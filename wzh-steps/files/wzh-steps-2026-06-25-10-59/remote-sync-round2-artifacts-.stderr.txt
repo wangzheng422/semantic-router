@@ -1,0 +1,4 @@
+sshpass: -e option given but "SSHPASS" environment variable is not set.
+sshpass: -e option given but "SSHPASS" environment variable is not set.
+sshpass: -e option given but "SSHPASS" environment variable is not set.
+sshpass: -e option given but "SSHPASS" environment variable is not set.

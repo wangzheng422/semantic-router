@@ -1,0 +1,5 @@
+## start_router config=router-multisignal.yaml
+0325dd74b48732ac5326c07931e2430d807a47cee4d7e30d555c0ad1d0191c04
+router_ready_after=1
+vsr-envoy Up About an hour 0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+vsr-router Up Less than a second 0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp

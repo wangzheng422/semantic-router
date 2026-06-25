@@ -1,0 +1,3 @@
+vsr-bench
+dbd17de3ec0eb72a4cb7a0c31dbf332e174b4ceeaf6dda1aeacd76cec3316388
+vsr-qwen35-2b Up Less than a second 0.0.0.0:18001->8000/tcp

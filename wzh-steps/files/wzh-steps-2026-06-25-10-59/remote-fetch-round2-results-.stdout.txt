@@ -1,0 +1,18 @@
+benchmarks/round2-2026-06-25-10-59/
+benchmarks/round2-2026-06-25-10-59/router-router-multisignal.yaml.log
+benchmarks/round2-2026-06-25-10-59/models-router-multisignal.yaml.json
+benchmarks/round2-2026-06-25-10-59/multisignal-results.jsonl
+benchmarks/round2-2026-06-25-10-59/multisignal-summary.json
+benchmarks/round2-2026-06-25-10-59/router-multisignal-after-traffic.log
+benchmarks/round2-2026-06-25-10-59/router-router-selection-algorithms.yaml.log
+benchmarks/round2-2026-06-25-10-59/router-router-selection-algorithms.yaml-selection-only.log
+benchmarks/round2-2026-06-25-10-59/selection-algorithms-results.jsonl
+benchmarks/round2-2026-06-25-10-59/selection-algorithms-summary.json
+benchmarks/round2-2026-06-25-10-59/router-selection-algorithms-after-traffic.log
+configs/router-multisignal.yaml
+configs/router-selection-algorithms.yaml
+traffic/traffic_multisignal.py
+traffic/traffic_selection_algorithms.py
+traffic/remote_round2.sh
+traffic/remote_selection_only.sh
+-rw-r--r--@ 1 zhengwan  staff    32K Jun 25 11:22 wzh-steps/files/wzh-steps-2026-06-25-10-59/semantic-router-round2-results-2026-06-25-10-59.tgz

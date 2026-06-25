@@ -1,0 +1,3 @@
+timestamp=2026-06-25T11:22:14+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=/bin/zsh -lc export\ SSHPASS=\"\$\(awk\ \'f\{print\;exit\}/Password/\{f=1\}\'\ .wzh/env.txt\)\"\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ cloud-user@bastion.75s2z.sandbox2921.opentlc.com\ \'set\ +e\;\ f=/var/mnt/semantic-router-bench/benchmarks/round2-2026-06-25-10-59/selection-algorithms-results.jsonl\;\ ls\ -l\ \"\$f\"\;\ wc\ -l\ \"\$f\"\;\ tail\ -5\ \"\$f\"\;\ echo\ \"\#\#\ ps\"\;\ podman\ ps\ --format\ \"\{\{.Names\}\}\ \{\{.Status\}\}\"\ \|\ grep\ -E\ \"vsr-router\|vllm\|envoy\"\;\ echo\ \"\#\#\ recent\ envoy\"\;\ podman\ logs\ --tail=20\ vsr-envoy\' 

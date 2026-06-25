@@ -1,0 +1,3 @@
+## inspect entrypoint
+Entrypoint=["/opt/nvidia/nvidia_entrypoint.sh"] Cmd=null
+## vllm version probe

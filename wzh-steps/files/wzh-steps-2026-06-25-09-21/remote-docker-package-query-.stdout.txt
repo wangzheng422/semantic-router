@@ -1,0 +1,7 @@
+## dnf list docker-like
+Failed to set locale, defaulting to C.UTF-8
+Error: Failed to download metadata for repo 'rhel-9-for-x86_64-baseos-eus-rpms': Cannot download repomd.xml: Cannot download repodata/repomd.xml: All mirrors were tried
+## dnf provides dockerd
+Failed to set locale, defaulting to C.UTF-8
+Error: No matches found. If searching for a file, try specifying the full path or using a wildcard prefix ("*/") at the beginning.
+## rpm-ostree install dry-run candidates

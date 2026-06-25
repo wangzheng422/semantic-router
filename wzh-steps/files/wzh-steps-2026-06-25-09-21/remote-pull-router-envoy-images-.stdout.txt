@@ -1,0 +1,5 @@
+855af44c3aa4c53cc2117efd2d9b6cb445321e60b2603884778f90fa78b7c3dc
+a46cc8cd8ef3653a223ead261bc5e6b7c79715f2a56577a838600b2911ed93b8
+docker.io/envoyproxy/envoy:v1.34-latest 179 MB
+docker.io/vllm/vllm-openai:latest 20.4 GB
+ghcr.io/vllm-project/semantic-router/vllm-sr:latest 457 MB

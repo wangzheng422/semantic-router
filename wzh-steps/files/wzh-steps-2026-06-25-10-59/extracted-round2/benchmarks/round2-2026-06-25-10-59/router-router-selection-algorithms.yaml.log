@@ -1,0 +1,12 @@
+Starting router from canonical config...
+  Config file: /app/config.yaml
+Starting router...
+
+[97m       █     █     █▄   ▄█[0m
+[97m ▄▄ ▄█ █     █     █ ▀▄▀ █[0m
+[97m  █▄█▀ █     █     █     █[0m
+[97m   ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀[0m
+[97m  Semantic Router[0m
+[38;2;145;158;171m  Intelligent Routing for Mixture-of-Models[0m
+
+{"level":"fatal","ts":"2026-06-25T03:16:25.121","caller":"logging.go:264","msg":"runtime_config_load_failed","event":"runtime_config_load_failed","component":"router","config_path":"/app/config.yaml","error":"routing.decisions[5].algorithm.type=session_aware is no longer supported; remove algorithm.type=session_aware and enable global.router.learning.protection","stacktrace":"github.com/vllm-project/semantic-router/src/semantic-router/pkg/observability/logging.logComponentEventAt\n\t/build/pkg/observability/logging/logging.go:264\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/observability/logging.ComponentFatalEvent\n\t/build/pkg/observability/logging/logging.go:256\nmain.loadRuntimeConfigOrFatal\n\t/build/cmd/runtime_bootstrap.go:83\nmain.main\n\t/build/cmd/main.go:24\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:283"}

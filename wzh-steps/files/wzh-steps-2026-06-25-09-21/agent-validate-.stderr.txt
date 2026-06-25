@@ -1,0 +1,4 @@
+WARNING: The directory '/Users/zhengwan/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+go: github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.5.0: github.com/golangci/golangci-lint/v2/cmd/golangci-lint@v2.5.0: Get "https://proxy.golang.org/github.com/golangci/golangci-lint/v2/cmd/golangci-lint/@v/v2.5.0.info": proxyconnect tcp: dial tcp 127.0.0.1:5085: connect: operation not permitted
+make[1]: *** [agent-bootstrap] Error 1
+make: *** [_run] Error 2

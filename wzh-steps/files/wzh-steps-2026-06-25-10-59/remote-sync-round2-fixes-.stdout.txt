@@ -1,0 +1,2 @@
+-rw-r--r--. 1 cloud-user users 11971 Jun 25 03:11 /var/mnt/semantic-router-bench/configs/router-multisignal.yaml
+-rwxr-xr-x. 1 cloud-user users  5144 Jun 25 03:11 /var/mnt/semantic-router-bench/traffic/remote_round2.sh

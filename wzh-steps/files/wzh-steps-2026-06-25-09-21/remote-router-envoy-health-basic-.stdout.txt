@@ -1,0 +1,33 @@
+## ps
+vsr-qwen35-2b Up 17 minutes 0 0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8 Up 5 minutes 0 0.0.0.0:18002->8000/tcp
+vsr-router Up 21 seconds 0 0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+vsr-envoy Exited (1) 20 seconds ago 1 0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+## router health
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 25 Jun 2026 02:03:42 GMT
+Content-Length: 54
+
+{"status": "healthy", "service": "classification-api"}
+## router eval
+
+## envoy ready
+
+## envoy models
+
+## router logs
+Starting router from canonical config...
+  Config file: /app/config.yaml
+Starting router...
+
+[97m       █     █     █▄   ▄█[0m
+[97m ▄▄ ▄█ █     █     █ ▀▄▀ █[0m
+[97m  █▄█▀ █     █     █     █[0m
+[97m   ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀[0m
+[97m  Semantic Router[0m
+[38;2;145;158;171m  Intelligent Routing for Mixture-of-Models[0m
+
+[32m✓ Downloaded[0m
+  path: /app/models/mmbert-embed-32k-2d-matryoshka
+## envoy logs

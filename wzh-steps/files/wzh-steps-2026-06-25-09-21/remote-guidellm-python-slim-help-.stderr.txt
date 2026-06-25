@@ -1,0 +1,9 @@
+Warning: Permanently added 'bastion.75s2z.sandbox2921.opentlc.com' (ED25519) to the list of known hosts.
+Trying to pull docker.io/library/python:3.12-slim...
+Getting image source signatures
+Copying blob sha256:aff2d9f8dc87f4c10bbb7f438f3a325169379776bdfad5c49e4be5acc3c2f192
+Copying blob sha256:e95a6c7ea7d49b37920899b023ecd0e32796c976c1748491f76cae53ba86d13a
+Copying blob sha256:b32430367bf08f32c23778909985ac645d1794f0aeef670aa796a50c8751527d
+Copying blob sha256:df79d931cd67092e2b8e48d8f6369922571efe4ee0f9af71636ce36600481492
+Copying config sha256:9cbfea842643d1cf45df5d841ac78e8cc1a8bfbcc36934a9d31fdc964fcc5917
+Writing manifest to image destination

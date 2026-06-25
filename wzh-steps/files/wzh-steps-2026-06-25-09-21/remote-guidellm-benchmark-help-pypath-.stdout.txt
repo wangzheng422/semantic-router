@@ -1,0 +1,8 @@
+Usage: python -m guidellm benchmark [OPTIONS] COMMAND [ARGS]...
+
+  Run a benchmark or load a previously saved benchmark report.
+
+Options:
+  --help  Show this message and exit.
+run (default)  Run a benchmark against a generative model.
+from-file      Load a saved benchmark report and optionally re-export to...

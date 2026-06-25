@@ -1,0 +1,191 @@
+config.strategy.rampup_duration float 0.0
+config.constraints.max_requests dict {'type_': 'max_number', 'max_num': 2, 'current_index': 0}
+config.sample_requests NoneType None
+config.profile.completed_strategies list [{'type_': 'concurrent', 'worker_count': 1, 'max_concurrency': 1, 'streams': 1, 'rampup_duration': 0.0}]
+config.profile.completed_strategies.[0].rampup_duration float 0.0
+config.profile.constraints.max_requests int 2
+config.profile.rampup_duration float 0.0
+config.requests dict {'data': "['prompt_tokens=64,prompt_tokens_stdev=8,prompt_tokens_min=16,prompt_tokens_max=128,output_tokens=32,output_tokens_stdev=4,output_tokens_min=8,output_tokens_max=64']", 'data_args': '[]', 'data_samples': -1, 'preprocessors': ['GenerativeColumnMapper', 'MediaEncoder'], 'finalizer': 'GenerativeRequestFinalizer', 'collator': 'GenerativeRequestCollator', 'sampler': 'None', 'num_workers': 1, 'random_seed': 42}
+config.environment.attributes.run_errors list []
+scheduler_state.start_requests_time float 1782354339.6531365
+scheduler_state.end_requests_time float 1782354340.8287277
+scheduler_state.end_queuing_constraints.max_requests dict {'request_queuing': 'stop', 'request_processing': 'continue', 'metadata': {'max_number': 2, 'create_exceeded': True, 'processed_exceeded': False, 'created_requests': 2, 'processed_requests': 0, 'remaining_requests': 2, 'stop_time': None}, 'progress': {'remaining_requests': 2.0, 'total_requests': 2.0, 'remaining_duration': None, 'total_duration': None, 'stop_time': None}}
+scheduler_state.end_queuing_constraints.max_requests.request_queuing str 'stop'
+scheduler_state.end_queuing_constraints.max_requests.request_processing str 'continue'
+scheduler_state.end_queuing_constraints.max_requests.metadata.created_requests int 2
+scheduler_state.end_queuing_constraints.max_requests.metadata.processed_requests int 0
+scheduler_state.end_queuing_constraints.max_requests.metadata.remaining_requests int 2
+scheduler_state.end_queuing_constraints.max_requests.progress.remaining_requests float 2.0
+scheduler_state.end_queuing_constraints.max_requests.progress.total_requests float 2.0
+scheduler_state.end_queuing_constraints.max_requests.progress.remaining_duration NoneType None
+scheduler_state.end_queuing_constraints.max_requests.progress.total_duration NoneType None
+scheduler_state.end_processing_constraints.max_requests dict {'request_queuing': 'stop', 'request_processing': 'stop_local', 'metadata': {'max_number': 2, 'create_exceeded': True, 'processed_exceeded': True, 'created_requests': 2, 'processed_requests': 2, 'remaining_requests': 0, 'stop_time': 1782354340.827734}, 'progress': {'remaining_requests': 0.0, 'total_requests': 2.0, 'remaining_duration': None, 'total_duration': None, 'stop_time': 1782354340.827734}}
+scheduler_state.end_processing_constraints.max_requests.request_queuing str 'stop'
+scheduler_state.end_processing_constraints.max_requests.request_processing str 'stop_local'
+scheduler_state.end_processing_constraints.max_requests.metadata.created_requests int 2
+scheduler_state.end_processing_constraints.max_requests.metadata.processed_requests int 2
+scheduler_state.end_processing_constraints.max_requests.metadata.remaining_requests int 0
+scheduler_state.end_processing_constraints.max_requests.progress.remaining_requests float 0.0
+scheduler_state.end_processing_constraints.max_requests.progress.total_requests float 2.0
+scheduler_state.end_processing_constraints.max_requests.progress.remaining_duration NoneType None
+scheduler_state.end_processing_constraints.max_requests.progress.total_duration NoneType None
+scheduler_state.scheduler_constraints.max_requests dict {'request_queuing': 'stop', 'request_processing': 'stop_local', 'metadata': {'max_number': 2, 'create_exceeded': True, 'processed_exceeded': True, 'created_requests': 2, 'processed_requests': 2, 'remaining_requests': 0, 'stop_time': 1782354340.827734}, 'progress': {'remaining_requests': 0.0, 'total_requests': 2.0, 'remaining_duration': None, 'total_duration': None, 'stop_time': 1782354340.827734}}
+scheduler_state.scheduler_constraints.max_requests.request_queuing str 'stop'
+scheduler_state.scheduler_constraints.max_requests.request_processing str 'stop_local'
+scheduler_state.scheduler_constraints.max_requests.metadata.created_requests int 2
+scheduler_state.scheduler_constraints.max_requests.metadata.processed_requests int 2
+scheduler_state.scheduler_constraints.max_requests.metadata.remaining_requests int 0
+scheduler_state.scheduler_constraints.max_requests.progress.remaining_requests float 0.0
+scheduler_state.scheduler_constraints.max_requests.progress.total_requests float 2.0
+scheduler_state.scheduler_constraints.max_requests.progress.remaining_duration NoneType None
+scheduler_state.scheduler_constraints.max_requests.progress.total_duration NoneType None
+scheduler_state.progress.remaining_requests float 0.0
+scheduler_state.progress.total_requests float 2.0
+scheduler_state.progress.remaining_duration NoneType None
+scheduler_state.progress.total_duration NoneType None
+scheduler_state.created_requests int 2
+scheduler_state.queued_requests int 0
+scheduler_state.pending_requests int 0
+scheduler_state.processing_requests int 0
+scheduler_state.processed_requests int 2
+scheduler_state.successful_requests int 2
+scheduler_state.errored_requests int 0
+scheduler_state.cancelled_requests int 0
+scheduler_metrics.request_start_time float 1782354339.6531365
+scheduler_metrics.request_end_time float 1782354340.827734
+scheduler_metrics.requests_made dict {'successful': 2, 'errored': 0, 'incomplete': 0, 'total': 2}
+scheduler_metrics.requests_made.errored int 0
+scheduler_metrics.requests_made.incomplete int 0
+scheduler_metrics.request_start_delay_avg float 0.00016951560974121094
+scheduler_metrics.request_targeted_start_delay_avg float 0.3156989812850952
+scheduler_metrics.request_time_avg float 0.5870068073272705
+metrics.request_totals dict {'successful': 0, 'errored': 0, 'incomplete': 0, 'total': 0}
+metrics.request_totals.errored int 0
+metrics.request_totals.incomplete int 0
+metrics.requests_per_second dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.requests_per_second.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.requests_per_second.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.request_concurrency dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.request_concurrency.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.request_concurrency.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.request_latency dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.request_latency.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.request_latency.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.request_streaming_iterations_count dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.request_streaming_iterations_count.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.request_streaming_iterations_count.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.prompt_token_count dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.prompt_token_count.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.prompt_token_count.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.output_token_count dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.output_token_count.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.output_token_count.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.total_token_count dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.total_token_count.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.total_token_count.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.time_to_first_token_ms dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.time_to_first_token_ms.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.time_to_first_token_ms.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.time_per_output_token_ms dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.time_per_output_token_ms.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.time_per_output_token_ms.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.inter_token_latency_ms dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.inter_token_latency_ms.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.inter_token_latency_ms.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.prompt_tokens_per_second dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.prompt_tokens_per_second.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.prompt_tokens_per_second.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.output_tokens_per_second dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.output_tokens_per_second.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.output_tokens_per_second.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.tokens_per_second dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.tokens_per_second.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.tokens_per_second.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.output_tokens_per_iteration dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.output_tokens_per_iteration.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.output_tokens_per_iteration.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.iter_tokens_per_iteration dict {'successful': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}, 'errored': {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0
+metrics.iter_tokens_per_iteration.errored dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.iter_tokens_per_iteration.incomplete dict {'mean': 0.0, 'median': 0.0, 'mode': 0.0, 'variance': 0.0, 'std_dev': 0.0, 'min': 0.0, 'max': 0.0, 'count': 0, 'total_sum': 0.0, 'percentiles': {'p001': 0.0, 'p01': 0.0, 'p05': 0.0, 'p10': 0.0, 'p25': 0.0, 'p50': 0.0, 'p75': 0.0, 'p90': 0.0, 'p95': 0.0, 'p99': 0.0, 'p999': 0.0}, 'pdf': None}
+metrics.text.tokens dict {'input': None, 'input_per_second': None, 'input_concurrency': None, 'output': None, 'output_per_second': None, 'output_concurrency': None, 'total': None, 'total_per_second': None, 'total_concurrency': None}
+metrics.image.tokens dict {'input': None, 'input_per_second': None, 'input_concurrency': None, 'output': None, 'output_per_second': None, 'output_concurrency': None, 'total': None, 'total_per_second': None, 'total_concurrency': None}
+metrics.video.tokens dict {'input': None, 'input_per_second': None, 'input_concurrency': None, 'output': None, 'output_per_second': None, 'output_concurrency': None, 'total': None, 'total_per_second': None, 'total_concurrency': None}
+metrics.audio.tokens dict {'input': None, 'input_per_second': None, 'input_concurrency': None, 'output': None, 'output_per_second': None, 'output_concurrency': None, 'total': None, 'total_per_second': None, 'total_concurrency': None}
+requests dict {'successful': [{'type_': 'generative_request_stats', 'request_id': 'ab5ccbec-08e9-417b-85d5-12a93fd1e290', 'response_id': 'chatcmpl-8959880e1eb6f212', 'request_args': '{"method":null,"stream":true,"headers":null,"params":null,"body":{"model":"qwen35-2b","stream":true,"stream_options":{"include_usage":true,"continuous_usage_stats":true},"max_completion_tokens":38,"ignore_eos":true,"messages":[{"role":"user","content":[{"type":"text","text":"1 0 Score each cause. Quality throughout beautiful inst
+requests.successful.[0].request_id str 'ab5ccbec-08e9-417b-85d5-12a93fd1e290'
+requests.successful.[0].request_args str '{"method":null,"stream":true,"headers":null,"params":null,"body":{"model":"qwen35-2b","stream":true,"stream_options":{"include_usage":true,"continuous_usage_stats":true},"max_completion_tokens":38,"ignore_eos":true,"messages":[{"role":"user","content":[{"type":"text","text":"1 0 Score each cause. Quality throughout beautiful instead.\\nDespite measure ago current.\\nDetermine operation speak according south recently. Everyone democratic shake bill here grow. Page southern role movie win her.\\n
+requests.successful.[0].info.request_id str 'ab5ccbec-08e9-417b-85d5-12a93fd1e290'
+requests.successful.[0].info.timings.request_start float 1782354339.6531365
+requests.successful.[0].info.timings.first_request_iteration float 1782354339.6901324
+requests.successful.[0].info.timings.first_token_iteration float 1782354339.6902564
+requests.successful.[0].info.timings.last_token_iteration float 1782354340.2792492
+requests.successful.[0].info.timings.last_request_iteration float 1782354340.2794106
+requests.successful.[0].info.timings.request_iterations int 41
+requests.successful.[0].info.timings.token_iterations int 38
+requests.successful.[0].info.timings.request_end float 1782354340.2797697
+requests.successful.[0].info.error NoneType None
+requests.successful.[0].info.completed_at float 1782354340.2797697
+requests.successful.[0].input_metrics.text_tokens int 75
+requests.successful.[0].input_metrics.image_tokens NoneType None
+requests.successful.[0].input_metrics.video_tokens NoneType None
+requests.successful.[0].input_metrics.audio_tokens NoneType None
+requests.successful.[0].input_metrics.total_tokens int 75
+requests.successful.[0].output_metrics.text_tokens int 38
+requests.successful.[0].output_metrics.image_tokens NoneType None
+requests.successful.[0].output_metrics.video_tokens NoneType None
+requests.successful.[0].output_metrics.audio_tokens NoneType None
+requests.successful.[0].output_metrics.total_tokens int 38
+requests.successful.[0].request_start_time float 1782354339.6531365
+requests.successful.[0].request_end_time float 1782354340.2797697
+requests.successful.[0].request_latency float 0.6266331672668457
+requests.successful.[0].prompt_tokens int 75
+requests.successful.[0].output_tokens int 38
+requests.successful.[0].total_tokens int 113
+requests.successful.[0].time_to_first_token_ms float 37.11986541748047
+requests.successful.[0].time_per_output_token_ms float 16.476649987070186
+requests.successful.[0].inter_token_latency_ms float 15.918725245707744
+requests.successful.[0].tokens_per_second float 180.32878868009237
+requests.successful.[0].output_tokens_per_second float 60.64153955613726
+requests.successful.[0].iter_tokens_per_iteration float 1.0
+requests.successful.[0].output_tokens_per_iteration float 1.0
+requests.successful.[1].request_id str '1a6a7419-24e3-4a32-9335-0fd338c63020'
+requests.successful.[1].request_args str '{"method":null,"stream":true,"headers":null,"params":null,"body":{"model":"qwen35-2b","stream":true,"stream_options":{"include_usage":true,"continuous_usage_stats":true},"max_completion_tokens":33,"ignore_eos":true,"messages":[{"role":"user","content":[{"type":"text","text":"1 1 Young catch management sense technology. Physical society instead as. Other life edge network wall quite.\\nSeem shoulder future fall citizen about reveal. Will seven medical blood personal.\\nCurrent hear claim well tw
+requests.successful.[1].info.request_id str '1a6a7419-24e3-4a32-9335-0fd338c63020'
+requests.successful.[1].info.timings.request_start float 1782354340.2803535
+requests.successful.[1].info.timings.first_request_iteration float 1782354340.3156989
+requests.successful.[1].info.timings.first_token_iteration float 1782354340.3157523
+requests.successful.[1].info.timings.last_token_iteration float 1782354340.8272889
+requests.successful.[1].info.timings.last_request_iteration float 1782354340.8274581
+requests.successful.[1].info.timings.request_iterations int 36
+requests.successful.[1].info.timings.token_iterations int 33
+requests.successful.[1].info.timings.request_end float 1782354340.827734
+requests.successful.[1].info.error NoneType None
+requests.successful.[1].info.completed_at float 1782354340.827734
+requests.successful.[1].input_metrics.text_tokens int 75
+requests.successful.[1].input_metrics.image_tokens NoneType None
+requests.successful.[1].input_metrics.video_tokens NoneType None
+requests.successful.[1].input_metrics.audio_tokens NoneType None
+requests.successful.[1].input_metrics.total_tokens int 75
+requests.successful.[1].output_metrics.text_tokens int 33
+requests.successful.[1].output_metrics.image_tokens NoneType None
+requests.successful.[1].output_metrics.video_tokens NoneType None
+requests.successful.[1].output_metrics.audio_tokens NoneType None
+requests.successful.[1].output_metrics.total_tokens int 33
+requests.successful.[1].request_start_time float 1782354340.2803535
+requests.successful.[1].request_end_time float 1782354340.827734
+requests.successful.[1].request_latency float 0.5473804473876953
+requests.successful.[1].prompt_tokens int 75
+requests.successful.[1].output_tokens int 33
+requests.successful.[1].total_tokens int 108
+requests.successful.[1].time_to_first_token_ms float 35.39872169494629
+requests.successful.[1].time_per_output_token_ms float 16.57379757274281
+requests.successful.[1].inter_token_latency_ms float 15.98551869392395
+requests.successful.[1].tokens_per_second float 197.30335731832673
+requests.successful.[1].output_tokens_per_second float 60.287136958377616
+requests.successful.[1].iter_tokens_per_iteration float 1.0
+requests.successful.[1].output_tokens_per_iteration float 1.0
+requests.errored list []
+requests.incomplete list []
+duration float -0.0005838871002197266
+warmup_duration float 0.6272170543670654
+cooldown_duration float 0.547964334487915

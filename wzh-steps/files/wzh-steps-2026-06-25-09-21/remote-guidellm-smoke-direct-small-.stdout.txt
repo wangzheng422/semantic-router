@@ -1,0 +1,12 @@
+✔ OpenAIHTTPBackend backend validated with model qwen35-2b
+  {'target': 'http://vsr-qwen35-2b:8000', 'model': 'qwen35-2b', 'timeout': None,
+  'timeout_connect': 5.0, 'http2': True, 'follow_redirects': True, 'verify':    
+  False, 'openai_paths': {'/health': 'health', '/v1/models': 'v1/models',       
+  '/v1/completions': 'v1/completions', '/v1/chat/completions':                  
+  'v1/chat/completions', '/v1/responses': 'v1/responses',                       
+  '/v1/audio/transcriptions': 'v1/audio/transcriptions',                        
+  '/v1/audio/translations': 'v1/audio/translations', '/pooling': 'pooling'},    
+  'validate_backend': {'method': 'GET', 'url':                                  
+  'http://vsr-qwen35-2b:8000/health'}}                                          
+✔ Processor resolved
+  Using model 'qwen35-2b' as processor                                          

@@ -1,0 +1,3 @@
+timestamp=2026-06-25T11:32:11+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=/bin/zsh -lc rg\ -n\ \"Downloading\ model\|Successfully\ downloaded\ model\|required_models_already_present\|embedding_models_init_started\|jailbreak_detector_backend_selected\|pii_detector_backend_selected\|category_classifier_backend_selected\|Registered\ algorithm\|startup_complete\|runtime_config_load_failed\"\ wzh-steps/files/wzh-steps-2026-06-25-09-21/remote-router-envoy-health-basic-.stderr.txt\ wzh-steps/files/wzh-steps-2026-06-25-10-59/extracted-round2/benchmarks/round2-2026-06-25-10-59/router-\*.log\ wzh-steps/files/wzh-steps-2026-06-25-10-59/remote-run-round2-authz-elo-fixed-.stdout.txt\ \|\|\ true 

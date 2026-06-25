@@ -1,0 +1,9 @@
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/direct-large/benchmark.json 98967 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/direct-small/benchmark.json 98915 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/router-large/benchmark.json 98995 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/router-small/benchmark.json 98987 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/smoke-direct-small-json/benchmark.json 34851 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/smoke-router-small-json/benchmark.json 34815 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm_matrix.sh 3454 bytes
+/var/mnt/semantic-router-bench/benchmarks/semantic-router-results-2026-06-25.tgz 52113 bytes
+/var/mnt/semantic-router-bench/benchmarks/traffic-aggressive-large.jsonl 5454 bytes

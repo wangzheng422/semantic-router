@@ -1,0 +1,3 @@
+-rw-r--r--. 1 cloud-user users 5882 Jun 25 03:18 /var/mnt/semantic-router-bench/configs/router-selection-algorithms.yaml
+-rwxr-xr-x. 1 cloud-user users 4129 Jun 25 03:18 /var/mnt/semantic-router-bench/traffic/remote_selection_only.sh
+-rwxr-xr-x. 1 cloud-user users 5089 Jun 25 03:18 /var/mnt/semantic-router-bench/traffic/traffic_selection_algorithms.py

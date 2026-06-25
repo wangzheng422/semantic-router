@@ -1,0 +1,138 @@
+<class 'dict'>
+dict_keys(['metadata', 'args', 'benchmarks'])
+{
+  "metadata": {
+    "version": 1,
+    "guidellm_version": "0.6.1",
+    "python_version": "3.12.13",
+    "platform": "Linux-5.14.0-427.65.1.el9_4.x86_64-x86_64-with-glibc2.41"
+  },
+  "args": {
+    "data": [
+      "prompt_tokens=64,prompt_tokens_stdev=8,prompt_tokens_min=16,prompt_tokens_max=128,output_tokens=32,output_tokens_stdev=4,output_tokens_min=8,output_tokens_max=64"
+    ],
+    "profile": "concurrent",
+    "rate": [
+      1.0
+    ],
+    "backend": "openai_http",
+    "backend_kwargs": {
+      "target": "http://vsr-qwen35-2b:8000",
+      "model": "qwen35-2b",
+      "request_format": "chat_completions"
+    },
+    "processor": "Qwen/Qwen3.5-2B",
+    "processor_args": null,
+    "data_args": [],
+    "data_samples": -1,
+    "data_column_mapper": "generative_column_mapper",
+    "data_preprocessors": [
+      "encode_media"
+    ],
+    "data_preprocessors_kwargs": {},
+    "data_finalizer": "generative",
+    "data_collator": "generative",
+    "data_sampler": null,
+    "data_num_workers": 1,
+    "dataloader_kwargs": null,
+    "random_seed": 42,
+    "outputs": [
+      "benchmark.json"
+    ],
+    "output_dir": "/benchmarks/guidellm-results/smoke-direct-small-json",
+    "sample_requests": null,
+    "warmup": 0,
+    "cooldown": 0,
+    "rampup": 0.0,
+    "prefer_response_metrics": true,
+    "max_seconds": null,
+    "max_requests": 2,
+    "max_errors": null,
+    "max_error_rate": null,
+    "max_global_error_rate": null,
+    "over_saturation": null
+  },
+  "benchmarks": [
+    {
+      "type_": "generative_benchmark",
+      "config": {
+        "id_": "8185949d-7107-4087-b294-cc8f8e559188",
+        "run_id": "3bbcaea8-e2f0-4886-8cb7-c92acd152318",
+        "run_index": 0,
+        "strategy": {
+          "type_": "concurrent",
+          "worker_count": 1,
+          "max_concurrency": 1,
+          "streams": 1,
+          "rampup_duration": 0.0
+        },
+        "constraints": {
+          "max_requests": {
+            "type_": "max_number",
+            "max_num": 2,
+            "current_index": 0
+          }
+        },
+        "sample_requests": null,
+        "warmup": {
+          "percent": 0.0,
+          "value": null,
+          "mode": "prefer_duration"
+        },
+        "cooldown": {
+          "percent": 0.0,
+          "value": null,
+          "mode": "prefer_duration"
+        },
+        "prefer_response_metrics": true,
+        "profile": {
+          "type_": "concurrent",
+          "completed_strategies": [
+            {
+              "type_": "concurrent",
+              "worker_count": 1,
+              "max_concurrency": 1,
+              "streams": 1,
+              "rampup_duration": 0.0
+            }
+          ],
+          "constraints": {
+            "max_requests": 2
+          },
+          "rampup_duration": 0.0,
+          "streams": [
+            1
+          ],
+          "strategy_types": [
+            "concurrent"
+          ]
+        },
+        "requests": {
+          "data": "['prompt_tokens=64,prompt_tokens_stdev=8,prompt_tokens_min=16,prompt_tokens_max=128,output_tokens=32,output_tokens_stdev=4,output_tokens_min=8,output_tokens_max=64']",
+          "data_args": "[]",
+          "data_samples": -1,
+          "preprocessors": [
+            "GenerativeColumnMapper",
+            "MediaEncoder"
+          ],
+          "finalizer": "GenerativeRequestFinalizer",
+          "collator": "GenerativeRequestCollator",
+          "sampler": "None",
+          "num_workers": 1,
+          "random_seed": 42
+        },
+        "backend": {
+          "target": "http://vsr-qwen35-2b:8000",
+          "model": "qwen35-2b",
+          "timeout": null,
+          "timeout_connect": 5.0,
+          "http2": true,
+          "follow_redirects": true,
+          "verify": false,
+          "openai_paths": {
+            "/health": "health",
+            "/v1/models": "v1/models",
+            "/v1/completions": "v1/completions",
+            "/v1/chat/completions": "v1/chat/completions",
+            "/v1/responses": "v1/responses",
+            "/v1/audio/transcriptions":

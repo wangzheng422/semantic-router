@@ -1,0 +1,3 @@
+timestamp=2026-06-25T10:06:26+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=sshpass -e ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=20 cloud-user@bastion.75s2z.sandbox2921.opentlc.com set\ -euo\ pipefail\;\ podman\ run\ --rm\ --network\ vsr-bench\ --entrypoint\ python3\ docker.io/vllm/vllm-openai:latest\ -\ \<\<\"PY\"$'\n'import\ importlib.metadata\ as\ md$'\n'for\ pkg\ in\ \[\"openai\",\ \"httpx\",\ \"guidellm\"\]:$'\n'\ \ \ \ try:$'\n'\ \ \ \ \ \ \ \ print\(pkg,\ md.version\(pkg\)\)$'\n'\ \ \ \ except\ Exception\ as\ e:$'\n'\ \ \ \ \ \ \ \ print\(pkg,\ \"missing\"\)$'\n'PY 

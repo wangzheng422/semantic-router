@@ -1,0 +1,3 @@
+f37691f675bb82f734f606de8af90e777d3f80a20b120e699fd43fd10e60b8d7
+docker.io/vllm/vllm-openai:latest 20.4 GB
+registry.redhat.io/rhelai1/instructlab-nvidia-rhel9:1.5.0 28.4 GB

@@ -1,0 +1,100 @@
+## identity
+bastion.75s2z.internal
+cloud-user
+2026-06-25T01:30:39+00:00
+## os
+NAME="Red Hat Enterprise Linux"
+VERSION="9.20250429.0.4 (Plow)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="9.4"
+PLATFORM_ID="platform:el9"
+PRETTY_NAME="Red Hat Enterprise Linux 9.20250429.0.4 (Plow)"
+ANSI_COLOR="0;31"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:9::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9"
+BUG_REPORT_URL="https://issues.redhat.com/"
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 9"
+REDHAT_BUGZILLA_PRODUCT_VERSION=9.4
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="9.4"
+OSTREE_VERSION='9.20250429.0'
+VARIANT="RHEL AI"
+VARIANT_ID=rhel_ai
+RHEL_AI_VERSION_ID='1.5.0'
+## kernel
+Linux bastion.75s2z.internal 5.14.0-427.65.1.el9_4.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Apr 11 15:52:56 EDT 2025 x86_64 x86_64 x86_64 GNU/Linux
+## gpu
+Thu Jun 25 01:30:39 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.163.01             Driver Version: 550.163.01     CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L4                      On  |   00000000:38:00.0 Off |                    0 |
+| N/A   34C    P8             12W /   72W |       1MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA L4                      On  |   00000000:3A:00.0 Off |                    0 |
+| N/A   33C    P8             11W /   72W |       1MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA L4                      On  |   00000000:3C:00.0 Off |                    0 |
+| N/A   36C    P8             11W /   72W |       1MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA L4                      On  |   00000000:3E:00.0 Off |                    0 |
+| N/A   33C    P8             11W /   72W |       1MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+## block
+NAME        MODEL                               SIZE TYPE FSTYPE MOUNTPOINTS
+loop0                                          39.6M loop erofs  
+zram0                                             8G disk        [SWAP]
+nvme0n1     Amazon Elastic Block Store            1T disk        
+|-nvme0n1p1                                       1M part        
+|-nvme0n1p2                                     501M part vfat   /boot/efi
+|-nvme0n1p3                                       1G part xfs    /boot
+`-nvme0n1p4                                  1022.5G part xfs    /var
+                                                                 /sysroot/ostree/deploy/default/var
+                                                                 /etc
+                                                                 /sysroot
+nvme1n1     Amazon EC2 NVMe Instance Storage  875.4G disk        
+nvme3n1     Amazon EC2 NVMe Instance Storage  875.4G disk        
+nvme2n1     Amazon EC2 NVMe Instance Storage  875.4G disk        
+nvme4n1     Amazon EC2 NVMe Instance Storage  875.4G disk        
+## mounts
+TARGET SOURCE FSTYPE OPTIONS
+/tmp   tmpfs  tmpfs  rw,nosuid,nodev,seclabel,nr_inodes=1048576,inode64
+## runtimes
+podman version 4.9.4-rhel
+## containers
+## ports
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*          
+LISTEN 0      4096         0.0.0.0:111       0.0.0.0:*          
+LISTEN 0      128             [::]:22           [::]:*          
+LISTEN 0      4096            [::]:111          [::]:*          
+## disk usage
+Filesystem     Type      Size  Used Avail Use% Mounted on
+devtmpfs       devtmpfs  4.0M     0  4.0M   0% /dev
+tmpfs          tmpfs      91G   84K   91G   1% /dev/shm
+tmpfs          tmpfs      37G  1.1M   37G   1% /run
+/dev/nvme0n1p4 xfs      1023G  242G  782G  24% /sysroot
+overlay        overlay    40M   40M     0 100% /
+tmpfs          tmpfs      91G     0   91G   0% /tmp
+/dev/nvme0n1p3 xfs       960M  101M  860M  11% /boot
+/dev/nvme0n1p2 vfat      501M  7.1M  494M   2% /boot/efi
+tmpfs          tmpfs      19G  8.0K   19G   1% /run/user/1000

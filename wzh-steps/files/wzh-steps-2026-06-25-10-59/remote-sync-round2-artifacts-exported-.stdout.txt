@@ -1,0 +1,5 @@
+-rw-r--r--. 1 cloud-user users 12089 Jun 25 03:08 /var/mnt/semantic-router-bench/configs/router-multisignal.yaml
+-rw-r--r--. 1 cloud-user users  7933 Jun 25 03:08 /var/mnt/semantic-router-bench/configs/router-selection-algorithms.yaml
+-rwxr-xr-x. 1 cloud-user users  4648 Jun 25 03:08 /var/mnt/semantic-router-bench/traffic/remote_round2.sh
+-rwxr-xr-x. 1 cloud-user users  9790 Jun 25 03:08 /var/mnt/semantic-router-bench/traffic/traffic_multisignal.py
+-rwxr-xr-x. 1 cloud-user users  6814 Jun 25 03:08 /var/mnt/semantic-router-bench/traffic/traffic_selection_algorithms.py

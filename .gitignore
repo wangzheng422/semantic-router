@@ -92,7 +92,7 @@ wikipedia_data/
 # Added by Claude Task Master
 # Logs
 logs
-*.log
+# *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -216,3 +216,8 @@ Makefile.local
 # Candle binding build outputs (use target/ for default Cargo builds)
 candle-binding/target-mkl/
 candle-binding/target-cpu/
+
+
+.wzh/
+
+# *.tgz

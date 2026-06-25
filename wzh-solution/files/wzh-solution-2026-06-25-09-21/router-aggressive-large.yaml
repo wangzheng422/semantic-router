@@ -1,0 +1,93 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-27b-fp8
+    default_reasoning_effort: medium
+    reasoning_families:
+      qwen3:
+        type: chat_template_kwargs
+        parameter: enable_thinking
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      reasoning_family: qwen3
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      reasoning_family: qwen3
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 8192
+      description: Fast lane for explicitly lightweight requests.
+      capabilities: [chat]
+      quality_score: 0.62
+      modality: ar
+      tags: [small, fast]
+    - name: qwen35-27b-fp8
+      param_size: 27B
+      context_window_size: 4096
+      description: Preferred lane for most analytical customer requests.
+      capabilities: [chat, reasoning, code]
+      quality_score: 0.91
+      modality: ar
+      tags: [large, reasoning]
+
+  signals:
+    keywords:
+      - name: force_small_keywords
+        operator: OR
+        method: bm25
+        keywords:
+          - hello
+          - greeting
+          - translate only
+          - short answer
+          - one sentence
+          - 简短
+          - 只翻译
+        case_sensitive: false
+        bm25_threshold: 0.05
+
+  decisions:
+    - name: force-small
+      description: Only clearly lightweight requests stay on the 2B backend.
+      priority: 300
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: force_small_keywords
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+    - name: default-large
+      description: Aggressive configuration that sends all other traffic to the larger FP8 backend.
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium

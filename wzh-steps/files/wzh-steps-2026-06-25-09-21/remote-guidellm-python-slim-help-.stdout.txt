@@ -1,0 +1,13 @@
+Usage: guidellm [OPTIONS] COMMAND [ARGS]...
+
+  GuideLLM CLI for benchmarking, preprocessing, and testing language models.
+
+Options:
+  --version  Show the version and exit.
+  --help     Show this message and exit.
+
+Commands:
+  benchmark    Run a benchmark or load a previously saved benchmark report.
+  config       Show configuration settings.
+  mock-server  Start a mock OpenAI/vLLM-compatible server for testing.
+  preprocess   Tools for preprocessing datasets for use in benchmarks.

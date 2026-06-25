@@ -1,0 +1,42 @@
+===result_dirs===
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/direct-large/benchmark.json 98967 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/direct-small/benchmark.json 98915 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/router-large/benchmark.json 98995 bytes
+/var/mnt/semantic-router-bench/benchmarks/guidellm-results/matrix/router-small/benchmark.json 98987 bytes
+===containers===
+NAMES               IMAGE                                                STATUS
+vsr-qwen35-2b       docker.io/vllm/vllm-openai:latest                    Up 50 minutes
+vsr-qwen35-27b-fp8  docker.io/vllm/vllm-openai:latest                    Up 38 minutes
+vsr-envoy           docker.io/envoyproxy/envoy:v1.34-latest              Up 31 minutes
+vsr-router          ghcr.io/vllm-project/semantic-router/vllm-sr:latest  Up About a minute
+===envoy_tail===
+[2026-06-25T02:27:30.639Z] "GET /health HTTP/1.1" 200 - 2 "-" "-" "-" "10.89.0.2:8000"
+[2026-06-25T02:27:31.734Z] "POST /v1/chat/completions HTTP/1.1" 200 - 4142 "qwen35-27b-fp8" "qwen35-27b-fp8" "route-large-keyword" "10.89.0.4:8000"
+[2026-06-25T02:27:35.879Z] "POST /v1/chat/completions HTTP/1.1" 200 - 546 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:30:28.249Z] "GET /v1/models HTTP/1.1" 500 - 18600 "-" "-" "-" "-"
+[2026-06-25T02:31:16.955Z] "GET /v1/models HTTP/1.1" 200 - 2 "-" "-" "-" "-"
+[2026-06-25T02:32:20.931Z] "POST /v1/chat/completions HTTP/1.1" 200 - 181 "qwen35-2b" "qwen35-2b" "force-small" "10.89.0.2:8000"
+[2026-06-25T02:32:21.123Z] "POST /v1/chat/completions HTTP/1.1" 200 - 10190 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:32:31.315Z] "POST /v1/chat/completions HTTP/1.1" 200 - 10180 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:32:41.497Z] "POST /v1/chat/completions HTTP/1.1" 200 - 146 "qwen35-2b" "qwen35-2b" "force-small" "10.89.0.2:8000"
+[2026-06-25T02:32:41.646Z] "POST /v1/chat/completions HTTP/1.1" 200 - 373 "qwen35-2b" "qwen35-2b" "force-small" "10.89.0.2:8000"
+[2026-06-25T02:32:42.021Z] "POST /v1/chat/completions HTTP/1.1" 200 - 10196 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:32:52.220Z] "POST /v1/chat/completions HTTP/1.1" 200 - 608 "qwen35-2b" "qwen35-2b" "force-small" "10.89.0.2:8000"
+[2026-06-25T02:34:24.081Z] "GET /health HTTP/1.1" 200 - 4 "-" "-" "-" "10.89.0.2:8000"
+[2026-06-25T02:34:27.133Z] "GET /health HTTP/1.1" 200 - 2 "-" "-" "-" "10.89.0.2:8000"
+[2026-06-25T02:34:28.230Z] "POST /v1/chat/completions HTTP/1.1" 200 - 4094 "qwen35-27b-fp8" "qwen35-27b-fp8" "route-large-keyword" "10.89.0.4:8000"
+[2026-06-25T02:34:32.328Z] "POST /v1/chat/completions HTTP/1.1" 200 - 545 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:34:32.876Z] "POST /v1/chat/completions HTTP/1.1" 200 - 578 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:34:33.457Z] "POST /v1/chat/completions HTTP/1.1" 200 - 600 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:34:34.061Z] "POST /v1/chat/completions HTTP/1.1" 200 - 484 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:34:34.548Z] "POST /v1/chat/completions HTTP/1.1" 200 - 433 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:34:34.984Z] "POST /v1/chat/completions HTTP/1.1" 200 - 467 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:34:35.454Z] "POST /v1/chat/completions HTTP/1.1" 200 - 547 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:35:24.596Z] "GET /health HTTP/1.1" 200 - 3 "-" "-" "-" "10.89.0.2:8000"
+[2026-06-25T02:35:27.895Z] "GET /health HTTP/1.1" 200 - 1 "-" "-" "-" "10.89.0.2:8000"
+[2026-06-25T02:35:28.990Z] "POST /v1/chat/completions HTTP/1.1" 200 - 4082 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:35:33.075Z] "POST /v1/chat/completions HTTP/1.1" 200 - 3553 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:35:36.632Z] "POST /v1/chat/completions HTTP/1.1" 200 - 3791 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:35:40.426Z] "POST /v1/chat/completions HTTP/1.1" 200 - 3910 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:35:44.339Z] "POST /v1/chat/completions HTTP/1.1" 200 - 3153 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"
+[2026-06-25T02:35:47.496Z] "POST /v1/chat/completions HTTP/1.1" 200 - 2830 "qwen35-27b-fp8" "qwen35-27b-fp8" "default-large" "10.89.0.4:8000"

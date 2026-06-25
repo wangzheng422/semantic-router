@@ -1,0 +1,3 @@
+32052046f52aabfa708c8b3d3aadaec5877b49c4fe579836fc21f168db6b36ce
+router_ready=1
+{"status": "healthy", "service": "classification-api"}

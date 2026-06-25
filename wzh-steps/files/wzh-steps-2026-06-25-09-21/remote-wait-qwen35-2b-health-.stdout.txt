@@ -1,0 +1,273 @@
+## attempt 1 2026-06-25T01:46:09+00:00
+vsr-qwen35-2b Up 20 seconds
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339] 
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]        █     █     █▄   ▄█
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.23.0
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]   █▄█▀ █     █     █     █  model   Qwen/Qwen3.5-2B
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339] 
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:273] non-default args: {'model_tag': 'Qwen/Qwen3.5-2B', 'host': '0.0.0.0', 'model': 'Qwen/Qwen3.5-2B', 'max_model_len': 8192, 'served_model_name': ['qwen35-2b'], 'gpu_memory_utilization': 0.72}
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_PIPELINE
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_COMMIT
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_IMAGE_TAG
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_URL
+## attempt 2 2026-06-25T01:46:19+00:00
+vsr-qwen35-2b Up 31 seconds
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339] 
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]        █     █     █▄   ▄█
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]  ▄▄ ▄█ █     █     █ ▀▄▀ █  version 0.23.0
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]   █▄█▀ █     █     █     █  model   Qwen/Qwen3.5-2B
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339]    ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339] 
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:273] non-default args: {'model_tag': 'Qwen/Qwen3.5-2B', 'host': '0.0.0.0', 'model': 'Qwen/Qwen3.5-2B', 'max_model_len': 8192, 'served_model_name': ['qwen35-2b'], 'gpu_memory_utilization': 0.72}
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_PIPELINE
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_COMMIT
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_IMAGE_TAG
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_URL
+## attempt 3 2026-06-25T01:46:30+00:00
+vsr-qwen35-2b Up 41 seconds
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:339] 
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:273] non-default args: {'model_tag': 'Qwen/Qwen3.5-2B', 'host': '0.0.0.0', 'model': 'Qwen/Qwen3.5-2B', 'max_model_len': 8192, 'served_model_name': ['qwen35-2b'], 'gpu_memory_utilization': 0.72}
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_PIPELINE
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_COMMIT
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_IMAGE_TAG
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_URL
+(APIServer pid=1) INFO 06-25 01:46:22 [model.py:611] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=1) INFO 06-25 01:46:22 [model.py:1745] Using max model len 8192
+(APIServer pid=1) INFO 06-25 01:46:22 [vllm.py:999] Asynchronous scheduling is enabled.
+(APIServer pid=1) INFO 06-25 01:46:22 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+## attempt 4 2026-06-25T01:46:40+00:00
+vsr-qwen35-2b Up 51 seconds
+(APIServer pid=1) INFO 06-25 01:46:08 [api_utils.py:273] non-default args: {'model_tag': 'Qwen/Qwen3.5-2B', 'host': '0.0.0.0', 'model': 'Qwen/Qwen3.5-2B', 'max_model_len': 8192, 'served_model_name': ['qwen35-2b'], 'gpu_memory_utilization': 0.72}
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_PIPELINE
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_COMMIT
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_IMAGE_TAG
+(APIServer pid=1) WARNING 06-25 01:46:08 [envs.py:2088] Unknown vLLM environment variable detected: VLLM_BUILD_URL
+(APIServer pid=1) INFO 06-25 01:46:22 [model.py:611] Resolved architecture: Qwen3_5ForConditionalGeneration
+(APIServer pid=1) INFO 06-25 01:46:22 [model.py:1745] Using max model len 8192
+(APIServer pid=1) INFO 06-25 01:46:22 [vllm.py:999] Asynchronous scheduling is enabled.
+(APIServer pid=1) INFO 06-25 01:46:22 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+## attempt 5 2026-06-25T01:46:50+00:00
+vsr-qwen35-2b Up About a minute
+(APIServer pid=1) INFO 06-25 01:46:22 [model.py:1745] Using max model len 8192
+(APIServer pid=1) INFO 06-25 01:46:22 [vllm.py:999] Asynchronous scheduling is enabled.
+(APIServer pid=1) INFO 06-25 01:46:22 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(EngineCore pid=296) INFO 06-25 01:46:41 [core.py:113] Initializing a V1 LLM engine (v0.23.0) with config: model='Qwen/Qwen3.5-2B', speculative_config=None, tokenizer='Qwen/Qwen3.5-2B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False), seed=0, served_model_name=qwen35-2b, enable_prefix_caching=False, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::linear_attention', 'vllm::plamo2_mamba_mixer', 'vllm::qwen_gdn_attention_core', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::kda_attention', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [2048], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'size_asserts': False, 'alignment_asserts': False, 'scalar_asserts': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native']), enable_flashinfer_autotune=True, moe_backend='auto', linear_backend='auto')
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.89.0.2:48693 backend=nccl
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=296) INFO 06-25 01:46:45 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+## attempt 6 2026-06-25T01:47:01+00:00
+vsr-qwen35-2b Up About a minute
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.89.0.2:48693 backend=nccl
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=296) INFO 06-25 01:46:45 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=296) INFO 06-25 01:46:51 [gpu_model_runner.py:5092] Starting to load model Qwen/Qwen3.5-2B...
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=296) INFO 06-25 01:46:51 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=296) INFO 06-25 01:46:51 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:378] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=296) INFO 06-25 01:46:51 [flash_attn.py:636] Using FlashAttention version 2
+## attempt 7 2026-06-25T01:47:11+00:00
+vsr-qwen35-2b Up About a minute
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.89.0.2:48693 backend=nccl
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=296) INFO 06-25 01:46:45 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=296) INFO 06-25 01:46:51 [gpu_model_runner.py:5092] Starting to load model Qwen/Qwen3.5-2B...
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=296) INFO 06-25 01:46:51 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=296) INFO 06-25 01:46:51 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:378] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=296) INFO 06-25 01:46:51 [flash_attn.py:636] Using FlashAttention version 2
+## attempt 8 2026-06-25T01:47:21+00:00
+vsr-qwen35-2b Up About a minute
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.89.0.2:48693 backend=nccl
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=296) INFO 06-25 01:46:45 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=296) INFO 06-25 01:46:51 [gpu_model_runner.py:5092] Starting to load model Qwen/Qwen3.5-2B...
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=296) INFO 06-25 01:46:51 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=296) INFO 06-25 01:46:51 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:378] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=296) INFO 06-25 01:46:51 [flash_attn.py:636] Using FlashAttention version 2
+## attempt 9 2026-06-25T01:47:32+00:00
+vsr-qwen35-2b Up About a minute
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.89.0.2:48693 backend=nccl
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=296) INFO 06-25 01:46:45 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=296) INFO 06-25 01:46:51 [gpu_model_runner.py:5092] Starting to load model Qwen/Qwen3.5-2B...
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=296) INFO 06-25 01:46:51 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=296) INFO 06-25 01:46:51 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:378] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=296) INFO 06-25 01:46:51 [flash_attn.py:636] Using FlashAttention version 2
+## attempt 10 2026-06-25T01:47:42+00:00
+vsr-qwen35-2b Up About a minute
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.89.0.2:48693 backend=nccl
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=296) INFO 06-25 01:46:45 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=296) INFO 06-25 01:46:51 [gpu_model_runner.py:5092] Starting to load model Qwen/Qwen3.5-2B...
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=296) INFO 06-25 01:46:51 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=296) INFO 06-25 01:46:51 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:378] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=296) INFO 06-25 01:46:51 [flash_attn.py:636] Using FlashAttention version 2
+## attempt 11 2026-06-25T01:47:52+00:00
+vsr-qwen35-2b Up 2 minutes
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1568] world_size=1 rank=0 local_rank=0 distributed_init_method=tcp://10.89.0.2:48693 backend=nccl
+(EngineCore pid=296) INFO 06-25 01:46:45 [parallel_state.py:1903] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=296) INFO 06-25 01:46:45 [topk_topp_sampler.py:55] Using FlashInfer for top-p & top-k sampling.
+(EngineCore pid=296) INFO 06-25 01:46:51 [gpu_model_runner.py:5092] Starting to load model Qwen/Qwen3.5-2B...
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:433] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=296) INFO 06-25 01:46:51 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=296) INFO 06-25 01:46:51 [qwen_gdn_linear_attn.py:228] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=296) INFO 06-25 01:46:51 [cuda.py:378] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=296) INFO 06-25 01:46:51 [flash_attn.py:636] Using FlashAttention version 2
+## attempt 12 2026-06-25T01:48:03+00:00
+vsr-qwen35-2b Up 2 minutes
+(EngineCore pid=296) INFO 06-25 01:47:56 [weight_utils.py:603] Time spent downloading weights for Qwen/Qwen3.5-2B: 64.506464 seconds
+(EngineCore pid=296) INFO 06-25 01:47:56 [weight_utils.py:922] Filesystem type for checkpoints: XFS. Checkpoint size: 4.24 GiB. Available RAM: 175.33 GiB.
+(EngineCore pid=296) INFO 06-25 01:47:56 [weight_utils.py:945] Auto-prefetch is disabled because the filesystem (XFS) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+## attempt 13 2026-06-25T01:48:13+00:00
+vsr-qwen35-2b Up 2 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+## attempt 14 2026-06-25T01:48:23+00:00
+vsr-qwen35-2b Up 2 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+## attempt 15 2026-06-25T01:48:33+00:00
+vsr-qwen35-2b Up 2 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+## attempt 16 2026-06-25T01:48:44+00:00
+vsr-qwen35-2b Up 2 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+(EngineCore pid=296) INFO 06-25 01:48:34 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/77d851c818718a195bf8b9b748f300aa7ddc601f8385e487d4f459b354e8bde2/rank_0_0/model
+(EngineCore pid=296) INFO 06-25 01:48:34 [monitor.py:53] torch.compile took 34.57 s in total
+## attempt 17 2026-06-25T01:48:54+00:00
+vsr-qwen35-2b Up 3 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+(EngineCore pid=296) INFO 06-25 01:48:34 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/77d851c818718a195bf8b9b748f300aa7ddc601f8385e487d4f459b354e8bde2/rank_0_0/model
+(EngineCore pid=296) INFO 06-25 01:48:34 [monitor.py:53] torch.compile took 34.57 s in total
+## attempt 18 2026-06-25T01:49:04+00:00
+vsr-qwen35-2b Up 3 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+(EngineCore pid=296) INFO 06-25 01:48:34 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/77d851c818718a195bf8b9b748f300aa7ddc601f8385e487d4f459b354e8bde2/rank_0_0/model
+(EngineCore pid=296) INFO 06-25 01:48:34 [monitor.py:53] torch.compile took 34.57 s in total
+## attempt 19 2026-06-25T01:49:15+00:00
+vsr-qwen35-2b Up 3 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+(EngineCore pid=296) INFO 06-25 01:48:34 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/77d851c818718a195bf8b9b748f300aa7ddc601f8385e487d4f459b354e8bde2/rank_0_0/model
+(EngineCore pid=296) INFO 06-25 01:48:34 [monitor.py:53] torch.compile took 34.57 s in total
+## attempt 20 2026-06-25T01:49:25+00:00
+vsr-qwen35-2b Up 3 minutes
+(EngineCore pid=296) INFO 06-25 01:47:57 [default_loader.py:397] Loading weights took 0.67 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+(EngineCore pid=296) INFO 06-25 01:48:34 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/77d851c818718a195bf8b9b748f300aa7ddc601f8385e487d4f459b354e8bde2/rank_0_0/model
+(EngineCore pid=296) INFO 06-25 01:48:34 [monitor.py:53] torch.compile took 34.57 s in total
+## attempt 21 2026-06-25T01:49:35+00:00
+vsr-qwen35-2b Up 3 minutes
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 65.771398 seconds
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=296) INFO 06-25 01:47:58 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=296) INFO 06-25 01:47:58 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/2b9d8c5bbb/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=296) INFO 06-25 01:48:04 [backends.py:1148] Dynamo bytecode transform time: 4.71 s
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+(EngineCore pid=296) INFO 06-25 01:48:34 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/77d851c818718a195bf8b9b748f300aa7ddc601f8385e487d4f459b354e8bde2/rank_0_0/model
+(EngineCore pid=296) INFO 06-25 01:48:34 [monitor.py:53] torch.compile took 34.57 s in total
+(EngineCore pid=296) INFO 06-25 01:49:33 [monitor.py:81] Initial profiling/warmup run took 59.10 s
+## attempt 22 2026-06-25T01:49:46+00:00
+vsr-qwen35-2b Up 3 minutes
+(EngineCore pid=296) INFO 06-25 01:48:09 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=296) INFO 06-25 01:48:32 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 27.14 s
+(EngineCore pid=296) INFO 06-25 01:48:34 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/77d851c818718a195bf8b9b748f300aa7ddc601f8385e487d4f459b354e8bde2/rank_0_0/model
+(EngineCore pid=296) INFO 06-25 01:48:34 [monitor.py:53] torch.compile took 34.57 s in total
+(EngineCore pid=296) INFO 06-25 01:49:33 [monitor.py:81] Initial profiling/warmup run took 59.10 s
+(EngineCore pid=296) INFO 06-25 01:49:40 [gpu_model_runner.py:6412] Profiling CUDA graph memory: PIECEWISE=51 (largest=512), FULL=35 (largest=256)
+(EngineCore pid=296) INFO 06-25 01:49:42 [gpu_model_runner.py:6517] Estimated CUDA graph memory: 0.31 GiB total
+(EngineCore pid=296) INFO 06-25 01:49:43 [gpu_worker.py:480] Available KV cache memory: 9.46 GiB
+(EngineCore pid=296) INFO 06-25 01:49:43 [gpu_worker.py:495] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.7200 is equivalent to --gpu-memory-utilization=0.7059 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.7341. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=296) INFO 06-25 01:49:43 [kv_cache_utils.py:1744] GPU KV cache size: 654,928 tokens
+(EngineCore pid=296) INFO 06-25 01:49:43 [kv_cache_utils.py:1745] Maximum concurrency for 8,192 tokens per request: 79.95x
+## attempt 23 2026-06-25T01:49:56+00:00
+vsr-qwen35-2b Up 4 minutes
+(EngineCore pid=296) INFO 06-25 01:49:43 [kv_cache_utils.py:1744] GPU KV cache size: 654,928 tokens
+(EngineCore pid=296) INFO 06-25 01:49:43 [kv_cache_utils.py:1745] Maximum concurrency for 8,192 tokens per request: 79.95x
+(EngineCore pid=296) INFO 06-25 01:49:47 [gpu_model_runner.py:6585] Graph capturing finished in 4 secs, took 0.44 GiB
+(EngineCore pid=296) INFO 06-25 01:49:47 [gpu_worker.py:639] CUDA graph pool memory: 0.44 GiB (actual), 0.31 GiB (estimated), difference: 0.13 GiB (29.1%).
+(EngineCore pid=296) INFO 06-25 01:49:47 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(EngineCore pid=296) INFO 06-25 01:49:48 [core.py:306] init engine (profile, create kv cache, warmup model) took 110.00 s (compilation: 34.57 s)
+(EngineCore pid=296) INFO 06-25 01:49:48 [vllm.py:999] Asynchronous scheduling is enabled.
+(EngineCore pid=296) INFO 06-25 01:49:48 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+(APIServer pid=1) INFO 06-25 01:49:48 [api_server.py:579] Supported tasks: ['generate']
+(APIServer pid=1) INFO 06-25 01:49:50 [hf.py:548] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+## attempt 24 2026-06-25T01:50:06+00:00
+vsr-qwen35-2b Up 4 minutes
+
+health-ok
+{"object":"list","data":[{"id":"qwen35-2b","object":"model","created":1782352206,"owned_by":"vllm","root":"Qwen/Qwen3.5-2B","parent":null,"max_model_len":8192,"permission":[{"id":"modelperm-aaface2454923a43","object":"model_permission","created":1782352206,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}

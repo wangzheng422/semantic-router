@@ -1,0 +1,66 @@
+Warning: Permanently added 'bastion.75s2z.sandbox2921.opentlc.com' (ED25519) to the list of known hosts.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/benchmarks/guidellm-py/guidellm/__main__.py", line 795, in <module>
+    cli()
+  File "/benchmarks/guidellm-py/click/core.py", line 1514, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1435, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1902, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1902, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1298, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 853, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/__main__.py", line 476, in run
+    asyncio.run(
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/benchmarks/guidellm-py/guidellm/benchmark/entrypoints.py", line 492, in benchmark_generative_text
+    request_loader = await resolve_request_loader(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/benchmark/entrypoints.py", line 312, in resolve_request_loader
+    request_loader: DataLoader[GenerationRequest] = DataLoader(
+                                                    ^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/data/loaders.py", line 153, in __init__
+    iterator: DatasetsIterator[DataT] = DatasetsIterator(
+                                        ^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/data/loaders.py", line 51, in __init__
+    DatasetDeserializerFactory.deserialize(
+  File "/benchmarks/guidellm-py/guidellm/data/deserializers/deserializer.py", line 48, in deserialize
+    dataset = cls._deserialize_with_registered_deserializers(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/data/deserializers/deserializer.py", line 112, in _deserialize_with_registered_deserializers
+    raise ValueError(
+ValueError: Data deserialization failed, likely because the input doesn't match any of the input formats. See the 15 error(s) that occurred while attempting to deserialize the data prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024:
+  - Deserializer 'huggingface': (HFValidationError) Repo id must use alphanumeric chars, '-', '_' or '.'. The name cannot start or end with '-' or '.' and the maximum length is 96: 'prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024'.
+  - Deserializer 'synthetic_text': (OSError) qwen35-2b is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+  - Deserializer 'arrow_file': (DataNotSupportedError) Unsupported data for ArrowFileDatasetDeserializer, expected str or Path to a local .arrow file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'csv_file': (DataNotSupportedError) Unsupported data for CSVFileDatasetDeserializer, expected str or Path to a valid local .csv file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'db_file': (DataNotSupportedError) Unsupported data for DBFileDatasetDeserializer, expected str or Path to a local .db file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'hdf5_file': (DataNotSupportedError) Unsupported data for HDF5FileDatasetDeserializer, expected str or Path to a local .hdf5 or .h5 file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'in_memory_csv_str': (DataNotSupportedError) Unsupported data for InMemoryCsvDatasetDeserializer, expected CSV string, got <class 'str'>
+  - Deserializer 'in_memory_dict': (DataNotSupportedError) Unsupported data for InMemoryDictDatasetDeserializer, expected dict[str, list], got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'in_memory_dict_list': (DataNotSupportedError) Unsupported data for InMemoryDictListDatasetDeserializer, expected list of dicts, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'in_memory_item_list': (DataNotSupportedError) Unsupported data for InMemoryItemListDatasetDeserializer, expected list of primitive items, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'in_memory_json_str': (DataNotSupportedError) Unsupported data for InMemoryJsonStrDatasetDeserializer, expected JSON string with a list or dict of items, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'json_file': (DataNotSupportedError) Unsupported data for JSONFileDatasetDeserializer, expected str or Path to a local .json or .jsonl file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'parquet_file': (DataNotSupportedError) Unsupported data for ParquetFileDatasetDeserializer, expected str or Path to a local .parquet file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'tar_file': (DataNotSupportedError) Unsupported data for TarFileDatasetDeserializer, expected str or Path to a local .tar file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024
+  - Deserializer 'text_file': (DataNotSupportedError) Unsupported data for TextFileDatasetDeserializer, expected str or Path to a local .txt or .text file, got prompt_tokens=512,prompt_tokens_stdev=128,prompt_tokens_min=1,prompt_tokens_max=1024,output_tokens=256,output_tokens_stdev=64,output_tokens_min=1,output_tokens_max=1024

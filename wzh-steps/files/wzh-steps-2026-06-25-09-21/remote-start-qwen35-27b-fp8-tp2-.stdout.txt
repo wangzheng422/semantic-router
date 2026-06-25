@@ -1,0 +1,2 @@
+7d7de870d724a41586daabcd06c07fbf6aaee3151dca81eb065bad1862437333
+vsr-qwen35-27b-fp8 Up Less than a second 0.0.0.0:18002->8000/tcp

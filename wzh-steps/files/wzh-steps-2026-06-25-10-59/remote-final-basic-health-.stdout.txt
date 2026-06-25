@@ -1,0 +1,6 @@
+{"status": "healthy", "service": "classification-api"}
+vsr-qwen35-2b Up 2 hours 0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8 Up About an hour 0.0.0.0:18002->8000/tcp
+vsr-envoy Up About an hour 0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+vsr-router Up 4 minutes 0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+/var/mnt/semantic-router-bench/configs/router-basic.yaml -> /app/config.yaml

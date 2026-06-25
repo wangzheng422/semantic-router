@@ -1,0 +1,16 @@
+## cdi list
+nvidia.com/gpu=0
+nvidia.com/gpu=1
+nvidia.com/gpu=2
+nvidia.com/gpu=3
+nvidia.com/gpu=GPU-397a25b6-0012-e383-ab68-e1465756f30b
+nvidia.com/gpu=GPU-9d49817f-9463-1e2c-498e-393b48eac17d
+nvidia.com/gpu=GPU-c17d6b75-70ef-460b-baae-0ac462703696
+nvidia.com/gpu=GPU-fd5d1f66-3318-e994-03b0-bb0f751be3a2
+nvidia.com/gpu=all
+## images before
+registry.redhat.io/rhelai1/instructlab-nvidia-rhel9:1.5.0 28.4 GB
+## vllm manifest
+application/vnd.docker.distribution.manifest.list.v2+json
+schemaVersion 2
+manifests 2

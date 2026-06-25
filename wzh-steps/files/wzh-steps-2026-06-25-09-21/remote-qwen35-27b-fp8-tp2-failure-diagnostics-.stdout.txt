@@ -1,0 +1,217 @@
+## container
+vsr-qwen35-27b-fp8 Exited (1) 56 seconds ago 1
+## gpu
+Thu Jun 25 01:57:09 2026       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.163.01             Driver Version: 550.163.01     CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA L4                      On  |   00000000:38:00.0 Off |                    0 |
+| N/A   58C    P0             30W /   72W |   15881MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA L4                      On  |   00000000:3A:00.0 Off |                    0 |
+| N/A   48C    P8             17W /   72W |       1MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA L4                      On  |   00000000:3C:00.0 Off |                    0 |
+| N/A   48C    P8             12W /   72W |       1MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA L4                      On  |   00000000:3E:00.0 Off |                    0 |
+| N/A   33C    P8             11W /   72W |       1MiB /  23034MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A     11063      C   VLLM::EngineCore                            15872MiB |
++-----------------------------------------------------------------------------------------+
+## logs tail
+(Worker_TP0 pid=527) INFO 06-25 01:53:18 [weight_utils.py:922] Filesystem type for checkpoints: XFS. Checkpoint size: 28.75 GiB. Available RAM: 167.28 GiB.
+(Worker_TP0 pid=527) INFO 06-25 01:53:18 [weight_utils.py:945] Auto-prefetch is disabled because the filesystem (XFS) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(Worker_TP0 pid=527) INFO 06-25 01:53:21 [default_loader.py:397] Loading weights took 3.14 seconds
+(Worker_TP0 pid=527) INFO 06-25 01:53:22 [gpu_model_runner.py:5187] Model loading took 14.54 GiB memory and 99.470376 seconds
+(Worker_TP0 pid=527) INFO 06-25 01:53:22 [interface.py:670] Setting attention block size to 784 tokens to ensure that attention page size is >= mamba page size.
+(Worker_TP0 pid=527) INFO 06-25 01:53:22 [interface.py:694] Padding mamba page size by 0.13% to ensure that mamba page size and attention page size are exactly equal.
+(Worker_TP1 pid=528) INFO 06-25 01:53:22 [interface.py:670] Setting attention block size to 784 tokens to ensure that attention page size is >= mamba page size.
+(Worker_TP1 pid=528) INFO 06-25 01:53:22 [interface.py:694] Padding mamba page size by 0.13% to ensure that mamba page size and attention page size are exactly equal.
+(Worker_TP0 pid=527) INFO 06-25 01:53:22 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(Worker_TP0 pid=527) INFO 06-25 01:53:39 [backends.py:1089] Using cache directory: /root/.cache/vllm/torch_compile_cache/ab839f312b/rank_0_0/backbone for vLLM's torch.compile
+(Worker_TP0 pid=527) INFO 06-25 01:53:39 [backends.py:1148] Dynamo bytecode transform time: 15.31 s
+(Worker_TP0 pid=527) INFO 06-25 01:53:44 [backends.py:378] Cache the graph of compile range (1, 2048) for later use
+(EngineCore pid=423) INFO 06-25 01:54:23 [shm_broadcast.py:705] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
+(Worker_TP0 pid=527) INFO 06-25 01:54:31 [backends.py:393] Compiling a graph for compile range (1, 2048) takes 50.35 s
+(Worker_TP0 pid=527) INFO 06-25 01:54:56 [decorators.py:708] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/6a7db8dd8e262938fd245388e705bcb877b40d646f44793621370540a0a3f62b/rank_0_0/model
+(Worker_TP0 pid=527) INFO 06-25 01:54:56 [monitor.py:53] torch.compile took 91.84 s in total
+(Worker_TP0 pid=527) WARNING 06-25 01:54:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=8192,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=528) WARNING 06-25 01:54:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=8192,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(EngineCore pid=423) INFO 06-25 01:55:23 [shm_broadcast.py:705] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
+(Worker_TP0 pid=527) WARNING 06-25 01:55:55 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=3072,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=528) WARNING 06-25 01:55:55 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=3072,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=527) WARNING 06-25 01:55:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=17408,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=528) WARNING 06-25 01:55:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=17408,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=527) WARNING 06-25 01:55:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=8704,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=528) WARNING 06-25 01:55:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=8704,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=528) WARNING 06-25 01:55:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=7168,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=527) WARNING 06-25 01:55:56 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=7168,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=527) INFO 06-25 01:55:58 [monitor.py:81] Initial profiling/warmup run took 62.51 s
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987] WorkerProc hit an exception.
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987] Traceback (most recent call last):
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 982, in worker_busy_loop
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     output = func(*args, **kwargs)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 425, in determine_available_memory
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     cudagraph_memory_estimate = self.model_runner.profile_cudagraph_memory()
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6378, in profile_cudagraph_memory
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self._init_minimal_kv_cache_for_profiling()
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6262, in _init_minimal_kv_cache_for_profiling
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self.initialize_kv_cache(minimal_config, is_profiling=True)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7319, in initialize_kv_cache
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_caches = self.initialize_kv_cache_tensors(
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7233, in initialize_kv_cache_tensors
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_cache_raw_tensors = self._allocate_kv_cache_tensors(kv_cache_config)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7014, in _allocate_kv_cache_tensors
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     tensor = torch.zeros(
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 1 has a total capacity of 21.95 GiB of which 678.12 MiB is free. Including non-PyTorch memory, this process has 0 bytes memory in use. Of the allocated memory 20.75 GiB is allocated by PyTorch, and 181.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987] Traceback (most recent call last):
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 982, in worker_busy_loop
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     output = func(*args, **kwargs)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 425, in determine_available_memory
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     cudagraph_memory_estimate = self.model_runner.profile_cudagraph_memory()
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6378, in profile_cudagraph_memory
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self._init_minimal_kv_cache_for_profiling()
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6262, in _init_minimal_kv_cache_for_profiling
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self.initialize_kv_cache(minimal_config, is_profiling=True)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7319, in initialize_kv_cache
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_caches = self.initialize_kv_cache_tensors(
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7233, in initialize_kv_cache_tensors
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_cache_raw_tensors = self._allocate_kv_cache_tensors(kv_cache_config)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7014, in _allocate_kv_cache_tensors
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     tensor = torch.zeros(
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 1 has a total capacity of 21.95 GiB of which 678.12 MiB is free. Including non-PyTorch memory, this process has 0 bytes memory in use. Of the allocated memory 20.75 GiB is allocated by PyTorch, and 181.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+(Worker_TP1 pid=528) ERROR 06-25 01:56:05 [multiproc_executor.py:987] 
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987] WorkerProc hit an exception.
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987] Traceback (most recent call last):
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 982, in worker_busy_loop
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     output = func(*args, **kwargs)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 425, in determine_available_memory
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     cudagraph_memory_estimate = self.model_runner.profile_cudagraph_memory()
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6378, in profile_cudagraph_memory
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self._init_minimal_kv_cache_for_profiling()
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6262, in _init_minimal_kv_cache_for_profiling
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self.initialize_kv_cache(minimal_config, is_profiling=True)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7319, in initialize_kv_cache
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_caches = self.initialize_kv_cache_tensors(
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7233, in initialize_kv_cache_tensors
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_cache_raw_tensors = self._allocate_kv_cache_tensors(kv_cache_config)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7014, in _allocate_kv_cache_tensors
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     tensor = torch.zeros(
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 21.95 GiB of which 678.12 MiB is free. Including non-PyTorch memory, this process has 0 bytes memory in use. Of the allocated memory 20.75 GiB is allocated by PyTorch, and 181.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987] Traceback (most recent call last):
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 982, in worker_busy_loop
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     output = func(*args, **kwargs)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_worker.py", line 425, in determine_available_memory
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     cudagraph_memory_estimate = self.model_runner.profile_cudagraph_memory()
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     return func(*args, **kwargs)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]            ^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6378, in profile_cudagraph_memory
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self._init_minimal_kv_cache_for_profiling()
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 6262, in _init_minimal_kv_cache_for_profiling
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     self.initialize_kv_cache(minimal_config, is_profiling=True)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7319, in initialize_kv_cache
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_caches = self.initialize_kv_cache_tensors(
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7233, in initialize_kv_cache_tensors
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     kv_cache_raw_tensors = self._allocate_kv_cache_tensors(kv_cache_config)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/worker/gpu_model_runner.py", line 7014, in _allocate_kv_cache_tensors
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]     tensor = torch.zeros(
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987]              ^^^^^^^^^^^^
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987] torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 21.95 GiB of which 678.12 MiB is free. Including non-PyTorch memory, this process has 0 bytes memory in use. Of the allocated memory 20.75 GiB is allocated by PyTorch, and 181.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+(Worker_TP0 pid=527) ERROR 06-25 01:56:05 [multiproc_executor.py:987] 
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195] EngineCore failed to start.
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195] Traceback (most recent call last):
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 1164, in run_engine_core
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     return func(*args, **kwargs)
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 930, in __init__
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     super().__init__(
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 132, in __init__
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     kv_cache_config = self._initialize_kv_caches(vllm_config)
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     return func(*args, **kwargs)
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/engine/core.py", line 257, in _initialize_kv_caches
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     available_gpu_memory = self.model_executor.determine_available_memory()
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/abstract.py", line 147, in determine_available_memory
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     return self.collective_rpc("determine_available_memory")
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 404, in collective_rpc
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     return future if non_block else future.result()
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]                                     ^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 91, in result
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     return super().result()
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]            ^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     return self.__get_result()
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     raise self._exception
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 95, in _wait_for_response
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     response = self.aggregate(self.get_response())
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]                               ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]   File "/usr/local/lib/python3.12/dist-packages/vllm/v1/executor/multiproc_executor.py", line 391, in get_response
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195]     raise RuntimeError(
+(EngineCore pid=423) ERROR 06-25 01:56:05 [core.py:1195] RuntimeError: Worker failed with error 'CUDA out of memory. Tried to allocate 784.00 MiB. GPU 0 has a total capacity of 21.95 GiB of which 678.12 MiB is free. Including non-PyTorch memory, this process has 0 bytes memory in use. Of the allocated memory 20.75 GiB is allocated by PyTorch, and 181.07 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)', please check the stack trace above for the root cause
+(EngineCore pid=423) ERROR 06-25 01:56:09 [multiproc_executor.py:284] Worker proc VllmWorker-0 died unexpectedly, shutting down executor.
+(EngineCore pid=423) INFO 06-25 01:56:09 [multiproc_executor.py:428] [shutdown] Executor: waiting for worker exit count=2

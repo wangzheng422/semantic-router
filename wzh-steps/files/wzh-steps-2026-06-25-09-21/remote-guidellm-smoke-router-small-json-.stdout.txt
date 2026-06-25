@@ -1,0 +1,84 @@
+✔ OpenAIHTTPBackend backend validated with model auto
+  {'target': 'http://vsr-envoy:8888', 'model': 'auto', 'timeout': None,         
+  'timeout_connect': 5.0, 'http2': True, 'follow_redirects': True, 'verify':    
+  False, 'openai_paths': {'/health': 'health', '/v1/models': 'v1/models',       
+  '/v1/completions': 'v1/completions', '/v1/chat/completions':                  
+  'v1/chat/completions', '/v1/responses': 'v1/responses',                       
+  '/v1/audio/transcriptions': 'v1/audio/transcriptions',                        
+  '/v1/audio/translations': 'v1/audio/translations', '/pooling': 'pooling'},    
+  'validate_backend': {'method': 'GET', 'url': 'http://vsr-envoy:8888/health'}} 
+✔ Processor resolved
+  Using processor 'Qwen/Qwen3.5-2B'                                             
+✔ Request loader initialized with inf unique requests
+  {'data':                                                                      
+  "['prompt_tokens=64,prompt_tokens_stdev=8,prompt_tokens_min=16,prompt_tokens_m
+  ax=128,output_tokens=32,output_tokens_stdev=4,output_tokens_min=8,output_token
+  s_max=64']", 'data_args': '[]', 'data_samples': -1, 'preprocessors':          
+  ['GenerativeColumnMapper', 'MediaEncoder'], 'finalizer':                      
+  'GenerativeRequestFinalizer', 'collator': 'GenerativeRequestCollator',        
+  'sampler': 'None', 'num_workers': 1, 'random_seed': 42}                       
+✔ Resolved transient phase configurations
+  Warmup: percent=0.0 value=None mode='prefer_duration'                         
+  Cooldown: percent=0.0 value=None mode='prefer_duration'                       
+  Rampup (Throughput/Concurrent): 0.0                                           
+✔ ConcurrentProfile profile resolved
+  {'str': "type_='concurrent' completed_strategies=[]                           
+  constraints={'max_requests': 2} rampup_duration=0.0 streams=[1]               
+  strategy_types=['concurrent']", 'type': 'ConcurrentProfile', 'class':         
+  'ConcurrentProfile', 'module': 'guidellm.benchmark.profiles', 'attributes':   
+  {'type_': 'concurrent', 'completed_strategies': [], 'constraints':            
+  {'max_requests': 2}, 'rampup_duration': 0.0, 'streams': [1]}}                 
+✔ Output formats resolved
+  {'json':                                                                      
+  "output_path=PosixPath('/benchmarks/guidellm-results/smoke-router-small-json/b
+  enchmark.json') format_type='json'"}                                          
+✔ Setup complete, starting benchmarks...
+
+
+
+
+
+ℹ Run Summary Info
+|============|==========|==========|======|======|======|======|=====|=====|======|=====|=====|
+| Benchmark  | Timings                              ||||| Input Tokens   ||| Output Tokens  |||
+| Strategy   | Start    | End      | Dur  | Warm | Cool | Comp | Inc | Err | Comp | Inc | Err |
+|            |          |          | Sec  | Sec  | Sec  | Tot  | Tot | Tot | Tot  | Tot | Tot |
+|------------|----------|----------|------|------|------|------|-----|-----|------|-----|-----|
+| concurrent | 02:27:35 | 02:27:35 | -0.0 | 4.1  | 0.5  | 0.0  | 0.0 | 0.0 | 0.0  | 0.0 | 0.0 |
+|============|==========|==========|======|======|======|======|=====|=====|======|=====|=====|
+
+
+ℹ Request Token Statistics (Completed Requests)
+|============|======|=====|======|======|======|=====|=======|======|=========|========|
+| Benchmark  | Input Tok || Output Tok || Total Tok || Stream Iter || Output Tok      ||
+| Strategy   | Per Req   || Per Req    || Per Req   || Per Req     || Per Stream Iter ||
+|            | Mdn  | p95 | Mdn  | p95  | Mdn  | p95 | Mdn   | p95  | Mdn     | p95    |
+|------------|------|-----|------|------|------|-----|-------|------|---------|--------|
+| concurrent | 0.0  | 0.0 | 0.0  | 0.0  | 0.0  | 0.0 | 0.0   | 0.0  | 0.0     | 0.0    |
+|============|======|=====|======|======|======|=====|=======|======|=========|========|
+
+
+ℹ Request Latency Statistics (Completed Requests)
+|============|=========|========|=====|=====|=====|=====|=====|=====|
+| Benchmark  | Request Latency || TTFT     || ITL      || TPOT     ||
+| Strategy   | Sec             || ms       || ms       || ms       ||
+|            | Mdn     | p95    | Mdn | p95 | Mdn | p95 | Mdn | p95 |
+|------------|---------|--------|-----|-----|-----|-----|-----|-----|
+| concurrent | 0.0     | 0.0    | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 |
+|============|=========|========|=====|=====|=====|=====|=====|=====|
+
+
+ℹ Server Throughput Statistics (All Requests)
+|============|=======|======|=========|==============|===============|==============|
+| Benchmark  | Requests             ||| Input Tokens | Output Tokens | Total Tokens |
+| Strategy   | Concurrency || Per Sec | Per Sec      | Per Sec       | Per Sec      |
+|            | Mdn   | Mean | Mean                                               ||||
+|------------|-------|------|---------|--------------|---------------|--------------|
+| concurrent | 0.0   | 0.0  | 0.0     | 0.0          | 0.0           | 0.0          |
+|============|=======|======|=========|==============|===============|==============|
+
+
+
+✔ Benchmarking complete, generated 1 benchmark(s)
+…   json    : 
+/benchmarks/guidellm-results/smoke-router-small-json/benchmark.json

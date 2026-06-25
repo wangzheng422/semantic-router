@@ -1,0 +1,3 @@
+timestamp=2026-06-25T09:36:15+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=sshpass -e ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=20 cloud-user@bastion.75s2z.sandbox2921.opentlc.com set\ -euo\ pipefail\;\ echo\ \"\#\#\ dnf\ list\ docker-like\"\;\ sudo\ dnf\ -q\ list\ --available\ \"docker\*\"\ \"moby\*\"\ \"containerd\*\"\ 2\>\&1\ \|\|\ true\;\ echo\ \"\#\#\ dnf\ provides\ dockerd\"\;\ sudo\ dnf\ -q\ provides\ \"\*/dockerd\"\ 2\>\&1\ \|\|\ true\;\ echo\ \"\#\#\ rpm-ostree\ install\ dry-run\ candidates\"\;\ sudo\ rpm-ostree\ install\ --dry-run\ moby-engine\ docker-ce\ docker-ce-cli\ containerd.io\ 2\>\&1\ \|\|\ true 

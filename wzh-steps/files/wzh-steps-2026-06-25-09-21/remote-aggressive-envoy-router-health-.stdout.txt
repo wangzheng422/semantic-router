@@ -1,0 +1,55 @@
+===ps===
+NAMES               STATUS         PORTS
+vsr-qwen35-2b       Up 45 minutes  0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8  Up 33 minutes  0.0.0.0:18002->8000/tcp
+vsr-envoy           Up 26 minutes  0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+vsr-router          Up 48 seconds  0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+===health===
+HTTP/1.1 200 OK
+Content-Type: application/json
+Date: Thu, 25 Jun 2026 02:31:16 GMT
+Content-Length: 54
+
+{"status": "healthy", "service": "classification-api"}
+HTTP/1.1 200 OK
+content-type: application/json
+content-length: 606
+date: Thu, 25 Jun 2026 02:31:16 GMT
+server: envoy
+
+{"object":"list","data":[{"id":"vllm-sr/auto","object":"model","created":1782354676,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"auto","object":"model","created":1782354676,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"MoM","object":"model","created":1782354676,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"vllm-sr/fusion","object":"model","created":1782354676,"owned_by":"vllm-semantic-router","description":"Fusion multi-model deliberation"}]}
+===router_logs===
+Starting router from canonical config...
+  Config file: /app/config.yaml
+Starting router...
+
+[97m       █     █     █▄   ▄█[0m
+[97m ▄▄ ▄█ █     █     █ ▀▄▀ █[0m
+[97m  █▄█▀ █     █     █     █[0m
+[97m   ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀[0m
+[97m  Semantic Router[0m
+[38;2;145;158;171m  Intelligent Routing for Mixture-of-Models[0m
+
+INFO: mmBERT embedding model registered with 2D Matryoshka support
+===envoy_logs===
+[2026-06-25T02:05:11.818Z] "GET /v1/models HTTP/1.1" 200 - 3 "-" "-" "-" "-"
+[2026-06-25T02:08:15.597Z] "POST /v1/chat/completions HTTP/1.1" 200 - 2456 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:08:18.062Z] "POST /v1/chat/completions HTTP/1.1" 200 - 1290 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:08:19.354Z] "POST /v1/chat/completions HTTP/1.1" 200 - 1290 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:08:20.646Z] "POST /v1/chat/completions HTTP/1.1" 200 - 146 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:08:20.794Z] "POST /v1/chat/completions HTTP/1.1" 200 - 375 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:08:21.171Z] "POST /v1/chat/completions HTTP/1.1" 200 - 1296 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:08:22.470Z] "POST /v1/chat/completions HTTP/1.1" 200 - 594 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:09:46.147Z] "POST /v1/chat/completions HTTP/1.1" 200 - 182 "qwen35-2b" "qwen35-2b" "route-small-keyword" "10.89.0.2:8000"
+[2026-06-25T02:09:46.339Z] "POST /v1/chat/completions HTTP/1.1" 200 - 16798 "qwen35-27b-fp8" "qwen35-27b-fp8" "route-large-keyword" "10.89.0.4:8000"
+[2026-06-25T02:10:03.140Z] "POST /v1/chat/completions HTTP/1.1" 200 - 8766 "qwen35-27b-fp8" "qwen35-27b-fp8" "route-large-keyword" "10.89.0.4:8000"
+[2026-06-25T02:10:11.908Z] "POST /v1/chat/completions HTTP/1.1" 200 - 146 "qwen35-2b" "qwen35-2b" "route-small-keyword" "10.89.0.2:8000"
+[2026-06-25T02:10:12.056Z] "POST /v1/chat/completions HTTP/1.1" 200 - 373 "qwen35-2b" "qwen35-2b" "route-small-keyword" "10.89.0.2:8000"
+[2026-06-25T02:10:12.432Z] "POST /v1/chat/completions HTTP/1.1" 200 - 8651 "qwen35-27b-fp8" "qwen35-27b-fp8" "route-large-keyword" "10.89.0.4:8000"
+[2026-06-25T02:10:21.086Z] "POST /v1/chat/completions HTTP/1.1" 200 - 434 "qwen35-2b" "qwen35-2b" "route-small-keyword" "10.89.0.2:8000"
+[2026-06-25T02:12:49.798Z] "GET /v1/models HTTP/1.1" 200 - 1 "-" "-" "-" "-"
+[2026-06-25T02:27:27.480Z] "GET /health HTTP/1.1" 200 - 3 "-" "-" "-" "10.89.0.2:8000"
+[2026-06-25T02:27:30.639Z] "GET /health HTTP/1.1" 200 - 2 "-" "-" "-" "10.89.0.2:8000"
+[2026-06-25T02:27:31.734Z] "POST /v1/chat/completions HTTP/1.1" 200 - 4142 "qwen35-27b-fp8" "qwen35-27b-fp8" "route-large-keyword" "10.89.0.4:8000"
+[2026-06-25T02:27:35.879Z] "POST /v1/chat/completions HTTP/1.1" 200 - 546 "qwen35-2b" "qwen35-2b" "default-small" "10.89.0.2:8000"
+[2026-06-25T02:30:28.249Z] "GET /v1/models HTTP/1.1" 500 - 18600 "-" "-" "-" "-"

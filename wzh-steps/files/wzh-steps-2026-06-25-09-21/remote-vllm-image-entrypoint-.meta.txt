@@ -1,0 +1,3 @@
+timestamp=2026-06-25T09:44:58+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=sshpass -e ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=20 cloud-user@bastion.75s2z.sandbox2921.opentlc.com podman\ image\ inspect\ docker.io/vllm/vllm-openai:latest\ --format\ \"Entrypoint=\{\{json\ .Config.Entrypoint\}\}\ Cmd=\{\{json\ .Config.Cmd\}\}\ Env=\{\{json\ .Config.Env\}\}\" 

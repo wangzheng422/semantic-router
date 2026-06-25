@@ -730,7 +730,119 @@ Envoy 配置会自动生成，将不同模型名映射到不同的后端地址�
 
 ---
 
-## 十三、项目目录结构速览
+## 十三、多轮对话中途切换模型
+
+### 13.1 结论：能切，而且是默认行为
+
+Router 的基本工作模式是 **per-request（逐请求）路由**。每一轮对话进来时，Router 都会独立地运行信号检测和决策引擎。所以：
+
+- 第1-3轮是闲聊 → 路由到轻量模型
+- 第4轮用户说"帮我写个归并排序" → keyword/embedding 信号检测到代码类 → **自动切换到代码模型**
+
+Router 不会因为前几轮用了模型A就永远粘在模型A上。
+
+### 13.2 但切换有代价
+
+中途切模型有两个代价：
+- **KV Cache 失效**：vLLM 对之前对话的 KV Cache 在模型 A 上是热的，切到模型 B 后需要重新计算全部上下文，增加首 token 延迟
+- **上下文一致性**：不同模型的"记忆"和风格可能不同
+
+为此项目设计了两层智能控制机制。
+
+### 13.3 第一层：Cache Affinity（缓存亲和力）— 软性 tie-breaker
+
+在 `pkg/selection/cache_affinity.go` 中实现。当两个模型的路由得分接近时，倾向于留在当前模型。
+
+```
+┌─────────────────────────────────────────────────────────┐
+│  Cache Affinity 决策逻辑                                  │
+│                                                          │
+│  基础得分差距大 (gap > 0.20):                              │
+│    → Cache Affinity 不介入                                │
+│    → 按新的得分直接选模型（强信号直接切换）                   │
+│                                                          │
+│  基础得分差距小 (gap < 0.20):                              │
+│    → 给当前模型一个小的加分（最多 ±0.14）                    │
+│    → 作为 tie-breaker，不会覆盖强信号                       │
+│                                                          │
+│  考虑的因素:                                               │
+│    - 对话轮次深度 (turn depth)                              │
+│    - 历史 token 量 (history mass)                          │
+│    - Context reuse 比例                                    │
+│    - 上下文窗口适配度 (window fit)                           │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 13.4 第二层：Model Switch Gate（模型切换门控）— 硬性控制
+
+在 `pkg/selection/model_switch_gate.go` 中实现。这是一个更强的控制机制，有两种模式：
+
+| 模式 | 行为 |
+|------|------|
+| **shadow**（默认） | 只记录"会不会切换"的日志和指标，但**不阻止**切换 |
+| **enforce** | 当切换代价大于收益时，**强制留在当前模型** |
+
+决策公式：
+```
+净收益 = 切换收益（质量差距）- 切换代价（handoff penalty + cache warmth 损失）
+
+如果 净收益 < min_switch_advantage → 不切换，留在当前模型
+如果 净收益 >= min_switch_advantage → 允许切换
+```
+
+配置示例：
+```yaml
+model_selection:
+  model_switch_gate:
+    enabled: true
+    mode: shadow              # 或 "enforce"
+    min_switch_advantage: 0.1 # 最低切换净收益阈值
+    default_handoff_penalty: 0.05  # 默认切换惩罚
+    cache_warmth_weight: 0.3  # Cache 热度的权重
+```
+
+### 13.5 具体场景示例
+
+```
+第1轮: "你好，今天天气怎么样"
+  → 信号: 闲聊, 低复杂度
+  → 决策: 路由到 轻量模型A
+  → (第一轮, 没有 previous_model, cache affinity 不生效)
+
+第2轮: "给我讲讲量子力学"
+  → 信号: 科学领域, 中等复杂度
+  → 决策: 可能还是模型A (通用模型能处理)
+  → cache affinity: 有少量倾向留在 A
+
+第3轮: "请用 Python 递归实现归并排序，并分析时间复杂度"
+  → 信号: keyword=代码, embedding=高度匹配 coding, complexity=高
+  → 决策: 路由到 代码模型B (得分远高于模型A)
+  → cache affinity: gap > 0.20, 不介入
+  → model_switch_gate:
+    shadow 模式: 记录日志, 允许切换 → 切到模型B ✅
+    enforce 模式: 评估质量收益 vs handoff 代价
+      代码模型明显更好 → 仍然切换 ✅
+
+第4轮: "再帮我优化一下这段代码的空间复杂度"
+  → 信号: 依然是代码类
+  → 决策: 继续路由到 代码模型B
+  → cache affinity: 倾向留在 B (same_model bonus)
+```
+
+### 13.6 总结
+
+| 问题 | 答案 |
+|------|------|
+| 能不能中途切模型？ | **能，这是默认行为** |
+| 是每轮都重新判断吗？ | **是的，每个请求独立路由** |
+| 有没有会话粘性？ | **有，但只是 tie-breaker**（Cache Affinity，最多 ±0.14 偏移） |
+| 能不能强制不切？ | **能，开启 model_switch_gate enforce 模式** |
+| 强信号时会被粘性覆盖吗？ | **不会，强信号（gap > 0.20）会直接切换** |
+| 切换会有指标记录吗？ | **会，`llm_session_model_transitions_total` 指标追踪切换次数** |
+
+---
+
+## 十四、项目目录结构速览
 
 ```
 semantic-router/

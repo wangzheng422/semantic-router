@@ -1,0 +1,10 @@
+NAMES               STATUS         PORTS
+vsr-qwen35-2b       Up 27 minutes  0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8  Up 15 minutes  0.0.0.0:18002->8000/tcp
+vsr-envoy           Up 7 minutes   0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+vsr-router          Up 3 minutes   0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+===health===
+router=200
+envoy_models=200
+small=200
+large=200

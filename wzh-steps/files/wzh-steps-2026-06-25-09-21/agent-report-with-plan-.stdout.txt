@@ -1,0 +1,62 @@
+Requirement already satisfied: PyYAML==6.0.3 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 1)) (6.0.3)
+Requirement already satisfied: codespell==2.4.1 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 2)) (2.4.1)
+Requirement already satisfied: pre-commit==4.3.0 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 3)) (4.3.0)
+Requirement already satisfied: ruff==0.15.5 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 4)) (0.15.5)
+Requirement already satisfied: tree-sitter==0.25.2 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 5)) (0.25.2)
+Requirement already satisfied: tree-sitter-go==0.25.0 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 6)) (0.25.0)
+Requirement already satisfied: tree-sitter-python==0.25.0 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 7)) (0.25.0)
+Requirement already satisfied: tree-sitter-rust==0.24.0 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 8)) (0.24.0)
+Requirement already satisfied: yamllint==1.38.0 in ./.venv-agent/lib/python3.14/site-packages (from -r tools/agent/requirements.txt (line 9)) (1.38.0)
+Requirement already satisfied: cfgv>=2.0.0 in ./.venv-agent/lib/python3.14/site-packages (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (3.5.0)
+Requirement already satisfied: identify>=1.0.0 in ./.venv-agent/lib/python3.14/site-packages (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (2.6.19)
+Requirement already satisfied: nodeenv>=0.11.1 in ./.venv-agent/lib/python3.14/site-packages (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (1.10.0)
+Requirement already satisfied: virtualenv>=20.10.0 in ./.venv-agent/lib/python3.14/site-packages (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (21.5.1)
+Requirement already satisfied: pathspec>=1.0.0 in ./.venv-agent/lib/python3.14/site-packages (from yamllint==1.38.0->-r tools/agent/requirements.txt (line 9)) (1.1.1)
+Requirement already satisfied: distlib<1,>=0.3.7 in ./.venv-agent/lib/python3.14/site-packages (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (0.4.3)
+Requirement already satisfied: filelock<4,>=3.24.2 in ./.venv-agent/lib/python3.14/site-packages (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (3.29.4)
+Requirement already satisfied: platformdirs<5,>=3.9.1 in ./.venv-agent/lib/python3.14/site-packages (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (4.10.0)
+Requirement already satisfied: python-discovery>=1.4.2 in ./.venv-agent/lib/python3.14/site-packages (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3)) (1.4.2)
+[0;32m==================> Running agent-report ============> ... [0m
+Agent Environment
+  Requested env: cpu
+  Manifest env: cpu-local
+  Build target: make vllm-sr-dev
+  Serve command: vllm-sr serve --image-pull-policy never
+  Local env: yes
+  Smoke config: e2e/config/config.agent-smoke.cpu.yaml
+
+Agent Skill
+  Primary skill: harness-contract-change
+  Impacted surfaces: docs_examples, harness_docs
+  Required surfaces: harness_docs
+  Conditional surfaces hit: none
+  Optional surfaces hit: docs_examples
+
+Agent Context
+  Changed files: 5
+  Matched rules: repo-docs, agent_text
+  Loop mode: lightweight
+  Execution plan: required for long-horizon multi-loop work
+  Fast tests: make agent-validate
+  Feature tests: none
+  Local smoke: not required
+  Local E2E profiles (manual): none
+  Workflow integration suites (manual): none
+  CI E2E mode: none
+  Failure policy: fix failures and rerun the smallest applicable gate until the current change passes or a real blocker is recorded
+  Stop condition: applicable gates pass for the current change
+  Classification: documentation-only
+
+Context Pack
+  Start here:
+    - AGENTS.md :: Short harness entrypoint and canonical command index.
+    - docs/agent/README.md :: Canonical docs index and task-first navigation entry. Also: Referenced by the 'harness-contract-change' skill Must Read section.
+    - docs/agent/context-management.md :: Progressive disclosure model and context-pack policy for this repository.
+  Must read:
+    - tools/agent/skills/harness-contract-change/SKILL.md :: Primary skill contract for this task.
+    - docs/agent/governance.md :: Referenced by the 'harness-contract-change' skill Must Read section. Also: Harness doc layering and source-of-truth policy for shared contract changes.
+    - docs/agent/plans/README.md :: Referenced by the 'harness-contract-change' skill Must Read section. Also: Use when the work needs a resumable execution loop across sessions or contributors.
+  Additional refs: read-if-applicable, resume (use --context-detail full or --format json)
+
+Validation Commands
+  - make agent-validate

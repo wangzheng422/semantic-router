@@ -1,0 +1,226 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+    default_reasoning_effort: low
+    reasoning_families:
+      qwen3:
+        type: chat_template_kwargs
+        parameter: enable_thinking
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 0
+        cached_input_per_1m: 0
+        completion_per_1m: 0
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 0
+        cached_input_per_1m: 0
+        completion_per_1m: 0
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 8192
+      description: Fast low-cost model for short replies and simple account/support requests.
+      capabilities: [chat, fast-response, low-latency]
+      quality_score: 0.62
+      modality: ar
+      tags: [small, fast, inexpensive]
+    - name: qwen35-27b-fp8
+      param_size: 27B
+      context_window_size: 4096
+      description: Larger FP8 model for complex analysis, reasoning, incident handling, code, and synthesis.
+      capabilities: [chat, reasoning, code, analysis]
+      quality_score: 0.91
+      modality: ar
+      tags: [large, reasoning, premium]
+
+  signals:
+    keywords:
+      - name: alg_routerdc
+        operator: OR
+        method: bm25
+        keywords: ["ALGORITHM_ROUTERDC"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+      - name: alg_automix
+        operator: OR
+        method: bm25
+        keywords: ["ALGORITHM_AUTOMIX"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+      - name: alg_hybrid
+        operator: OR
+        method: bm25
+        keywords: ["ALGORITHM_HYBRID"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+      - name: alg_multifactor
+        operator: OR
+        method: bm25
+        keywords: ["ALGORITHM_MULTIFACTOR"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+      - name: alg_latency
+        operator: OR
+        method: bm25
+        keywords: ["ALGORITHM_LATENCY"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+
+  decisions:
+    - name: select-routerdc
+      priority: 970
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: alg_routerdc
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+      algorithm:
+        type: router_dc
+        router_dc:
+          temperature: 0.2
+          dimension_size: 384
+          min_similarity: 0.0
+          use_query_contrastive: true
+          use_model_contrastive: true
+          require_descriptions: false
+          use_capabilities: true
+
+    - name: select-automix
+      priority: 960
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: alg_automix
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+      algorithm:
+        type: automix
+        automix:
+          verification_threshold: 0.78
+          max_escalations: 2
+          cost_aware_routing: true
+          cost_quality_tradeoff: 0.35
+          discount_factor: 0.9
+          use_logprob_verification: true
+
+    - name: select-hybrid
+      priority: 950
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: alg_hybrid
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+      algorithm:
+        type: hybrid
+        hybrid:
+          elo_weight: 0.35
+          router_dc_weight: 0.35
+          automix_weight: 0.20
+          cost_weight: 0.10
+          quality_gap_threshold: 0.05
+          normalize_scores: true
+
+    - name: select-multi-factor
+      priority: 940
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: alg_multifactor
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+      algorithm:
+        type: multi_factor
+        multi_factor:
+          weights:
+            quality: 0.45
+            latency: 0.25
+            cost: 0.20
+            load: 0.10
+          slo:
+            max_tpot_ms: 300
+            max_ttft_ms: 1200
+            max_cost_per_1m: 1.0
+            max_inflight: 50
+          latency_percentile: 95
+          on_no_candidates: cheapest
+
+    - name: select-latency-aware
+      priority: 930
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: alg_latency
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+      algorithm:
+        type: latency_aware
+        latency_aware:
+          tpot_percentile: 90
+          ttft_percentile: 95
+          description: Prefer the model with better observed latency percentile data when available.
+
+    - name: default-small
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false

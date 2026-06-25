@@ -1,0 +1,84 @@
+Warning: Permanently added 'bastion.75s2z.sandbox2921.opentlc.com' (ED25519) to the list of known hosts.
+curl: (56) Recv failure: Connection reset by peer
+curl: (56) Recv failure: Connection reset by peer
+(APIServer pid=1) Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+curl: (56) Recv failure: Connection reset by peer
+(APIServer pid=1) Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+(APIServer pid=1) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(APIServer pid=1) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+curl: (56) Recv failure: Connection reset by peer
+(APIServer pid=1) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(APIServer pid=1) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+[transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+curl: (56) Recv failure: Connection reset by peer
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:   9% Completed | 1/11 [00:00<00:03,  3.19it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  18% Completed | 2/11 [00:00<00:02,  3.18it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  27% Completed | 3/11 [00:00<00:02,  3.20it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  36% Completed | 4/11 [00:01<00:02,  3.21it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  45% Completed | 5/11 [00:01<00:01,  3.18it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  55% Completed | 6/11 [00:01<00:01,  3.13it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  64% Completed | 7/11 [00:02<00:01,  3.12it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  73% Completed | 8/11 [00:02<00:00,  3.36it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  82% Completed | 9/11 [00:02<00:00,  3.58it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  91% Completed | 10/11 [00:03<00:00,  3.24it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.33it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.27it/s]
+(Worker_TP0 pid=483) 
+curl: (56) Recv failure: Connection reset by peer
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  27% Completed | 3/11 [00:00<00:02,  3.20it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  36% Completed | 4/11 [00:01<00:02,  3.21it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  45% Completed | 5/11 [00:01<00:01,  3.18it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  55% Completed | 6/11 [00:01<00:01,  3.13it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  64% Completed | 7/11 [00:02<00:01,  3.12it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  73% Completed | 8/11 [00:02<00:00,  3.36it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  82% Completed | 9/11 [00:02<00:00,  3.58it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  91% Completed | 10/11 [00:03<00:00,  3.24it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.33it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.27it/s]
+(Worker_TP0 pid=483) 
+curl: (56) Recv failure: Connection reset by peer
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  27% Completed | 3/11 [00:00<00:02,  3.20it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  36% Completed | 4/11 [00:01<00:02,  3.21it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  45% Completed | 5/11 [00:01<00:01,  3.18it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  55% Completed | 6/11 [00:01<00:01,  3.13it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  64% Completed | 7/11 [00:02<00:01,  3.12it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  73% Completed | 8/11 [00:02<00:00,  3.36it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  82% Completed | 9/11 [00:02<00:00,  3.58it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  91% Completed | 10/11 [00:03<00:00,  3.24it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.33it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.27it/s]
+(Worker_TP0 pid=483) 
+curl: (56) Recv failure: Connection reset by peer
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  27% Completed | 3/11 [00:00<00:02,  3.20it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  36% Completed | 4/11 [00:01<00:02,  3.21it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  45% Completed | 5/11 [00:01<00:01,  3.18it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  55% Completed | 6/11 [00:01<00:01,  3.13it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  64% Completed | 7/11 [00:02<00:01,  3.12it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  73% Completed | 8/11 [00:02<00:00,  3.36it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  82% Completed | 9/11 [00:02<00:00,  3.58it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  91% Completed | 10/11 [00:03<00:00,  3.24it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.33it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.27it/s]
+(Worker_TP0 pid=483) 
+curl: (56) Recv failure: Connection reset by peer
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  36% Completed | 4/11 [00:01<00:02,  3.21it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  45% Completed | 5/11 [00:01<00:01,  3.18it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  55% Completed | 6/11 [00:01<00:01,  3.13it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  64% Completed | 7/11 [00:02<00:01,  3.12it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  73% Completed | 8/11 [00:02<00:00,  3.36it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  82% Completed | 9/11 [00:02<00:00,  3.58it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards:  91% Completed | 10/11 [00:03<00:00,  3.24it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.33it/s]
+(Worker_TP0 pid=483) Loading safetensors checkpoint shards: 100% Completed | 11/11 [00:03<00:00,  3.27it/s]
+(Worker_TP0 pid=483) 
+curl: (56) Recv failure: Connection reset by peer
+(EngineCore pid=379) Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+(EngineCore pid=379) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=379) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+curl: (56) Recv failure: Connection reset by peer
+(EngineCore pid=379) Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+(EngineCore pid=379) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=379) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.

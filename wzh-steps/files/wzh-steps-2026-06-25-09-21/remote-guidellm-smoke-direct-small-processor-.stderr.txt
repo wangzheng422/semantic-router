@@ -1,0 +1,43 @@
+Warning: Permanently added 'bastion.75s2z.sandbox2921.opentlc.com' (ED25519) to the list of known hosts.
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/benchmarks/guidellm-py/guidellm/__main__.py", line 795, in <module>
+    cli()
+  File "/benchmarks/guidellm-py/click/core.py", line 1514, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1435, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1902, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1902, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 1298, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/click/core.py", line 853, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/__main__.py", line 476, in run
+    asyncio.run(
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/benchmarks/guidellm-py/guidellm/benchmark/entrypoints.py", line 572, in benchmark_generative_text
+    output_result = await output.finalize(report)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/benchmark/outputs/serialized.py", line 82, in finalize
+    return report.save_file(output_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/benchmarks/guidellm-py/guidellm/benchmark/schemas/generative/report.py", line 111, in save_file
+    raise ValueError(f"Unsupported file type: {file_type} for {file_path}.")
+ValueError: Unsupported file type:  for /benchmarks/guidellm-results/smoke-direct-small-processor.

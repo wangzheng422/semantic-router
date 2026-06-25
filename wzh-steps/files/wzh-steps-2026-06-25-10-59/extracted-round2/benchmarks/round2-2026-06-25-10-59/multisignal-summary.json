@@ -1,0 +1,317 @@
+{
+  "input": "/var/mnt/semantic-router-bench/benchmarks/round2-2026-06-25-10-59/multisignal-results.jsonl",
+  "rows": 20,
+  "selected_models": {
+    "qwen35-27b-fp8": 11,
+    "qwen35-2b": 9
+  },
+  "selected_decisions": {
+    "route-support-embedding-large": 1,
+    "route-account-embedding-small": 2,
+    "route-critical-event-large": 3,
+    "default-small": 1,
+    "route-structure-large": 1,
+    "route-zh-small": 1,
+    "route-long-context-large": 1,
+    "route-pii-small-guarded": 2,
+    "route-jailbreak-small-guarded": 1,
+    "route-preference-small": 2,
+    "route-authz-admin-large": 1,
+    "route-user-feedback-large": 3,
+    "route-fact-check-large": 1
+  },
+  "errors": {},
+  "rows_compact": [
+    {
+      "scenario_id": "embedding_technical_support",
+      "turn": 1,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-support-embedding-large",
+      "matched": {
+        "x-vsr-matched-embeddings": "technical_support",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "embedding_account_management",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-account-embedding-small",
+      "matched": {
+        "x-vsr-matched-embeddings": "account_management",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "structure_many_questions",
+      "turn": 1,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-critical-event-large",
+      "matched": {
+        "x-vsr-matched-fact-check": "needs_fact_check",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-structure": "many_questions",
+        "x-vsr-matched-event": "critical_payment_event",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "structure_numbered_steps",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "default-small",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "structure_first_then_projection",
+      "turn": 1,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-structure-large",
+      "matched": {
+        "x-vsr-matched-embeddings": "technical_support",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-structure": "first_then_flow",
+        "x-vsr-matched-projections": "high_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "language_zh",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-zh-small",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-language": "zh",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "long_context",
+      "turn": 1,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-long-context-large",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "long_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "fact_check",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-pii-small-guarded",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-pii": "restricted_pii",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "jailbreak",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-jailbreak-small-guarded",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-jailbreak": "prompt_injection",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "pii_fake",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-pii-small-guarded",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-pii": "restricted_pii",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "event_critical_payment",
+      "turn": 1,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-critical-event-large",
+      "matched": {
+        "x-vsr-matched-embeddings": "technical_support",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-event": "critical_payment_event",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "preference_terse",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-preference-small",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-preference": "terse_answers",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-structure": "format_directive_dense",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "authz_admin",
+      "turn": 1,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-authz-admin-large",
+      "matched": {
+        "x-vsr-matched-embeddings": "account_management",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-authz": "admin,premium_user",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_turn_topic_switch",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-account-embedding-small",
+      "matched": {
+        "x-vsr-matched-embeddings": "account_management",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_turn_topic_switch",
+      "turn": 2,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-critical-event-large",
+      "matched": {
+        "x-vsr-matched-embeddings": "technical_support",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-user-feedback": "wrong_answer",
+        "x-vsr-matched-context": "long_context",
+        "x-vsr-matched-conversation": "multi_turn_user",
+        "x-vsr-matched-event": "critical_payment_event",
+        "x-vsr-matched-projections": "high_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_turn_topic_switch",
+      "turn": 3,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-user-feedback-large",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-user-feedback": "wrong_answer",
+        "x-vsr-matched-language": "zh",
+        "x-vsr-matched-context": "long_context",
+        "x-vsr-matched-conversation": "multi_turn_user",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_turn_wrong_answer_feedback",
+      "turn": 1,
+      "model": "qwen35-2b",
+      "decision": "route-preference-small",
+      "matched": {
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-preference": "terse_answers",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_turn_wrong_answer_feedback",
+      "turn": 2,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-user-feedback-large",
+      "matched": {
+        "x-vsr-matched-embeddings": "technical_support",
+        "x-vsr-matched-fact-check": "no_fact_check_needed",
+        "x-vsr-matched-user-feedback": "wrong_answer",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-conversation": "multi_turn_user",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_turn_reask",
+      "turn": 1,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-fact-check-large",
+      "matched": {
+        "x-vsr-matched-fact-check": "needs_fact_check",
+        "x-vsr-matched-context": "short_context",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_turn_reask",
+      "turn": 2,
+      "model": "qwen35-27b-fp8",
+      "decision": "route-user-feedback-large",
+      "matched": {
+        "x-vsr-matched-fact-check": "needs_fact_check",
+        "x-vsr-matched-user-feedback": "wrong_answer",
+        "x-vsr-matched-reask": "likely_dissatisfied",
+        "x-vsr-matched-context": "long_context",
+        "x-vsr-matched-conversation": "multi_turn_user",
+        "x-vsr-matched-projections": "low_escalation"
+      },
+      "error_type": null,
+      "http_status": 200
+    }
+  ]
+}

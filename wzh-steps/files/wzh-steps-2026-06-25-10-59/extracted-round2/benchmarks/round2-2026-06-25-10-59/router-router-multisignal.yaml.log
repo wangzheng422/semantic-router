@@ -1,0 +1,20 @@
+Starting router from canonical config...
+  Config file: /app/config.yaml
+Starting router...
+
+[97m       █     █     █▄   ▄█[0m
+[97m ▄▄ ▄█ █     █     █ ▀▄▀ █[0m
+[97m  █▄█▀ █     █     █     █[0m
+[97m   ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀[0m
+[97m  Semantic Router[0m
+[38;2;145;158;171m  Intelligent Routing for Mixture-of-Models[0m
+
+{"level":"warn","ts":"2026-06-25T03:13:59.209","caller":"logging.go:264","msg":"startup_status_file_backend","backend":"file","message":"Startup status using local file backend. Status is not shared across replicas or visible to the dashboard in containerized deployments. Set startup_status.store_backend: redis for production use.","event":"startup_status_file_backend","component":"router"}
+{"level":"info","ts":"2026-06-25T03:13:59.210","caller":"logging.go:264","msg":"required_models_check_started","component":"router","event":"required_models_check_started"}
+{"level":"info","ts":"2026-06-25T03:13:59.210","caller":"logging.go:264","msg":"api_server_starting","component":"router","api_port":8080,"event":"api_server_starting"}
+{"level":"info","ts":"2026-06-25T03:13:59.210","caller":"logging.go:264","msg":"classification_service_waiting_for_runtime","using_placeholder":true,"event":"classification_service_waiting_for_runtime","component":"apiserver"}
+{"level":"info","ts":"2026-06-25T03:13:59.211","caller":"logging.go:264","msg":"memory_api_disabled","component":"apiserver","reason":"config_disabled","event":"memory_api_disabled"}
+{"level":"info","ts":"2026-06-25T03:13:59.211","caller":"logging.go:264","msg":"required_models_already_present","total_models":5,"event":"required_models_already_present","component":"router"}
+{"level":"info","ts":"2026-06-25T03:13:59.211","caller":"logging.go:264","msg":"server_listening","port":8080,"event":"server_listening","component":"apiserver"}
+{"level":"info","ts":"2026-06-25T03:13:59.212","caller":"logging.go:264","msg":"metrics_server_starting","event":"metrics_server_starting","component":"router","address":":9190"}
+{"level":"info","ts":"2026-06-25T03:13:59.212","caller":"logging.go:264","msg":"embedding_models_init_started","bert_configured":false,"use_cpu":true,"qwen3_configured":false,"gemma_configured":false,"event":"embedding_models_init_started","mmbert_configured":true,"component":"router","multimodal_configured":false}

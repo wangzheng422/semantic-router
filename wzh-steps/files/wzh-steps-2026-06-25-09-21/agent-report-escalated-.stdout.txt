@@ -1,0 +1,100 @@
+Collecting PyYAML==6.0.3 (from -r tools/agent/requirements.txt (line 1))
+  Downloading pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl.metadata (2.4 kB)
+Collecting codespell==2.4.1 (from -r tools/agent/requirements.txt (line 2))
+  Downloading codespell-2.4.1-py3-none-any.whl.metadata (15 kB)
+Collecting pre-commit==4.3.0 (from -r tools/agent/requirements.txt (line 3))
+  Downloading pre_commit-4.3.0-py2.py3-none-any.whl.metadata (1.2 kB)
+Collecting ruff==0.15.5 (from -r tools/agent/requirements.txt (line 4))
+  Downloading ruff-0.15.5-py3-none-macosx_11_0_arm64.whl.metadata (26 kB)
+Collecting tree-sitter==0.25.2 (from -r tools/agent/requirements.txt (line 5))
+  Downloading tree_sitter-0.25.2-cp314-cp314-macosx_11_0_arm64.whl.metadata (10.0 kB)
+Collecting tree-sitter-go==0.25.0 (from -r tools/agent/requirements.txt (line 6))
+  Downloading tree_sitter_go-0.25.0-cp310-abi3-macosx_11_0_arm64.whl.metadata (1.7 kB)
+Collecting tree-sitter-python==0.25.0 (from -r tools/agent/requirements.txt (line 7))
+  Downloading tree_sitter_python-0.25.0-cp310-abi3-macosx_11_0_arm64.whl.metadata (1.9 kB)
+Collecting tree-sitter-rust==0.24.0 (from -r tools/agent/requirements.txt (line 8))
+  Downloading tree_sitter_rust-0.24.0-cp39-abi3-macosx_11_0_arm64.whl.metadata (2.8 kB)
+Collecting yamllint==1.38.0 (from -r tools/agent/requirements.txt (line 9))
+  Downloading yamllint-1.38.0-py3-none-any.whl.metadata (4.2 kB)
+Collecting cfgv>=2.0.0 (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading cfgv-3.5.0-py2.py3-none-any.whl.metadata (8.9 kB)
+Collecting identify>=1.0.0 (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading identify-2.6.19-py2.py3-none-any.whl.metadata (4.4 kB)
+Collecting nodeenv>=0.11.1 (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading nodeenv-1.10.0-py2.py3-none-any.whl.metadata (24 kB)
+Collecting virtualenv>=20.10.0 (from pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading virtualenv-21.5.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting pathspec>=1.0.0 (from yamllint==1.38.0->-r tools/agent/requirements.txt (line 9))
+  Downloading pathspec-1.1.1-py3-none-any.whl.metadata (14 kB)
+Collecting distlib<1,>=0.3.7 (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading distlib-0.4.3-py2.py3-none-any.whl.metadata (5.3 kB)
+Collecting filelock<4,>=3.24.2 (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading filelock-3.29.4-py3-none-any.whl.metadata (2.0 kB)
+Collecting platformdirs<5,>=3.9.1 (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading platformdirs-4.10.0-py3-none-any.whl.metadata (5.5 kB)
+Collecting python-discovery>=1.4.2 (from virtualenv>=20.10.0->pre-commit==4.3.0->-r tools/agent/requirements.txt (line 3))
+  Downloading python_discovery-1.4.2-py3-none-any.whl.metadata (5.6 kB)
+Downloading pyyaml-6.0.3-cp314-cp314-macosx_11_0_arm64.whl (173 kB)
+Downloading codespell-2.4.1-py3-none-any.whl (344 kB)
+Downloading pre_commit-4.3.0-py2.py3-none-any.whl (220 kB)
+Downloading ruff-0.15.5-py3-none-macosx_11_0_arm64.whl (10.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.2/10.2 MB 11.1 MB/s  0:00:00
+Downloading tree_sitter-0.25.2-cp314-cp314-macosx_11_0_arm64.whl (137 kB)
+Downloading tree_sitter_go-0.25.0-cp310-abi3-macosx_11_0_arm64.whl (48 kB)
+Downloading tree_sitter_python-0.25.0-cp310-abi3-macosx_11_0_arm64.whl (76 kB)
+Downloading tree_sitter_rust-0.24.0-cp39-abi3-macosx_11_0_arm64.whl (137 kB)
+Downloading yamllint-1.38.0-py3-none-any.whl (68 kB)
+Downloading cfgv-3.5.0-py2.py3-none-any.whl (7.4 kB)
+Downloading identify-2.6.19-py2.py3-none-any.whl (99 kB)
+Downloading nodeenv-1.10.0-py2.py3-none-any.whl (23 kB)
+Downloading pathspec-1.1.1-py3-none-any.whl (57 kB)
+Downloading virtualenv-21.5.1-py3-none-any.whl (4.6 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.6/4.6 MB 20.6 MB/s  0:00:00
+Downloading distlib-0.4.3-py2.py3-none-any.whl (470 kB)
+Downloading filelock-3.29.4-py3-none-any.whl (42 kB)
+Downloading platformdirs-4.10.0-py3-none-any.whl (22 kB)
+Downloading python_discovery-1.4.2-py3-none-any.whl (33 kB)
+Installing collected packages: distlib, tree-sitter-rust, tree-sitter-python, tree-sitter-go, tree-sitter, ruff, PyYAML, platformdirs, pathspec, nodeenv, identify, filelock, codespell, cfgv, yamllint, python-discovery, virtualenv, pre-commit
+
+Successfully installed PyYAML-6.0.3 cfgv-3.5.0 codespell-2.4.1 distlib-0.4.3 filelock-3.29.4 identify-2.6.19 nodeenv-1.10.0 pathspec-1.1.1 platformdirs-4.10.0 pre-commit-4.3.0 python-discovery-1.4.2 ruff-0.15.5 tree-sitter-0.25.2 tree-sitter-go-0.25.0 tree-sitter-python-0.25.0 tree-sitter-rust-0.24.0 virtualenv-21.5.1 yamllint-1.38.0
+[0;32m==================> Running agent-report ============> ... [0m
+Agent Environment
+  Requested env: cpu
+  Manifest env: cpu-local
+  Build target: make vllm-sr-dev
+  Serve command: vllm-sr serve --image-pull-policy never
+  Local env: yes
+  Smoke config: e2e/config/config.agent-smoke.cpu.yaml
+
+Agent Skill
+  Primary skill: cross-stack-bugfix
+  Impacted surfaces: none
+  Required surfaces: local_e2e, ci_e2e
+  Conditional surfaces hit: none
+
+Agent Context
+  Changed files: 3
+  Matched rules: none
+  Loop mode: completion
+  Execution plan: required for long-horizon multi-loop work
+  Fast tests: none
+  Feature tests: none
+  Local smoke: not required
+  Local E2E profiles (manual): none
+  Workflow integration suites (manual): none
+  CI E2E mode: none
+  Failure policy: fix failures and rerun the smallest applicable gate until the active subtask passes; continue across subtasks until the task boundary is met or a real blocker is recorded
+  Stop condition: active subtask passes its applicable gates; when the work becomes long-horizon or cross-session, keep an execution plan current
+
+Context Pack
+  Start here:
+    - AGENTS.md :: Short harness entrypoint and canonical command index.
+    - docs/agent/README.md :: Canonical docs index and task-first navigation entry.
+    - docs/agent/context-management.md :: Progressive disclosure model and context-pack policy for this repository.
+  Must read:
+    - tools/agent/skills/cross-stack-bugfix/SKILL.md :: Primary skill contract for this task.
+    - docs/agent/change-surfaces.md :: Referenced by the 'cross-stack-bugfix' skill Must Read section.
+  Additional refs: read-if-applicable, resume (use --context-detail full or --format json)
+
+Validation Commands
+  - none

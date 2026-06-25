@@ -1,0 +1,1 @@
+/var/mnt/semantic-router-bench/configs/router-basic.yaml -> /app/config.yaml

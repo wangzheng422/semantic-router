@@ -1,0 +1,10 @@
+WARNING: The directory '/Users/zhengwan/Library/Caches/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPSConnection(host='127.0.0.1', port=5085): Failed to establish a new connection: [Errno 1] Operation not permitted")': /simple/pyyaml/
+WARNING: Retrying (Retry(total=3, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPSConnection(host='127.0.0.1', port=5085): Failed to establish a new connection: [Errno 1] Operation not permitted")': /simple/pyyaml/
+WARNING: Retrying (Retry(total=2, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPSConnection(host='127.0.0.1', port=5085): Failed to establish a new connection: [Errno 1] Operation not permitted")': /simple/pyyaml/
+WARNING: Retrying (Retry(total=1, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPSConnection(host='127.0.0.1', port=5085): Failed to establish a new connection: [Errno 1] Operation not permitted")': /simple/pyyaml/
+WARNING: Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError("HTTPSConnection(host='127.0.0.1', port=5085): Failed to establish a new connection: [Errno 1] Operation not permitted")': /simple/pyyaml/
+ERROR: Could not find a version that satisfies the requirement PyYAML==6.0.3 (from versions: none)
+ERROR: No matching distribution found for PyYAML==6.0.3
+make[1]: *** [agent-venv-install] Error 1
+make: *** [_run] Error 2

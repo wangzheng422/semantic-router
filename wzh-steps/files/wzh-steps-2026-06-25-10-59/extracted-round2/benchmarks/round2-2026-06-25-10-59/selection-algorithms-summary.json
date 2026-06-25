@@ -1,0 +1,98 @@
+{
+  "input": "/var/mnt/semantic-router-bench/benchmarks/round2-2026-06-25-10-59/selection-algorithms-results.jsonl",
+  "rows": 10,
+  "selected_models": {
+    "qwen35-2b": 6,
+    "qwen35-27b-fp8": 4
+  },
+  "selected_decisions": {
+    "select-routerdc": 2,
+    "select-automix": 2,
+    "select-hybrid": 2,
+    "select-multi-factor": 2,
+    "select-latency-aware": 2
+  },
+  "errors": {},
+  "rows_compact": [
+    {
+      "scenario_id": "routerdc_simple",
+      "algorithm_keyword": "ALGORITHM_ROUTERDC",
+      "model": "qwen35-2b",
+      "decision": "select-routerdc",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "routerdc_complex",
+      "algorithm_keyword": "ALGORITHM_ROUTERDC",
+      "model": "qwen35-27b-fp8",
+      "decision": "select-routerdc",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "automix_simple",
+      "algorithm_keyword": "ALGORITHM_AUTOMIX",
+      "model": "qwen35-27b-fp8",
+      "decision": "select-automix",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "automix_complex",
+      "algorithm_keyword": "ALGORITHM_AUTOMIX",
+      "model": "qwen35-27b-fp8",
+      "decision": "select-automix",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "hybrid_simple",
+      "algorithm_keyword": "ALGORITHM_HYBRID",
+      "model": "qwen35-2b",
+      "decision": "select-hybrid",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "hybrid_complex",
+      "algorithm_keyword": "ALGORITHM_HYBRID",
+      "model": "qwen35-27b-fp8",
+      "decision": "select-hybrid",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_factor_simple",
+      "algorithm_keyword": "ALGORITHM_MULTIFACTOR",
+      "model": "qwen35-2b",
+      "decision": "select-multi-factor",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "multi_factor_complex",
+      "algorithm_keyword": "ALGORITHM_MULTIFACTOR",
+      "model": "qwen35-2b",
+      "decision": "select-multi-factor",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "latency_simple",
+      "algorithm_keyword": "ALGORITHM_LATENCY",
+      "model": "qwen35-2b",
+      "decision": "select-latency-aware",
+      "error_type": null,
+      "http_status": 200
+    },
+    {
+      "scenario_id": "latency_complex",
+      "algorithm_keyword": "ALGORITHM_LATENCY",
+      "model": "qwen35-2b",
+      "decision": "select-latency-aware",
+      "error_type": null,
+      "http_status": 200
+    }
+  ]
+}

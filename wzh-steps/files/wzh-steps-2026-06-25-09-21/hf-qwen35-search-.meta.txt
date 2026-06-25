@@ -1,0 +1,3 @@
+timestamp=2026-06-25T09:31:28+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -lc curl\ -fsSL\ \"https://huggingface.co/api/models\?author=Qwen\&search=Qwen3.5\&limit=100\"\ \|\ python\ -c\ \"import\ json,sys\;\ data=json.load\(sys.stdin\)\;\ print\(\\\"count\\\",\ len\(data\)\)\;\ \[print\(m.get\(\\\"modelId\\\"\)\)\ for\ m\ in\ data\]\" 

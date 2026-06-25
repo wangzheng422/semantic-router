@@ -1,0 +1,3 @@
+timestamp=2026-06-25T11:05:09+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=python -c import\ yaml\;\ from\ pathlib\ import\ Path\;\ paths=\[Path\(\'wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml\'\),\ Path\(\'wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml\'\)\]\;\ \[print\(p,\ yaml.safe_load\(p.open\(\)\).get\(\'version\'\),\ len\(yaml.safe_load\(p.open\(\)\).get\(\'routing\',\ \{\}\).get\(\'decisions\',\ \[\]\)\)\)\ for\ p\ in\ paths\] 

@@ -1,0 +1,3 @@
+timestamp=2026-06-25T11:17:37+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=/bin/zsh -lc python\ -c\ \"import\ yaml\;\ from\ pathlib\ import\ Path\;\ p=Path\(\\\"wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml\\\"\)\;\ data=yaml.safe_load\(p.open\(\)\)\;\ print\(p,\ data.get\(\\\"version\\\"\),\ len\(data.get\(\\\"routing\\\",\ \{\}\).get\(\\\"decisions\\\",\ \[\]\)\)\)\"\;\ python\ -m\ py_compile\ wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py\;\ sh\ -n\ wzh-solution/files/wzh-solution-2026-06-25-10-59/remote_selection_only.sh 

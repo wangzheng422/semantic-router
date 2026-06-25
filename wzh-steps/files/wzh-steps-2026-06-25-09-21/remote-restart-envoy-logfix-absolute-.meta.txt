@@ -1,0 +1,3 @@
+timestamp=2026-06-25T10:04:49+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=sshpass -e ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ConnectTimeout=20 cloud-user@bastion.75s2z.sandbox2921.opentlc.com set\ -euo\ pipefail\;\ podman\ rm\ -f\ vsr-envoy\ \>/dev/null\ 2\>\&1\ \|\|\ true\;\ podman\ run\ -d\ --name\ vsr-envoy\ --network\ vsr-bench\ --security-opt=label=disable\ -p\ 18888:8888\ -p\ 19901:9901\ -v\ /var/mnt/semantic-router-bench/configs/envoy-vsr.yaml:/etc/envoy/envoy.yaml:Z\ docker.io/envoyproxy/envoy:v1.34-latest\ -c\ /etc/envoy/envoy.yaml\ --log-level\ warn\;\ podman\ ps\ --format\ \"\{\{.Names\}\}\ \{\{.Status\}\}\ \{\{.Ports\}\}\"\ \|\ grep\ vsr-envoy 

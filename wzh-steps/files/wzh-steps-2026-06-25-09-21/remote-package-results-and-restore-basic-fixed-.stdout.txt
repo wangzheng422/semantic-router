@@ -1,0 +1,5 @@
+acd4b4791a77e387ca0d372eedddadf6696ecdceda1a57e2a7a5772ecedee03a
+restored_basic_ready=1
+-rw-r--r--. 1 cloud-user users 53K Jun 25 02:37 benchmarks/semantic-router-results-2026-06-25.tgz
+{"status": "healthy", "service": "classification-api"}
+-rw-r--r--@ 1 zhengwan  staff    52K Jun 25 10:38 wzh-steps/files/wzh-steps-2026-06-25-09-21/semantic-router-results-2026-06-25.tgz

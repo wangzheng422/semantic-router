@@ -77,5 +77,6 @@ Tasks use stable IDs and checkbox status:
 
 ## Current Execution Plans
 
+- [pl-0034-semantic-router-vm-routing-benchmark.md](pl-0034-semantic-router-vm-routing-benchmark.md)
 - [pl-0033-v0-3-themis-release-closure.md](pl-0033-v0-3-themis-release-closure.md)
 - [pl-0032-architecture-scorecard-ratchet.md](pl-0032-architecture-scorecard-ratchet.md)

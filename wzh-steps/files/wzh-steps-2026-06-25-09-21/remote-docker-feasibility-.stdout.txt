@@ -1,0 +1,27 @@
+## commands
+docker=dockerd=containerd=rpm-ostree=/usr/bin/rpm-ostree
+dnf=/usr/bin/dnf
+yum=/usr/bin/yum
+systemctl=/usr/bin/systemctl
+## docker services
+UNIT FILE STATE PRESET
+
+0 unit files listed.
+## rpm-ostree status
+State: idle
+Deployments:
+* ostree-unverified-registry:registry.redhat.io/rhelai1/bootc-aws-nvidia-rhel9:1.5
+                   Digest: sha256:a0de7645e8a96cca6a2779e4f1920c39b995b0e11a38e1032268df1feae4a486
+                  Version: 9.20250429.0 (2025-05-16T05:19:48Z)
+## installed packages
+libnvidia-container-tools-1.17.6-1.x86_64
+libnvidia-container1-1.17.6-1.x86_64
+nvidia-container-toolkit-1.17.6-1.x86_64
+nvidia-container-toolkit-base-1.17.6-1.x86_64
+podman-4.9.4-18.el9_4.x86_64
+## repos
+Not root, Subscription Management repositories not updated
+repo id                                      repo name
+codeready-builder-for-rhel-9-x86_64-eus-rpms Red Hat CodeReady Linux Builder for RHEL 9 x86_64 - Extended Update Support (RPMs)
+rhel-9-for-x86_64-appstream-eus-rpms         Red Hat Enterprise Linux 9 for x86_64 - AppStream - Extended Update Support (RPMs)
+rhel-9-for-x86_64-baseos-eus-rpms            Red Hat Enterprise Linux 9 for x86_64 - BaseOS - Extended Update Support (RPMs)

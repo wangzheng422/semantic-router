@@ -1,0 +1,459 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+    default_reasoning_effort: low
+    reasoning_families:
+      qwen3:
+        type: chat_template_kwargs
+        parameter: enable_thinking
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 0
+        cached_input_per_1m: 0
+        completion_per_1m: 0
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 0
+        cached_input_per_1m: 0
+        completion_per_1m: 0
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 8192
+      description: Fast low-cost lane for simple customer requests, account tasks, and concise answers.
+      capabilities: [chat, fast-response, account-support]
+      quality_score: 0.62
+      modality: ar
+      tags: [small, fast]
+    - name: qwen35-27b-fp8
+      param_size: 27B
+      context_window_size: 4096
+      description: Larger FP8 lane for complex reasoning, technical support, incidents, security review, and long-context analysis.
+      capabilities: [chat, reasoning, code, technical-support, security, incident-analysis]
+      quality_score: 0.91
+      modality: ar
+      tags: [large, reasoning]
+
+  signals:
+    embeddings:
+      - name: technical_support
+        threshold: 0.60
+        aggregation_method: max
+        candidates:
+          - how to configure the system
+          - installation guide
+          - troubleshooting steps
+          - error message explanation
+          - setup instructions
+      - name: account_management
+        threshold: 0.60
+        aggregation_method: max
+        candidates:
+          - password reset
+          - account settings
+          - profile update
+          - subscription management
+          - billing information
+
+    fact_check:
+      - name: needs_fact_check
+        description: Queries with factual claims that should be verified against evidence.
+      - name: no_fact_check_needed
+        description: Creative or opinion-heavy prompts that do not need factual verification.
+
+    user_feedbacks:
+      - name: wrong_answer
+        description: User indicates the current answer is incorrect.
+      - name: need_clarification
+        description: User asks for a clearer or more detailed follow-up.
+
+    reasks:
+      - name: likely_dissatisfied
+        description: Current user turn closely repeats the immediately previous user turn.
+        threshold: 0.70
+        lookback_turns: 1
+
+    preferences:
+      - name: terse_answers
+        description: Users who prefer short, direct responses.
+        examples:
+          - keep it concise
+          - bullet points only
+          - answer in one paragraph
+        threshold: 0.60
+
+    language:
+      - name: zh
+        description: Chinese-language requests.
+      - name: es
+        description: Spanish-language requests.
+
+    context:
+      - name: short_context
+        min_tokens: "0"
+        max_tokens: "120"
+        description: Short requests.
+      - name: long_context
+        min_tokens: "121"
+        max_tokens: "8K"
+        description: Long requests that should prefer the larger model.
+
+    structure:
+      - name: many_questions
+        description: Prompts with many explicit questions.
+        feature:
+          type: count
+          source:
+            type: regex
+            pattern: '[?？]'
+        predicate:
+          gte: 4
+      - name: numbered_steps
+        description: Prompts that contain numbered list items.
+        feature:
+          type: exists
+          source:
+            type: regex
+            pattern: '(?m)^\\s*\\d+\\.\\s+'
+      - name: first_then_flow
+        description: Prompts that express an ordered workflow.
+        feature:
+          type: sequence
+          source:
+            type: sequence
+            case_sensitive: false
+            sequences:
+              - ["first", "then"]
+              - ["first", "next", "finally"]
+              - ["首先", "然后"]
+              - ["先", "再"]
+      - name: format_directive_dense
+        description: Output-format directives are dense relative to multilingual text units.
+        feature:
+          type: density
+          source:
+            type: keyword_set
+            keywords:
+              - table
+              - bullet
+              - json
+              - markdown
+              - 表格
+              - 列表
+              - JSON
+        predicate:
+          gt: 0.08
+
+    role_bindings:
+      - name: admins
+        subjects:
+          - kind: Group
+            name: admins
+        role: admin
+      - name: premium_support
+        subjects:
+          - kind: Group
+            name: premium-support
+        role: premium_user
+
+    jailbreak:
+      - name: prompt_injection
+        method: hybrid
+        threshold: 0.55
+        include_history: true
+        description: Detect common prompt-injection or jailbreak attempts.
+        jailbreak_patterns:
+          - ignore previous instructions
+          - reveal the hidden prompt
+          - jailbreak mode
+        benign_patterns:
+          - explain the policy
+          - summarize the safety rules
+
+    pii:
+      - name: restricted_pii
+        threshold: 0.55
+        include_history: true
+        pii_types_allowed:
+          - EMAIL_ADDRESS
+        description: Sensitive prompts where only low-risk identifiers may pass through.
+
+    conversation:
+      - name: multi_turn_user
+        description: At least two user messages - the conversation has history.
+        feature:
+          type: count
+          source:
+            type: message
+            role: user
+        predicate:
+          gte: 2
+      - name: active_tool_use
+        description: At least one assistant tool call has been made.
+        feature:
+          type: count
+          source:
+            type: assistant_tool_call
+        predicate:
+          gte: 1
+
+    events:
+      - name: critical_payment_event
+        description: Critical payment or transaction events that need incident-grade routing.
+        event_types:
+          - payment_failed
+          - transaction_declined
+        severities:
+          - critical
+          - high
+        action_codes:
+          - TXN_DECLINE
+        temporal: true
+
+  projections:
+    scores:
+      - name: escalation_score
+        method: weighted_sum
+        inputs:
+          - type: embedding
+            name: technical_support
+            weight: 0.30
+            value_source: confidence
+          - type: context
+            name: long_context
+            weight: 0.25
+          - type: structure
+            name: many_questions
+            weight: 0.25
+          - type: structure
+            name: first_then_flow
+            weight: 0.20
+    mappings:
+      - name: escalation_band
+        source: escalation_score
+        method: threshold_bands
+        outputs:
+          - name: low_escalation
+            lt: 0.30
+          - name: high_escalation
+            gte: 0.30
+
+  decisions:
+    - name: route-authz-admin-large
+      priority: 980
+      rules:
+        operator: AND
+        conditions:
+          - type: authz
+            name: admin
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-critical-event-large
+      priority: 960
+      rules:
+        operator: AND
+        conditions:
+          - type: event
+            name: critical_payment_event
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-pii-small-guarded
+      priority: 940
+      rules:
+        operator: AND
+        conditions:
+          - type: pii
+            name: restricted_pii
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+
+    - name: route-jailbreak-small-guarded
+      priority: 920
+      rules:
+        operator: AND
+        conditions:
+          - type: jailbreak
+            name: prompt_injection
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+
+    - name: route-user-feedback-large
+      priority: 900
+      rules:
+        operator: OR
+        conditions:
+          - type: user_feedback
+            name: wrong_answer
+          - type: user_feedback
+            name: need_clarification
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-reask-large
+      priority: 880
+      rules:
+        operator: AND
+        conditions:
+          - type: reask
+            name: likely_dissatisfied
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-conversation-large
+      priority: 860
+      rules:
+        operator: AND
+        conditions:
+          - type: conversation
+            name: multi_turn_user
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-structure-large
+      priority: 840
+      rules:
+        operator: OR
+        conditions:
+          - type: structure
+            name: many_questions
+          - type: structure
+            name: numbered_steps
+          - type: structure
+            name: first_then_flow
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-projection-large
+      priority: 820
+      rules:
+        operator: AND
+        conditions:
+          - type: projection
+            name: high_escalation
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-long-context-large
+      priority: 800
+      rules:
+        operator: AND
+        conditions:
+          - type: context
+            name: long_context
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-support-embedding-large
+      priority: 780
+      rules:
+        operator: AND
+        conditions:
+          - type: embedding
+            name: technical_support
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-account-embedding-small
+      priority: 760
+      rules:
+        operator: AND
+        conditions:
+          - type: embedding
+            name: account_management
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+
+    - name: route-fact-check-large
+      priority: 740
+      rules:
+        operator: AND
+        conditions:
+          - type: fact_check
+            name: needs_fact_check
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+
+    - name: route-zh-small
+      priority: 720
+      rules:
+        operator: AND
+        conditions:
+          - type: language
+            name: zh
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+
+    - name: route-preference-small
+      priority: 700
+      rules:
+        operator: AND
+        conditions:
+          - type: preference
+            name: terse_answers
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+
+    - name: default-small
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
