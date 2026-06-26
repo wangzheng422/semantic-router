@@ -1,0 +1,172 @@
+## ps
+vsr-qwen35-2b Exited (135) 12 minutes ago
+vsr-qwen35-27b-fp8 Created
+vsr-router Exited (1) 3 minutes ago
+vsr-envoy Exited (135) 7 seconds ago
+## models
+2b=000
+
+27b=000
+
+## logs tail 2b
+(EngineCore pid=296) INFO 06-25 07:50:52 [gpu_worker.py:480] Available KV cache memory: 1.66 GiB
+(EngineCore pid=296) INFO 06-25 07:50:52 [kv_cache_utils.py:1744] GPU KV cache size: 99,421 tokens
+(EngineCore pid=296) INFO 06-25 07:50:52 [kv_cache_utils.py:1745] Maximum concurrency for 4,096 tokens per request: 24.27x
+(EngineCore pid=296) INFO 06-25 07:50:52 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(EngineCore pid=296) INFO 06-25 07:50:53 [core.py:313] init engine (profile, create kv cache, warmup model) took 85.68 s
+(EngineCore pid=296) INFO 06-25 07:50:53 [vllm.py:999] Asynchronous scheduling is enabled.
+(EngineCore pid=296) WARNING 06-25 07:50:53 [vllm.py:1055] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=296) WARNING 06-25 07:50:53 [vllm.py:1097] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=296) INFO 06-25 07:50:53 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+(EngineCore pid=296) INFO 06-25 07:50:53 [vllm.py:1273] Cudagraph is disabled under eager mode
+(EngineCore pid=296) INFO 06-25 07:50:53 [compilation.py:321] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=1) INFO 06-25 07:50:53 [api_server.py:579] Supported tasks: ['generate']
+(APIServer pid=1) INFO 06-25 07:50:55 [hf.py:548] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=1) INFO 06-25 07:51:09 [base.py:227] Multi-modal warmup completed in 13.993s
+(APIServer pid=1) INFO 06-25 07:51:10 [base.py:227] Readonly multi-modal warmup completed in 0.536s
+(APIServer pid=1) INFO 06-25 07:51:10 [api_server.py:583] Starting vLLM server on http://0.0.0.0:8000
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:37] Available routes are:
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /docs, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /load, Methods: GET
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /version, Methods: GET
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /health, Methods: GET
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /metrics, Methods: GET
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=1) INFO 06-25 07:51:10 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=1) INFO:     Started server process [1]
+(APIServer pid=1) INFO:     Waiting for application startup.
+(APIServer pid=1) INFO:     Application startup complete.
+(APIServer pid=1) INFO:     10.89.0.2:59514 - "GET /v1/models HTTP/1.1" 200 OK
+(EngineCore pid=296) INFO 06-25 07:51:30 [core.py:1178] [shutdown] EngineCore: trigger received signal=SIGTERM
+(APIServer pid=1) INFO 06-25 07:51:30 [launcher.py:100] [shutdown] API server: shutdown triggered
+(APIServer pid=1) INFO 06-25 07:51:30 [launcher.py:116] [shutdown] API server: stopping engine client mode=abort timeout=0s
+(EngineCore pid=296) INFO 06-25 07:51:30 [core.py:1297] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=296) INFO 06-25 07:51:30 [core.py:1328] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=296) INFO 06-25 07:51:30 [core.py:1191] [shutdown] EngineCore: exiting busy loop
+(APIServer pid=1) INFO 06-25 07:51:30 [core_client.py:652] [shutdown] MPClient: start timeout=0s
+(APIServer pid=1) INFO 06-25 07:51:30 [core_client.py:654] [shutdown] MPClient: stopping engine manager
+(APIServer pid=1) WARNING 06-25 07:51:30 [utils.py:607] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=1) INFO 06-25 07:51:30 [core_client.py:656] [shutdown] MPClient: engine manager stopped
+(APIServer pid=1) INFO 06-25 07:51:30 [core_client.py:657] [shutdown] MPClient: cleaning up background resources
+(APIServer pid=1) INFO 06-25 07:51:30 [core_client.py:659] [shutdown] MPClient: complete
+(APIServer pid=1) INFO 06-25 07:51:30 [launcher.py:125] [shutdown] API server: engine client stopped
+(APIServer pid=1) INFO 06-25 07:51:30 [launcher.py:128] [shutdown] API server: signalling HTTP server shutdown
+(APIServer pid=1) INFO 06-25 07:51:30 [launcher.py:149] [shutdown] API server: shutting down FastAPI HTTP server
+(APIServer pid=1) INFO:     Shutting down
+(APIServer pid=1) INFO:     Waiting for application shutdown.
+(APIServer pid=1) INFO:     Application shutdown complete.
+(APIServer pid=1) Exception ignored in atexit callback: <function dump_compile_times at 0x7fc50f577380>
+(APIServer pid=1) Traceback (most recent call last):
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 910, in dump_compile_times
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 896, in compile_times
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 244, in tabulate
+(APIServer pid=1)   File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+(APIServer pid=1)   File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+(APIServer pid=1)   File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+(APIServer pid=1)   File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+(APIServer pid=1)   File "<frozen importlib._bootstrap_external>", line 1132, in get_code
+(APIServer pid=1)   File "<frozen importlib._bootstrap_external>", line 1190, in get_data
+(APIServer pid=1) OSError: [Errno 107] Transport endpoint is not connected: '/usr/local/lib/python3.12/dist-packages/tabulate/__init__.py'
+/usr/lib/python3.12/multiprocessing/resource_tracker.py:279: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown
+## logs tail 27b
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=1) INFO 06-25 07:56:41 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=1) INFO:     Started server process [1]
+(APIServer pid=1) INFO:     Waiting for application startup.
+(APIServer pid=1) INFO:     Application startup complete.
+(APIServer pid=1) INFO:     10.89.0.2:43022 - "GET /v1/models HTTP/1.1" 200 OK
+(EngineCore pid=423) INFO 06-25 07:56:58 [core.py:1178] [shutdown] EngineCore: trigger received signal=SIGTERM
+(APIServer pid=1) INFO 06-25 07:56:58 [launcher.py:100] [shutdown] API server: shutdown triggered
+(APIServer pid=1) INFO 06-25 07:56:58 [launcher.py:116] [shutdown] API server: stopping engine client mode=abort timeout=0s
+(EngineCore pid=423) INFO 06-25 07:56:58 [core.py:1297] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=423) INFO 06-25 07:56:58 [core.py:1328] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=423) INFO 06-25 07:56:58 [core.py:1191] [shutdown] EngineCore: exiting busy loop
+(EngineCore pid=423) INFO 06-25 07:56:58 [multiproc_executor.py:428] [shutdown] Executor: waiting for worker exit count=2
+(Worker_TP0 pid=527) INFO 06-25 07:56:58 [multiproc_executor.py:790] Parent process exited, terminating worker queues
+(APIServer pid=1) INFO 06-25 07:56:58 [core_client.py:652] [shutdown] MPClient: start timeout=0s
+(APIServer pid=1) INFO 06-25 07:56:58 [core_client.py:654] [shutdown] MPClient: stopping engine manager
+(APIServer pid=1) WARNING 06-25 07:56:58 [utils.py:607] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=1) INFO 06-25 07:56:58 [core_client.py:656] [shutdown] MPClient: engine manager stopped
+(APIServer pid=1) INFO 06-25 07:56:58 [core_client.py:657] [shutdown] MPClient: cleaning up background resources
+(APIServer pid=1) INFO 06-25 07:56:58 [core_client.py:659] [shutdown] MPClient: complete
+(APIServer pid=1) INFO 06-25 07:56:58 [launcher.py:125] [shutdown] API server: engine client stopped
+(APIServer pid=1) INFO 06-25 07:56:58 [launcher.py:128] [shutdown] API server: signalling HTTP server shutdown
+(APIServer pid=1) INFO 06-25 07:56:58 [launcher.py:149] [shutdown] API server: shutting down FastAPI HTTP server
+(APIServer pid=1) INFO:     Shutting down
+(APIServer pid=1) INFO:     Waiting for application shutdown.
+(APIServer pid=1) INFO:     Application shutdown complete.
+(APIServer pid=1) Exception ignored in atexit callback: <function dump_compile_times at 0x7f2b14a73380>
+(APIServer pid=1) Traceback (most recent call last):
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 910, in dump_compile_times
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 896, in compile_times
+(APIServer pid=1)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 244, in tabulate
+(APIServer pid=1)   File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+(APIServer pid=1)   File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+(APIServer pid=1)   File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+(APIServer pid=1)   File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+(APIServer pid=1)   File "<frozen importlib._bootstrap_external>", line 1132, in get_code
+(APIServer pid=1)   File "<frozen importlib._bootstrap_external>", line 1190, in get_data
+(APIServer pid=1) OSError: [Errno 107] Transport endpoint is not connected: '/usr/local/lib/python3.12/dist-packages/tabulate/__init__.py'
+(Worker_TP0 pid=527) Exception ignored in atexit callback: <function dump_compile_times at 0x7f43b512cea0>
+(Worker_TP0 pid=527) Traceback (most recent call last):
+(Worker_TP0 pid=527)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 910, in dump_compile_times
+(Worker_TP0 pid=527)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 896, in compile_times
+(Worker_TP0 pid=527)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 244, in tabulate
+(Worker_TP0 pid=527)   File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+(Worker_TP0 pid=527)   File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+(Worker_TP0 pid=527)   File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+(Worker_TP0 pid=527)   File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+(Worker_TP0 pid=527)   File "<frozen importlib._bootstrap_external>", line 1132, in get_code
+(Worker_TP0 pid=527)   File "<frozen importlib._bootstrap_external>", line 1190, in get_data
+(Worker_TP0 pid=527) OSError: [Errno 107] Transport endpoint is not connected: '/usr/local/lib/python3.12/dist-packages/tabulate/__init__.py'
+(Worker_TP1 pid=528) Exception ignored in atexit callback: <function dump_compile_times at 0x7fce5a630ea0>
+(Worker_TP1 pid=528) Traceback (most recent call last):
+(Worker_TP1 pid=528)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 910, in dump_compile_times
+(Worker_TP1 pid=528)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 896, in compile_times
+(Worker_TP1 pid=528)   File "/usr/local/lib/python3.12/dist-packages/torch/_dynamo/utils.py", line 244, in tabulate
+(Worker_TP1 pid=528)   File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+(Worker_TP1 pid=528)   File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+(Worker_TP1 pid=528)   File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+(Worker_TP1 pid=528)   File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+(Worker_TP1 pid=528)   File "<frozen importlib._bootstrap_external>", line 1132, in get_code
+(Worker_TP1 pid=528)   File "<frozen importlib._bootstrap_external>", line 1190, in get_data
+(Worker_TP1 pid=528) OSError: [Errno 107] Transport endpoint is not connected: '/usr/local/lib/python3.12/dist-packages/tabulate/__init__.py'

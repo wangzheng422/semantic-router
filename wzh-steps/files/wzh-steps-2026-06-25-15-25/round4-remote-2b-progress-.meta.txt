@@ -1,0 +1,3 @@
+timestamp=2026-06-25T15:48:29+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=wzh-steps/files/wzh-steps-2026-06-25-15-25/remote_exec.sh set\ +e\;\ podman\ ps\ -a\ --format\ \"\{\{.Names\}\}\ \{\{.Status\}\}\"\ \|\ grep\ vsr-qwen35-2b\;\ podman\ logs\ --tail\ 100\ vsr-qwen35-2b\ 2\>\&1\;\ du\ -sh\ /var/mnt/semantic-router-bench/hf-cache\ 2\>/dev/null\ \|\|\ true\;\ find\ /var/mnt/semantic-router-bench/hf-cache\ -maxdepth\ 4\ -type\ d\ \|\ sed\ -n\ \"1,120p\" 

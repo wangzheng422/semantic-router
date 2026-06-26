@@ -1,0 +1,31 @@
+## cleanup old containers
+vsr-qwen35-2b
+vsr-envoy
+vsr-router
+vsr-qwen35-27b-fp8
+## format-and-mount
+meta-data=/dev/nvme1n1           isize=512    agcount=4, agsize=57373047 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=1 inobtcount=1 nrext64=0
+data     =                       bsize=4096   blocks=229492187, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=112056, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+Discarding blocks...Done.
+## network
+## linger
+Linger=yes
+## result
+TARGET                         SOURCE       FSTYPE OPTIONS
+/var/mnt/semantic-router-bench /dev/nvme1n1 xfs    rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+drwxr-xr-x. 8 cloud-user cloud-user 96 Jun 25 13:48 /var/mnt/semantic-router-bench
+drwxr-xr-x. 2 cloud-user users       6 Jun 25 13:48 /var/mnt/semantic-router-bench/benchmarks
+drwxr-xr-x. 2 cloud-user users       6 Jun 25 13:48 /var/mnt/semantic-router-bench/configs
+drwxr-xr-x. 2 cloud-user users       6 Jun 25 13:48 /var/mnt/semantic-router-bench/hf-cache
+drwxr-xr-x. 2 cloud-user users       6 Jun 25 13:48 /var/mnt/semantic-router-bench/logs
+drwxr-xr-x. 2 cloud-user users       6 Jun 25 13:48 /var/mnt/semantic-router-bench/models
+drwxr-xr-x. 2 cloud-user users       6 Jun 25 13:48 /var/mnt/semantic-router-bench/traffic
+vsr-bench

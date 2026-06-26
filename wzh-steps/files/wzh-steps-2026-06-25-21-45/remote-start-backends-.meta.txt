@@ -1,0 +1,3 @@
+timestamp=2026-06-25T21:50:20+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh wzh-steps/files/wzh-steps-2026-06-25-21-45/remote.zsh chmod\ +x\ /var/mnt/semantic-router-bench/start_backends_after_linger.sh\;\ /var/mnt/semantic-router-bench/start_backends_after_linger.sh 

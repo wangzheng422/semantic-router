@@ -1,0 +1,130 @@
+package config
+
+import (
+	"fmt"
+	"os"
+
+	"gopkg.in/yaml.v2"
+)
+
+// CanonicalGlobal contains router-managed runtime defaults plus sparse
+// overrides, organized into explicit platform modules.
+type CanonicalGlobal struct {
+	Router       CanonicalRouterGlobal      `yaml:"router"`
+	Services     CanonicalServiceGlobal     `yaml:"services"`
+	Stores       CanonicalStoreGlobal       `yaml:"stores"`
+	Integrations CanonicalIntegrationGlobal `yaml:"integrations"`
+	ModelCatalog CanonicalModelCatalog      `yaml:"model_catalog"`
+}
+
+// CanonicalRouterGlobal captures router-engine control knobs.
+type CanonicalRouterGlobal struct {
+	ConfigSource              ConfigSource          `yaml:"config_source,omitempty"`
+	Strategy                  string                `yaml:"strategy,omitempty"`
+	AutoModelName             string                `yaml:"auto_model_name,omitempty"`
+	IncludeConfigModelsInList bool                  `yaml:"include_config_models_in_list"`
+	ClearRouteCache           bool                  `yaml:"clear_route_cache"`
+	StreamedBody              CanonicalStreamedBody `yaml:"streamed_body"`
+	SkipProcessing            SkipProcessingConfig  `yaml:"skip_processing"`
+	ModelSelection            ModelSelectionConfig  `yaml:"model_selection"`
+}
+
+// CanonicalStreamedBody groups streaming request body controls.
+type CanonicalStreamedBody struct {
+	Enabled    bool  `yaml:"enabled"`
+	MaxBytes   int64 `yaml:"max_bytes,omitempty"`
+	TimeoutSec int   `yaml:"timeout_sec,omitempty"`
+}
+
+// CanonicalServiceGlobal groups shared runtime services exposed by the router.
+type CanonicalServiceGlobal struct {
+	API           APIConfig           `yaml:"api"`
+	ResponseAPI   ResponseAPIConfig   `yaml:"response_api"`
+	Observability ObservabilityConfig `yaml:"observability"`
+	Authz         AuthzConfig         `yaml:"authz"`
+	RateLimit     RateLimitConfig     `yaml:"ratelimit"`
+	RouterReplay  RouterReplayConfig  `yaml:"router_replay"`
+	StartupStatus StartupStatusConfig `yaml:"startup_status"`
+}
+
+// CanonicalStoreGlobal groups storage-backed runtime facilities.
+type CanonicalStoreGlobal struct {
+	SemanticCache SemanticCache      `yaml:"semantic_cache"`
+	Memory        MemoryConfig       `yaml:"memory"`
+	VectorStore   *VectorStoreConfig `yaml:"vector_store,omitempty"`
+}
+
+// CanonicalIntegrationGlobal groups external helper services used by the router.
+type CanonicalIntegrationGlobal struct {
+	Tools  ToolsConfig  `yaml:"tools"`
+	Looper LooperConfig `yaml:"looper"`
+}
+
+// CanonicalModelCatalog groups router-owned model assets and the module
+// configs that resolve through those assets.
+type CanonicalModelCatalog struct {
+	Embeddings CanonicalEmbeddingModels `yaml:"embeddings"`
+	System     CanonicalSystemModels    `yaml:"system"`
+	External   []ExternalModelConfig    `yaml:"external,omitempty"`
+	KBs        []KnowledgeBaseConfig    `yaml:"kbs,omitempty"`
+	Modules    CanonicalModelModules    `yaml:"modules"`
+}
+
+// CanonicalEmbeddingModels groups embedding-related model assets.
+type CanonicalEmbeddingModels struct {
+	Semantic EmbeddingModels `yaml:"semantic"`
+}
+
+// CanonicalModelModules groups configurable capability modules built on top of
+// router-owned model assets.
+type CanonicalModelModules struct {
+	PromptCompression       PromptCompressionConfig         `yaml:"prompt_compression"`
+	PromptGuard             CanonicalPromptGuardModule      `yaml:"prompt_guard"`
+	Classifier              CanonicalClassifierModule       `yaml:"classifier"`
+	Complexity              ComplexityModelConfig           `yaml:"complexity"`
+	HallucinationMitigation CanonicalHallucinationModule    `yaml:"hallucination_mitigation"`
+	FeedbackDetector        CanonicalFeedbackDetectorModule `yaml:"feedback_detector"`
+	ModalityDetector        ModalityDetectorConfig          `yaml:"modality_detector"`
+}
+
+// CanonicalSystemModels centralizes stable capability bindings for built-in models.
+type CanonicalSystemModels struct {
+	PromptGuard            string `yaml:"prompt_guard,omitempty"`
+	DomainClassifier       string `yaml:"domain_classifier,omitempty"`
+	PIIClassifier          string `yaml:"pii_classifier,omitempty"`
+	FactCheckClassifier    string `yaml:"fact_check_classifier,omitempty"`
+	HallucinationDetector  string `yaml:"hallucination_detector,omitempty"`
+	HallucinationExplainer string `yaml:"hallucination_explainer,omitempty"`
+	FeedbackDetector       string `yaml:"feedback_detector,omitempty"`
+}
+
+// CanonicalPromptGuardModule keeps prompt-guard settings visible as a module
+// while resolving the concrete model from the shared system-model catalog.
+type CanonicalPromptGuardModule struct {
+	PromptGuardConfig `yaml:",inline"`
+	ModelRef          string `yaml:"model_ref,omitempty"`
+}
+
+// CanonicalClassifierModule exposes classifier submodules explicitly.
+type CanonicalClassifierModule struct {
+	Domain     CanonicalCategoryModule `yaml:"domain"`
+	MCP        MCPCategoryModel        `yaml:"mcp"`
+	PII        CanonicalPIIModule      `yaml:"pii"`
+	Preference PreferenceModelConfig   `yaml:"preference"`
+}
+
+type CanonicalCategoryModule struct {
+	CategoryModel `yaml:",inline"`
+	ModelRef      string `yaml:"model_ref,omitempty"`
+}
+
+type CanonicalPIIModule struct {
+	PIIModel `yaml:",inline"`
+	ModelRef string `yaml:"model_ref,omitempty"`
+}
+
+// CanonicalHallucinationModule keeps the mitigation block readable by splitting
+// fact-check, detector, and explainer responsibilities.
+type CanonicalHallucinationModule struct {
+	Enabled                 bool                           `yaml:"enabled,omitempty"`
+	OnHallucinationDetected string                         `yaml:"on_hallucination_detected,omitempty"`

@@ -1,0 +1,474 @@
+src/semantic-router/pkg/config/decision_config.go:67:	Elo          *EloSelectionConfig          `yaml:"elo,omitempty"`
+src/semantic-router/pkg/config/decision_config.go:75:	SessionAware *SessionAwareSelectionConfig `yaml:"session_aware,omitempty"`
+src/semantic-router/pkg/config/model_config_types.go:361:func (cfg *RouterConfig) FindExternalModelByRole(role string) *ExternalModelConfig {
+src/semantic-router/pkg/config/validator_domain.go:8:func validateDomainContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/selection/session_aware_scoring.go:10:func (s *SessionAwareSelector) adjustScores(
+src/semantic-router/pkg/selection/session_aware_scoring.go:57:func (s *SessionAwareSelector) scoreCurrentCandidate(
+src/semantic-router/pkg/selection/session_aware_scoring.go:79:func (s *SessionAwareSelector) scoreSwitchCandidate(
+src/semantic-router/pkg/selection/session_aware_scoring.go:130:func (s *SessionAwareSelector) prefixCacheBenefit(
+src/semantic-router/pkg/selection/session_aware_scoring.go:138:func (s *SessionAwareSelector) prefixCachePenalty(
+src/semantic-router/pkg/selection/session_aware_scoring.go:154:func (s *SessionAwareSelector) switchHistoryPenalty(session *AgenticSessionContext) float64 {
+src/semantic-router/pkg/selection/session_aware_scoring.go:161:func (s *SessionAwareSelector) cacheCostMultiplier(current, candidate string) float64 {
+src/semantic-router/pkg/selection/session_aware_scoring.go:166:func (s *SessionAwareSelector) modelCostPressure(model string) float64 {
+src/semantic-router/pkg/selection/session_aware_scoring.go:206:func (s *SessionAwareSelector) lookupQualityGap(selCtx *SelectionContext, current, candidate string) float64 {
+src/semantic-router/pkg/selection/session_aware_scoring.go:231:func (s *SessionAwareSelector) continuationEvidence(selCtx *SelectionContext, session *AgenticSessionContext) continuationEvidence {
+src/semantic-router/pkg/selection/session_aware_scoring.go:265:func (s *SessionAwareSelector) lookupRemainingTurnPrior(selCtx *SelectionContext) remainingTurnPriorEvidence {
+src/semantic-router/pkg/selection/session_aware_scoring.go:302:func (s *SessionAwareSelector) lookupHandoffPenalty(current, candidate string) float64 {
+src/semantic-router/pkg/config/validator_embedding.go:12:func validateEmbeddingContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_embedding.go:52:func ValidateEmbeddingContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_taxonomy.go:9:func validateKnowledgeBaseContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_taxonomy.go:29:func referencedKnowledgeBaseNames(cfg *RouterConfig) map[string]struct{} {
+src/semantic-router/pkg/config/validator_taxonomy.go:89:func knowledgeBaseDefinitions(cfg *RouterConfig, referenced map[string]struct{}) (map[string]KnowledgeBaseConfig, map[string]KnowledgeBaseDefinition, error) {
+src/semantic-router/pkg/config/selection_config.go:3:// ModelSelectionConfig represents configuration for advanced model selection algorithms.
+src/semantic-router/pkg/config/selection_config.go:4:type ModelSelectionConfig struct {
+src/semantic-router/pkg/config/selection_config.go:12:	Elo      EloSelectionConfig      `yaml:"elo,omitempty"`
+src/semantic-router/pkg/config/selection_config.go:18:	SessionAware SessionAwareSelectionConfig `yaml:"session_aware,omitempty"`
+src/semantic-router/pkg/config/selection_config.go:154:type EloSelectionConfig struct {
+src/semantic-router/pkg/config/selection_config.go:185:	EloWeight           float64 `yaml:"elo_weight,omitempty"`
+src/semantic-router/pkg/config/selection_config.go:193:// SessionAwareSelectionConfig configures the session_aware selector. It wraps
+src/semantic-router/pkg/config/selection_config.go:195:type SessionAwareSelectionConfig struct {
+src/semantic-router/pkg/config/selection_config.go:296:// MLModelSelectionConfig configures the ML-based algorithm used from per-decision policies.
+src/semantic-router/pkg/config/selection_config.go:297:type MLModelSelectionConfig struct {
+src/semantic-router/pkg/config/validator_decision_emit.go:14:func validateDecisionEmitContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/selection/selector.go:18:// It implements multiple selection strategies including Elo rating, RouterDC (dual-contrastive
+src/semantic-router/pkg/selection/selector.go:22://   - Elo: RouteLLM (arXiv:2406.18665) - Weighted Elo using Bradley-Terry model
+src/semantic-router/pkg/selection/selector.go:39:	// MethodElo uses Elo rating system with Bradley-Terry model
+src/semantic-router/pkg/selection/selector.go:41:	MethodElo SelectionMethod = "elo"
+src/semantic-router/pkg/selection/selector.go:52:	// Allows blending Elo, embedding similarity, and cost considerations
+src/semantic-router/pkg/selection/selector.go:96:	// MethodSessionAware wraps a base selector with agentic session policy:
+src/semantic-router/pkg/selection/selector.go:99:	MethodSessionAware SelectionMethod = "session_aware"
+src/semantic-router/pkg/selection/selector.go:243:	// This is primarily used by Elo and learning-based methods
+src/semantic-router/pkg/config/validator_modality.go:5:func validateModalityContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_modality.go:36:func validateModalityDecisions(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_modality.go:50:func validateBothModalityDecision(cfg *RouterConfig, decision Decision) error {
+src/semantic-router/pkg/config/validator_modality.go:77:func validateImageGenBackends(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/routing_signal_usage.go:13:func (c *RouterConfig) UsesSignalTypeInRouting(signalType string) bool {
+src/semantic-router/pkg/config/routing_signal_usage.go:42:func (c *RouterConfig) NeedsCategoryMappingForRouting() bool {
+src/semantic-router/pkg/config/routing_signal_usage.go:48:func (c *RouterConfig) NeedsPIIMappingForRouting() bool {
+src/semantic-router/pkg/config/routing_signal_usage.go:54:func (c *RouterConfig) NeedsJailbreakMappingForRouting() bool {
+src/semantic-router/pkg/config/canonical_routing_loader.go:16:func ParseRoutingYAMLBytes(data []byte) (*RouterConfig, error) {
+src/semantic-router/pkg/config/plugin_config.go:191:func (c *RouterConfig) IsRAGEnabledForDecision(decisionName string) bool {
+src/semantic-router/pkg/config/plugin_config.go:205:func (c *RouterConfig) IsMemoryEnabledForDecision(decisionName string) bool {
+src/semantic-router/pkg/config/plugin_config.go:219:func (c *RouterConfig) HasPersonalizationPlugins(decisionName string) bool {
+src/semantic-router/pkg/config/validator_projection.go:8:func validateProjectionContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_projection.go:32:func validateProjectionPartitions(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_projection.go:129:func projectionPartitionMemberTypes(cfg *RouterConfig) map[string]string {
+src/semantic-router/pkg/config/validator_projection.go:149:func validateProjectionScores(cfg *RouterConfig) (map[string]struct{}, error) {
+src/semantic-router/pkg/config/validator_projection.go:268:	cfg *RouterConfig,
+src/semantic-router/pkg/config/validator_projection.go:296:	cfg *RouterConfig,
+src/semantic-router/pkg/config/validator_projection.go:397:func projectionDeclaredSignals(cfg *RouterConfig) map[string]map[string]struct{} {
+src/semantic-router/pkg/config/validator_projection.go:443:	cfg *RouterConfig,
+src/semantic-router/pkg/config/validator_projection.go:700:	cfg *RouterConfig,
+src/semantic-router/pkg/config/pricing_helper.go:8:func (c *RouterConfig) GetFullModelPricing(modelName string) (ModelPricing, bool) {
+src/semantic-router/pkg/config/lora_alias_resolution.go:21:func (c *RouterConfig) resolveLoRABaseModel(alias string) (string, ModelParams, bool) {
+src/semantic-router/pkg/config/lora_alias_resolution.go:54:func (c *RouterConfig) collectPreferredEndpoints(endpointNames []string) []VLLMEndpoint {
+src/semantic-router/pkg/selection/gmtrouter.go:31:// GMTRouterConfig configures the GMTRouter personalized selector
+src/semantic-router/pkg/selection/gmtrouter.go:44:type GMTRouterConfig struct {
+src/semantic-router/pkg/selection/gmtrouter.go:77:// DefaultGMTRouterConfig returns the default GMTRouter configuration
+src/semantic-router/pkg/selection/gmtrouter.go:78:func DefaultGMTRouterConfig() *GMTRouterConfig {
+src/semantic-router/pkg/selection/gmtrouter.go:79:	return &GMTRouterConfig{
+src/semantic-router/pkg/selection/gmtrouter.go:155:	config *GMTRouterConfig
+src/semantic-router/pkg/selection/gmtrouter.go:175:func NewGMTRouterSelector(cfg *GMTRouterConfig) *GMTRouterSelector {
+src/semantic-router/pkg/selection/gmtrouter.go:177:		cfg = DefaultGMTRouterConfig()
+src/semantic-router/pkg/selection/storage.go:31:// EloStorage defines the interface for persisting Elo ratings
+src/semantic-router/pkg/selection/storage.go:33:type EloStorage interface {
+src/semantic-router/pkg/selection/storage.go:67:// FileEloStorage implements EloStorage using a JSON file
+src/semantic-router/pkg/selection/storage.go:68:type FileEloStorage struct {
+src/semantic-router/pkg/selection/storage.go:80:// NewFileEloStorage creates a new file-based storage backend
+src/semantic-router/pkg/selection/storage.go:82:func NewFileEloStorage(path string) (*FileEloStorage, error) {
+src/semantic-router/pkg/selection/storage.go:89:	storage := &FileEloStorage{
+src/semantic-router/pkg/selection/storage.go:102:func (f *FileEloStorage) LoadRatings(category string) (map[string]*ModelRating, error) {
+src/semantic-router/pkg/selection/storage.go:123:func (f *FileEloStorage) SaveRatings(category string, ratings map[string]*ModelRating) error {
+src/semantic-router/pkg/selection/storage.go:152:func (f *FileEloStorage) LoadAllRatings() (map[string]map[string]*ModelRating, error) {
+src/semantic-router/pkg/selection/storage.go:177:func (f *FileEloStorage) SaveAllRatings(ratings map[string]map[string]*ModelRating) error {
+src/semantic-router/pkg/selection/storage.go:200:func (f *FileEloStorage) Close() error {
+src/semantic-router/pkg/selection/storage.go:216:	logging.Infof("[EloStorage] Closed file storage: %s", f.path)
+src/semantic-router/pkg/selection/storage.go:221:func (f *FileEloStorage) loadFromFile() (*StoredRatings, error) {
+src/semantic-router/pkg/selection/storage.go:237:		logging.Warnf("[EloStorage] Storage file is empty, returning fresh state: %s", f.path)
+src/semantic-router/pkg/selection/storage.go:250:			logging.Errorf("[EloStorage] Corrupted file backed up to: %s", backupPath)
+src/semantic-router/pkg/selection/storage.go:273:func (f *FileEloStorage) sanitizeRatings(ratings map[string]*ModelRating) {
+src/semantic-router/pkg/selection/storage.go:281:			logging.Warnf("[EloStorage] Model %s has suspiciously low rating %.2f, clamping to 100", model, rating.Rating)
+src/semantic-router/pkg/selection/storage.go:285:			logging.Warnf("[EloStorage] Model %s has suspiciously high rating %.2f, clamping to 3000", model, rating.Rating)
+src/semantic-router/pkg/selection/storage.go:302:func (f *FileEloStorage) saveToFile(stored *StoredRatings) error {
+src/semantic-router/pkg/selection/storage.go:321:	logging.Debugf("[EloStorage] Saved ratings to %s", f.path)
+src/semantic-router/pkg/selection/storage.go:326:func (f *FileEloStorage) StartAutoSave(interval time.Duration, getAll func() map[string]map[string]*ModelRating) {
+src/semantic-router/pkg/selection/storage.go:349:						logging.Errorf("[EloStorage] Failed final save: %v", err)
+src/semantic-router/pkg/selection/storage.go:358:						logging.Errorf("[EloStorage] Auto-save failed: %v", err)
+src/semantic-router/pkg/selection/storage.go:367:func (f *FileEloStorage) MarkDirty() {
+src/semantic-router/pkg/selection/storage.go:371:// MemoryEloStorage implements EloStorage using in-memory storage (for testing)
+src/semantic-router/pkg/selection/storage.go:372:type MemoryEloStorage struct {
+src/semantic-router/pkg/selection/storage.go:378:// NewMemoryEloStorage creates a new in-memory storage backend
+src/semantic-router/pkg/selection/storage.go:379:func NewMemoryEloStorage() *MemoryEloStorage {
+src/semantic-router/pkg/selection/storage.go:380:	return &MemoryEloStorage{
+src/semantic-router/pkg/selection/storage.go:387:func (m *MemoryEloStorage) LoadRatings(category string) (map[string]*ModelRating, error) {
+src/semantic-router/pkg/selection/storage.go:411:func (m *MemoryEloStorage) SaveRatings(category string, ratings map[string]*ModelRating) error {
+src/semantic-router/pkg/selection/storage.go:434:func (m *MemoryEloStorage) LoadAllRatings() (map[string]map[string]*ModelRating, error) {
+src/semantic-router/pkg/selection/storage.go:458:func (m *MemoryEloStorage) SaveAllRatings(ratings map[string]map[string]*ModelRating) error {
+src/semantic-router/pkg/selection/storage.go:482:func (m *MemoryEloStorage) Close() error {
+src/semantic-router/pkg/config/canonical_config.go:77:func normalizeCanonicalConfig(canonical *CanonicalConfig) (*RouterConfig, error) {
+src/semantic-router/pkg/config/canonical_config.go:104:func applyCanonicalRoutingState(cfg *RouterConfig, canonical *CanonicalConfig) {
+src/semantic-router/pkg/config/canonical_config.go:126:func applyCanonicalProviderState(cfg *RouterConfig, providers CanonicalProviders) error {
+src/semantic-router/pkg/selection/hybrid.go:34:	// EloWeight is the weight for Elo rating contribution (0-1)
+src/semantic-router/pkg/selection/hybrid.go:35:	EloWeight float64 `yaml:"elo_weight"`
+src/semantic-router/pkg/selection/hybrid.go:59:		EloWeight:           0.3,
+src/semantic-router/pkg/selection/hybrid.go:70:// It uses weighted combination of Elo ratings, embedding similarity,
+src/semantic-router/pkg/selection/hybrid.go:76:	eloSelector      *EloSelector
+src/semantic-router/pkg/selection/hybrid.go:96:		eloSelector:      NewEloSelector(DefaultEloConfig()),
+src/semantic-router/pkg/selection/hybrid.go:106:	elo *EloSelector,
+src/semantic-router/pkg/selection/hybrid.go:128:// SetEloSelector sets the Elo component
+src/semantic-router/pkg/selection/hybrid.go:129:func (h *HybridSelector) SetEloSelector(elo *EloSelector) {
+src/semantic-router/pkg/selection/hybrid.go:179:	// Get Elo scores
+src/semantic-router/pkg/selection/hybrid.go:180:	if h.eloSelector != nil && h.config.EloWeight > 0 {
+src/semantic-router/pkg/selection/hybrid.go:224:		h.config.EloWeight, h.config.RouterDCWeight, h.config.AutoMixWeight, h.config.CostWeight)
+src/semantic-router/pkg/selection/hybrid.go:380:		"elo":       h.config.EloWeight,
+src/semantic-router/pkg/selection/hybrid.go:513:			parts = append(parts, fmt.Sprintf("Elo=%.3f", score))
+src/semantic-router/pkg/selection/hybrid.go:530:		h.config.EloWeight, h.config.RouterDCWeight, h.config.AutoMixWeight, h.config.CostWeight)
+src/semantic-router/pkg/config/validator.go:19:	validate func(*RouterConfig) error
+src/semantic-router/pkg/config/validator.go:85:			validate: validateModelSelectionConfig,
+src/semantic-router/pkg/config/validator.go:171:func validateConfigStructure(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator.go:185:func ValidateKubernetesConfigContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator.go:189:func validateConfigContracts(cfg *RouterConfig, scope configValidationScope) error {
+src/semantic-router/pkg/config/validator.go:201:func validateLegacyLatencyRoutingConfig(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator.go:208:func validateModelSelectionConfig(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator.go:212:	if err := validateModelSwitchGate(cfg.ModelSelection.ModelSwitchGate); err != nil {
+src/semantic-router/pkg/config/validator.go:215:	if err := validateSessionAwareSelectionConfig(cfg.ModelSelection.SessionAware); err != nil {
+src/semantic-router/pkg/config/validator.go:218:	warnModelSwitchGateEnforceWithoutCostSignals(cfg.ModelSelection)
+src/semantic-router/pkg/config/plugin_router_replay_support.go:30:func (c *RouterConfig) EffectiveRouterReplayConfigForDecision(decisionName string) *RouterReplayPluginConfig {
+src/semantic-router/pkg/config/validator_decision.go:10:func validateDecisionContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_decision.go:20:func validateDecisionModelContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_decision.go:35:func validateDecisionModelRefs(cfg *RouterConfig, decision Decision) error {
+src/semantic-router/pkg/config/validator_decision.go:111:func validateDecisionPluginContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/validator_decision.go:139:func validateDecisionRAGAndMemoryPlugins(cfg *RouterConfig, decision *Decision) error {
+src/semantic-router/pkg/config/validator_decision.go:175:func hasLegacyLatencyRoutingConfig(cfg *RouterConfig) bool {
+src/semantic-router/pkg/config/validator_decision.go:248:	addBlock("elo", algorithm.Elo != nil)
+src/semantic-router/pkg/config/validator_decision.go:256:	addBlock("session_aware", algorithm.SessionAware != nil)
+src/semantic-router/pkg/config/validator_decision.go:289:		if algorithm.SessionAware == nil {
+src/semantic-router/pkg/config/validator_decision.go:292:		if err := validateSessionAwareSelectionConfig(*algorithm.SessionAware); err != nil {
+src/semantic-router/pkg/config/validator_decision.go:347:func validateLoRAName(cfg *RouterConfig, modelName string, loraName string) error {
+src/semantic-router/pkg/config/validator_tool_filtering.go:8:func validateAdvancedToolFilteringConfig(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/canonical_global.go:29:	ModelSelection            ModelSelectionConfig  `yaml:"model_selection"`
+src/semantic-router/pkg/config/canonical_global.go:203:func applyCanonicalGlobal(cfg *RouterConfig, global *CanonicalGlobal) error {
+src/semantic-router/pkg/config/canonical_global.go:217:	cfg.ModelSelection = global.Router.ModelSelection
+src/semantic-router/pkg/selection/factory.go:31:// ModelSelectionConfig represents the configuration for model selection
+src/semantic-router/pkg/selection/factory.go:32:type ModelSelectionConfig struct {
+src/semantic-router/pkg/selection/factory.go:36:	// Elo configuration (used when method is "elo")
+src/semantic-router/pkg/selection/factory.go:37:	Elo *EloConfig `yaml:"elo,omitempty"`
+src/semantic-router/pkg/selection/factory.go:57:	GMTRouter *GMTRouterConfig `yaml:"gmtrouter,omitempty"`
+src/semantic-router/pkg/selection/factory.go:63:	// SessionAware configuration (used when method is "session_aware")
+src/semantic-router/pkg/selection/factory.go:64:	SessionAware *SessionAwareConfig `yaml:"session_aware,omitempty"`
+src/semantic-router/pkg/selection/factory.go:67:// DefaultModelSelectionConfig returns the default configuration
+src/semantic-router/pkg/selection/factory.go:68:func DefaultModelSelectionConfig() *ModelSelectionConfig {
+src/semantic-router/pkg/selection/factory.go:69:	return &ModelSelectionConfig{
+src/semantic-router/pkg/selection/factory.go:76:	cfg           *ModelSelectionConfig
+src/semantic-router/pkg/selection/factory.go:84:func NewFactory(cfg *ModelSelectionConfig) *Factory {
+src/semantic-router/pkg/selection/factory.go:86:		cfg = DefaultModelSelectionConfig()
+src/semantic-router/pkg/selection/factory.go:125:	case MethodElo:
+src/semantic-router/pkg/selection/factory.go:126:		eloSelector := NewEloSelector(f.cfg.Elo)
+src/semantic-router/pkg/selection/factory.go:192:	case MethodSessionAware:
+src/semantic-router/pkg/selection/factory.go:193:		sessionAwareSelector := NewSessionAwareSelector(f.cfg.SessionAware)
+src/semantic-router/pkg/selection/factory.go:200:		sessionAwareSelector.SetBaseSelector(f.createSessionAwareBaseSelector(sessionAwareSelector.config.BaseMethod))
+src/semantic-router/pkg/selection/factory.go:230:	// Create Elo selector
+src/semantic-router/pkg/selection/factory.go:231:	eloCfg := f.cfg.Elo
+src/semantic-router/pkg/selection/factory.go:233:		eloCfg = DefaultEloConfig()
+src/semantic-router/pkg/selection/factory.go:235:	eloSelector := NewEloSelector(eloCfg)
+src/semantic-router/pkg/selection/factory.go:239:	registry.Register(MethodElo, eloSelector)
+src/semantic-router/pkg/selection/factory.go:335:		gmtRouterCfg = DefaultGMTRouterConfig()
+src/semantic-router/pkg/selection/factory.go:357:	// Create SessionAware selector after base selectors so it can wrap one.
+src/semantic-router/pkg/selection/factory.go:358:	sessionAwareSelector := NewSessionAwareSelector(f.cfg.SessionAware)
+src/semantic-router/pkg/selection/factory.go:370:	registry.Register(MethodSessionAware, sessionAwareSelector)
+src/semantic-router/pkg/selection/factory.go:379:func (f *Factory) createSessionAwareBaseSelector(method SelectionMethod) Selector {
+src/semantic-router/pkg/selection/factory.go:380:	if method == "" || method == MethodSessionAware {
+src/semantic-router/pkg/selection/factory.go:477:func Initialize(cfg *ModelSelectionConfig, modelConfig map[string]config.ModelParams, categories []config.Category, embeddingFunc func(string) ([]float32, error)) {
+src/semantic-router/pkg/config/validator_conversation.go:26:func validateConversationContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/selection/tier_declarations.go:22:func (e *EloSelector) Tier() AlgorithmTier {
+src/semantic-router/pkg/selection/tier_declarations.go:26:// ExternalDependencies returns external dependencies (none for Elo)
+src/semantic-router/pkg/selection/tier_declarations.go:27:func (e *EloSelector) ExternalDependencies() []Dependency {
+src/semantic-router/pkg/config/canonical_export.go:8:// CanonicalConfigFromRouterConfig exports the canonical v0.3 config surface
+src/semantic-router/pkg/config/canonical_export.go:10:func CanonicalConfigFromRouterConfig(cfg *RouterConfig) CanonicalConfig {
+src/semantic-router/pkg/config/canonical_export.go:24:			Models: canonicalProviderModelsFromRouterConfig(cfg),
+src/semantic-router/pkg/config/canonical_export.go:26:		Routing: CanonicalRoutingFromRouterConfig(cfg),
+src/semantic-router/pkg/config/canonical_export.go:27:		Global:  CanonicalGlobalFromRouterConfig(cfg),
+src/semantic-router/pkg/config/canonical_export.go:31:// CanonicalStaticConfigFromRouterConfig exports the static canonical base used
+src/semantic-router/pkg/config/canonical_export.go:34:func CanonicalStaticConfigFromRouterConfig(cfg *RouterConfig) CanonicalConfig {
+src/semantic-router/pkg/config/canonical_export.go:35:	canonical := CanonicalConfigFromRouterConfig(cfg)
+src/semantic-router/pkg/config/canonical_export.go:40:// CanonicalRoutingFromRouterConfig exports the routing-owned canonical surface
+src/semantic-router/pkg/config/canonical_export.go:43:func CanonicalRoutingFromRouterConfig(cfg *RouterConfig) CanonicalRouting {
+src/semantic-router/pkg/config/canonical_export.go:49:		ModelCards:  routingModelsFromRouterConfig(cfg),
+src/semantic-router/pkg/config/canonical_export.go:50:		Signals:     canonicalSignalsFromRouterConfig(cfg),
+src/semantic-router/pkg/config/canonical_export.go:51:		Projections: canonicalProjectionsFromRouterConfig(cfg),
+src/semantic-router/pkg/config/canonical_export.go:56:func canonicalSignalsFromRouterConfig(cfg *RouterConfig) CanonicalSignals {
+src/semantic-router/pkg/config/canonical_export.go:79:func canonicalProjectionsFromRouterConfig(cfg *RouterConfig) CanonicalProjections {
+src/semantic-router/pkg/config/canonical_export.go:87:func routingModelsFromRouterConfig(cfg *RouterConfig) []RoutingModel {
+src/semantic-router/pkg/config/canonical_export.go:128:// CanonicalGlobalFromRouterConfig exports the router-wide canonical global
+src/semantic-router/pkg/config/canonical_export.go:130:func CanonicalGlobalFromRouterConfig(cfg *RouterConfig) *CanonicalGlobal {
+src/semantic-router/pkg/config/canonical_export.go:148:			ModelSelection: cfg.ModelSelection,
+src/semantic-router/pkg/config/canonical_export.go:230:func canonicalProviderModelsFromRouterConfig(cfg *RouterConfig) []CanonicalProviderModel {
+src/semantic-router/pkg/config/canonical_export.go:261:func canonicalProviderModelNames(cfg *RouterConfig) map[string]bool {
+src/semantic-router/pkg/selection/elo.go:31:// DefaultEloRating is the initial Elo rating for new models
+src/semantic-router/pkg/selection/elo.go:32:const DefaultEloRating = 1500.0
+src/semantic-router/pkg/selection/elo.go:34:// EloKFactor controls how much ratings change per comparison
+src/semantic-router/pkg/selection/elo.go:36:const EloKFactor = 32.0
+src/semantic-router/pkg/selection/elo.go:38:// EloMinRatingFromScore is the base rating when converting static scores (0-1) to Elo
+src/semantic-router/pkg/selection/elo.go:39:const EloMinRatingFromScore = 1000.0
+src/semantic-router/pkg/selection/elo.go:41:// EloRatingRange is the rating range for score conversion (scores 0-1 map to 1000-2000)
+src/semantic-router/pkg/selection/elo.go:42:const EloRatingRange = 1000.0
+src/semantic-router/pkg/selection/elo.go:44:// EloConfig configures the Elo-based model selector
+src/semantic-router/pkg/selection/elo.go:45:type EloConfig struct {
+src/semantic-router/pkg/selection/elo.go:46:	// InitialRating is the starting Elo rating for new models
+src/semantic-router/pkg/selection/elo.go:52:	// CategoryWeighted enables per-category Elo ratings
+src/semantic-router/pkg/selection/elo.go:64:	// StoragePath is the file path for persisting Elo ratings (optional)
+src/semantic-router/pkg/selection/elo.go:74:// DefaultEloConfig returns the default Elo configuration
+src/semantic-router/pkg/selection/elo.go:75:func DefaultEloConfig() *EloConfig {
+src/semantic-router/pkg/selection/elo.go:76:	return &EloConfig{
+src/semantic-router/pkg/selection/elo.go:77:		InitialRating:     DefaultEloRating,
+src/semantic-router/pkg/selection/elo.go:78:		KFactor:           EloKFactor,
+src/semantic-router/pkg/selection/elo.go:86:// ModelRating stores the Elo rating and metadata for a model
+src/semantic-router/pkg/selection/elo.go:96:// EloSelector implements Elo rating-based model selection
+src/semantic-router/pkg/selection/elo.go:98:type EloSelector struct {
+src/semantic-router/pkg/selection/elo.go:99:	config *EloConfig
+src/semantic-router/pkg/selection/elo.go:114:	storage EloStorage
+src/semantic-router/pkg/selection/elo.go:117:// NewEloSelector creates a new Elo-based selector
+src/semantic-router/pkg/selection/elo.go:118:func NewEloSelector(cfg *EloConfig) *EloSelector {
+src/semantic-router/pkg/selection/elo.go:120:		cfg = DefaultEloConfig()
+src/semantic-router/pkg/selection/elo.go:122:	selector := &EloSelector{
+src/semantic-router/pkg/selection/elo.go:131:		storage, err := NewFileEloStorage(cfg.StoragePath)
+src/semantic-router/pkg/selection/elo.go:168:func (e *EloSelector) SetStorage(storage EloStorage) {
+src/semantic-router/pkg/selection/elo.go:173:func (e *EloSelector) loadFromStorage() error {
+src/semantic-router/pkg/selection/elo.go:210:func (e *EloSelector) getAllRatingsForStorage() map[string]map[string]*ModelRating {
+src/semantic-router/pkg/selection/elo.go:240:func (e *EloSelector) Close() error {
+src/semantic-router/pkg/selection/elo.go:248:func (e *EloSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/elo.go:249:	return MethodElo
+src/semantic-router/pkg/selection/elo.go:253:func (e *EloSelector) SetModelCost(model string, costPer1M float64) {
+src/semantic-router/pkg/selection/elo.go:260:func (e *EloSelector) InitializeFromConfig(modelConfig map[string]config.ModelParams, categories []config.Category) {
+src/semantic-router/pkg/selection/elo.go:291:				// Convert static scores to Elo ratings (scale 0-1 -> 1000-2000)
+src/semantic-router/pkg/selection/elo.go:292:				rating := EloMinRatingFromScore + (ms.Score * EloRatingRange)
+src/semantic-router/pkg/selection/elo.go:303:// Select chooses the best model based on Elo ratings
+src/semantic-router/pkg/selection/elo.go:304:func (e *EloSelector) Select(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+src/semantic-router/pkg/selection/elo.go:314:	logging.Infof("[EloSelector] Evaluating %d candidates for category '%s':",
+src/semantic-router/pkg/selection/elo.go:317:		logging.Infof("[EloSelector]   %s: rating=%.1f (W:%d L:%d T:%d)",
+src/semantic-router/pkg/selection/elo.go:325:		totalRating += math.Pow(10, r.Rating/400.0) // Standard Elo probability scale
+src/semantic-router/pkg/selection/elo.go:373:	reasoning := fmt.Sprintf("Selected based on Elo rating %.1f (win rate: %d/%d)",
+src/semantic-router/pkg/selection/elo.go:382:	logging.Infof("[EloSelector] Selected model %s (rating=%.1f, score=%.4f, confidence=%.2f)",
+src/semantic-router/pkg/selection/elo.go:385:	// Record metrics for all candidate models' current Elo ratings
+src/semantic-router/pkg/selection/elo.go:391:		RecordEloRating(r.Model, category, r.Rating)
+src/semantic-router/pkg/selection/elo.go:399:		Method:        MethodElo,
+src/semantic-router/pkg/selection/elo.go:405:// UpdateFeedback updates Elo ratings based on user preference feedback.
+src/semantic-router/pkg/selection/elo.go:407:// 1. Comparison: Both WinnerModel and LoserModel set - standard Elo update
+src/semantic-router/pkg/selection/elo.go:410:func (e *EloSelector) UpdateFeedback(ctx context.Context, feedback *Feedback) error {
+src/semantic-router/pkg/selection/elo.go:421:	logging.Infof("[EloSelector] Updated ratings: winner=%s, loser=%s, tie=%v",
+src/semantic-router/pkg/selection/elo.go:429:// updateGlobalRatings updates global Elo ratings and records metrics.
+src/semantic-router/pkg/selection/elo.go:430:func (e *EloSelector) updateGlobalRatings(feedback *Feedback) {
+src/semantic-router/pkg/selection/elo.go:431:	var winnerOldElo, loserOldElo float64
+src/semantic-router/pkg/selection/elo.go:436:		winnerOldElo = r.Rating
+src/semantic-router/pkg/selection/elo.go:438:		winnerOldElo = e.config.InitialRating
+src/semantic-router/pkg/selection/elo.go:441:		loserOldElo = r.Rating
+src/semantic-router/pkg/selection/elo.go:443:		loserOldElo = e.config.InitialRating
+src/semantic-router/pkg/selection/elo.go:461:			WinnerOldElo: winnerOldElo,
+src/semantic-router/pkg/selection/elo.go:462:			WinnerNewElo: globalWinnerStats.Rating,
+src/semantic-router/pkg/selection/elo.go:463:			LoserOldElo:  loserOldElo,
+src/semantic-router/pkg/selection/elo.go:464:			LoserNewElo:  globalLoserStats.Rating,
+src/semantic-router/pkg/selection/elo.go:471:// updateCategoryRatings updates category-specific Elo ratings and records metrics.
+src/semantic-router/pkg/selection/elo.go:472:func (e *EloSelector) updateCategoryRatings(feedback *Feedback) {
+src/semantic-router/pkg/selection/elo.go:473:	var catWinnerOldElo, catLoserOldElo float64
+src/semantic-router/pkg/selection/elo.go:484:		catWinnerOldElo = r.Rating
+src/semantic-router/pkg/selection/elo.go:486:		catWinnerOldElo = e.config.InitialRating
+src/semantic-router/pkg/selection/elo.go:489:		catLoserOldElo = r.Rating
+src/semantic-router/pkg/selection/elo.go:491:		catLoserOldElo = e.config.InitialRating
+src/semantic-router/pkg/selection/elo.go:509:			WinnerOldElo: catWinnerOldElo,
+src/semantic-router/pkg/selection/elo.go:510:			WinnerNewElo: catWinnerStats.Rating,
+src/semantic-router/pkg/selection/elo.go:511:			LoserOldElo:  catLoserOldElo,
+src/semantic-router/pkg/selection/elo.go:512:			LoserNewElo:  catLoserStats.Rating,
+src/semantic-router/pkg/selection/elo.go:520:func (e *EloSelector) persistRatings() {
+src/semantic-router/pkg/selection/elo.go:524:	if fileStorage, ok := e.storage.(*FileEloStorage); ok {
+src/semantic-router/pkg/selection/elo.go:528:			logging.Warnf("[EloSelector] Failed to save ratings to storage: %v", err)
+src/semantic-router/pkg/selection/elo.go:533:// updateRatingLocked performs the actual Elo rating update directly on the given ratings map.
+src/semantic-router/pkg/selection/elo.go:535:func (e *EloSelector) updateRatingLocked(feedback *Feedback, ratings map[string]*ModelRating) {
+src/semantic-router/pkg/selection/elo.go:557:func (e *EloSelector) applyWinnerOnlyFeedbackLocked(model string, ratings map[string]*ModelRating) {
+src/semantic-router/pkg/selection/elo.go:570:func (e *EloSelector) applyLoserOnlyFeedbackLocked(model string, ratings map[string]*ModelRating) {
+src/semantic-router/pkg/selection/elo.go:583:func (e *EloSelector) applyPairwiseFeedbackLocked(feedback *Feedback, ratings map[string]*ModelRating) {
+src/semantic-router/pkg/selection/elo.go:626:func (e *EloSelector) getRatingsForCandidates(decisionName string, candidates []config.ModelRef) []*ModelRating {
+src/semantic-router/pkg/selection/elo.go:657:func (e *EloSelector) getGlobalRating(model string) *ModelRating {
+src/semantic-router/pkg/selection/elo.go:664:func (e *EloSelector) setGlobalRating(model string, rating *ModelRating) {
+src/semantic-router/pkg/selection/elo.go:671:func (e *EloSelector) getCategoryRating(category, model string) *ModelRating {
+src/semantic-router/pkg/selection/elo.go:681:func (e *EloSelector) setCategoryRating(category, model string, rating *ModelRating) {
+src/semantic-router/pkg/selection/elo.go:691:func (e *EloSelector) applyCostAdjustment(scores map[string]float64, costWeight float64) {
+src/semantic-router/pkg/selection/elo.go:729:func (e *EloSelector) calculateConfidence(rating *ModelRating) float64 {
+src/semantic-router/pkg/selection/elo.go:744:func (e *EloSelector) GetLeaderboard(category string) []*ModelRating {
+src/semantic-router/pkg/config/canonical_defaults.go:22:		ModelSelection: ModelSelectionConfig{
+src/semantic-router/pkg/config/canonical_defaults.go:304:// DefaultGlobalConfig materializes canonical global defaults into the runtime RouterConfig.
+src/semantic-router/pkg/config/canonical_defaults.go:305:func DefaultGlobalConfig() RouterConfig {
+src/semantic-router/pkg/config/canonical_defaults.go:308:	cfg := RouterConfig{}
+src/semantic-router/pkg/config/config.go:59:// RouterConfig represents the main configuration for the LLM Router.
+src/semantic-router/pkg/config/config.go:60:type RouterConfig struct {
+src/semantic-router/pkg/config/config.go:207:	ModelSelection  ModelSelectionConfig `yaml:"model_selection,omitempty"`
+src/semantic-router/pkg/config/validator_model_switch_gate.go:40:func validateSessionAwareSelectionConfig(cfg SessionAwareSelectionConfig) error {
+src/semantic-router/pkg/config/validator_model_switch_gate.go:112:func warnModelSwitchGateEnforceWithoutCostSignals(cfg ModelSelectionConfig) {
+src/semantic-router/pkg/selection/rl_driven.go:331:	storage EloStorage
+src/semantic-router/pkg/selection/rl_driven.go:363:		storage, err := NewFileEloStorage(cfg.StoragePath)
+src/semantic-router/pkg/selection/rl_driven.go:1343:	if fileStorage, ok := r.storage.(*FileEloStorage); ok {
+src/semantic-router/pkg/selection/rl_driven.go:1414:	// Convert Elo rating to Beta distribution. Higher Elo means higher alpha.
+src/semantic-router/pkg/selection/rl_driven.go:1443:	// Convert Beta distribution mean to Elo-like rating
+src/semantic-router/pkg/config/helper.go:12:func (rc *RouterConfig) GetModelReasoningFamily(modelName string) *ReasoningFamilyConfig {
+src/semantic-router/pkg/config/helper.go:26:func (rc *RouterConfig) GetModelReasoningFamilyName(modelName string) (string, bool) {
+src/semantic-router/pkg/config/helper.go:45:func (rc *RouterConfig) ModelNameMatches(candidateName string, modelName string) bool {
+src/semantic-router/pkg/config/helper.go:58:func (c *RouterConfig) resolveModelConfigKey(modelName string) (string, bool) {
+src/semantic-router/pkg/config/helper.go:75:func (c *RouterConfig) GetEffectiveAutoModelName() string {
+src/semantic-router/pkg/config/helper.go:84:func (c *RouterConfig) IsAutoModelName(modelName string) bool {
+src/semantic-router/pkg/config/helper.go:92:func (c *RouterConfig) GetCategoryDescriptions() []string {
+src/semantic-router/pkg/config/helper.go:106:func (c *RouterConfig) GetModelForDecisionIndex(index int) string {
+src/semantic-router/pkg/config/helper.go:124:func (c *RouterConfig) resolveModelConfig(modelName string) (ModelParams, bool) {
+src/semantic-router/pkg/config/helper.go:142:func (c *RouterConfig) GetModelPricing(modelName string) (promptPer1M float64, completionPer1M float64, currency string, ok bool) {
+src/semantic-router/pkg/config/helper.go:160:func (c *RouterConfig) GetMostExpensivePricedModel() (modelName string, promptPer1M float64, completionPer1M float64, currency string, ok bool) {
+src/semantic-router/pkg/config/helper.go:188:func (c *RouterConfig) GetModelAPIFormat(modelName string) string {
+src/semantic-router/pkg/config/helper.go:202:func (c *RouterConfig) GetModelAccessKey(modelName string) string {
+src/semantic-router/pkg/config/helper.go:277:func (c *RouterConfig) IsPIIClassifierEnabled() bool {
+src/semantic-router/pkg/config/helper.go:282:func (c *RouterConfig) IsCategoryClassifierEnabled() bool {
+src/semantic-router/pkg/config/helper.go:287:func (c *RouterConfig) IsMCPCategoryClassifierEnabled() bool {
+src/semantic-router/pkg/config/helper.go:292:func (c *RouterConfig) GetPromptGuardConfig() PromptGuardConfig {
+src/semantic-router/pkg/config/helper.go:297:func (c *RouterConfig) IsPromptGuardEnabled() bool {
+src/semantic-router/pkg/config/helper.go:317:func (c *RouterConfig) GetEndpointsForModel(modelName string) []VLLMEndpoint {
+src/semantic-router/pkg/config/helper.go:332:func (c *RouterConfig) GetEndpointByName(name string) (*VLLMEndpoint, bool) {
+src/semantic-router/pkg/config/helper.go:342:func (c *RouterConfig) GetAllModels() []string {
+src/semantic-router/pkg/config/helper.go:353:func (c *RouterConfig) GetModelReasoningForDecision(decisionName string, modelName string) bool {
+src/semantic-router/pkg/config/helper.go:367:func (c *RouterConfig) GetBestModelForDecision(decisionName string) (string, bool) {
+src/semantic-router/pkg/config/helper.go:380:func (c *RouterConfig) ValidateEndpoints() error {
+src/semantic-router/pkg/config/helper.go:429:func (c *RouterConfig) GetCategoryByName(name string) *Category {
+src/semantic-router/pkg/config/helper.go:439:func (c *RouterConfig) GetDecisionByName(name string) *Decision {
+src/semantic-router/pkg/config/helper.go:451:func (c *RouterConfig) IsCacheEnabledForDecision(decisionName string) bool {
+src/semantic-router/pkg/config/helper.go:465:func (c *RouterConfig) GetCacheSimilarityThresholdForDecision(decisionName string) float32 {
+src/semantic-router/pkg/config/helper.go:480:func (c *RouterConfig) GetCacheTTLSecondsForDecision(decisionName string) int {
+src/semantic-router/pkg/config/helper.go:497:func (c *RouterConfig) ResolveExternalModelID(modelName string, endpointName string) string {
+src/semantic-router/pkg/config/helper.go:528:func (c *RouterConfig) ResolvePrimaryBackendForModel(modelName string) (string, string, bool, error) {
+src/semantic-router/pkg/config/helper.go:590:func (c *RouterConfig) GetProviderProfileForEndpoint(endpointName string) (*ProviderProfile, error) {
+src/semantic-router/pkg/config/validator_reask.go:5:func validateReaskContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/selection/ml_adapter.go:202:	mlCfg := &config.MLModelSelectionConfig{
+src/semantic-router/pkg/selection/ml_adapter.go:243:	mlCfg := &config.MLModelSelectionConfig{
+src/semantic-router/pkg/selection/ml_adapter.go:284:	mlCfg := &config.MLModelSelectionConfig{
+src/semantic-router/pkg/selection/ml_adapter.go:326:	mlCfg := &config.MLModelSelectionConfig{
+src/semantic-router/pkg/selection/metrics.go:32:	// ModelSelectionTotal tracks the total number of model selections
+src/semantic-router/pkg/selection/metrics.go:34:	ModelSelectionTotal *prometheus.CounterVec
+src/semantic-router/pkg/selection/metrics.go:36:	// ModelSelectionDuration tracks the duration of model selection operations
+src/semantic-router/pkg/selection/metrics.go:38:	ModelSelectionDuration *prometheus.HistogramVec
+src/semantic-router/pkg/selection/metrics.go:40:	// ModelSelectionScore tracks the score of selected models
+src/semantic-router/pkg/selection/metrics.go:42:	ModelSelectionScore *prometheus.HistogramVec
+src/semantic-router/pkg/selection/metrics.go:44:	// ModelSelectionConfidence tracks confidence scores of selections
+src/semantic-router/pkg/selection/metrics.go:47:	ModelSelectionConfidence *prometheus.HistogramVec
+src/semantic-router/pkg/selection/metrics.go:49:	// ModelEloRating tracks current Elo ratings for models by category
+src/semantic-router/pkg/selection/metrics.go:52:	ModelEloRating *prometheus.GaugeVec
+src/semantic-router/pkg/selection/metrics.go:63:	// ModelSelectionHistory tracks selection counts per algorithm over time
+src/semantic-router/pkg/selection/metrics.go:66:	ModelSelectionHistory *prometheus.CounterVec
+src/semantic-router/pkg/selection/metrics.go:133:	// ModelSelectionDependencyHealth tracks external dependency reachability
+src/semantic-router/pkg/selection/metrics.go:135:	ModelSelectionDependencyHealth *prometheus.GaugeVec
+src/semantic-router/pkg/selection/metrics.go:159:	ModelSelectionTotal = promauto.NewCounterVec(
+src/semantic-router/pkg/selection/metrics.go:167:	ModelSelectionDuration = promauto.NewHistogramVec(
+src/semantic-router/pkg/selection/metrics.go:176:	ModelSelectionScore = promauto.NewHistogramVec(
+src/semantic-router/pkg/selection/metrics.go:185:	ModelSelectionConfidence = promauto.NewHistogramVec(
+src/semantic-router/pkg/selection/metrics.go:194:	ModelSelectionDependencyHealth = promauto.NewGaugeVec(
+src/semantic-router/pkg/selection/metrics.go:204:	ModelEloRating = promauto.NewGaugeVec(
+src/semantic-router/pkg/selection/metrics.go:207:			Help: "Current Elo rating for models by category (enables evolution tracking)",
+src/semantic-router/pkg/selection/metrics.go:223:			Help: "Distribution of Elo rating changes during feedback updates",
+src/semantic-router/pkg/selection/metrics.go:224:			// Buckets cover typical Elo K-factor based changes (-32 to +32)
+src/semantic-router/pkg/selection/metrics.go:230:	ModelSelectionHistory = promauto.NewCounterVec(
+src/semantic-router/pkg/selection/metrics.go:381:		ModelSelectionTotal.WithLabelValues(method, "_init", "_init", "supported")
+src/semantic-router/pkg/selection/metrics.go:382:		ModelSelectionDuration.WithLabelValues(method, "supported")
+src/semantic-router/pkg/selection/metrics.go:383:		ModelSelectionScore.WithLabelValues(method, "_init")
+src/semantic-router/pkg/selection/metrics.go:384:		ModelSelectionConfidence.WithLabelValues(method, "supported")
+src/semantic-router/pkg/selection/metrics.go:385:		ModelSelectionHistory.WithLabelValues(method, "_init")
+src/semantic-router/pkg/selection/metrics.go:388:	// Initialize Elo metrics
+src/semantic-router/pkg/selection/metrics.go:389:	ModelEloRating.WithLabelValues("_init", "_init").Set(0)
+src/semantic-router/pkg/selection/metrics.go:420:	ModelSelectionDependencyHealth.WithLabelValues("_init", "_init", "_init").Set(0)
+src/semantic-router/pkg/selection/metrics.go:435:	ModelSelectionTotal.WithLabelValues(method, model, decision, tierStr).Inc()
+src/semantic-router/pkg/selection/metrics.go:436:	ModelSelectionScore.WithLabelValues(method, model).Observe(score)
+src/semantic-router/pkg/selection/metrics.go:437:	ModelSelectionHistory.WithLabelValues(method, decision).Inc()
+src/semantic-router/pkg/selection/metrics.go:440:// RecordEloRating records the current Elo rating for a model in a category
+src/semantic-router/pkg/selection/metrics.go:441:func RecordEloRating(model, category string, rating float64) {
+src/semantic-router/pkg/selection/metrics.go:445:	ModelEloRating.WithLabelValues(model, category).Set(rating)
+src/semantic-router/pkg/selection/metrics.go:448:// RecordEloRatings records Elo ratings for multiple models at once
+src/semantic-router/pkg/selection/metrics.go:450:func RecordEloRatings(ratings map[string]*ModelRating, category string) {
+src/semantic-router/pkg/selection/metrics.go:455:		ModelEloRating.WithLabelValues(r.Model, category).Set(r.Rating)
+src/semantic-router/pkg/selection/metrics.go:485:// RecordRatingChange records an Elo rating change after feedback
+src/semantic-router/pkg/selection/metrics.go:499:	ModelEloRating.WithLabelValues(model, category).Set(newRating)
+src/semantic-router/pkg/selection/metrics.go:534:	WinnerOldElo float64
+src/semantic-router/pkg/selection/metrics.go:535:	WinnerNewElo float64
+src/semantic-router/pkg/selection/metrics.go:536:	LoserOldElo  float64
+src/semantic-router/pkg/selection/metrics.go:537:	LoserNewElo  float64
+src/semantic-router/pkg/selection/metrics.go:571:		change := m.WinnerNewElo - m.WinnerOldElo
+src/semantic-router/pkg/selection/metrics.go:573:		ModelEloRating.WithLabelValues(m.Winner, category).Set(m.WinnerNewElo)
+src/semantic-router/pkg/selection/metrics.go:586:		change := m.LoserNewElo - m.LoserOldElo
+src/semantic-router/pkg/selection/metrics.go:588:		ModelEloRating.WithLabelValues(m.Loser, category).Set(m.LoserNewElo)
+src/semantic-router/pkg/selection/metrics.go:699:	ModelSelectionTotal.WithLabelValues("rl_driven", model, category, tierStr).Inc()
+src/semantic-router/pkg/selection/metrics.go:700:	ModelSelectionScore.WithLabelValues("rl_driven", model).Observe(score)
+src/semantic-router/pkg/selection/metrics.go:701:	ModelSelectionHistory.WithLabelValues("rl_driven", category).Inc()
+src/semantic-router/pkg/selection/metrics.go:780:	ModelSelectionTotal.WithLabelValues(methodStr, model, decision, tierStr).Inc()
+src/semantic-router/pkg/selection/metrics.go:781:	ModelSelectionDuration.WithLabelValues(methodStr, tierStr).Observe(duration.Seconds())
+src/semantic-router/pkg/selection/metrics.go:782:	ModelSelectionScore.WithLabelValues(methodStr, model).Observe(score)
+src/semantic-router/pkg/selection/metrics.go:783:	ModelSelectionConfidence.WithLabelValues(methodStr, tierStr).Observe(confidence)
+src/semantic-router/pkg/selection/metrics.go:784:	ModelSelectionHistory.WithLabelValues(methodStr, decision).Inc()
+src/semantic-router/pkg/selection/metrics.go:797:	ModelSelectionDependencyHealth.WithLabelValues(method, dependency, depType).Set(val)
+src/semantic-router/pkg/config/loader.go:19:	config     *RouterConfig
+src/semantic-router/pkg/config/loader.go:25:	configUpdateSubscribers = map[uint64]chan *RouterConfig{}
+src/semantic-router/pkg/config/loader.go:30:func Load(configPath string) (*RouterConfig, error) {
+src/semantic-router/pkg/config/loader.go:50:func Parse(configPath string) (*RouterConfig, error) {
+src/semantic-router/pkg/config/loader.go:78:func ParseYAMLBytes(data []byte) (*RouterConfig, error) {
+src/semantic-router/pkg/config/loader.go:82:func parseYAMLBytesWithBaseDir(data []byte, baseDir string) (*RouterConfig, error) {
+src/semantic-router/pkg/config/loader.go:103:	cfg, err := parseRouterConfigPayload(data, raw)
+src/semantic-router/pkg/config/loader.go:199:func parseRouterConfigPayload(data []byte, raw map[string]interface{}) (*RouterConfig, error) {
+src/semantic-router/pkg/config/loader.go:206:func parseCanonicalConfigPayload(data []byte, raw map[string]interface{}) (*RouterConfig, error) {
+src/semantic-router/pkg/config/loader.go:254:func finalizeParsedConfig(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/loader.go:274:func logParsedDecisions(cfg *RouterConfig) {
+src/semantic-router/pkg/config/loader.go:419:func Replace(newCfg *RouterConfig) {
+src/semantic-router/pkg/config/loader.go:436:	subscribers := make(map[uint64]chan *RouterConfig, len(configUpdateSubscribers))
+src/semantic-router/pkg/config/loader.go:464:func Get() *RouterConfig {
+src/semantic-router/pkg/config/loader.go:471:	ch        chan *RouterConfig
+src/semantic-router/pkg/config/loader.go:476:func (s *ConfigUpdateSubscription) Updates() <-chan *RouterConfig {
+src/semantic-router/pkg/config/loader.go:500:	ch := make(chan *RouterConfig, buffer)
+src/semantic-router/pkg/config/loader.go:520:func WatchConfigUpdates() <-chan *RouterConfig {
+src/semantic-router/pkg/selection/session_aware.go:14:// SessionAwareConfig configures agentic session-aware model selection.
+src/semantic-router/pkg/selection/session_aware.go:15:type SessionAwareConfig struct {
+src/semantic-router/pkg/selection/session_aware.go:36:// DefaultSessionAwareConfig returns the production-oriented default policy.
+src/semantic-router/pkg/selection/session_aware.go:37:func DefaultSessionAwareConfig() *SessionAwareConfig {
+src/semantic-router/pkg/selection/session_aware.go:38:	return &SessionAwareConfig{
+src/semantic-router/pkg/selection/session_aware.go:60:// SessionAwareSelector wraps a base selector with explicit session policy.
+src/semantic-router/pkg/selection/session_aware.go:61:type SessionAwareSelector struct {
+src/semantic-router/pkg/selection/session_aware.go:62:	config       *SessionAwareConfig
+src/semantic-router/pkg/selection/session_aware.go:68:func NewSessionAwareSelector(cfg *SessionAwareConfig) *SessionAwareSelector {
+src/semantic-router/pkg/selection/session_aware.go:70:		cfg = DefaultSessionAwareConfig()
+src/semantic-router/pkg/selection/session_aware.go:72:		cfg = normalizeSessionAwareConfig(*cfg)
+src/semantic-router/pkg/selection/session_aware.go:74:	return &SessionAwareSelector{
+src/semantic-router/pkg/selection/session_aware.go:80:func normalizeSessionAwareConfig(cfg SessionAwareConfig) *SessionAwareConfig {
+src/semantic-router/pkg/selection/session_aware.go:81:	defaults := DefaultSessionAwareConfig()
+src/semantic-router/pkg/selection/session_aware.go:82:	cfg.BaseMethod = defaultSessionAwareBaseMethod(cfg.BaseMethod, defaults.BaseMethod)
+src/semantic-router/pkg/selection/session_aware.go:100:func defaultSessionAwareBaseMethod(method, defaultMethod SelectionMethod) SelectionMethod {
+src/semantic-router/pkg/selection/session_aware.go:101:	if method == "" || method == MethodSessionAware {
+src/semantic-router/pkg/selection/session_aware.go:142:func (s *SessionAwareSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/session_aware.go:143:	return MethodSessionAware
+src/semantic-router/pkg/selection/session_aware.go:146:func (s *SessionAwareSelector) SetBaseSelector(selector Selector) {
+src/semantic-router/pkg/selection/session_aware.go:150:func (s *SessionAwareSelector) SetLookupTable(lt lookuptable.LookupTable) {
+src/semantic-router/pkg/selection/session_aware.go:154:func (s *SessionAwareSelector) InitializeFromConfig(modelConfig map[string]config.ModelParams) {
+src/semantic-router/pkg/selection/session_aware.go:161:func (s *SessionAwareSelector) Select(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+src/semantic-router/pkg/selection/session_aware.go:212:	logging.Infof("[SessionAwareSelector] %s score=%.4f confidence=%.2f", reason, bestScore, confidence)
+src/semantic-router/pkg/selection/session_aware.go:218:		Method:        MethodSessionAware,
+src/semantic-router/pkg/selection/session_aware.go:236:func (s *SessionAwareSelector) sessionHardLockReason(session *AgenticSessionContext, continuityReset bool) string {
+src/semantic-router/pkg/selection/session_aware.go:267:func (s *SessionAwareSelector) decisionDriftDetected(selCtx *SelectionContext, session *AgenticSessionContext) bool {
+src/semantic-router/pkg/selection/session_aware.go:277:func (s *SessionAwareSelector) selectBase(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+src/semantic-router/pkg/selection/session_aware.go:278:	if s.baseSelector != nil && s.baseSelector.Method() != MethodSessionAware {
+src/semantic-router/pkg/selection/session_aware.go:284:		logging.Warnf("[SessionAwareSelector] base selector %s failed: %v", s.baseSelector.Method(), err)
+src/semantic-router/pkg/selection/session_aware.go:290:func (s *SessionAwareSelector) wrapBaseSelection(base *SelectionResult, reason string, trace *SessionPolicyTrace) *SelectionResult {
+src/semantic-router/pkg/selection/session_aware.go:292:	wrapped.Method = MethodSessionAware
+src/semantic-router/pkg/selection/session_aware.go:304:func (s *SessionAwareSelector) forceCurrent(selCtx *SelectionContext, base *SelectionResult, current, reason string, trace *SessionPolicyTrace) *SelectionResult {
+src/semantic-router/pkg/selection/session_aware.go:339:		Method:        MethodSessionAware,
+src/semantic-router/pkg/selection/session_aware.go:348:func (s *SessionAwareSelector) newPolicyTrace(
+src/semantic-router/pkg/selection/session_aware.go:408:func (s *SessionAwareSelector) UpdateFeedback(ctx context.Context, feedback *Feedback) error {
+src/semantic-router/pkg/selection/session_aware.go:415:func (s *SessionAwareSelector) Tier() AlgorithmTier {
+src/semantic-router/pkg/selection/session_aware.go:419:func (s *SessionAwareSelector) ExternalDependencies() []Dependency {
+src/semantic-router/pkg/config/validator_structure.go:22:func validateStructureContracts(cfg *RouterConfig) error {
+src/semantic-router/pkg/config/module_runtime_helpers.go:4:func (c *RouterConfig) GetCacheSimilarityThreshold() float32 {
+src/semantic-router/pkg/config/module_runtime_helpers.go:15:func (c *RouterConfig) IsHallucinationMitigationEnabled() bool {
+src/semantic-router/pkg/config/module_runtime_helpers.go:20:func (c *RouterConfig) IsFactCheckClassifierEnabled() bool {
+src/semantic-router/pkg/config/module_runtime_helpers.go:31:func (c *RouterConfig) GetFactCheckRules() []FactCheckRule {
+src/semantic-router/pkg/config/module_runtime_helpers.go:36:func (c *RouterConfig) IsHallucinationModelEnabled() bool {
+src/semantic-router/pkg/config/module_runtime_helpers.go:53:func (c *RouterConfig) GetFactCheckThreshold() float32 {
+src/semantic-router/pkg/config/module_runtime_helpers.go:61:func (c *RouterConfig) GetHallucinationModelThreshold() float32 {
+src/semantic-router/pkg/config/module_runtime_helpers.go:69:func (c *RouterConfig) GetHallucinationAction() string {
+src/semantic-router/pkg/config/module_runtime_helpers.go:77:func (c *RouterConfig) IsFeedbackDetectorEnabled() bool {
+src/semantic-router/pkg/config/prompt_compression.go:44:func validatePromptCompressionContracts(cfg *RouterConfig) error {

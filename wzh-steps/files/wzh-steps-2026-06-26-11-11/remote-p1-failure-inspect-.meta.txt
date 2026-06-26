@@ -1,0 +1,10 @@
+timestamp=2026-06-26T11:27:53+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ HOST=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Hostname\\"\)+2\]\)\"\)\;\ PASS=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Password\\"\)+2\]\)\"\)\;\ export\ SSHPASS=\"\$PASS\"\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ cloud-user@\$HOST\ \"set\ -eux\;\ podman\ ps\ -a\ --format\ \\"table\ \{\{.Names\}\}\t\{\{.Status\}\}\t\{\{.Ports\}\}\\"\;\ echo\ ---router\ logs---\;\ podman\ logs\ vsr-router\ \|\|\ true\;\ echo\ ---envoy\ logs---\;\ podman\ logs\ --tail\ 120\ vsr-envoy\ \|\|\ true\;\ echo\ ---router\ inspect\ state---\;\ podman\ inspect\ vsr-router\ --format\ \\"exit=\{\{.State.ExitCode\}\}\ status=\{\{.State.Status\}\}\ error=\{\{.State.Error\}\}\ started=\{\{.State.StartedAt\}\}\ finished=\{\{.State.FinishedAt\}\}\\"\ \|\|\ true\" 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-p1-failure-inspect-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-p1-failure-inspect-.stderr.txt
+stdout_lines=21
+stderr_lines=12
+stdout_bytes=1081
+stderr_bytes=2979

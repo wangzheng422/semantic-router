@@ -1,0 +1,61 @@
+\label{fig:ml_runtimes}
+\end{figure*}
+
+\subsection{Candle Runtime: GPU-Accelerated Classification}
+
+The Candle runtime handles all transformer-based classification tasks, including LoRA adapter loading and inference (\Cref{sec:lora_mom}).
+
+\noindent\textbf{Supported architectures.}
+BERT~\cite{devlin2019bert}, ModernBERT~\cite{warner2024modernbert} (with Flash Attention and GeGLU), mmBERT-32K (YaRN RoPE for 32K context), DeBERTa v3 (NLI), and feed-forward MLPs (model selection).
+
+\noindent\textbf{Optimization features.}
+Flash Attention 2 kernels reduce attention memory from $O(n^2)$ to $O(n)$ and improve throughput.
+Optional Intel MKL integration for CPU deployments.
+LoRA adapter hot-loading enables runtime model updates without restart.
+
+\subsection{ModernBERT-base-32k: Extended Context Window}
+
+The Candle runtime supports ModernBERT-base-32k, extending the context window from 512 tokens (BERT-base) to 32,768 tokens via YaRN (Yet another RoPE extensioN) scaling~\cite{peng2023yarn}.
+This enables signal extraction from long documents and multi-turn conversations that exceed the traditional 512-token limit.
+
+\noindent\textbf{Architecture and scaling.}
+ModernBERT-base-32k uses Rotary Position Embeddings (RoPE) with YaRN scaling to extend the base model's 8,192-token context to 32K tokens.
+The model maintains compatibility with existing LoRA adapters trained on BERT-base, enabling seamless migration without retraining classifier heads.
+Flash Attention 2 provides memory-efficient attention computation, reducing memory requirements from $O(n^2)$ to $O(n)$ for long sequences.
+
+\noindent\textbf{Performance characteristics.}
+Empirical benchmarks on NVIDIA L4 GPU (23GB VRAM) demonstrate reliable performance for context lengths up to 8K tokens:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{1K tokens}: p50 latency $\sim$94\,ms at C=1, $\sim$970\,ms at C=10 (100\% success rate)
+  \item \textbf{4K tokens}: p50 latency $\sim$955\,ms at C=1, $\sim$9,389\,ms at C=10 (93\% success rate, 7 OOM errors)
+  \item \textbf{8K tokens}: p50 latency $\sim$3,525\,ms at C=1, fails at C=10 due to insufficient GPU memory
+\end{itemize}
+For sequences exceeding 32K tokens, automatic chunking with configurable overlap (default 128 tokens) enables processing of arbitrarily long documents while preserving context continuity.
+
+\noindent\textbf{Hardware requirements.}
+Production deployments for 1K--8K tokens require a GPU with $\geq$23GB VRAM (e.g., NVIDIA L4, A10G).
+Full 32K token support and high concurrency (C=50+) require $\geq$40GB VRAM (e.g., NVIDIA A100).
+CPU inference is supported but incurs significant latency penalties ($\sim$45$\times$ slower for 512 tokens).
+
+\noindent\textbf{Backward compatibility.}
+The integration maintains full backward compatibility with existing BERT-base workflows.
+Sequences $\leq$512 tokens exhibit no performance degradation, and existing LoRA adapters (domain classification, PII detection, jailbreak detection) function without modification.
+
+\subsection{Linfa Runtime: CPU ML Inference}
+
+Classical ML model selection algorithms (KNN, KMeans, SVM) are served by the Linfa runtime.
+These algorithms operate on pre-computed feature vectors and do not require GPU acceleration, making Linfa's lightweight CPU implementation ideal.
+
+\noindent\textbf{Training-inference split.}
+Models are trained in Python (scikit-learn, custom implementations) and serialized to JSON.
+The Rust runtime loads serialized models at startup and performs inference-only computation.
+This decouples the training environment (Python, GPU-optional) from the inference environment (Rust, CPU-only), enabling simpler deployment.
+
+\subsection{ONNX Runtime: Efficient Embeddings}
+
+Embedding computation is served by ONNX Runtime, optimized for the mmBERT-Embed-32K model with 2D Matryoshka representation learning~\cite{kusupati2022matryoshka}.
+
+\noindent\textbf{2D Matryoshka trade-offs.}
+The architecture supports two-dimensional quality-latency trade-offs:
+\begin{itemize}[leftmargin=*]
+  \item \textbf{Layer early-exit}: Extract embeddings from intermediate layers (6, 11, 16, or 22 out of 22), achieving $\sim$3--4$\times$ speedup at layer 6 with modest quality degradation.

@@ -1,0 +1,10 @@
+timestamp=2026-06-26T11:43:04+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=./wzh-solution/files/wzh-solution-2026-06-26-11-11/dashboard_runtime_smoke.zsh 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/local-dashboard-runtime-smoke-ui-auth-api-pass-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/local-dashboard-runtime-smoke-ui-auth-api-pass-.stderr.txt
+stdout_lines=36
+stderr_lines=0
+stdout_bytes=2868
+stderr_bytes=0

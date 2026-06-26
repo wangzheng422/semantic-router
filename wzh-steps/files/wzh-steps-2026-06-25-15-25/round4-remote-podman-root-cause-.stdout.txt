@@ -1,0 +1,60 @@
+## podman info storage
+{"configFile":"/var/home/cloud-user/.config/containers/storage.conf","containerStore":{"number":2,"paused":0,"running":0,"stopped":2},"graphDriverName":"overlay","graphOptions":{"overlay.force_mask":"shared","overlay.imagestore":"/usr/lib/containers/storage","overlay.mount_program":{"Executable":"/usr/bin/fuse-overlayfs","Package":"fuse-overlayfs-1.13-1.el9.x86_64","Version":"fusermount3 version: 3.10.2\nfuse-overlayfs: version 1.13-dev\nFUSE library version 3.10.2\nusing FUSE kernel interface version 7.31"}},"graphRoot":"/var/home/cloud-user/.local/share/containers/storage","graphRootAllocated":1097843322880,"graphRootUsed":280437747712,"graphStatus":{"Backing Filesystem":"xfs","Native Overlay Diff":"false","Supports d_type":"true","Supports shifting":"true","Supports volatile":"true","Using metacopy":"false"},"imageCopyTmpDir":"/var/tmp","imageStore":{"number":5},"runRoot":"/run/user/1000/containers","volumePath":"/var/home/cloud-user/.local/share/containers/storage/volumes","transientStore":false}
+
+## storage mounts
+/                                                       overlay                                                                                                              overlay    ro,relatime,seclabel,lowerdir=/run/ostree/.private/cfsroot-lower::/sysroot/ostree/repo/objects,redirect_dir=on,metacopy=on
+| |-/sys/fs/fuse/connections                            fusectl                                                                                                              fusectl    rw,nosuid,nodev,noexec,relatime
+## graphroot
+GraphRoot=/var/home/cloud-user/.local/share/containers/storage RunRoot=/run/user/1000/containers GraphDriver=overlay
+## image inspect vllm
+Id=f37691f675bb82f734f606de8af90e777d3f80a20b120e699fd43fd10e60b8d7 GraphDriver={"Name":"overlay","Data":{"LowerDir":"/var/home/cloud-user/.local/share/containers/storage/overlay/a193ea10c54f785c7edd685c8d2d1ceb379494642361635c60323b01019f1ab3/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/0127ed7d3978996139c0685df4f0a9881e232218671107b239906ba037db8e82/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/69dd1c5c2c68d89ed86912a113b062af87b839bc1785cf20ba6a2c8d663867bd/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/75be1ebe123f657cfb5fdf4cc96bb09f75a4c90625c81f563832d68cb53aa51b/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/a8440149129750a130146faa65fa768550dc9cb57e312dd89bbf502e61d824db/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/5659049e93bf37fe816468b7b3f4397a3e6e258fbc50839daaebc49dd3226e32/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/8ce91c9faa6ed320f8b617d62938297135f76d144274fdc132cd4539d4ad5db8/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/46eddc0a15625a2a595012c378fe36af8f82e2745699127f7d568680d98ba0f7/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/cda822641bdc660457886f2e54e8eb5939979f6c0f69ea9eedb34d8291f64302/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/9589165ec82c3e3ccae2bea52ca5f189cc61c9abd361783350e2b1d4bb7aa195/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/a7cdd6a91f0bba4c426f3470326c9a5c251a3b4e0735a0840a9f5ea057471368/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/f59682c58b3f06e57f90f60296e7e9fef2fc9c64295ecff20e5d2393b42290d2/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/688bd3738026ed3fe42bae918c368f899f4591a4c54e573ba27cc1f3a6a68871/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/8f37649844f1b1e8ae02eb707147071e8cee15e210c4f19aff7dea23e2d8b86d/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/1537f9f386c269e9a641527a57f2e618772d4a860f322b417efe4b1c968f3175/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/d8768fb9df215e9be03bcdab9ed4374e2a2637ec69ef0c98e4bd00cdbad696f8/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/1ac3b95c8a6f4b01e4ab4375b4e7c7aa88135f4dfbebf6615d108b30bbd5be15/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/e511333a8f14e1a68e8b4241f87f8d45e06358bb35dc589672e8a51b73747efd/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/57c7240cef1387f38a86d419ade59932f691a17f80b1f79c5e68e28d78ab1ceb/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/3561d236958449b6fef817574fb9e93172279ab910ef4dba08d2013a07ce300a/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/5cd152de35bb761248e0c15fabcc0242679e643af3fa2381a870165a73aaf753/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/41e90628d7599103f18865012b8bc0faa5f73abfb127d5d224ba67fc797851fd/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/3682edb76f3f6072d97a1b5fd75420888f6d0d7f5d9bb6b91ec7f5a7e725a0c9/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/202f1636dbb81f679f5cca9ac687068237b7e2473646493047e68ae066337d71/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/d6929fdf7f8019179451631e34a8ed90b19d39c01d15f6d4175a48220f6ee696/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/98d1dba7e123f409fcf5d3d80a8a397c86582226d0c86cd5ffaf8633c1429a64/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/e4713881abd21e133feb07e518d7a8e119dafc90f8930521da8b6f10839701ae/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/84a3470cce02e53e8f4929bab8022a77bd5905fe11962b1c5a2eae8c53cc500f/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/d8b5209070df534c443f291ad3dfb331d7d0ed65c4d4c44cfec4a12fe5b1b8b8/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/49101da417f2cbabbb7529369d66bbc5959449985e7bcbbeb99f50c80e8d0809/diff:/var/home/cloud-user/.local/share/containers/storage/overlay/767e56ba346ae714b6e6b816baa839051145ed78cfa0e4524a86cc287b0c4b00/diff","UpperDir":"/var/home/cloud-user/.local/share/containers/storage/overlay/8d8a7b790416f495ad09d55c52dc3c28278493f48a18827cc6db4aedef6222fc/diff","WorkDir":"/var/home/cloud-user/.local/share/containers/storage/overlay/8d8a7b790416f495ad09d55c52dc3c28278493f48a18827cc6db4aedef6222fc/work"}}
+## minimal python image
+3.12.13 (main, Jun 24 2026, 02:08:01) [GCC 14.2.0]
+['tmpfiles.d', 'ssl', 'mime', 'systemd', 'x86_64-linux-gnu']
+python_exit=0
+## vllm image python minimal
+3.12.13 (main, Mar  4 2026, 09:23:07) [GCC 11.4.0]
+vllm_python_exit=0
+## recent kernel
+[Thu Jun 25 07:15:55 2026] Command line: BOOT_IMAGE=(hd0,gpt3)/boot/ostree/default-b2434d92e30cf25544ea6bd8b9bcb409987f999557e230fa58b147c833c424ac/vmlinuz-5.14.0-427.65.1.el9_4.x86_64 root=UUID=fce2ba6a-68ac-4703-8826-f8caa41b1c0d rw boot=UUID=3430bd2e-2342-4dfc-9cad-7bf32524ecdb console=tty0 console=ttyS0,115200n8 net.ifnames=0 nvme_core.io_timeout=4294967295 rw console=tty0 console=ttyS0 console=ttyS0,115200n8 net.ifnames=0 nvme_core.io_timeout=4294967295 ostree=/ostree/boot.1/default/b2434d92e30cf25544ea6bd8b9bcb409987f999557e230fa58b147c833c424ac/0
+[Thu Jun 25 07:15:55 2026] Kernel command line: BOOT_IMAGE=(hd0,gpt3)/boot/ostree/default-b2434d92e30cf25544ea6bd8b9bcb409987f999557e230fa58b147c833c424ac/vmlinuz-5.14.0-427.65.1.el9_4.x86_64 root=UUID=fce2ba6a-68ac-4703-8826-f8caa41b1c0d rw boot=UUID=3430bd2e-2342-4dfc-9cad-7bf32524ecdb console=tty0 console=ttyS0,115200n8 net.ifnames=0 nvme_core.io_timeout=4294967295 rw console=tty0 console=ttyS0 console=ttyS0,115200n8 net.ifnames=0 nvme_core.io_timeout=4294967295 ostree=/ostree/boot.1/default/b2434d92e30cf25544ea6bd8b9bcb409987f999557e230fa58b147c833c424ac/0
+[Thu Jun 25 07:16:02 2026] fuse: init (API version 7.36)
+[Thu Jun 25 07:16:03 2026] nvme nvme0: pci function 0000:00:04.0
+[Thu Jun 25 07:16:03 2026] nvme nvme2: pci function 0000:33:00.0
+[Thu Jun 25 07:16:03 2026] nvme 0000:33:00.0: enabling device (0000 -> 0002)
+[Thu Jun 25 07:16:03 2026] nvme nvme1: pci function 0000:35:00.0
+[Thu Jun 25 07:16:03 2026] nvme 0000:35:00.0: enabling device (0000 -> 0002)
+[Thu Jun 25 07:16:03 2026] nvme nvme3: pci function 0000:36:00.0
+[Thu Jun 25 07:16:03 2026] nvme 0000:36:00.0: enabling device (0000 -> 0002)
+[Thu Jun 25 07:16:03 2026] nvme nvme4: pci function 0000:34:00.0
+[Thu Jun 25 07:16:03 2026] nvme 0000:34:00.0: enabling device (0000 -> 0002)
+[Thu Jun 25 07:16:03 2026] nvme nvme0: 2/0/0 default/read/poll queues
+[Thu Jun 25 07:16:03 2026]  nvme0n1: p1 p2 p3 p4
+[Thu Jun 25 07:16:03 2026] nvme nvme1: 31/0/0 default/read/poll queues
+[Thu Jun 25 07:16:03 2026] nvme nvme2: 31/0/0 default/read/poll queues
+[Thu Jun 25 07:16:03 2026] nvme nvme4: 31/0/0 default/read/poll queues
+[Thu Jun 25 07:16:03 2026] nvme nvme3: 31/0/0 default/read/poll queues
+[Thu Jun 25 07:16:04 2026] SGI XFS with ACLs, security attributes, scrub, quota, no debug enabled
+[Thu Jun 25 07:16:04 2026] XFS (nvme0n1p4): Mounting V5 Filesystem fce2ba6a-68ac-4703-8826-f8caa41b1c0d
+[Thu Jun 25 07:16:05 2026] XFS (nvme0n1p4): Ending clean mount
+[Thu Jun 25 07:16:05 2026] overlayfs: empty lowerdir
+[Thu Jun 25 07:16:05 2026] overlayfs: using the lowest 1 of 2 lowerdirs as data layers
+[Thu Jun 25 07:16:06 2026] systemd[1]: Starting Load Kernel Module fuse...
+[Thu Jun 25 07:16:08 2026] XFS (nvme0n1p3): Mounting V5 Filesystem 3430bd2e-2342-4dfc-9cad-7bf32524ecdb
+[Thu Jun 25 07:16:08 2026] XFS (nvme0n1p3): Ending clean mount
+[Thu Jun 25 07:31:07 2026] XFS (nvme1n1): Mounting V5 Filesystem 2a6fa1ab-e8c1-42e9-8255-bc2d3025b2c3
+[Thu Jun 25 07:31:07 2026] XFS (nvme1n1): Ending clean mount
+[Thu Jun 25 07:33:02 2026] podman1: port 1(veth0) entered blocking state
+[Thu Jun 25 07:33:02 2026] podman1: port 1(veth0) entered disabled state
+[Thu Jun 25 07:33:02 2026] podman1: port 1(veth0) entered blocking state
+[Thu Jun 25 07:33:02 2026] podman1: port 1(veth0) entered forwarding state
+[Thu Jun 25 07:33:34 2026] podman1: port 2(veth1) entered blocking state
+[Thu Jun 25 07:33:34 2026] podman1: port 2(veth1) entered disabled state
+[Thu Jun 25 07:33:34 2026] podman1: port 2(veth1) entered blocking state
+[Thu Jun 25 07:33:34 2026] podman1: port 2(veth1) entered forwarding state
+[Thu Jun 25 07:33:46 2026] podman1: port 1(veth0) entered disabled state
+[Thu Jun 25 07:33:46 2026] podman1: port 1(veth0) entered disabled state
+[Thu Jun 25 07:33:46 2026] podman1: port 2(veth1) entered disabled state
+[Thu Jun 25 07:33:46 2026] podman1: port 2(veth1) entered disabled state
+## container inspect 2b
+State={"OciVersion":"1.1.0+dev","Status":"exited","Running":false,"Paused":false,"Restarting":false,"OOMKilled":false,"Dead":false,"Pid":0,"ExitCode":135,"Error":"","StartedAt":"2026-06-25T07:33:33.87045633Z","FinishedAt":"2026-06-25T07:33:46.306826988Z","Health":{"Status":"","FailingStreak":0,"Log":null},"CheckpointedAt":"0001-01-01T00:00:00Z","RestoredAt":"0001-01-01T00:00:00Z"} Mounts=[{"Type":"bind","Source":"/var/mnt/semantic-router-bench/hf-cache","Destination":"/data/hf-cache","Driver":"","Mode":"","Options":["rbind"],"RW":true,"Propagation":"rprivate"},{"Type":"bind","Source":"/var/mnt/semantic-router-bench/logs","Destination":"/logs","Driver":"","Mode":"","Options":["rbind"],"RW":true,"Propagation":"rprivate"}]

@@ -1,0 +1,59 @@
+    1567 wzh-solution/wzh-solution-2026.06.25.19.50.md
+     182 wzh-steps/wzh-steps-2026.06.25.19.50.md
+    1749 total
+1:# Semantic Router 从入门到精通：从简单路由、模型选择算法到融合配置的完整中文报告
+14:## 0. 先给总答案
+47:## 1. 先建立 mental model
+83:## 2. 流量到底怎么走
+135:## 3. 配置文件的骨架
+182:## 4. 入门：最简单的 keyword/default 路由
+270:### 4.1 priority 是入门阶段最容易踩的坑
+280:### 4.2 default-small 和 default-large 的区别
+320:## 5. 入门配置下的多轮对话
+347:## 6. guidellm 压测怎么看
+376:## 7. 进阶：多 signal 路由
+419:### 7.1 多 signal 配置的 decision 风格
+480:### 7.2 projection 是什么
+521:### 7.3 多 signal 实测结果
+545:## 8. 模型选择算法：decision 命中后再选模型
+551:### 8.1 没有 algorithm 时发生什么
+577:### 8.2 decision.algorithm 和 global.router.model_selection 的关系
+606:### 8.3 本次跑通的算法
+630:### 8.4 RouterDC
+663:### 8.5 AutoMix
+694:### 8.6 Hybrid
+738:### 8.7 MultiFactor
+774:### 8.8 LatencyAware
+788:### 8.9 Elo 和 Session-Aware 当前版本差异
+801:## 9. 信号命中成本：到底有没有调用小模型
+805:### 9.1 最便宜的一层：CPU/内存规则
+819:### 9.2 中等成本：router-local embedding/classifier
+839:### 9.3 最贵的一层：后端 LLM 生成
+866:## 10. 融合配置方法一：多 signal、多 decision、直接绑定模型
+919:## 11. 融合配置方法二：多 signal 先命中，再用 Hybrid 选模型
+1025:### 11.1 fused 实测结果
+1052:### 11.2 为什么复杂请求有时仍选 2B
+1076:## 12. 两种融合方法怎么选
+1107:## 13. 多轮对话和主题转换
+1146:### 13.1 cache affinity 和 model switch gate
+1159:## 14. OpenAI SDK raw input 在哪里
+1194:## 15. Chat template 是什么
+1239:## 16. 配置项逐个解释
+1241:### 16.1 providers.defaults
+1261:### 16.2 providers.models
+1283:### 16.3 routing.modelCards
+1305:### 16.4 signals.keywords
+1324:### 16.5 signals.embeddings
+1343:### 16.6 signals.context
+1358:### 16.7 signals.structure
+1378:### 16.8 role_bindings/authz
+1391:### 16.9 jailbreak 和 PII
+1416:### 16.10 conversation/reask/user_feedback
+1441:## 17. 生产落地路线
+1445:### 17.1 第一步：只跑 basic
+1465:### 17.2 第二步：加安全和业务硬规则
+1478:### 17.3 第三步：引入算法 selection
+1491:### 17.4 第四步：融合策略
+1522:## 18. 常见误解
+1535:## 19. 证据索引
+1553:## 20. 最短口诀

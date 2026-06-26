@@ -1,0 +1,40 @@
+[
+  {
+    "tool": {
+      "type": "function",
+      "function": {
+        "name": "get_weather",
+        "description": "Get current weather information for a location",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "location": {"type": "string"}
+          },
+          "required": ["location"]
+        }
+      }
+    },
+    "description": "weather temperature forecast city location",
+    "category": "weather",
+    "tags": ["weather", "forecast"]
+  },
+  {
+    "tool": {
+      "type": "function",
+      "function": {
+        "name": "calculate",
+        "description": "Perform arithmetic calculations",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "expression": {"type": "string"}
+          },
+          "required": ["expression"]
+        }
+      }
+    },
+    "description": "math arithmetic calculate expression",
+    "category": "math",
+    "tags": ["math", "calculation"]
+  }
+]

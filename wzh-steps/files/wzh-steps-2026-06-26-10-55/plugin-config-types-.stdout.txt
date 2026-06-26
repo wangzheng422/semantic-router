@@ -1,0 +1,97 @@
+src/semantic-router/pkg/dsl/compiler_plugins.go:18:		return c.buildDecisionPlugin(tmpl.PluginType, mergedFields)
+src/semantic-router/pkg/dsl/ast_json.go:156:	PluginType string     `json:"pluginType"`
+src/semantic-router/pkg/dsl/ast_json.go:335:			PluginType: plugin.PluginType,
+src/semantic-router/pkg/dsl/parser.go:407:		PluginType: normalizePluginName(r.PluginType),
+src/semantic-router/pkg/dsl/privacy_recipe_roundtrip_test.go:52:		if dec.GetToolsConfig() != nil {
+src/semantic-router/pkg/dsl/privacy_recipe_roundtrip_test.go:86:		left := dec.GetToolsConfig()
+src/semantic-router/pkg/dsl/privacy_recipe_roundtrip_test.go:87:		right := cfg2.Decisions[i].GetToolsConfig()
+src/semantic-router/pkg/config/config_test.go:2579:	It("should replace global config and reflect via GetConfig", func() {
+src/semantic-router/pkg/config/config_test.go:3356:	Describe("Decision.GetMemoryConfig", func() {
+src/semantic-router/pkg/config/config_test.go:3365:			Expect(decision.GetMemoryConfig()).To(BeNil())
+src/semantic-router/pkg/config/config_test.go:3384:			memConfig := decision.GetMemoryConfig()
+src/semantic-router/pkg/config/config_test.go:3406:			memConfig := decision.GetMemoryConfig()
+src/semantic-router/pkg/dsl/dsl_test.go:325:	if pd.Name != "my_hallu" || pd.PluginType != "hallucination" {
+src/semantic-router/pkg/dsl/dsl_test.go:326:		t.Errorf("expected my_hallu/hallucination, got %s/%s", pd.Name, pd.PluginType)
+src/semantic-router/pkg/dsl/dsl_test.go:1275:func TestNegativeCompileUnknownPluginType(t *testing.T) {
+src/semantic-router/pkg/dsl/dsl_test.go:1763:func TestCompileAllPluginTypes(t *testing.T) {
+src/semantic-router/pkg/config/image_gen_plugin.go:286:type ImageGenPluginConfig struct {
+src/semantic-router/pkg/config/image_gen_plugin.go:377:// GetImageGenConfig returns the image generation plugin configuration for a decision
+src/semantic-router/pkg/config/image_gen_plugin.go:378:func (d *Decision) GetImageGenConfig() *ImageGenPluginConfig {
+src/semantic-router/pkg/config/fragment_catalog_test.go:55:	for _, pluginType := range SupportedDecisionPluginTypes() {
+src/semantic-router/pkg/dsl/decompiler_plugin_emit.go:10:type typedPluginConfigEmitter func(*strings.Builder, *config.DecisionPlugin)
+src/semantic-router/pkg/dsl/validator.go:261:		if !v.pluginNames[pr.Name] && !isInlinePluginType(pr.Name) {
+src/semantic-router/pkg/dsl/validator.go:264:				fmt.Sprintf("Plugin %q is not defined as a template and is not a recognized inline plugin type. Supported inline types: system_prompt, semantic_cache, hallucination, memory, rag, tools, image_gen, fast_response, request_params, router_replay, header_mutation, response_jailbreak. Define a template with PLUGIN %s <type> { ... } or use a supported type", pr.Name, pr.Name),
+src/semantic-router/pkg/dsl/validator.go:369:// isInlinePluginType returns true if the name is a recognized inline plugin type.
+src/semantic-router/pkg/dsl/validator.go:370:func isInlinePluginType(name string) bool {
+src/semantic-router/pkg/dsl/validator.go:371:	return config.IsSupportedDecisionPluginType(name)
+src/semantic-router/pkg/dsl/ast.go:181:	PluginType string        `parser:"@Ident"`
+src/semantic-router/pkg/dsl/ast.go:438:	PluginType string
+src/semantic-router/pkg/dsl/taxonomy_dsl_test.go:111:	toolsCfg := cfg.Decisions[0].GetToolsConfig()
+src/semantic-router/pkg/dsl/taxonomy_dsl_test.go:238:		cfg := cfg.Decisions[index].GetToolsConfig()
+src/semantic-router/pkg/dsl/taxonomy_dsl_test.go:282:	toolsCfg := cfg.Decisions[0].GetToolsConfig()
+src/semantic-router/pkg/config/tool_selection_plugin.go:10:type ToolSelectionPluginConfig struct {
+src/semantic-router/pkg/config/tool_selection_plugin.go:27:func (d *Decision) GetToolSelectionConfig() *ToolSelectionPluginConfig {
+src/semantic-router/pkg/config/routing_surface_catalog.go:41:var supportedDecisionPluginTypes = []string{
+src/semantic-router/pkg/config/routing_surface_catalog.go:109:func SupportedDecisionPluginTypes() []string {
+src/semantic-router/pkg/config/routing_surface_catalog.go:110:	return cloneSortedStrings(supportedDecisionPluginTypes)
+src/semantic-router/pkg/config/routing_surface_catalog.go:113:func NormalizeDecisionPluginType(pluginType string) string {
+src/semantic-router/pkg/config/routing_surface_catalog.go:120:func IsSupportedDecisionPluginType(pluginType string) bool {
+src/semantic-router/pkg/config/routing_surface_catalog.go:121:	normalized := NormalizeDecisionPluginType(pluginType)
+src/semantic-router/pkg/config/routing_surface_catalog.go:122:	for _, candidate := range supportedDecisionPluginTypes {
+src/semantic-router/pkg/config/reference_config_routing_surface_test.go:72:func assertSupportedPluginsInReferenceConfig(t testingT, decisions []interface{}) {
+src/semantic-router/pkg/config/reference_config_routing_surface_test.go:74:	for _, pluginType := range SupportedDecisionPluginTypes() {
+src/semantic-router/pkg/config/tools_plugin.go:24:type ToolsPluginConfig struct {
+src/semantic-router/pkg/config/tools_plugin.go:82:// GetToolsConfig returns the tools plugin configuration.
+src/semantic-router/pkg/config/tools_plugin.go:83:func (d *Decision) GetToolsConfig() *ToolsPluginConfig {
+src/semantic-router/pkg/config/reference_config_contract_test.go:46:	assertSupportedPluginsInReferenceConfig(t, decisions)
+src/semantic-router/pkg/config/validator_decision.go:113:		if toolsCfg := decision.GetToolsConfig(); toolsCfg != nil {
+src/semantic-router/pkg/config/validator_decision.go:118:		if tsCfg := decision.GetToolSelectionConfig(); tsCfg != nil {
+src/semantic-router/pkg/config/validator_decision.go:124:		if imageGenCfg := decision.GetImageGenConfig(); imageGenCfg != nil {
+src/semantic-router/pkg/config/validator_decision.go:140:	ragCfg := decision.GetRAGConfig()
+src/semantic-router/pkg/config/validator_decision.go:147:	cacheCfg := decision.GetSemanticCacheConfig()
+src/semantic-router/pkg/config/validator_decision.go:148:	memCfg := decision.GetMemoryConfig()
+src/semantic-router/pkg/config/loader.go:464:func Get() *RouterConfig {
+src/semantic-router/pkg/config/canonical_loader_test.go:506:func TestGetModelPricingResolvesProviderModelIDFromCanonicalConfig(t *testing.T) {
+src/semantic-router/pkg/config/canonical_loader_test.go:560:func TestGetModelPricingTreatsExplicitZeroPricingAsConfigured(t *testing.T) {
+src/semantic-router/pkg/config/rag_plugin.go:6:type RAGPluginConfig struct {
+src/semantic-router/pkg/config/rag_plugin.go:60:// GetRAGConfig returns the RAG plugin configuration for a decision
+src/semantic-router/pkg/config/rag_plugin.go:61:func (d *Decision) GetRAGConfig() *RAGPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:20:type SemanticCachePluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:27:type MemoryPluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:38:type FastResponsePluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:44:type RequestParamsPluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:56:type SystemPromptPluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:63:type HeaderMutationPluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:76:type ResponseJailbreakPluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:83:type HallucinationPluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:92:type RouterReplayPluginConfig struct {
+src/semantic-router/pkg/config/plugin_config.go:135:// GetSemanticCacheConfig returns the semantic-cache plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:136:func (d *Decision) GetSemanticCacheConfig() *SemanticCachePluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:141:// GetSystemPromptConfig returns the system_prompt plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:142:func (d *Decision) GetSystemPromptConfig() *SystemPromptPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:147:// GetHeaderMutationConfig returns the header_mutation plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:148:func (d *Decision) GetHeaderMutationConfig() *HeaderMutationPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:153:// GetHallucinationConfig returns the hallucination plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:154:func (d *Decision) GetHallucinationConfig() *HallucinationPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:159:// GetResponseJailbreakConfig returns the response_jailbreak plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:160:func (d *Decision) GetResponseJailbreakConfig() *ResponseJailbreakPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:165:// GetRouterReplayConfig returns the router_replay plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:166:func (d *Decision) GetRouterReplayConfig() *RouterReplayPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:171:// GetMemoryConfig returns the memory plugin config, or nil to use global config.
+src/semantic-router/pkg/config/plugin_config.go:172:func (d *Decision) GetMemoryConfig() *MemoryPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:177:// GetFastResponseConfig returns the fast_response plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:178:func (d *Decision) GetFastResponseConfig() *FastResponsePluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:183:// GetRequestParamsConfig returns the request_params plugin configuration.
+src/semantic-router/pkg/config/plugin_config.go:184:func (d *Decision) GetRequestParamsConfig() *RequestParamsPluginConfig {
+src/semantic-router/pkg/config/plugin_config.go:196:	ragConfig := decision.GetRAGConfig()
+src/semantic-router/pkg/config/plugin_config.go:210:	memConfig := decision.GetMemoryConfig()
+src/semantic-router/pkg/config/taxonomy_config_test.go:486:	cfg := got.GetToolsConfig()
+src/semantic-router/pkg/config/helper.go:12:func (rc *RouterConfig) GetModelReasoningFamily(modelName string) *ReasoningFamilyConfig {
+src/semantic-router/pkg/config/helper.go:291:// GetPromptGuardConfig returns the prompt guard configuration
+src/semantic-router/pkg/config/helper.go:292:func (c *RouterConfig) GetPromptGuardConfig() PromptGuardConfig {
+src/semantic-router/pkg/config/helper.go:407:	config := d.GetSystemPromptConfig()
+src/semantic-router/pkg/config/helper.go:421:	config := d.GetSystemPromptConfig()
+src/semantic-router/pkg/config/helper.go:454:		config := decision.GetSemanticCacheConfig()
+src/semantic-router/pkg/config/helper.go:468:		config := decision.GetSemanticCacheConfig()
+src/semantic-router/pkg/config/helper.go:483:		config := decision.GetSemanticCacheConfig()
+src/semantic-router/pkg/config/module_runtime_helpers.go:44:		halConfig := decision.GetHallucinationConfig()

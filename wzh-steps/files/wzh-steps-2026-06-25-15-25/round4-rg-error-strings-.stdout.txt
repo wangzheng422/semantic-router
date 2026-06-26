@@ -1,0 +1,240 @@
+deploy/operator/controllers/canonical_config_spec_test.go:135:								"type": "session_aware",
+deploy/operator/controllers/canonical_config_spec_test.go:136:								"session_aware": {
+deploy/operator/controllers/canonical_config_spec_test.go:178:							"type": "session_aware",
+deploy/operator/controllers/canonical_config_spec_test.go:179:							"session_aware": {
+deploy/operator/controllers/canonical_config_spec_test.go:199:	if algorithm == nil || algorithm.Type != "session_aware" || algorithm.SessionAware == nil {
+deploy/operator/controllers/canonical_config_spec_test.go:200:		t.Fatalf("expected session_aware algorithm to survive typed decision conversion, got %#v", algorithm)
+deploy/operator/controllers/canonical_config_spec_test.go:293:	if decision.Algorithm == nil || decision.Algorithm.Type != "session_aware" || decision.Algorithm.SessionAware == nil {
+deploy/operator/controllers/canonical_config_spec_test.go:294:		t.Fatalf("expected session_aware algorithm, got %#v", decision.Algorithm)
+config/README.md:26:- `decision.algorithm.type=session_aware` wraps a base selector with agentic session policy: tool loops and non-portable provider-state continuations stay on the current model, decision drift and idle boundaries can reselect, non-idle sessions pay handoff, switch-history, confidence-gated remaining-turn-prior, and input checkout prefix-cache costs before switching, and router replay records the full policy trace for experiments. Cache-cost multipliers must be neutral-or-stricter (`max_cache_cost_multiplier >= 1`) and remaining-turn horizons must be positive.
+config/README.md:51:- `selection/`: candidate-selection policies such as `elo`, `router_dc`, `automix`, `session_aware`, and `latency_aware`
+config/algorithm/selection/session-aware.yaml:2:  type: session_aware
+config/algorithm/selection/session-aware.yaml:3:  session_aware:
+deploy/operator/api/v1alpha1/semanticrouter_types_test.go:499:					"type": "session_aware",
+deploy/operator/api/v1alpha1/semanticrouter_types_test.go:500:					"session_aware": {"base_method": "hybrid"}
+deploy/operator/api/v1alpha1/semanticrouter_types_test.go:513:		!strings.Contains(serialized, `"session_aware"`) {
+deploy/operator/api/v1alpha1/semanticrouter_types_test.go:526:		!strings.Contains(string(decoded.Decisions[0].Algorithm.Raw), "session_aware") {
+deploy/operator/api/v1alpha1/semanticrouter_types.go:1246:	// a router-owned object so supported algorithms such as session_aware can
+config/config.yaml:1092:        type: session_aware
+config/config.yaml:1093:        session_aware:
+config/config.yaml:1335:    model_selection:
+config/config.yaml:1369:      session_aware:
+src/vllm-sr/cli/validator.py:84:                "legacy latency config is no longer supported; use decision.algorithm.type=latency_aware and remove conditions.type=latency",
+src/vllm-sr/cli/validator.py:154:        "session_aware": "session_aware",
+src/vllm-sr/cli/validator.py:185:        if algorithm.session_aware is not None:
+src/vllm-sr/cli/validator.py:186:            configured_blocks.append("session_aware")
+src/vllm-sr/cli/validator.py:544:    knn, kmeans, svm, mlp, multi_factor, latency_aware, session_aware,
+src/vllm-sr/cli/validator.py:568:        "session_aware",
+src/vllm-sr/cli/algorithms.py:381:       - "session_aware": Agentic long-horizon routing with router-owned session memory
+src/vllm-sr/cli/algorithms.py:393:    #            "rl_driven", "gmtrouter", "latency_aware", "session_aware")
+src/vllm-sr/cli/algorithms.py:408:    session_aware: SessionAwareSelectionConfig | None = None
+src/vllm-sr/tests/test_latency_validation.py:75:        "legacy latency config is no longer supported" in str(error) for error in errors
+src/vllm-sr/cli/commands/runtime.py:212:    "latency_aware, knn, kmeans, svm, mlp, multi_factor, rl_driven, gmtrouter, or session_aware. "
+src/vllm-sr/tests/test_algorithm_config.py:49:            "session_aware",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:29:    "session_aware",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:39:    "knn": "  Tip: Configure global.router.model_selection.ml.knn for trained KNN routing",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:40:    "kmeans": "  Tip: Configure global.router.model_selection.ml.kmeans for cluster routing",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:41:    "svm": "  Tip: Configure global.router.model_selection.ml.svm for trained SVM routing",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:42:    "mlp": "  Tip: Configure global.router.model_selection.ml.mlp for trained MLP routing",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:44:    "session_aware": "  Tip: Preserve agentic continuity with decision.algorithm.session_aware",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:60:    "session_aware",
+src/vllm-sr/cli/commands/runtime_config_mutation.py:72:    "session_aware": "session_aware",
+src/vllm-sr/tests/test_config_file_loaders.py:121:def test_parse_user_config_rejects_removed_session_aware_fallback_method(
+src/vllm-sr/tests/test_config_file_loaders.py:128:        "type": "session_aware",
+src/vllm-sr/tests/test_config_file_loaders.py:129:        "session_aware": {"fallback_method": "static"},
+src/vllm-sr/cli/commands/runtime_help.py:30:session_aware - Agentic stay-vs-switch policy for long sessions
+src/vllm-sr/cli/commands/runtime_help.py:52:    vllm-sr serve --algorithm session_aware
+deploy/operator/config/crd/bases/vllm.ai_semanticrouters.yaml:1191:                            a router-owned object so supported algorithms such as session_aware can
+src/vllm-sr/tests/test_cli_main.py:73:    assert "session_aware" in result.output
+src/vllm-sr/cli/parser.py:101:            "Deprecated config fields are no longer supported: "
+src/semantic-router/pkg/modelselection/trainer.go:30:// IMPORTANT: This order MUST match Python training: src/training/model_selection/ml_model_selection/data_loader.py
+src/vllm-sr/cli/config_migration.py:566:        "model_selection",
+deploy/openshift/demo/demo-semantic-router.py:221:def test_model_selection(envoy_url: str):
+deploy/openshift/demo/demo-semantic-router.py:524:            test_model_selection(envoy_url)
+deploy/openshift/demo/demo-semantic-router.py:535:            test_model_selection(envoy_url)
+src/semantic-router/pkg/modelruntime/router_runtime.go:340:		"model_selection": mlSelectionNeedsBatched,
+src/semantic-router/pkg/modelselection/README.md:14:> cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/README.md:49:│  Training is done in Python: src/training/model_selection/ml_model_selection/       │
+src/semantic-router/pkg/modelselection/README.md:146:model_selection:
+src/semantic-router/pkg/modelselection/README.md:180:src/training/model_selection/ml_model_selection/         # Training and validation scripts
+src/semantic-router/pkg/modelselection/README.md:689:cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/README.md:940:    model_selection:
+src/semantic-router/pkg/modelselection/README.md:1026:> See `src/training/model_selection/ml_model_selection/` for the full training pipeline.
+src/semantic-router/pkg/modelselection/README.md:1032:cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/README.md:1046:cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/selector.go:31:// Training is done in Python (src/training/model_selection/ml_model_selection/).
+src/semantic-router/pkg/modelselection/selector.go:597:// See: src/training/model_selection/ml_model_selection/train.py
+src/semantic-router/pkg/modelselection/selector.go:605:	// Training is now done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:607:	logging.Warnf("KNN training in Go is deprecated. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/pkg/modelselection/selector.go:721:// See: src/training/model_selection/ml_model_selection/train.py
+src/semantic-router/pkg/modelselection/selector.go:729:	// Training is now done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:731:	logging.Warnf("KMeans training in Go is deprecated. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/pkg/modelselection/selector.go:842:// See: src/training/model_selection/ml_model_selection/train.py
+src/semantic-router/pkg/modelselection/selector.go:850:	// Training is now done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:852:	logging.Warnf("SVM training in Go is deprecated. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/pkg/modelselection/selector.go:969:	// Training is done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:970:	logging.Warnf("MLP training in Go is not supported. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/cmd/main.go:195:		"model_selection":     cfg.ModelSelection.Enabled,
+src/semantic-router/pkg/modelselection/persistence.go:732:	return "models/model_selection"
+src/semantic-router/pkg/modelselection/persistence.go:737:	return "data/model_selection"
+deploy/helm/semantic-router/values.yaml:471:#       model_selection:
+deploy/helm/semantic-router/values.yaml:4476:      model_selection:
+deploy/helm/semantic-router/values.yaml:9894:      model_selection:
+src/semantic-router/pkg/config/decision_config.go:75:	SessionAware *SessionAwareSelectionConfig `yaml:"session_aware,omitempty"`
+src/semantic-router/pkg/config/decision_config.go:92:	// lives at src/training/model_selection/rl_model_selection/automix_verifier.py.
+src/semantic-router/pkg/config/reference_config_routing_surface_test.go:57:	assertMapCoversStructFields(t, mustMapAt(t, algorithmsByType["session_aware"], "session_aware"), reflect.TypeOf(SessionAwareSelectionConfig{}), "routing.decisions[].algorithm.session_aware")
+src/semantic-router/pkg/k8s/testdata/output/04-domain-only.yaml:93:    model_selection: {}
+src/semantic-router/pkg/looper/confidence.go:305:// src/training/model_selection/rl_model_selection/automix_verifier.py).
+src/semantic-router/pkg/k8s/testdata/output/14-domain-embedding-plugin.yaml:79:    model_selection: {}
+src/semantic-router/pkg/config/config.go:207:	ModelSelection  ModelSelectionConfig `yaml:"model_selection,omitempty"`
+src/semantic-router/pkg/k8s/testdata/output/16-keyword-embedding-domain-no-plugin.yaml:121:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/07-domain-embedding.yaml:93:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/12-keyword-embedding-plugin.yaml:81:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/15-keyword-embedding-domain-plugin.yaml:147:    model_selection: {}
+src/semantic-router/pkg/extproc/req_filter_classification.go:133:	if method == selection.MethodSessionAware && algorithm != nil && algorithm.SessionAware != nil {
+src/semantic-router/pkg/extproc/req_filter_classification.go:160:	if r.ModelSelector != nil && cfg.BaseMethod != "" && cfg.BaseMethod != selection.MethodSessionAware {
+src/semantic-router/pkg/extproc/req_filter_classification.go:174:	if method == selection.MethodSessionAware || result.Method == selection.MethodSessionAware {
+src/semantic-router/pkg/extproc/req_filter_classification.go:452:	eloSelector, ok := r.ModelSelector.Get(selection.MethodElo)
+src/semantic-router/pkg/k8s/testdata/output/11-domain-plugin.yaml:69:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/02-keyword-only.yaml:87:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/05-keyword-embedding.yaml:93:    model_selection: {}
+src/semantic-router/pkg/extproc/req_filter_classification_runtime.go:17:	"elo":           selection.MethodElo,
+src/semantic-router/pkg/extproc/req_filter_classification_runtime.go:24:	"session_aware": selection.MethodSessionAware,
+src/semantic-router/pkg/k8s/testdata/output/10-embedding-plugin.yaml:69:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/03-embedding-only.yaml:88:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/06-keyword-domain.yaml:99:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/13-keyword-domain-plugin.yaml:82:    model_selection: {}
+src/semantic-router/pkg/extproc/router_replay_aggregate_test.go:61:	modelSelection := body["model_selection"].([]interface{})
+src/semantic-router/pkg/extproc/router_replay_aggregate_test.go:63:		t.Fatalf("expected alphabetical tie-breaker for model_selection, got %#v", got)
+src/semantic-router/pkg/selection/router_r1_client.go:33:// Requires external server: src/training/rl_model_selection/router_r1_server.py
+src/semantic-router/pkg/config/fragment_catalog_test.go:43:		"session_aware": filepath.Join("selection", "session-aware.yaml"),
+src/semantic-router/pkg/k8s/testdata/output/01-basic.yaml:104:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/08-keyword-embedding-domain.yaml:105:    model_selection: {}
+src/semantic-router/pkg/extproc/router_replay_aggregate.go:16:	ModelSelection       []routerReplayAggregateValue      `json:"model_selection"`
+src/semantic-router/pkg/k8s/testdata/output/09-keyword-plugin.yaml:68:    model_selection: {}
+src/semantic-router/pkg/selection/selector_test.go:101:			if result.Method != MethodElo {
+src/semantic-router/pkg/selection/selector_test.go:102:				t.Errorf("expected method %s, got %s", MethodElo, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:339:	registry.Register(MethodElo, NewEloSelector(nil))
+src/semantic-router/pkg/selection/selector_test.go:343:	eloSelector, ok := registry.Get(MethodElo)
+src/semantic-router/pkg/selection/selector_test.go:369:			expectedMethod: MethodElo,
+src/semantic-router/pkg/k8s/testdata/output/17-embedding-multimodal.yaml:115:    model_selection: {}
+src/semantic-router/pkg/config/routing_surface_catalog.go:78:	{Type: "session_aware", Tier: "supported"},
+src/semantic-router/pkg/config/reference_config_global_test.go:6:	modelSelection := mustMapAt(t, router, "model_selection")
+src/semantic-router/pkg/config/reference_config_global_test.go:11:	assertMapCoversStructFields(t, modelSelection, reflect.TypeOf(ModelSelectionConfig{}), "global.router.model_selection")
+src/semantic-router/pkg/config/reference_config_global_test.go:16:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml"), reflect.TypeOf(MLSelectionConfig{}), "global.router.model_selection.ml")
+src/semantic-router/pkg/config/reference_config_global_test.go:17:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "elo"), reflect.TypeOf(EloSelectionConfig{}), "global.router.model_selection.elo")
+src/semantic-router/pkg/config/reference_config_global_test.go:18:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "router_dc"), reflect.TypeOf(RouterDCSelectionConfig{}), "global.router.model_selection.router_dc")
+src/semantic-router/pkg/config/reference_config_global_test.go:19:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "automix"), reflect.TypeOf(AutoMixSelectionConfig{}), "global.router.model_selection.automix")
+src/semantic-router/pkg/config/reference_config_global_test.go:20:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "hybrid"), reflect.TypeOf(HybridSelectionConfig{}), "global.router.model_selection.hybrid")
+src/semantic-router/pkg/config/reference_config_global_test.go:21:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "session_aware"), reflect.TypeOf(SessionAwareSelectionConfig{}), "global.router.model_selection.session_aware")
+src/semantic-router/pkg/config/reference_config_global_test.go:22:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "model_switch_gate"), reflect.TypeOf(ModelSwitchGateConfig{}), "global.router.model_selection.model_switch_gate")
+src/semantic-router/pkg/config/reference_config_global_test.go:23:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "knn"), reflect.TypeOf(MLKNNConfig{}), "global.router.model_selection.ml.knn")
+src/semantic-router/pkg/config/reference_config_global_test.go:24:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "kmeans"), reflect.TypeOf(MLKMeansConfig{}), "global.router.model_selection.ml.kmeans")
+src/semantic-router/pkg/config/reference_config_global_test.go:25:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "svm"), reflect.TypeOf(MLSVMConfig{}), "global.router.model_selection.ml.svm")
+src/semantic-router/pkg/config/reference_config_global_test.go:26:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "mlp"), reflect.TypeOf(MLMLPConfig{}), "global.router.model_selection.ml.mlp")
+src/semantic-router/pkg/config/reference_config_global_test.go:29:	assertMapCoversStructFields(t, lookupTables, reflect.TypeOf(LookupTableConfig{}), "global.router.model_selection.lookup_tables")
+src/semantic-router/pkg/config/reference_config_global_test.go:30:	assertSliceUnionCoversStructFields(t, mustSliceAt(t, lookupTables, "quality_gaps"), reflect.TypeOf(QualityGapOverride{}), "global.router.model_selection.lookup_tables.quality_gaps")
+src/semantic-router/pkg/config/reference_config_global_test.go:31:	assertSliceUnionCoversStructFields(t, mustSliceAt(t, lookupTables, "handoff_penalties"), reflect.TypeOf(HandoffPenaltyOverride{}), "global.router.model_selection.lookup_tables.handoff_penalties")
+src/semantic-router/pkg/config/reference_config_global_test.go:32:	assertSliceUnionCoversStructFields(t, mustSliceAt(t, lookupTables, "remaining_turn_priors"), reflect.TypeOf(RemainingTurnPriorOverride{}), "global.router.model_selection.lookup_tables.remaining_turn_priors")
+src/semantic-router/pkg/config/taxonomy_config_test.go:276:	if !strings.Contains(err.Error(), "routing.signals.category_kb is no longer supported") {
+src/semantic-router/pkg/dsl/dsl_test.go:1613:			name:     "session_aware",
+src/semantic-router/pkg/dsl/dsl_test.go:1614:			algoType: "session_aware",
+src/semantic-router/pkg/dsl/dsl_test.go:1618:					t.Fatal("expected session_aware config")
+src/semantic-router/pkg/dsl/dsl_test.go:1709:					Type: "session_aware",
+src/semantic-router/pkg/dsl/dsl_test.go:1731:		"ALGORITHM session_aware",
+src/semantic-router/pkg/dsl/dsl_test.go:1757:		t.Fatalf("round-trip session_aware context_portability_hard_lock = %#v", sessionAware)
+src/semantic-router/pkg/selection/selector.go:39:	// MethodElo uses Elo rating system with Bradley-Terry model
+src/semantic-router/pkg/selection/selector.go:41:	MethodElo SelectionMethod = "elo"
+src/semantic-router/pkg/selection/selector.go:96:	// MethodSessionAware wraps a base selector with agentic session policy:
+src/semantic-router/pkg/selection/selector.go:99:	MethodSessionAware SelectionMethod = "session_aware"
+src/semantic-router/pkg/selection/selector.go:189:	// session_aware selection. The flat SessionID remains the shared
+src/semantic-router/pkg/selection/selector.go:230:	// Method is session_aware.
+src/semantic-router/pkg/extproc/req_filter_classification_selection_test.go:167:		Type: "session_aware",
+src/semantic-router/pkg/extproc/req_filter_classification_selection_test.go:181:	if method != string(selection.MethodSessionAware) {
+src/semantic-router/pkg/extproc/req_filter_classification_selection_test.go:182:		t.Fatalf("expected session_aware method, got %q", method)
+src/semantic-router/pkg/config/routing_surface_catalog_test.go:30:			t.Errorf("Previously supported algorithm type %q is no longer supported", algType)
+src/semantic-router/pkg/selection/rl_driven.go:334:	// Requires external Router-R1 server (see src/training/rl_model_selection/router_r1_server.py)
+src/semantic-router/pkg/selection/rl_driven.go:397:	// Requires external server: src/training/rl_model_selection/router_r1_server.py
+src/semantic-router/pkg/selection/rl_driven.go:628:// Requires external server: src/training/rl_model_selection/router_r1_server.py
+src/semantic-router/pkg/dsl/compiler_algorithms.go:41:	"session_aware": func(c *Compiler, algo *config.AlgorithmConfig, fields map[string]Value) {
+src/semantic-router/pkg/config/selection_config.go:18:	SessionAware SessionAwareSelectionConfig `yaml:"session_aware,omitempty"`
+src/semantic-router/pkg/config/selection_config.go:193:// SessionAwareSelectionConfig configures the session_aware selector. It wraps
+src/semantic-router/pkg/selection/automix.go:152:	// Requires external server: src/training/rl_model_selection/automix_verifier.py
+src/semantic-router/pkg/selection/automix.go:184:	// Requires external server: src/training/rl_model_selection/automix_verifier.py
+src/semantic-router/pkg/selection/automix.go:628:// Requires external server: src/training/rl_model_selection/automix_verifier.py
+src/semantic-router/pkg/config/validator.go:84:			name:     "model_selection",
+src/semantic-router/pkg/config/validator.go:203:		return fmt.Errorf("legacy latency config is no longer supported; use decision.algorithm.type=latency_aware and remove signals.latency_rules / conditions.type=latency")
+src/semantic-router/pkg/config/canonical_global.go:29:	ModelSelection            ModelSelectionConfig  `yaml:"model_selection"`
+src/semantic-router/pkg/selection/metrics_test.go:510:	RecordSelectionWithTier(MethodElo, "test-model", "test-decision", TierSupported, 0.8, 0.9, time.Millisecond)
+src/semantic-router/pkg/dsl/emitter_yaml.go:285:		"looper", "model_selection", "vector_store",
+src/semantic-router/pkg/config/validator_decision.go:256:	addBlock("session_aware", algorithm.SessionAware != nil)
+src/semantic-router/pkg/config/validator_decision.go:273:		"session_aware": "session_aware",
+src/semantic-router/pkg/config/validator_decision.go:288:	case "session_aware":
+src/semantic-router/pkg/config/validator_decision.go:293:			return fmt.Errorf("decision '%s', algorithm.session_aware: %w", decisionName, err)
+src/semantic-router/pkg/selection/factory.go:63:	// SessionAware configuration (used when method is "session_aware")
+src/semantic-router/pkg/selection/factory.go:64:	SessionAware *SessionAwareConfig `yaml:"session_aware,omitempty"`
+src/semantic-router/pkg/selection/factory.go:125:	case MethodElo:
+src/semantic-router/pkg/selection/factory.go:192:	case MethodSessionAware:
+src/semantic-router/pkg/selection/factory.go:239:	registry.Register(MethodElo, eloSelector)
+src/semantic-router/pkg/selection/factory.go:370:	registry.Register(MethodSessionAware, sessionAwareSelector)
+src/semantic-router/pkg/selection/factory.go:380:	if method == "" || method == MethodSessionAware {
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:41:	"session_aware": func(algo *config.AlgorithmConfig, fields map[string]Value) {
+src/semantic-router/pkg/config/validator_test.go:382:		Expect(err.Error()).To(ContainSubstring("legacy latency config is no longer supported"))
+src/semantic-router/pkg/config/validator_test.go:420:		Expect(err.Error()).To(ContainSubstring("legacy latency config is no longer supported"))
+src/semantic-router/pkg/config/docs_contract_test.go:96:			"global:\n  router:\n    model_selection:",
+src/semantic-router/pkg/config/docs_contract_test.go:254:			"global:\n  router:\n    model_selection:",
+src/semantic-router/pkg/config/docs_contract_test.go:280:			"config:\n  model_selection:",
+src/semantic-router/pkg/config/docs_contract_test.go:281:			"\nmodel_selection:\n",
+src/semantic-router/pkg/selection/elo.go:249:	return MethodElo
+src/semantic-router/pkg/selection/elo.go:399:		Method:        MethodElo,
+src/semantic-router/pkg/config/validator_model_switch_gate.go:42:		{"session_aware.idle_timeout_seconds", cfg.IdleTimeoutSeconds},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:43:		{"session_aware.min_turns_before_switch", cfg.MinTurnsBeforeSwitch},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:44:		{"session_aware.min_remaining_turn_prior_samples", cfg.MinRemainingTurnPriorSamples},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:51:			"session_aware.remaining_turn_prior_horizon must be > 0, got %d",
+src/semantic-router/pkg/config/validator_model_switch_gate.go:57:		{"session_aware.switch_margin", cfg.SwitchMargin},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:58:		{"session_aware.stay_bias", cfg.StayBias},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:59:		{"session_aware.tool_loop_stay_bias", cfg.ToolLoopStayBias},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:60:		{"session_aware.prefix_cache_weight", cfg.PrefixCacheWeight},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:61:		{"session_aware.handoff_penalty_weight", cfg.HandoffPenaltyWeight},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:62:		{"session_aware.default_handoff_penalty", cfg.DefaultHandoffPenalty},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:63:		{"session_aware.quality_gap_multiplier", cfg.QualityGapMultiplier},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:64:		{"session_aware.switch_history_weight", cfg.SwitchHistoryWeight},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:65:		{"session_aware.remaining_turn_prior_weight", cfg.RemainingTurnPriorWeight},
+src/semantic-router/pkg/config/validator_model_switch_gate.go:72:			"session_aware.max_cache_cost_multiplier must be >= 1, got %v",
+src/semantic-router/pkg/selection/selection_context_test.go:74:		{name: "session_aware", selector: NewSessionAwareSelector(nil)},
+src/semantic-router/pkg/selection/session_aware.go:101:	if method == "" || method == MethodSessionAware {
+src/semantic-router/pkg/selection/session_aware.go:143:	return MethodSessionAware
+src/semantic-router/pkg/selection/session_aware.go:202:		"session_aware: base=%s current=%s selected=%s idle_expired=%t active_tool_loop=%t",
+src/semantic-router/pkg/selection/session_aware.go:218:		Method:        MethodSessionAware,
+src/semantic-router/pkg/selection/session_aware.go:278:	if s.baseSelector != nil && s.baseSelector.Method() != MethodSessionAware {
+src/semantic-router/pkg/selection/session_aware.go:292:	wrapped.Method = MethodSessionAware
+src/semantic-router/pkg/selection/session_aware.go:294:	wrapped.Reasoning = fmt.Sprintf("session_aware: %s; base=%s selected=%s", reason, base.Method, base.SelectedModel)
+src/semantic-router/pkg/selection/session_aware.go:339:		Method:        MethodSessionAware,
+src/semantic-router/pkg/selection/session_aware.go:341:		Reasoning:     fmt.Sprintf("session_aware: %s current=%s base=%s", reason, current, base.Method),
+src/semantic-router/pkg/selection/metrics.go:33:	// Labels: method (elo/router_dc/automix/hybrid/static/knn/kmeans/svm/mlp/rl_driven/gmtrouter/latency_aware/multi_factor/session_aware), model, decision
+src/semantic-router/pkg/selection/metrics.go:161:			Name: "llm_model_selection_total",
+src/semantic-router/pkg/selection/metrics.go:169:			Name:    "llm_model_selection_duration_seconds",
+src/semantic-router/pkg/selection/metrics.go:178:			Name:    "llm_model_selection_score",
+src/semantic-router/pkg/selection/metrics.go:187:			Name:    "llm_model_selection_confidence",
+src/semantic-router/pkg/selection/metrics.go:196:			Name: "llm_model_selection_dependency_health",
+src/semantic-router/pkg/selection/metrics.go:232:			Name: "llm_model_selection_history",
+src/semantic-router/pkg/selection/metrics.go:240:			Name:    "llm_model_selection_component_agreement",
+src/semantic-router/pkg/selection/metrics.go:376:		"session_aware",
+src/semantic-router/pkg/extproc/router_selection.go:45:	logging.ComponentEvent("extproc", "model_selection_registry_initialized", map[string]interface{}{
+src/semantic-router/pkg/extproc/router_selection.go:156:		if decision.Algorithm.Type == "session_aware" &&
+src/semantic-router/pkg/extproc/router_selection.go:338:	logging.ComponentEvent("extproc", "ml_model_selection_enabled", map[string]interface{}{
+src/semantic-router/pkg/selection/tier_test.go:143:		MethodElo:          TierSupported,
+src/semantic-router/pkg/config/loader.go:133:			"deprecated config fields are no longer supported: %s; rewrite the file to canonical v0.3 providers/routing/global or run `vllm-sr config migrate --config old-config.yaml`",
+src/semantic-router/pkg/config/loader.go:143:			"removed config fields are no longer supported: %s; structure density now uses built-in multilingual normalization and no longer accepts feature.normalize_by",
+src/semantic-router/pkg/config/loader.go:155:			"routing.signals.category_kb is no longer supported; migrate to global.model_catalog.kbs[] plus routing.signals.kb[]",
+src/semantic-router/pkg/config/loader.go:160:			"routing.signals.taxonomy is no longer supported; migrate to routing.signals.kb[]",
+src/semantic-router/pkg/config/loader.go:167:			"global.model_catalog.classifiers is no longer supported; migrate to global.model_catalog.kbs[]",
+src/semantic-router/pkg/config/loader.go:194:		"removed config fields are no longer supported: %s; migrate to routing.decisions[].plugins[type=tools].configuration",
+src/semantic-router/pkg/config/canonical_loader_test.go:41:		"deprecated config fields are no longer supported",
+src/semantic-router/pkg/apiserver/route_feedback_test.go:50:	registry.Register(selection.MethodElo, newFeedbackEloSelector())
+src/semantic-router/pkg/apiserver/route_feedback_test.go:94:	registry.Register(selection.MethodElo, eloSelector)
+src/semantic-router/pkg/apiserver/route_feedback_test.go:211:	registry.Register(selection.MethodElo, eloSelector)
+src/semantic-router/pkg/apiserver/route_feedback_test.go:249:	registry.Register(selection.MethodElo, eloSelector)
+src/semantic-router/pkg/apiserver/route_feedback_test.go:279:	registry.Register(selection.MethodElo, eloSelector)
+src/semantic-router/pkg/apiserver/route_feedback.go:92:		selection.MethodElo,
+src/semantic-router/pkg/apiserver/route_feedback.go:184:	selector, ok := registry.Get(selection.MethodElo)

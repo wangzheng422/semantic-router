@@ -1,0 +1,84 @@
+Warning: Permanently added '[REDACTED: bastion hostname]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ podman rm -f vsr-router vsr-envoy
++ :
++ podman run --replace -d --name vsr-router --network vsr-bench --security-opt=label=disable -p 18080:8080 -p 15051:50051 -p 19190:9190 -e AI_BINDING=candle -v /var/mnt/semantic-router-bench/configs/router-p1-rag-only.yaml:/app/config.yaml:Z -v /var/mnt/semantic-router-bench/models:/app/models:Z -v /var/mnt/semantic-router-bench/logs:/logs:Z ghcr.io/vllm-project/semantic-router/vllm-sr:latest /app/config.yaml
++ podman run --replace -d --name vsr-envoy --network vsr-bench --security-opt=label=disable -p 18888:8888 -p 19901:9901 -v /var/mnt/semantic-router-bench/configs/envoy-round9.yaml:/etc/envoy/envoy.yaml:Z docker.io/envoyproxy/envoy:v1.34-latest -c /etc/envoy/envoy.yaml --log-level warn
++ ready=0
+++ seq 1 60
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ echo ready attempt=2
++ ready=1
++ break
++ test 1 = 1
++ podman run --rm --network host -v /var/mnt/semantic-router-bench/traffic:/traffic:Z docker.io/library/python:3.12-slim python /traffic/traffic_round9.py --mode rag-only --base-url http://127.0.0.1:18888/v1
++ echo ---router-log-tail---
++ podman logs --tail 220 vsr-router
+{"level":"warn","ts":"2026-06-26T03:31:11.520","caller":"logging.go:264","msg":"startup_status_file_backend","backend":"file","message":"Startup status using local file backend. Status is not shared across replicas or visible to the dashboard in containerized deployments. Set startup_status.store_backend: redis for production use.","event":"startup_status_file_backend","component":"router"}
+{"level":"info","ts":"2026-06-26T03:31:11.521","caller":"logging.go:264","msg":"required_models_check_started","event":"required_models_check_started","component":"router"}
+{"level":"info","ts":"2026-06-26T03:31:11.521","caller":"logging.go:264","msg":"api_server_starting","api_port":8080,"event":"api_server_starting","component":"router"}
+{"level":"info","ts":"2026-06-26T03:31:11.521","caller":"logging.go:264","msg":"classification_service_waiting_for_runtime","event":"classification_service_waiting_for_runtime","component":"apiserver","using_placeholder":true}
+{"level":"info","ts":"2026-06-26T03:31:11.521","caller":"logging.go:264","msg":"memory_api_disabled","reason":"config_disabled","event":"memory_api_disabled","component":"apiserver"}
+{"level":"info","ts":"2026-06-26T03:31:11.522","caller":"logging.go:264","msg":"required_models_already_present","component":"router","total_models":1,"event":"required_models_already_present"}
+{"level":"info","ts":"2026-06-26T03:31:11.522","caller":"logging.go:264","msg":"server_listening","component":"apiserver","port":8080,"event":"server_listening"}
+{"level":"info","ts":"2026-06-26T03:31:11.524","caller":"logging.go:264","msg":"metrics_server_starting","address":":9190","event":"metrics_server_starting","component":"router"}
+{"level":"info","ts":"2026-06-26T03:31:11.524","caller":"logging.go:264","msg":"embedding_models_init_started","bert_configured":false,"use_cpu":true,"event":"embedding_models_init_started","component":"router","mmbert_configured":true,"multimodal_configured":false,"qwen3_configured":false,"gemma_configured":false}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"router_runtime.go:346","msg":"INFO: Embedding models initialized successfully"}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"embedding_models_initialized","use_batched":false,"event":"embedding_models_initialized","component":"router"}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"embedding_models_init_completed","embedding_ready":false,"tools_ready":false,"tools_model":"mmbert","event":"embedding_models_init_completed","component":"router"}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"router_config_using_runtime_registry","event":"router_config_using_runtime_registry","component":"extproc","config_source":"file"}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"inmemory_cache_init_started","use_hnsw":false,"event":"inmemory_cache_init_started","embedding_model":"mmbert","max_entries":1000,"similarity_threshold":0.5,"enabled":true,"ttl_seconds":3600,"eviction_policy":"fifo","component":"cache"}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"inmemory_cache_initialized","component":"cache","ttl_seconds":3600,"embedding_model":"mmbert","eviction_policy":"fifo","max_entries":1000,"event":"inmemory_cache_initialized","similarity_threshold":0.5,"use_hnsw":false,"hnsw_ef_search":50,"enabled":true}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"semantic_cache_initialized","max_entries":1000,"event":"semantic_cache_initialized","component":"extproc","backend":"memory","similarity_threshold":0.5,"ttl_seconds":3600}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"tools_database_disabled","event":"tools_database_disabled","component":"extproc"}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"jailbreak_detector_backend_selected","event":"jailbreak_detector_backend_selected","component":"classifier","backend":"mmbert_32k"}
+{"level":"info","ts":"2026-06-26T03:31:12.720","caller":"logging.go:264","msg":"pii_detector_backend_selected","backend":"mmbert_32k","event":"pii_detector_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:31:12.722","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","event":"knowledge_base_preload_deferred","component":"classifier","knowledge_base":"privacy_kb","labels":18,"backend":""}
+{"level":"info","ts":"2026-06-26T03:31:12.722","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","knowledge_base":"privacy_kb","labels":18,"event":"knowledge_base_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:31:12.722","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","labels":14,"backend":"","event":"knowledge_base_preload_deferred","component":"classifier","knowledge_base":"mmlu_kb"}
+{"level":"info","ts":"2026-06-26T03:31:12.722","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","event":"knowledge_base_classifier_initialized","component":"classifier","knowledge_base":"mmlu_kb","labels":14}
+{"level":"info","ts":"2026-06-26T03:31:12.722","caller":"logging.go:264","msg":"category_classifier_backend_selected","backend":"mmbert_32k","event":"category_classifier_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:31:12.722","caller":"logging.go:264","msg":"redis_store_init_started","event":"redis_store_init_started","component":"responsestore","cluster_mode":false,"external_config":false,"ttl_seconds":86400}
+{"level":"warn","ts":"2026-06-26T03:31:12.722","caller":"logging.go:264","msg":"response_api_store_init_failed","error":"invalid Redis config: address is required for standalone Redis","event":"response_api_store_init_failed","component":"extproc","response_api_enabled":false,"backend":"redis"}
+{"level":"warn","ts":"2026-06-26T03:31:12.722","caller":"router_replay_setup.go:177","msg":"Router replay store_backend is set to \"memory\" — all replay records will be lost on router restart. Use \"postgres\" or \"redis\" for durable storage in production."}
+{"level":"info","ts":"2026-06-26T03:31:12.838","caller":"logging.go:264","msg":"automix_capabilities_initialized","model_count":1,"event":"automix_capabilities_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-26T03:31:12.838","caller":"logging.go:264","msg":"automix_capabilities_initialized","event":"automix_capabilities_initialized","component":"selection","model_count":1}
+{"level":"info","ts":"2026-06-26T03:31:12.838","caller":"logging.go:264","msg":"hybrid_selector_initialized","component":"selection","model_count":1,"event":"hybrid_selector_initialized"}
+{"level":"info","ts":"2026-06-26T03:31:12.839","caller":"logging.go:264","msg":"rl_driven_selector_initialized","model_count":1,"event":"rl_driven_selector_initialized","component":"selection","category_count":0}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"logging.go:264","msg":"gmt_router_initialized","personalization":true,"storage_enabled":false,"llm_node_count":0,"event":"gmt_router_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: static (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: router_dc (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: automix (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: hybrid (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:364","msg":"[Selection] Registered algorithm: knn (tier=experimental, dependencies=[Pre-trained knn model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:364","msg":"[Selection] Registered algorithm: kmeans (tier=experimental, dependencies=[Pre-trained kmeans model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:364","msg":"[Selection] Registered algorithm: svm (tier=experimental, dependencies=[Pre-trained svm model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: elo (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:364","msg":"[Selection] Registered algorithm: mlp (tier=experimental, dependencies=[Pre-trained mlp model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: rl_driven (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: gmtrouter (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: latency_aware (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"factory.go:358","msg":"[Selection] Registered algorithm: multi_factor (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"logging.go:264","msg":"selection_factory_initialized","selector_count":13,"event":"selection_factory_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"logging.go:264","msg":"model_selection_registry_initialized","component":"extproc","mode":"per_decision_algorithm_config","event":"model_selection_registry_initialized"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"logging.go:264","msg":"rate_limit_resolver_disabled","reason":"no_providers_configured","event":"rate_limit_resolver_disabled","component":"extproc"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"logging.go:264","msg":"credential_resolver_initialized","component":"extproc","providers":["header-injection","static-config"],"event":"credential_resolver_initialized"}
+{"level":"info","ts":"2026-06-26T03:31:12.840","caller":"logging.go:264","msg":"tools_database_load_skipped","event":"tools_database_load_skipped","component":"router","reason":"embedding_runtime_not_ready_for_tools"}
+{"level":"info","ts":"2026-06-26T03:31:12.841","caller":"logging.go:264","msg":"startup_complete","sem_cache_enabled":true,"secure":false,"decisions":"p1-rag-only","ratelimit_providers":0,"metrics_port":9190,"config_source":"file","component":"router","api_port":8080,"model_selection":true,"authz_providers":0,"event":"startup_complete","embedding_ready":false,"extproc_port":50051}
+{"level":"info","ts":"2026-06-26T03:31:12.841","caller":"logging.go:264","msg":"server_starting","port":50051,"secure":false,"max_msg_mb":4,"event":"server_starting","component":"extproc"}
+{"level":"info","ts":"2026-06-26T03:31:14.271","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=static, score=1.0000, confidence=1.00): single candidate"}
+{"level":"info","ts":"2026-06-26T03:31:14.274","caller":"req_filter_rag_external.go:207","msg":"Retrieved context from external API (latency: 0.002s, format: custom)"}
+{"level":"info","ts":"2026-06-26T03:31:14.275","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-26T03:31:14.275","caller":"logging.go:264","msg":"routing_decision","reasoning_enabled":false,"original_model":"auto","selected_model":"qwen35-2b","decision":"p1-rag-only","request_id":"934f654d-9419-46ed-8268-217f1630a38f","reason_code":"auto_routing","event":"routing_decision","component":"extproc","reasoning_effort":"","routing_latency_ms":4}
+{"level":"info","ts":"2026-06-26T03:31:14.275","caller":"logging.go:264","msg":"router_replay_start","tool_trace_flow":"User Query","category":"","component":"extproc","session_id":"cc-full-ad49887d98778de2","rag_context_length":67,"response_status":0,"selected_model":"qwen35-2b","decision_priority":1000,"decision":"p1-rag-only","event":"router_replay_start","streaming":false,"rag_enabled":true,"rag_similarity_score":0,"decision_tier":0,"turn_index":0,"confidence_score":0,"replay_id":"7f20b1adb8fafd0b7a2f0e02ae1cd16c","original_model":"auto","tool_trace_step_count":1,"signals":{"authz":null,"complexity":null,"context":null,"conversation":null,"domain":null,"embedding":null,"fact_check":null,"jailbreak":null,"kb":null,"keyword":null,"language":null,"modality":null,"pii":null,"preference":null,"reask":null,"structure":null,"user_feedback":null},"reasoning_mode":"off","session_policy":null,"selection_method":"single","timestamp":"2026-06-26T03:31:14.275","request_id":"934f654d-9419-46ed-8268-217f1630a38f","from_cache":false,"rag_backend":"external_api","tool_trace_stage":"User Query"}
+{"level":"info","ts":"2026-06-26T03:31:14.277","caller":"logging.go:160","msg":"llm_usage","model":"qwen35-2b","completion_tokens":7,"completion_latency_ms":6,"pricing":"not_configured","event":"llm_usage","prompt_tokens":11,"total_tokens":18,"cost":0,"currency":"unknown","request_id":"934f654d-9419-46ed-8268-217f1630a38f","cached_prompt_tokens":0}
+{"level":"info","ts":"2026-06-26T03:31:14.277","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-26T03:31:14.277","caller":"logging.go:264","msg":"router_replay_complete","rag_context_length":67,"component":"extproc","decision_priority":1000,"reasoning_mode":"off","decision":"p1-rag-only","original_model":"auto","request_id":"934f654d-9419-46ed-8268-217f1630a38f","rag_enabled":true,"total_tokens":18,"signals":{"authz":null,"complexity":null,"context":null,"conversation":null,"domain":null,"embedding":null,"fact_check":null,"jailbreak":null,"kb":null,"keyword":null,"language":null,"modality":null,"pii":null,"preference":null,"reask":null,"structure":null,"user_feedback":null},"decision_tier":0,"timestamp":"2026-06-26T03:31:14.275","session_id":"cc-full-ad49887d98778de2","selection_method":"single","from_cache":false,"tool_trace_stage":"LLM Final Response","rag_backend":"external_api","confidence_score":0,"streaming":false,"response_status":200,"tool_trace_step_count":2,"event":"router_replay_complete","replay_id":"7f20b1adb8fafd0b7a2f0e02ae1cd16c","session_policy":null,"tool_trace_flow":"User Query -> LLM Final Response","rag_similarity_score":0,"prompt_tokens":11,"selected_model":"qwen35-2b","completion_tokens":7,"cached_prompt_tokens":0,"turn_index":0,"category":""}
++ echo ---mock-log-file---
++ cat /var/mnt/semantic-router-bench/logs/mock_requests.jsonl

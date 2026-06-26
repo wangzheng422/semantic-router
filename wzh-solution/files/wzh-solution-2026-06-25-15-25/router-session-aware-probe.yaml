@@ -1,0 +1,115 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      pricing:
+        currency: USD
+        prompt_per_1m: 0.20
+        completion_per_1m: 0.40
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      pricing:
+        currency: USD
+        prompt_per_1m: 8.00
+        completion_per_1m: 16.00
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      description: Fast low-cost model for short account questions.
+      capabilities: [chat, fast-response]
+      quality_score: 0.62
+    - name: qwen35-27b-fp8
+      description: Larger model for multi-turn technical reasoning and long sessions.
+      capabilities: [chat, reasoning, technical-support]
+      quality_score: 0.91
+  signals:
+    conversation:
+      - name: multi_turn_user
+        description: At least two user messages.
+        feature:
+          type: count
+          source:
+            type: message
+            role: user
+        predicate:
+          gte: 2
+    keywords:
+      - name: technical
+        operator: OR
+        method: bm25
+        keywords: ["debug", "troubleshoot", "root cause", "incident"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+  decisions:
+    - name: session-aware-probe
+      priority: 100
+      rules:
+        operator: OR
+        conditions:
+          - type: conversation
+            name: multi_turn_user
+          - type: keyword
+            name: technical
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+      algorithm:
+        type: session_aware
+        session_aware:
+          base_method: hybrid
+          idle_timeout_seconds: 300
+          min_turns_before_switch: 1
+          switch_margin: 0.05
+          stay_bias: 0.10
+          tool_loop_hard_lock: true
+          context_portability_hard_lock: true
+          decision_drift_reset: true
+          max_cache_cost_multiplier: 2.5
+          remaining_turn_prior_horizon: 8
+    - name: default-small
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    model_selection:
+      method: hybrid
+      enabled: true
+      hybrid:
+        elo_weight: 0.2
+        router_dc_weight: 0.2
+        automix_weight: 0.2
+        cost_weight: 0.4
+        quality_gap_threshold: 0.08
+        normalize_scores: true

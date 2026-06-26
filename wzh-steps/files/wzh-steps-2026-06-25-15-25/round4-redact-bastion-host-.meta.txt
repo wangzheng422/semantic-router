@@ -1,0 +1,3 @@
+timestamp=2026-06-25T16:30:17+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -lc set\ -euo\ pipefail\;\ REDACT_HOST=\"\$\(rg\ -o\ \"bastion\\.\[\^\[:space:\]\]+\"\ .wzh/env.txt\ \|\ head\ -1\)\"\;\ if\ \[\ -z\ \"\$REDACT_HOST\"\ \]\;\ then\ echo\ no_host_found\;\ exit\ 0\;\ fi\;\ rg\ -l\ --fixed-strings\ \"\$REDACT_HOST\"\ todo.md\ wzh-solution\ wzh-steps\ \|\ while\ IFS=\ read\ -r\ f\;\ do\ case\ \"\$f\"\ in\ \*.tgz\)\ echo\ skipped_archive=\"\$f\"\;\ continue\;\;\ esac\;\ perl\ -0pi\ -e\ \'s/\\Q\$ENV\{REDACT_HOST\}\\E/\[REDACTED:\ vm\ bastion\ hostname\]/g\'\ \"\$f\"\;\ echo\ redacted_file=\"\$f\"\;\ done 

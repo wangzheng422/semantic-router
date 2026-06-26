@@ -1,0 +1,42 @@
+vsr-qwen35-2b Exited (135) 13 hours ago
+vsr-qwen35-27b-fp8 Exited (135) 13 hours ago
+vsr-router Exited (0) 13 hours ago
+vsr-envoy Exited (135) 13 hours ago
+vsr-mock-backend Up 50 seconds
+vsr-envoy
+vsr-mock-backend
+vsr-router
+60e3641f9fe40bb9ba48c7dbeb5766eb8330beff6fc4bb8c44d3bc22aa00c1b8
+aaffddc941c3ac061f33ce0178b988cd73db7bcf8c3b073e3fac0ec804eea9a0
+218f6e5a1d456ea655e2e46b22c375e7eeb4fe223a12d979f1ff31820845c47a
+ready attempt=11
+{"status": "healthy", "service": "classification-api"}{"body": {"choices": [{"finish_reason": "stop", "index": 0, "logprobs": {"content": null, "refusal": null}, "message": {"annotations": null, "audio": {"data": "", "expires_at": 0, "id": "", "transcript": ""}, "content": "ROUND9_FAST_RESPONSE", "function_call": {"arguments": "", "name": ""}, "refusal": "", "role": "assistant", "tool_calls": null}}], "created": 1782444207, "id": "chatcmpl-fast-1782444207", "model": "router", "object": "chat.completion", "service_tier": "", "system_fingerprint": "", "usage": {"completion_tokens": 0, "completion_tokens_details": {"accepted_prediction_tokens": 0, "audio_tokens": 0, "reasoning_tokens": 0, "rejected_prediction_tokens": 0}, "prompt_tokens": 0, "prompt_tokens_details": {"audio_tokens": 0, "cached_tokens": 0}, "total_tokens": 0}}, "case": "fast_response", "headers": {"connection": "close", "content-length": "704", "content-type": "application/json", "date": "Fri, 26 Jun 2026 03:23:27 GMT", "server": "envoy", "x-vsr-fast-response": "true", "x-vsr-response-path": "fast_response", "x-vsr-schema-version": "2", "x-vsr-selected-decision": "p0-fast-response"}, "latency_ms": 34.69, "ok": true, "status": 200}
+{"body": {"count": 0, "data": []}, "case": "mock_requests", "headers": {"Date": "Fri, 26 Jun 2026 03:23:27 GMT", "Server": "Round9MockOpenAI/1.0 Python/3.12.13", "content-length": "24", "content-type": "application/json"}, "latency_ms": 2.08, "ok": true, "status": 200}
+Starting router from canonical config...
+  Config file: /app/config.yaml
+Starting router...
+
+[97m       █     █     █▄   ▄█[0m
+[97m ▄▄ ▄█ █     █     █ ▀▄▀ █[0m
+[97m  █▄█▀ █     █     █     █[0m
+[97m   ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀[0m
+[97m  Semantic Router[0m
+[38;2;145;158;171m  Intelligent Routing for Mixture-of-Models[0m
+
+[32m✓ Downloaded[0m
+  path: /app/models/mmbert-embed-32k-2d-matryoshka
+INFO: mmBERT embedding model registered with 2D Matryoshka support
+[2026-06-26T03:23:06.800Z] "GET /v1/models" 500 1 "-" "-" "-" "-"
+[2026-06-26T03:23:08.816Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:10.829Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:12.844Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:14.857Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:16.871Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:18.885Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:20.899Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:22.912Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+[2026-06-26T03:23:24.926Z] "GET /v1/models" 500 0 "-" "-" "-" "-"
+NAMES             STATUS         PORTS
+vsr-mock-backend  Up 22 seconds  0.0.0.0:18003->8000/tcp
+vsr-router        Up 21 seconds  0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+vsr-envoy         Up 21 seconds  0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp

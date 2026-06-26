@@ -1,0 +1,125 @@
+Warning: Permanently added '[REDACTED: bastion hostname]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ podman ps -a --format '{{.Names}} {{.Status}}'
++ podman rm -f vsr-router vsr-envoy vsr-mock-backend
+time="2026-06-26T03:23:05Z" level=warning msg="StopSignal SIGTERM failed to stop container vsr-mock-backend in 10 seconds, resorting to SIGKILL"
++ :
++ podman run --replace -d --name vsr-mock-backend --network vsr-bench --security-opt=label=disable -p 18003:8000 -e MOCK_LOG_PATH=/logs/mock_requests.jsonl -v /var/mnt/semantic-router-bench/traffic:/traffic:Z -v /var/mnt/semantic-router-bench/logs:/logs:Z docker.io/library/python:3.12-slim python /traffic/mock_backend.py
++ podman run --replace -d --name vsr-router --network vsr-bench --security-opt=label=disable -p 18080:8080 -p 15051:50051 -p 19190:9190 -e AI_BINDING=candle -v /var/mnt/semantic-router-bench/configs/router-p0-fast-response.yaml:/app/config.yaml:Z -v /var/mnt/semantic-router-bench/models:/app/models:Z -v /var/mnt/semantic-router-bench/logs:/logs:Z ghcr.io/vllm-project/semantic-router/vllm-sr:latest /app/config.yaml
++ podman run --replace -d --name vsr-envoy --network vsr-bench --security-opt=label=disable -p 18888:8888 -p 19901:9901 -v /var/mnt/semantic-router-bench/configs/envoy-round9.yaml:/etc/envoy/envoy.yaml:Z docker.io/envoyproxy/envoy:v1.34-latest -c /etc/envoy/envoy.yaml --log-level warn
++ ready=0
+++ seq 1 60
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ sleep 2
++ for i in $(seq 1 60)
++ curl -fsS http://127.0.0.1:18080/health
++ curl -fsS http://127.0.0.1:18888/v1/models
++ echo ready attempt=11
++ ready=1
++ break
++ test 1 = 1
++ curl -fsS http://127.0.0.1:18080/health
++ podman run --rm --network host -v /var/mnt/semantic-router-bench/traffic:/traffic:Z docker.io/library/python:3.12-slim python /traffic/traffic_round9.py --mode fast --base-url http://127.0.0.1:18888/v1
++ podman logs --tail 80 vsr-router
+{"level":"warn","ts":"2026-06-26T03:23:06.730","caller":"logging.go:264","msg":"startup_status_file_backend","backend":"file","message":"Startup status using local file backend. Status is not shared across replicas or visible to the dashboard in containerized deployments. Set startup_status.store_backend: redis for production use.","event":"startup_status_file_backend","component":"router"}
+{"level":"info","ts":"2026-06-26T03:23:06.733","caller":"logging.go:264","msg":"required_models_check_started","event":"required_models_check_started","component":"router"}
+{"level":"info","ts":"2026-06-26T03:23:06.733","caller":"logging.go:264","msg":"api_server_starting","event":"api_server_starting","component":"router","api_port":8080}
+{"level":"info","ts":"2026-06-26T03:23:06.734","caller":"logging.go:264","msg":"classification_service_waiting_for_runtime","component":"apiserver","using_placeholder":true,"event":"classification_service_waiting_for_runtime"}
+{"level":"info","ts":"2026-06-26T03:23:06.734","caller":"logging.go:264","msg":"memory_api_disabled","reason":"config_disabled","event":"memory_api_disabled","component":"apiserver"}
+{"level":"info","ts":"2026-06-26T03:23:06.734","caller":"logging.go:264","msg":"server_listening","port":8080,"event":"server_listening","component":"apiserver"}
+{"level":"info","ts":"2026-06-26T03:23:07.521","caller":"downloader.go:76","msg":"Downloading model: models/mmbert-embed-32k-2d-matryoshka"}
+Fetching 28 files:   0%|          | 0/28 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 28 files:   4%|▎         | 1/28 [00:00<00:03,  7.53it/s]Fetching 28 files:  21%|██▏       | 6/28 [00:15<00:59,  2.72s/it]Fetching 28 files:  36%|███▌      | 10/28 [00:16<00:25,  1.44s/it]Fetching 28 files:  82%|████████▏ | 23/28 [00:17<00:02,  2.05it/s]Fetching 28 files: 100%|██████████| 28/28 [00:17<00:00,  1.62it/s]
+{"level":"info","ts":"2026-06-26T03:23:25.239","caller":"downloader.go:125","msg":"Successfully downloaded model: models/mmbert-embed-32k-2d-matryoshka"}
+{"level":"info","ts":"2026-06-26T03:23:25.240","caller":"downloader.go:199","msg":"Successfully downloaded all 1 models"}
+{"level":"info","ts":"2026-06-26T03:23:25.241","caller":"logging.go:264","msg":"required_models_ready","component":"router","event":"required_models_ready"}
+{"level":"info","ts":"2026-06-26T03:23:25.243","caller":"logging.go:264","msg":"metrics_server_starting","component":"router","address":":9190","event":"metrics_server_starting"}
+{"level":"info","ts":"2026-06-26T03:23:25.243","caller":"logging.go:264","msg":"embedding_models_init_started","event":"embedding_models_init_started","qwen3_configured":false,"gemma_configured":false,"multimodal_configured":false,"bert_configured":false,"component":"router","mmbert_configured":true,"use_cpu":true}
+{"level":"info","ts":"2026-06-26T03:23:26.552","caller":"router_runtime.go:346","msg":"INFO: Embedding models initialized successfully"}
+{"level":"info","ts":"2026-06-26T03:23:26.552","caller":"logging.go:264","msg":"embedding_models_initialized","event":"embedding_models_initialized","component":"router","use_batched":false}
+{"level":"info","ts":"2026-06-26T03:23:26.552","caller":"logging.go:264","msg":"embedding_models_init_completed","component":"router","embedding_ready":false,"tools_ready":false,"tools_model":"mmbert","event":"embedding_models_init_completed"}
+{"level":"info","ts":"2026-06-26T03:23:26.553","caller":"logging.go:264","msg":"router_config_using_runtime_registry","config_source":"file","event":"router_config_using_runtime_registry","component":"extproc"}
+{"level":"info","ts":"2026-06-26T03:23:26.553","caller":"logging.go:264","msg":"inmemory_cache_init_started","use_hnsw":false,"ttl_seconds":3600,"component":"cache","eviction_policy":"fifo","enabled":true,"similarity_threshold":0.5,"event":"inmemory_cache_init_started","embedding_model":"mmbert","max_entries":1000}
+{"level":"info","ts":"2026-06-26T03:23:26.554","caller":"logging.go:264","msg":"inmemory_cache_initialized","ttl_seconds":3600,"similarity_threshold":0.5,"eviction_policy":"fifo","hnsw_ef_search":50,"event":"inmemory_cache_initialized","embedding_model":"mmbert","component":"cache","max_entries":1000,"use_hnsw":false,"enabled":true}
+{"level":"info","ts":"2026-06-26T03:23:26.554","caller":"logging.go:264","msg":"semantic_cache_initialized","component":"extproc","ttl_seconds":3600,"max_entries":1000,"backend":"memory","similarity_threshold":0.5,"event":"semantic_cache_initialized"}
+{"level":"info","ts":"2026-06-26T03:23:26.554","caller":"logging.go:264","msg":"tools_database_disabled","event":"tools_database_disabled","component":"extproc"}
+{"level":"info","ts":"2026-06-26T03:23:26.554","caller":"logging.go:264","msg":"jailbreak_detector_backend_selected","backend":"mmbert_32k","event":"jailbreak_detector_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:23:26.554","caller":"logging.go:264","msg":"pii_detector_backend_selected","backend":"mmbert_32k","event":"pii_detector_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:23:26.556","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","knowledge_base":"privacy_kb","labels":18,"backend":"","event":"knowledge_base_preload_deferred","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:23:26.556","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","event":"knowledge_base_classifier_initialized","component":"classifier","knowledge_base":"privacy_kb","labels":18}
+{"level":"info","ts":"2026-06-26T03:23:26.558","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","knowledge_base":"mmlu_kb","labels":14,"backend":"","event":"knowledge_base_preload_deferred","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:23:26.558","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","knowledge_base":"mmlu_kb","labels":14,"event":"knowledge_base_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-26T03:23:26.558","caller":"logging.go:264","msg":"category_classifier_backend_selected","event":"category_classifier_backend_selected","component":"classifier","backend":"mmbert_32k"}
+{"level":"info","ts":"2026-06-26T03:23:26.558","caller":"logging.go:264","msg":"redis_store_init_started","ttl_seconds":86400,"cluster_mode":false,"external_config":false,"event":"redis_store_init_started","component":"responsestore"}
+{"level":"warn","ts":"2026-06-26T03:23:26.558","caller":"logging.go:264","msg":"response_api_store_init_failed","event":"response_api_store_init_failed","component":"extproc","response_api_enabled":false,"backend":"redis","error":"invalid Redis config: address is required for standalone Redis"}
+{"level":"error","ts":"2026-06-26T03:23:26.558","caller":"router_replay_setup.go:84","msg":"Failed to initialize shared replay store for backend postgres: postgres config required when store_backend is 'postgres'","stacktrace":"github.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.initializeSharedReplayRecorders\n\t/build/pkg/extproc/router_replay_setup.go:84\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.createReplayRuntime\n\t/build/pkg/extproc/router_replay_setup.go:16\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.buildRouterComponents\n\t/build/pkg/extproc/router_build.go:174\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.buildOpenAIRouterFromConfig\n\t/build/pkg/extproc/router_build.go:127\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.newOpenAIRouterForServer\n\t/build/pkg/extproc/router_build.go:74\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.NewServer\n\t/build/pkg/extproc/server.go:74\nmain.newExtProcServerOrFatal\n\t/build/cmd/runtime_bootstrap.go:374\nmain.main\n\t/build/cmd/main.go:45\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:283"}
+{"level":"info","ts":"2026-06-26T03:23:26.680","caller":"logging.go:264","msg":"automix_capabilities_initialized","model_count":1,"event":"automix_capabilities_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-26T03:23:26.681","caller":"logging.go:264","msg":"automix_capabilities_initialized","event":"automix_capabilities_initialized","component":"selection","model_count":1}
+{"level":"info","ts":"2026-06-26T03:23:26.681","caller":"logging.go:264","msg":"hybrid_selector_initialized","model_count":1,"event":"hybrid_selector_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"rl_driven_selector_initialized","event":"rl_driven_selector_initialized","component":"selection","model_count":1,"category_count":0}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"gmt_router_initialized","component":"selection","llm_node_count":0,"personalization":true,"storage_enabled":false,"event":"gmt_router_initialized"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: router_dc (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: automix (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: hybrid (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:364","msg":"[Selection] Registered algorithm: svm (tier=experimental, dependencies=[Pre-trained svm model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:364","msg":"[Selection] Registered algorithm: mlp (tier=experimental, dependencies=[Pre-trained mlp model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: rl_driven (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: gmtrouter (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: elo (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:364","msg":"[Selection] Registered algorithm: knn (tier=experimental, dependencies=[Pre-trained knn model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:364","msg":"[Selection] Registered algorithm: kmeans (tier=experimental, dependencies=[Pre-trained kmeans model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: latency_aware (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: multi_factor (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"factory.go:358","msg":"[Selection] Registered algorithm: static (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"selection_factory_initialized","selector_count":13,"event":"selection_factory_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"model_selection_registry_initialized","mode":"per_decision_algorithm_config","event":"model_selection_registry_initialized","component":"extproc"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"rate_limit_resolver_disabled","event":"rate_limit_resolver_disabled","component":"extproc","reason":"no_providers_configured"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"credential_resolver_initialized","providers":["header-injection","static-config"],"event":"credential_resolver_initialized","component":"extproc"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"tools_database_load_skipped","component":"router","reason":"embedding_runtime_not_ready_for_tools","event":"tools_database_load_skipped"}
+{"level":"info","ts":"2026-06-26T03:23:26.682","caller":"logging.go:264","msg":"startup_complete","ratelimit_providers":0,"decisions":"p0-fast-response","authz_providers":0,"extproc_port":50051,"api_port":8080,"embedding_ready":false,"metrics_port":9190,"component":"router","model_selection":true,"secure":false,"sem_cache_enabled":true,"event":"startup_complete","config_source":"file"}
+{"level":"info","ts":"2026-06-26T03:23:26.683","caller":"logging.go:264","msg":"server_starting","secure":false,"max_msg_mb":4,"event":"server_starting","component":"extproc","port":50051}
+{"level":"info","ts":"2026-06-26T03:23:27.450","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=static, score=1.0000, confidence=1.00): single candidate"}
+{"level":"info","ts":"2026-06-26T03:23:27.451","caller":"processor_req_body_memory.go:322","msg":"[FastResponse] Decision 'p0-fast-response' has fast_response plugin, returning immediate response"}
++ podman logs --tail 40 vsr-envoy
+[2026-06-26 03:23:06.730][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.config.cluster.v3.Cluster Using deprecated option 'envoy.config.cluster.v3.Cluster.http2_protocol_options' from file cluster.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-26 03:23:06.782][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.extensions.access_loggers.file.v3.FileAccessLog Using deprecated option 'envoy.extensions.access_loggers.file.v3.FileAccessLog.format' from file file.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-26 03:23:06.794][1][warning][main] [source/server/server.cc:970] There is no configured limit to the number of allowed active downstream connections. Configure a limit in `envoy.resource_monitors.global_downstream_max_connections` resource monitor.
++ podman ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'

@@ -1,0 +1,10 @@
+timestamp=2026-06-26T11:12:46+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ HOST=\$\(awk\ \"prev==1\{print\;\ exit\}\ /\^Hostname\$/\{prev=1\}\"\ .wzh/env.txt\)\;\ PASS=\$\(awk\ \"prev==1\{print\;\ exit\}\ /\^Password\$/\{prev=1\}\"\ .wzh/env.txt\)\;\ export\ SSHPASS=\"\$PASS\"\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ -o\ ConnectTimeout=20\ cloud-user@\$HOST\ \"set\ -x\;\ hostname\;\ date\;\ uname\ -a\;\ id\;\ command\ -v\ podman\ \|\|\ true\;\ command\ -v\ docker\ \|\|\ true\;\ podman\ ps\ --format\ \\"table\ \{\{.Names\}\}\t\{\{.Status\}\}\t\{\{.Ports\}\}\\"\ \|\|\ true\;\ ss\ -ltnp\ \|\|\ true\;\ ls\ -la\ /var/mnt\ /var/mnt/semantic-router\ 2\>/dev/null\ \|\|\ true\" 
+exit_code=255
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-inventory-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-inventory-.stderr.txt
+stdout_lines=0
+stderr_lines=1
+stdout_bytes=0
+stderr_bytes=51

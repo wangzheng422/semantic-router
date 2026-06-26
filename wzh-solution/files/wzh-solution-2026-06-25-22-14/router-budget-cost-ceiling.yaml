@@ -1,0 +1,127 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+    default_reasoning_effort: low
+    reasoning_families:
+      qwen3:
+        type: chat_template_kwargs
+        parameter: enable_thinking
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 0.20
+        cached_input_per_1m: 0.05
+        completion_per_1m: 0.40
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 8.00
+        cached_input_per_1m: 2.00
+        completion_per_1m: 16.00
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 4096
+      description: Low-cost model for short answers and budget-constrained traffic.
+      capabilities: [chat, fast-response, low-cost]
+      quality_score: 0.62
+      modality: ar
+      tags: [small, cheap]
+    - name: qwen35-27b-fp8
+      param_size: 27B
+      context_window_size: 4096
+      description: Higher-quality reasoning model for technical debugging and incident analysis.
+      capabilities: [chat, reasoning, code, incident-analysis]
+      quality_score: 0.91
+      modality: ar
+      tags: [large, expensive]
+
+  signals:
+    keywords:
+      - name: complex_budget_test
+        operator: OR
+        method: bm25
+        keywords: ["root cause", "incident", "debug", "architecture", "troubleshoot"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+
+  decisions:
+    - name: budget-cost-ceiling
+      priority: 900
+      rules:
+        operator: OR
+        conditions:
+          - type: keyword
+            name: complex_budget_test
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+      algorithm:
+        type: multi_factor
+        multi_factor:
+          weights:
+            quality: 1.0
+            latency: 0.0
+            cost: 0.0
+            load: 0.0
+          slo:
+            max_cost_per_1m: 1.0
+          on_no_candidates: cheapest
+
+    - name: default-small
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    auto_model_name: budget-cost-auto
+    include_config_models_in_list: true
+    model_selection:
+      method: multi_factor
+      enabled: true
+      multi_factor:
+        weights:
+          quality: 1.0
+          latency: 0.0
+          cost: 0.0
+          load: 0.0
+        slo:
+          max_cost_per_1m: 1.0
+        on_no_candidates: cheapest

@@ -1,0 +1,9 @@
+{
+  "configURL": "http://127.0.0.1:3001/config",
+  "playgroundURL": "http://127.0.0.1:3001/playground",
+  "checks": [
+    "dashboard auth API accepted bootstrap admin credentials",
+    "config page rendered Global Config and Canonical Global Config",
+    "playground page rendered chat input placeholder"
+  ]
+}

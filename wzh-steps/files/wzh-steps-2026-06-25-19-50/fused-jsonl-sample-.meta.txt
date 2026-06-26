@@ -1,0 +1,3 @@
+timestamp=2026-06-25T19:54:23+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=sed -n 1,3p wzh-steps/files/wzh-steps-2026-06-25-15-25/extracted-round4-final/benchmarks/round4-2026-06-25-15-25/fused-results.jsonl 

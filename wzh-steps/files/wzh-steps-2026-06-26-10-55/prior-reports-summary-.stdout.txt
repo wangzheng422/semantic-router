@@ -1,0 +1,493 @@
+wzh-solution/wzh-solution-2026.06.25.21.45.md:19:- 工作目录恢复为 `hf-cache`、`models`、`configs`、`logs`、`traffic`、`benchmarks`。
+wzh-solution/wzh-solution-2026.06.25.21.45.md:23:- semantic-router 使用上一轮 fused 配置 `router-fused-signals-hybrid.yaml` 恢复为容器 `vsr-router`。
+wzh-solution/wzh-solution-2026.06.25.21.45.md:37:  Router --> Config["router-fused-signals-hybrid.yaml"]
+wzh-solution/wzh-solution-2026.06.25.21.45.md:69:- `embedding_candidates_preloaded`
+wzh-solution/wzh-solution-2026.06.25.21.45.md:73:- `hybrid_selector_initialized`
+wzh-solution/wzh-solution-2026.06.25.21.45.md:98:| simple account short | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | `explicit_simple` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:99:| technical support complex | ok | `fused-signal-hybrid-selector` | `qwen35-27b-fp8` | `explicit_complex` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:100:| many questions incident | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | `explicit_complex` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:101:| numbered steps architecture | ok | `fused-signal-hybrid-selector` | `qwen35-27b-fp8` | `explicit_complex` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:102:| Chinese first/then flow | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | `explicit_simple` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:103:| long context root cause | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | `explicit_complex` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:104:| jailbreak guarded | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | classifier path |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:105:| fake PII guarded | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | classifier path |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:106:| critical payment event | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | `explicit_complex` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:107:| authz admin policy | ok | `fused-signal-hybrid-selector` | `qwen35-27b-fp8` | `explicit_complex` |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:108:| no signal default | ok | `fused-signal-hybrid-selector` | `qwen35-2b` | default/cost-favored path |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:124:5. 最终是否切换到 27B，取决于 fused decision 下面的 hybrid 模型选择算法，而不只取决于“是不是多轮”。
+wzh-solution/wzh-solution-2026.06.25.21.45.md:131:| account -> incident -> Chinese | 2 | `qwen35-2b` | 识别到 `explicit_complex` 和 `multi_turn_user`，但 hybrid 仍选小模型 |
+wzh-solution/wzh-solution-2026.06.25.21.45.md:138:因此结论是：多轮请求时 router 会重新看完整 messages，并能动态改变后端模型；但是否改变模型由配置的信号和模型选择算法共同决定。这一点正是 fused hybrid 配置的特点。
+wzh-solution/wzh-solution-2026.06.25.21.45.md:144:3. router 启动日志里有 Redis/Postgres replay store 相关 warning/error，但随后 `startup_complete`、`/health`、`/v1/models` 和 SDK 请求都成功。当前配置没有启用这些外部存储能力，所以这是非阻断问题；如果要测试 budget、replay、learning 持久化，需要单独配置后端存储。
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:12:    default_reasoning_effort: low
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:25:        cached_input_per_1m: 0.05
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:38:      description: Low-cost model for request-parameter budget route validation.
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:45:    - name: budget-request-params
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:52:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:54:        - type: request_params
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml:65:    auto_model_name: budget-request-auto
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:12:    default_reasoning_effort: low
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:25:        cached_input_per_1m: 0.05
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:35:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:39:        cached_input_per_1m: 2.00
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:60:      description: Expensive first candidate with an intentionally exhausted token budget.
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:61:      capabilities: [chat, reasoning]
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:67:    - name: ratelimit-budget-no-fallback
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:74:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:75:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:77:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:85:    auto_model_name: budget-ratelimit-auto
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:91:    ratelimit:
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:96:            - name: large-model-one-token-budget
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml:98:                user: round7-budget
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:12:    default_reasoning_effort: low
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:25:        cached_input_per_1m: 0.05
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:35:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:39:        cached_input_per_1m: 2.00
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:52:      description: Low-cost model for short answers and budget-constrained traffic.
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:60:      description: Higher-quality reasoning model for technical debugging and incident analysis.
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:61:      capabilities: [chat, reasoning, code, incident-analysis]
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:68:      - name: complex_budget_test
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:76:    - name: budget-cost-ceiling
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:82:            name: complex_budget_test
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:85:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:87:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:88:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:90:        type: multi_factor
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:91:        multi_factor:
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:108:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:114:    auto_model_name: budget-cost-auto
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:117:      method: multi_factor
+wzh-solution/files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml:119:      multi_factor:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:11:| 关键配置文件 | [router-basic.yaml](files/wzh-solution-2026-06-25-09-21/router-basic.yaml)，[router-aggressive-large.yaml](files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml)，[router-multisignal.yaml](files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml)，[router-selection-algorithms.yaml](files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml)，[router-fused-signals-hybrid.yaml](files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml) |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:16:semantic-router 的核心不是“多写几个 if else，把关键词分到不同模型”。它更像一个 LLM 网关：客户端继续用 OpenAI SDK 请求 `/v1/chat/completions`，请求先到 Envoy，再经 Envoy 的 ext_proc 机制交给 semantic-router。router 读取请求的 `messages`、headers、会话信息和模型元数据，计算一批信号，然后按 `routing.decisions` 找到一个命中的 decision。命中后可以直接选一个模型，也可以把多个候选模型交给 `router_dc`、`automix`、`hybrid`、`multi_factor`、`latency_aware` 这类模型选择算法继续比较。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:26:| 融合方法二 | 多 signal 先进入一个 fused decision，再由 `hybrid` 算法在 2B/27B 间选 | `router-fused-signals-hybrid.yaml` | 需要更灵活的成本/质量权衡，让算法参与最终选择 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:44:| `automix`、`hybrid`、`router_dc` 是 CPU 还是 GPU？ | AutoMix/Hybrid 主体是 Go/CPU 打分逻辑；RouterDC 和 Hybrid 中的 RouterDC 组件会调用 embedding 函数，embedding backend 可用 candle/openvino 等，本轮日志里是 router-local candle/mmBERT 路径。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:77:| Model selection | 选模算法，decision 命中后在候选模型中二次选择 | `router_dc`，`automix`，`hybrid` | “候选模型里最终选哪个” |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:126:| `x-vsr-selected-decision` | 命中的 decision，例如 `fused-signal-hybrid-selector` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:223:          use_reasoning: true
+wzh-solution/wzh-solution-2026.06.25.19.50.md:224:          reasoning_effort: medium
+wzh-solution/wzh-solution-2026.06.25.19.50.md:235:          use_reasoning: false
+wzh-solution/wzh-solution-2026.06.25.19.50.md:258:| `use_reasoning` | 是否给 Qwen reasoning family 传 reasoning 相关参数。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:259:| `reasoning_effort` | reasoning 强度，本次用于 `qwen35-27b-fp8` 的中等推理路径。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:345:切换不是没有代价。切模型后，后端 vLLM 的 KV cache 不共享，长上下文会重新计算，首 token 延迟可能升高。所以“能切”不等于“任何时候都应该切”。后面讲 session-aware / cache affinity 时会再回到这个问题。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:404:  B --> C1["authz admin?"]
+wzh-solution/wzh-solution-2026.06.25.19.50.md:425:  - name: route-authz-admin-large
+wzh-solution/wzh-solution-2026.06.25.19.50.md:429:        - type: authz
+wzh-solution/wzh-solution-2026.06.25.19.50.md:470:| 风险可控 | PII/jailbreak/authz 可以放高优先级，避免被普通语义规则覆盖。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:539:| authz | admin headers 命中 `admin,premium_user` 并走 27B-FP8。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:575:所以不要误以为 `global.router.model_selection.method: hybrid` 会自动让所有 decision 用 hybrid。真正本次请求使用什么算法，主要看命中的 decision 有没有 `algorithm.type`。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:612:| `ALGORITHM_ROUTERDC` | `select-routerdc` | `router_dc` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:613:| `ALGORITHM_AUTOMIX` | `select-automix` | `automix` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:614:| `ALGORITHM_HYBRID` | `select-hybrid` | `hybrid` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:615:| `ALGORITHM_MULTIFACTOR` | `select-multi-factor` | `multi_factor` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:616:| `ALGORITHM_LATENCY` | `select-latency-aware` | `latency_aware` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:622:| `router_dc` | 2B | 27B-FP8 | Validated |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:623:| `automix` | 27B-FP8 | 27B-FP8 | Validated |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:624:| `hybrid` | 2B | 27B-FP8 | Validated |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:625:| `multi_factor` | 2B | 2B | Validated |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:626:| `latency_aware` | 2B | 2B | Validated |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:638:  type: router_dc
+wzh-solution/wzh-solution-2026.06.25.19.50.md:639:  router_dc:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:671:  type: automix
+wzh-solution/wzh-solution-2026.06.25.19.50.md:672:  automix:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:700:  type: hybrid
+wzh-solution/wzh-solution-2026.06.25.19.50.md:701:  hybrid:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:702:    elo_weight: 0.15
+wzh-solution/wzh-solution-2026.06.25.19.50.md:703:    router_dc_weight: 0.35
+wzh-solution/wzh-solution-2026.06.25.19.50.md:704:    automix_weight: 0.15
+wzh-solution/wzh-solution-2026.06.25.19.50.md:714:| `elo_weight` | 历史/评分组件权重。本次 standalone Elo 已迁移，但 Hybrid 内部仍有 Elo-like 组件参与即时分。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:715:| `router_dc_weight` | 语义相似度组件权重。越高越相信 embedding 语义匹配。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:716:| `automix_weight` | AutoMix 成本/质量启发式组件权重。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:744:  type: multi_factor
+wzh-solution/wzh-solution-2026.06.25.19.50.md:745:  multi_factor:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:780:  type: latency_aware
+wzh-solution/wzh-solution-2026.06.25.19.50.md:781:  latency_aware:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:790:本地类型和历史文档里还能看到 `elo`、`session_aware`，但本轮实际 runtime image 拒绝它们作为 per-decision algorithm：
+wzh-solution/wzh-solution-2026.06.25.19.50.md:794:| `elo` | 被拒绝，提示已迁移到 `global.router.learning.adaptation` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:795:| `session_aware` | 被拒绝，提示已迁移到 `global.router.learning.protection` |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:799:> 在当前镜像中，它们不能再写成 `routing.decisions[].algorithm.type=elo/session_aware`。跨请求学习和会话保护要按新的 `global.router.learning.adaptation/protection` 路径继续验证。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:815:| authz | 读 header 或身份字段 | 低 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:828:| jailbreak | jailbreak classifier 或 hybrid detector | 检测 prompt injection/jailbreak。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:876:  C -->|authz admin| D["27B-FP8"]
+wzh-solution/wzh-solution-2026.06.25.19.50.md:895:| 980 | authz admin -> large | 高价值/高权限用户优先保障质量。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:921:这是 [router-fused-signals-hybrid.yaml](files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml) 的模式。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:927:  A["Request"] --> B["keyword / embedding / language / context / structure / authz / PII / jailbreak / conversation / event / projection"]
+wzh-solution/wzh-solution-2026.06.25.19.50.md:929:  C -->|yes| D["fused-signal-hybrid-selector"]
+wzh-solution/wzh-solution-2026.06.25.19.50.md:947:  - name: fused-signal-hybrid-selector
+wzh-solution/wzh-solution-2026.06.25.19.50.md:980:        - type: authz
+wzh-solution/wzh-solution-2026.06.25.19.50.md:984:        use_reasoning: false
+wzh-solution/wzh-solution-2026.06.25.19.50.md:986:        use_reasoning: true
+wzh-solution/wzh-solution-2026.06.25.19.50.md:987:        reasoning_effort: medium
+wzh-solution/wzh-solution-2026.06.25.19.50.md:989:      type: hybrid
+wzh-solution/wzh-solution-2026.06.25.19.50.md:990:      hybrid:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:991:        elo_weight: 0.15
+wzh-solution/wzh-solution-2026.06.25.19.50.md:992:        router_dc_weight: 0.35
+wzh-solution/wzh-solution-2026.06.25.19.50.md:993:        automix_weight: 0.15
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1004:4. `hybrid` 综合语义匹配、成本/质量、Elo-like 分数和成本惩罚。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1035:| 命中 `fused-signal-hybrid-selector` | 17 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1045:| `many_questions_incident` | `explicit_complex` + `technical_support` + `many_questions` + `high_escalation` | `qwen35-2b` | 虽然信号复杂，但当前 hybrid 权重仍可能因成本选 2B。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1048:| `authz_admin_policy` | `explicit_complex` + `admin,premium_user` | `qwen35-27b-fp8` | 高权限/策略请求走大模型。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1059:router_dc_weight: 0.35
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1060:automix_weight: 0.15
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1064:`cost_weight` 和 `router_dc_weight` 一样高。也就是说，成本不是附属因素，而是主要因素之一。如果一个请求虽然复杂，但 RouterDC/AutoMix 认为 27B 的收益没有明显超过成本，2B 就可能胜出。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1071:| 提高 `router_dc_weight` | 更相信语义匹配。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1099:  B -->|PII / jailbreak / authz hard rule| C["Direct guarded route"]
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1146:### 13.1 cache affinity 和 model switch gate
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1152:| Cache Affinity | 当候选模型得分很接近时，倾向留在当前模型，减少 KV cache 失效成本。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1153:| Model Switch Gate | 用 shadow/enforce 模式评估切换收益是否超过 handoff penalty/cache warmth 损失。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1155:这不是说 router 不能切，而是说它可以更聪明地切：强信号时允许切，弱信号时别为了微弱收益损失上下文/cache。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1157:当前镜像还把 old `session_aware` per-decision path 迁移到了 `global.router.learning.protection`，所以真正生产化的会话保护需要下一轮按新 schema 专门验证。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1177:| `request.headers` | 请求头，包括 auth/session/authz 等 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1247:    default_reasoning_effort: low
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1248:    reasoning_families:
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1257:| `default_reasoning_effort` | reasoning 默认强度。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1258:| `reasoning_families.qwen3` | Qwen reasoning 参数如何传给后端。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1290:    description: Larger FP8 reasoning model for technical support...
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1291:    capabilities: [chat, reasoning, code, technical-support, security]
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1293:    tags: [large, reasoning, expensive]
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1299:| `context_window_size` | 上下文窗口大小，cache affinity / 上下文适配会用。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1378:### 16.8 role_bindings/authz
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1389:authz 类规则通常依赖 header 或身份解析。它适合做高价值客户、管理员、premium support 这种差异化策略。但要注意：一旦 authz decision 引用身份，测试流量也要带正确的身份 header，否则可能不会命中。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1396:    method: hybrid
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1439:它们不等价于“一定上大模型”。在 direct-mapping 配置中可以把它们路由到 27B；在 fused+hybrid 配置中，它们只是进入算法选择的一部分证据。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1472:2. authz / premium。
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1482:建议从 `router_dc` 和 `hybrid` 开始：
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1486:| `router_dc` | 语义直观：请求和模型能力描述相似就选。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1487:| `hybrid` | 能同时考虑语义、成本、质量，适合优化。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1488:| `multi_factor` | 等你有稳定 latency/load/cost 观测后再用。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1489:| `latency_aware` | 等延迟统计稳定后再用。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1509:  - name: business-fused-hybrid
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1513:      type: hybrid
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1528:| 命中 complex signal 一定走大模型 | 不一定。fused+hybrid 中 signal 只是进入算法池，最终还看权重。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1533:| Elo/session_aware 不能用 | 不能作为当前镜像的 per-decision algorithm 旧路径使用；应研究新的 global learning path。 |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1542:| round 4 fused hybrid 报告 | [wzh-solution-2026.06.25.15.25.md](wzh-solution-2026.06.25.15.25.md) |
+wzh-solution/wzh-solution-2026.06.25.19.50.md:1548:| fused hybrid 配置 | [files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml](files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml) |
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:45:      description: Larger model for multi-turn technical reasoning and long sessions.
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:46:      capabilities: [chat, reasoning, technical-support]
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:78:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:80:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:82:        type: session_aware
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:83:        session_aware:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:84:          base_method: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:92:          max_cache_cost_multiplier: 2.5
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:107:      method: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:109:      hybrid:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:110:        elo_weight: 0.2
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:111:        router_dc_weight: 0.2
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-session-aware-probe.yaml:112:        automix_weight: 0.2
+wzh-solution/wzh-solution-2026.06.25.11.30.md:23:| 多信号路由 | embedding, context, structure, language, authz, PII, jailbreak, event, feedback, reask, preference, projection | 20 个 OpenAI SDK 场景全部成功，11 次走 27B-FP8，9 次走 2B |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:24:| 决策命中后的模型选择算法 | `routing.decisions[].algorithm.type` | router_dc / automix / hybrid / multi_factor / latency_aware 全部跑通 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:83:| 模型/cache 目录 | `/var/mnt/semantic-router-bench/hf-cache` |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:95:| `vsr-qwen35-2b` | 小模型 vLLM OpenAI 后端 | host `18001` -> container `8000` | `hf-cache:/data/hf-cache`, `logs:/logs` |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:96:| `vsr-qwen35-27b-fp8` | 大模型 vLLM OpenAI 后端 | host `18002` -> container `8000` | `hf-cache:/data/hf-cache`, `logs:/logs` |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:112:| `/var/mnt/semantic-router-bench/configs/router-multisignal.yaml` | round 2 的多信号配置，测试 embedding/context/language/authz/PII 等 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:113:| `/var/mnt/semantic-router-bench/configs/router-selection-algorithms.yaml` | round 2 的模型选择算法配置，测试 router_dc/automix/hybrid 等 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:115:| `/var/mnt/semantic-router-bench/hf-cache` | Hugging Face 模型缓存，vLLM 后端模型从这里复用 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:138:--gpu-memory-utilization 0.80
+wzh-solution/wzh-solution-2026.06.25.11.30.md:157:| model-selection registry | 注册 router_dc、automix、hybrid、multi_factor、latency_aware 等 | decision 命中后的候选模型选择 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:214:| `x-vsr-selected-reasoning` | 是否启用 reasoning 参数 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:269:| authz | `admin`, `premium_user` | 基于请求头身份和用户组 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:290:      use_reasoning: true
+wzh-solution/wzh-solution-2026.06.25.11.30.md:291:      reasoning_effort: medium
+wzh-solution/wzh-solution-2026.06.25.11.30.md:299:4. 并开启 reasoning
+wzh-solution/wzh-solution-2026.06.25.11.30.md:477:| admin header | `authz=admin,premium_user` | `route-authz-admin-large` | 27B-FP8 | admin decision priority 980，最高 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:535:    type: router_dc
+wzh-solution/wzh-solution-2026.06.25.11.30.md:556:| router_dc | 2B | 27B-FP8 | 根据 query-model contrastive similarity 选择，简单账号类偏 2B，复杂事故分析偏 27B |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:557:| automix | 27B-FP8 | 27B-FP8 | 当前质量分和配置使它偏向高质量模型 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:558:| hybrid | 2B | 27B-FP8 | 混合 RouterDC / AutoMix / cost 等权重，简单走小，复杂走大 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:559:| multi_factor | 2B | 2B | quality/latency/cost/load 权重与 SLO 配置下偏向便宜/快的 2B |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:560:| latency_aware | 2B | 2B | 当前 latency-aware 配置和可用观测下偏向 2B |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:562:### 12.4 Elo 和 session_aware 为什么没作为 per-decision 跑通
+wzh-solution/wzh-solution-2026.06.25.11.30.md:568:  type: elo
+wzh-solution/wzh-solution-2026.06.25.11.30.md:575:  type: session_aware
+wzh-solution/wzh-solution-2026.06.25.11.30.md:582:| elo | 已迁到 global router learning/adaptation |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:583:| session_aware | 已迁到 global router learning/protection |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:587:## 13. authz 的坑
+wzh-solution/wzh-solution-2026.06.25.11.30.md:589:本次 authz 测试暴露了一个很实际的点：
+wzh-solution/wzh-solution-2026.06.25.11.30.md:591:只要配置了 role binding 并且 decision 使用 authz signal，router 会要求请求里有身份头。
+wzh-solution/wzh-solution-2026.06.25.11.30.md:596:x-authz-user-id
+wzh-solution/wzh-solution-2026.06.25.11.30.md:602:authz signal evaluation failed: user identity header is empty
+wzh-solution/wzh-solution-2026.06.25.11.30.md:609:| 普通请求 | `x-authz-user-id: anonymous` |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:610:| admin 测试 | `x-authz-user-id: alice`, `x-authz-user-groups: admins,premium-support` |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:614:1. 如果你只想测试 authz 场景，不要让所有请求都被 authz 阻塞。
+wzh-solution/wzh-solution-2026.06.25.11.30.md:634:| `routing.decisions[].algorithm` | 候选模型二次选择方式 | router_dc 简单选 2B、复杂选 27B；multi_factor 两个都选 2B |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:693:| 质量/成本/延迟折中 | hybrid 或 multi_factor |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:754:| latency_aware 复杂请求仍选 2B | 当前 latency 观测或配置偏快模型，符合 latency-aware 的目标 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:755:| Elo / session_aware 不能 per-decision 配置 | 当前镜像把它们迁到 global learning 配置路径 |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:782:| 语义匹配候选模型能力 | router_dc |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:783:| 偏质量、允许升级 | automix |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:784:| 质量/语义/成本折中 | hybrid |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:785:| 显式质量/延迟/成本/load 权重 | multi_factor |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:786:| 强延迟目标 | latency_aware |
+wzh-solution/wzh-solution-2026.06.25.11.30.md:794:3. authz header 从可信认证网关注入。
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:12:    default_reasoning_effort: low
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:25:        cached_input_per_1m: 0.05
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:35:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:39:        cached_input_per_1m: 2.00
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:60:      description: Larger FP8 reasoning model for technical support, incidents, security review, code analysis, multi-step workflows, and long-context synthesis.
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:61:      capabilities: [chat, reasoning, code, technical-support, security, incident-analysis, long-context]
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:64:      tags: [large, reasoning, expensive]
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:159:        method: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:197:          - answer in one paragraph
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:256:    - name: fused-signal-hybrid-selector
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:297:          - type: authz
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:301:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:303:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:304:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:306:        type: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:307:        hybrid:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:308:          elo_weight: 0.15
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:309:          router_dc_weight: 0.35
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:310:          automix_weight: 0.15
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:322:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:331:      method: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:333:      router_dc:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:341:      automix:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:348:      hybrid:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:349:        elo_weight: 0.15
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:350:        router_dc_weight: 0.35
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml:351:        automix_weight: 0.15
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:48:      - name: elo_probe
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:55:    - name: elo-probe
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:61:            name: elo_probe
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:66:        type: elo
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:67:        elo:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:73:          storage_path: /logs/round4-elo-probe.json
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:88:      method: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:90:      hybrid:
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:91:        elo_weight: 0.15
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:92:        router_dc_weight: 0.35
+wzh-solution/files/wzh-solution-2026-06-25-15-25/router-elo-probe.yaml:93:        automix_weight: 0.15
+wzh-solution/wzh-solution-2026.06.25.09.21.md:14:- Four temporary NVMe disks can be used for model/cache/work data, but live disk state must be confirmed before formatting, mounting, or reusing them.
+wzh-solution/wzh-solution-2026.06.25.09.21.md:58:| Large backend tuning | Initial TP=2 + 8192 context failed CUDA OOM during profiling; stable config used TP=2, `--max-model-len 4096`, `--gpu-memory-utilization 0.80`, and `--enforce-eager`. |
+wzh-solution/wzh-solution-2026.06.25.09.21.md:78:| Distributed algorithm debug | 27B-FP8 / `route-large-keyword` | 27B-FP8 / `default-large` | Complex reasoning traffic reaches the large backend. |
+wzh-solution/wzh-solution-2026.06.25.09.21.md:98:Benchmark profile: `openai_http`, `chat_completions`, `concurrent` profile, concurrency 1, 8 requests per case, synthetic 64 input / 32 output token target. The table below is computed from request-level successful samples in the JSON reports.
+wzh-solution/wzh-solution-2026.06.25.09.21.md:112:- Sample size is intentionally small; for production SLO decisions, rerun with higher request counts, multiple concurrency levels, and warmed router/model caches.
+wzh-solution/wzh-solution-2026.06.25.09.21.md:116:- The 27B-FP8 backend fits on two L4 GPUs only with reduced context and eager mode in this environment. Longer context or CUDA graph mode needs more memory tuning.
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:15:    "x-vsr-selected-reasoning",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:17:    "x-ratelimit-limit",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:18:    "x-ratelimit-remaining",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:19:    "x-ratelimit-reset",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:46:            extra_headers={"x-authz-user-id": "round7-budget"},
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:78:    parser.add_argument("--mode", choices=["cost-ceiling", "request-params", "ratelimit"], required=True)
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:85:                "complex_debug_budget_ceiling",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:96:                "simple_default_budget_ceiling",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:105:                "request_params_max_tokens_64",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:109:                        "content": "Write a numbered list with at least ten detailed items about semantic routing budget controls.",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:116:                "request_params_blocked_logprobs",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:125:                "ratelimit_large_budget_exhausted",
+wzh-solution/files/wzh-solution-2026-06-25-22-14/budget_probe.py:129:                        "content": "This request should first select the expensive reasoning model, but that model has only a one-token local limiter budget.",
+wzh-solution/wzh-solution-2026.06.25.22.14.md:1:# Round 7: semantic-router budget 行为专项验证
+wzh-solution/wzh-solution-2026.06.25.22.14.md:6:| 目标 | 验证项目里所谓 budget 模式是否支持“某模型预算不足时自动切到仍有预算的模型” |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:11:| ratelimit 输出 | [files/wzh-solution-2026-06-25-22-14/ratelimit-budget-sdk-output.txt](files/wzh-solution-2026-06-25-22-14/ratelimit-budget-sdk-output.txt) |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:15:上一把 round 6 我验证的是 GPU VM 重启后的环境恢复、fused router 恢复、OpenAI SDK 流量和多轮路由。那不是 budget 专项测试。这个判断你指出得对。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:17:这一轮专门补测 budget/cost 相关能力，并把三类容易混在一起的能力拆开：
+wzh-solution/wzh-solution-2026.06.25.22.14.md:19:1. README 里叫 `budget-route` 的 `request_params` 插件。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:20:2. `multi_factor.slo.max_cost_per_1m` 这种成本上限过滤。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:21:3. `local-limiter` 的 token/request budget。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:25:### 1. README 的 `budget-route` 不是余额预算
+wzh-solution/wzh-solution-2026.06.25.22.14.md:27:`src/vllm-sr/README.md` 里的 `budget-route` 示例是：
+wzh-solution/wzh-solution-2026.06.25.22.14.md:31:  - type: "request_params"
+wzh-solution/wzh-solution-2026.06.25.22.14.md:39:这类 budget 是“请求参数预算”，意思是限制一次请求最多生成多少 token、最多几个 `n`、是否允许 `logprobs`。它不是“账户预算余额”，也不是“某个模型预算不够就换另一个模型”。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:43:`multi_factor` selector 支持：
+wzh-solution/wzh-solution-2026.06.25.22.14.md:47:  type: multi_factor
+wzh-solution/wzh-solution-2026.06.25.22.14.md:48:  multi_factor:
+wzh-solution/wzh-solution-2026.06.25.22.14.md:53:代码路径在 `src/semantic-router/pkg/selection/multi_factor.go`：
+wzh-solution/wzh-solution-2026.06.25.22.14.md:62:### 3. token budget 存在，但耗尽时是 429
+wzh-solution/wzh-solution-2026.06.25.22.14.md:67:ratelimit:
+wzh-solution/wzh-solution-2026.06.25.22.14.md:84:配置文件：[router-budget-cost-ceiling.yaml](files/wzh-solution-2026-06-25-22-14/router-budget-cost-ceiling.yaml)
+wzh-solution/wzh-solution-2026.06.25.22.14.md:100:    - name: budget-cost-ceiling
+wzh-solution/wzh-solution-2026.06.25.22.14.md:105:        type: multi_factor
+wzh-solution/wzh-solution-2026.06.25.22.14.md:106:        multi_factor:
+wzh-solution/wzh-solution-2026.06.25.22.14.md:111:测试请求是复杂 incident/debug/root-cause 请求。按上一轮 fused hybrid 行为，这类请求常会走 27B；但在本配置里，27B 的 `prompt_per_1m=8.00` 超过 `max_cost_per_1m=1.0`，所以它应被过滤。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:117:| `complex_debug_budget_ceiling` | `budget-cost-ceiling` | `qwen35-2b` | 成本上限使复杂请求走 2B |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:118:| `simple_default_budget_ceiling` | `default-small` | `qwen35-2b` | 默认小模型 |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:123:x-vsr-selected-decision: budget-cost-ceiling
+wzh-solution/wzh-solution-2026.06.25.22.14.md:125:x-vsr-matched-keywords: complex_budget_test
+wzh-solution/wzh-solution-2026.06.25.22.14.md:130:## VM 实测二：README budget-route 参数预算
+wzh-solution/wzh-solution-2026.06.25.22.14.md:132:配置文件：[router-budget-request-params.yaml](files/wzh-solution-2026-06-25-22-14/router-budget-request-params.yaml)
+wzh-solution/wzh-solution-2026.06.25.22.14.md:138:  - type: request_params
+wzh-solution/wzh-solution-2026.06.25.22.14.md:150:| `request_params_max_tokens_64` | 请求 `max_tokens=64` | 实际 `completion_tokens=16` |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:151:| `request_params_blocked_logprobs` | 请求 `logprobs=true`、`top_logprobs=2`、`n=2` | 请求成功，说明参数被处理/剥离，没有传给后端导致失败 |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:153:这个测试证明：README 的 `budget-route` 更准确地说是“单请求输出预算/参数预算”。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:157:## VM 实测三：token budget 耗尽不是 fallback
+wzh-solution/wzh-solution-2026.06.25.22.14.md:159:配置文件：[router-budget-ratelimit-no-fallback.yaml](files/wzh-solution-2026-06-25-22-14/router-budget-ratelimit-no-fallback.yaml)
+wzh-solution/wzh-solution-2026.06.25.22.14.md:165:- 给用户 `round7-budget` + 模型 `qwen35-27b-fp8` 设置 `tokens_per_unit: 1`。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:181:Rate limit DENIED by provider "local-limiter" for user=round7-budget model=qwen35-27b-fp8
+wzh-solution/wzh-solution-2026.06.25.22.14.md:194:如果你说的 budget mode 是“后面的模型有成本、有预算，预算不够就切到还有预算的模型”，那我这轮没有验证到这个功能存在。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:200:| `request_params` budget-route | 存在 | 限制 `max_tokens`、`n`、`logprobs` 等请求参数 |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:201:| `multi_factor.slo.max_cost_per_1m` | 存在 | 按模型定价过滤超过成本上限的候选模型 |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:202:| `local-limiter` token budget | 存在 | 预算不足时返回 429 |
+wzh-solution/wzh-solution-2026.06.25.22.14.md:207:> semantic-router 当前有成本感知/成本上限/请求参数预算/rate-limit token budget，但我没有看到也没有测到“模型预算余额耗尽后自动 fallback 到另一个模型”的闭环功能。
+wzh-solution/wzh-solution-2026.06.25.22.14.md:211:budget 测试结束后，VM 已恢复到 round 6 的 fused 配置：
+wzh-solution/wzh-solution-2026.06.25.22.14.md:213:- `vsr-router` 使用 `router-fused-signals-hybrid.yaml`
+wzh-solution/files/wzh-solution-2026-06-25-09-21/traffic_scenarios.py:68:    "x-vsr-selected-reasoning",
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:12:    default_reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:30:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:51:      capabilities: [chat, reasoning, code]
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:54:      tags: [large, reasoning]
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:83:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:92:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-aggressive-large.yaml:93:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:12:    default_reasoning_effort: low
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:30:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:50:      description: Larger FP8 lane for complex reasoning, code, math, and analysis.
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:51:      capabilities: [chat, reasoning, code]
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:54:      tags: [large, reasoning]
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:102:      description: Route obviously complex, reasoning, code, or architecture requests to the larger FP8 backend.
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:111:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:112:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:123:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-09-21/router-basic.yaml:132:          use_reasoning: false
+wzh-solution/wzh-solution-2026.06.25.15.25.md:15:融合配置验证成功：请求先经过 keyword、embedding、language、context、structure、authz、PII、jailbreak、conversation、projection 等信号计算；命中 decision 后，再用 `hybrid` 算法在 `qwen35-2b` 和 `qwen35-27b-fp8` 两个候选模型中选择。18 条 OpenAI SDK 场景流量全部成功，14 次选到 2B，4 次选到 27B-FP8。多轮对话会按当前 turn 重新计算信号；主题或反馈变化后可以动态改变后端模型，例如 `multi_wrong_answer_feedback` 第 1 轮选 2B，第 2 轮因多轮上下文/反馈转为 27B-FP8。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:40:融合配置保存在 [router-fused-signals-hybrid.yaml](files/wzh-solution-2026-06-25-15-25/router-fused-signals-hybrid.yaml)，共 354 行。核心思想是：
+wzh-solution/wzh-solution-2026.06.25.15.25.md:44:- `routing.decisions[0]` 使用 OR 条件，只要多个信号之一命中就进入 `fused-signal-hybrid-selector`。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:46:- decision 的 `algorithm.type: hybrid`，让 router 在候选模型之间继续选择，而不是由单个信号直接硬编码模型。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:58:`hybrid` 是本轮实际可运行的融合选模算法。它内部组合多个分数来源：
+wzh-solution/wzh-solution-2026.06.25.15.25.md:62:| `elo_weight` | 经验/质量历史分。当前 runtime 中 standalone `elo` 已迁移，但 hybrid 内部仍可使用 Elo selector 的即时评分组件；本轮日志里候选初始 rating 均为 0。 |
+wzh-solution/wzh-solution-2026.06.25.15.25.md:63:| `router_dc_weight` | RouterDC 的语义相似度权重。它对请求和模型描述/能力做 embedding 相似度比较，偏向更语义匹配的模型。 |
+wzh-solution/wzh-solution-2026.06.25.15.25.md:64:| `automix_weight` | AutoMix 的成本/质量启发式权重。它把模型质量、价格、tradeoff 结合起来，常常会把低复杂度请求压回 2B。 |
+wzh-solution/wzh-solution-2026.06.25.15.25.md:88:- 本地仓库文档和类型仍能看到 `algorithm.type=elo`、`algorithm.type=session_aware` 的配置结构。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:90:  - `session_aware`: `routing.decisions[0].algorithm.type=session_aware is no longer supported; remove algorithm.type=session_aware and enable global.router.learning.protection`
+wzh-solution/wzh-solution-2026.06.25.15.25.md:91:  - `elo`: `routing.decisions[0].algorithm.type=elo has moved to global.router.learning.adaptation; remove algorithm.type=elo and choose a request-time base algorithm only when needed`
+wzh-solution/wzh-solution-2026.06.25.15.25.md:103:- authz/event/projection：解析 header、键值字段或基于已有 signal 做 projection。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:113:- hybrid 会调用 Elo、RouterDC、AutoMix 的评分组件，然后做加权求和和成本调整。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:141:| 命中 `fused-signal-hybrid-selector` | 17 |
+wzh-solution/wzh-solution-2026.06.25.15.25.md:151:| `numbered_steps_architecture` | `explicit_complex` | `qwen35-27b-fp8` | 架构/步骤请求被 hybrid 选到大模型。 |
+wzh-solution/wzh-solution-2026.06.25.15.25.md:153:| `authz_admin_policy` | `explicit_complex` + `admin,premium_user` | `qwen35-27b-fp8` | header role signal 参与分流。 |
+wzh-solution/wzh-solution-2026.06.25.15.25.md:164:- `multi_topic_switch_account_to_incident_to_chinese` 三轮都重新计算了 signal。第 2 轮从账户任务切换到 incident/root cause，命中 `explicit_complex` + `technical_support` + `multi_turn_user`，但 hybrid 在成本和 AutoMix 作用下仍选 2B。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:176:- 旧文档或旧配置里的 `routing.decisions[].algorithm.type=elo/session_aware` 在当前镜像不可用。
+wzh-solution/wzh-solution-2026.06.25.15.25.md:177:- hybrid 仍可作为 request-time base algorithm 使用，并可组合 Elo-like 经验分、RouterDC 和 AutoMix。
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:12:    default_reasoning_effort: low
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:25:        cached_input_per_1m: 0
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:35:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:39:        cached_input_per_1m: 0
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:60:      description: Larger FP8 model for complex analysis, reasoning, incident handling, code, and synthesis.
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:61:      capabilities: [chat, reasoning, code, analysis]
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:64:      tags: [large, reasoning, premium]
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:74:      - name: alg_automix
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:80:      - name: alg_hybrid
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:109:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:111:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:112:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:114:        type: router_dc
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:115:        router_dc:
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:124:    - name: select-automix
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:130:            name: alg_automix
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:133:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:135:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:136:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:138:        type: automix
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:139:        automix:
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:147:    - name: select-hybrid
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:153:            name: alg_hybrid
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:156:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:158:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:159:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:161:        type: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:162:        hybrid:
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:163:          elo_weight: 0.35
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:164:          router_dc_weight: 0.35
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:165:          automix_weight: 0.20
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:179:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:181:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:182:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:184:        type: multi_factor
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:185:        multi_factor:
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:208:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:210:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:211:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:213:        type: latency_aware
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:214:        latency_aware:
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-selection-algorithms.yaml:226:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-09-21/envoy-vsr.yaml:28:                        - x-vsr-looper-request
+wzh-solution/files/wzh-solution-2026-06-25-09-21/envoy-vsr.yaml:29:                        - x-vsr-looper-secret
+wzh-solution/files/wzh-solution-2026-06-25-09-21/envoy-vsr.yaml:30:                        - x-vsr-looper-decision
+wzh-solution/files/wzh-solution-2026-06-25-09-21/envoy-vsr.yaml:31:                        - x-vsr-looper-iteration
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py:14:    "x-vsr-selected-reasoning",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py:32:        "id": "automix_simple",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py:37:        "id": "automix_complex",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py:42:        "id": "hybrid_simple",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py:47:        "id": "hybrid_complex",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py:52:        "id": "multi_factor_simple",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_selection_algorithms.py:57:        "id": "multi_factor_complex",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:15:    "x-vsr-selected-reasoning",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:30:    "x-vsr-matched-authz",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:63:        "expectation": "technical embedding + complex keyword should favor the larger reasoning model.",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:142:        "id": "authz_admin_policy",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:143:        "expectation": "authz admin role should match via request headers.",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:145:            "x-authz-user-id": "alice",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:146:            "x-authz-user-groups": "admins,premium-support",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:196:        "id": "elo_probe_simple",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:205:        "id": "elo_probe_complex",
+wzh-solution/files/wzh-solution-2026-06-25-15-25/traffic_fused_audit.py:246:    request_headers = {"x-authz-user-id": "anonymous"}
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:12:    default_reasoning_effort: low
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:13:    reasoning_families:
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:21:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:25:        cached_input_per_1m: 0
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:35:      reasoning_family: qwen3
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:39:        cached_input_per_1m: 0
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:60:      description: Larger FP8 lane for complex reasoning, technical support, incidents, security review, and long-context analysis.
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:61:      capabilities: [chat, reasoning, code, technical-support, security, incident-analysis]
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:64:      tags: [large, reasoning]
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:111:          - answer in one paragraph
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:190:        method: hybrid
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:271:    - name: route-authz-admin-large
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:276:          - type: authz
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:280:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:281:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:292:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:293:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:304:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:315:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:328:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:329:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:340:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:341:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:352:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:353:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:368:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:369:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:380:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:381:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:392:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:393:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:404:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:405:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:416:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:427:          use_reasoning: true
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:428:          reasoning_effort: medium
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:439:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:450:          use_reasoning: false
+wzh-solution/files/wzh-solution-2026-06-25-10-59/router-multisignal.yaml:459:          use_reasoning: false
+wzh-solution/wzh-solution-2026.06.25.10.59.md:10:## Planned Coverage
+wzh-solution/wzh-solution-2026.06.25.10.59.md:14:1. Signal routing: request content, metadata, and conversation shape produce matched signals such as embedding, structure, language, context, authz, PII, jailbreak, event, feedback, reask, preference, and projection.
+wzh-solution/wzh-solution-2026.06.25.10.59.md:58:| authz | Admin headers emitted `admin,premium_user` and routed to 27B-FP8. |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:74:| router_dc | 2B | 27B-FP8 | Validated |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:75:| automix | 27B-FP8 | 27B-FP8 | Validated |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:76:| hybrid | 2B | 27B-FP8 | Validated |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:77:| multi_factor | 2B | 2B | Validated |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:78:| latency_aware | 2B | 2B | Validated |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:89:| elo | Rejected at config load: moved to global router learning/adaptation. |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:90:| session_aware | Rejected at config load: moved to global router learning/protection. |
+wzh-solution/wzh-solution-2026.06.25.10.59.md:96:- Authz role bindings are strict: once an authz decision references role bindings, requests need an identity header. The test traffic therefore sent `x-authz-user-id: anonymous` for ordinary requests and admin group headers only for the authz scenario.
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_multisignal.py:14:    "x-vsr-selected-reasoning",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_multisignal.py:29:    "x-vsr-matched-authz",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_multisignal.py:157:        "id": "authz_admin",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_multisignal.py:159:            "x-authz-user-id": "alice",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_multisignal.py:160:            "x-authz-user-groups": "admins,premium-support",
+wzh-solution/files/wzh-solution-2026-06-25-10-59/traffic_multisignal.py:199:    request_headers = {"x-authz-user-id": "anonymous"}

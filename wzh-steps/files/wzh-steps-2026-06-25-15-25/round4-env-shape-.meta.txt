@@ -1,0 +1,3 @@
+timestamp=2026-06-25T15:28:10+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -lc awk\ -F=\ \'/\^\[A-Za-z_\]\[A-Za-z0-9_\]\*=/\{k=\$1\;\ v=substr\(\$0,index\(\$0,\"=\"\)+1\)\;\ if\ \(k\ ~\ /\(PASS\|PASSWORD\|KEY\|TOKEN\|SECRET\|CRED\)/\)\ v=\"\[REDACTED\]\"\;\ print\ k\"=\"v\}\'\ .wzh/env.txt 

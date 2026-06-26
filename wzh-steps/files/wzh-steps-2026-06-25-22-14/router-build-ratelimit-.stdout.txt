@@ -1,0 +1,61 @@
+deploy/recipes/balance.probes.yaml:74:      - id: distributed_rate_limiter
+src/semantic-router/pkg/config/reference_config_global_test.go:41:	assertReferenceConfigRateLimitCoverage(t, mustMapAt(t, services, "ratelimit"))
+src/semantic-router/pkg/config/reference_config_global_test.go:92:func assertReferenceConfigRateLimitCoverage(t testingT, ratelimit map[string]interface{}) {
+src/semantic-router/pkg/config/reference_config_global_test.go:93:	providers := mustSliceAt(t, ratelimit, "providers")
+src/semantic-router/pkg/config/reference_config_global_test.go:94:	rules := collectNestedSliceItems(t, providers, "rules", "global.services.ratelimit.providers")
+src/semantic-router/pkg/config/reference_config_global_test.go:96:	assertMapCoversStructFields(t, ratelimit, reflect.TypeOf(RateLimitConfig{}), "global.services.ratelimit")
+src/semantic-router/pkg/config/reference_config_global_test.go:97:	assertSliceUnionCoversStructFields(t, providers, reflect.TypeOf(RateLimitProviderConfig{}), "global.services.ratelimit.providers")
+src/semantic-router/pkg/config/reference_config_global_test.go:98:	assertSliceUnionCoversStructFields(t, rules, reflect.TypeOf(RateLimitRule{}), "global.services.ratelimit.providers[].rules")
+src/semantic-router/pkg/config/reference_config_global_test.go:101:		collectChildMapsFromSlice(t, rules, "match", "global.services.ratelimit.providers[].rules"),
+src/semantic-router/pkg/config/reference_config_global_test.go:103:		"global.services.ratelimit.providers[].rules[].match",
+src/semantic-router/pkg/extproc/router_build.go:12:	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/ratelimit"
+src/semantic-router/pkg/extproc/router_build.go:44:	rateLimiter          *ratelimit.RateLimitResolver
+src/semantic-router/pkg/extproc/router_build.go:190:		logging.ComponentEvent("extproc", "rate_limit_resolver_initialized", map[string]interface{}{
+src/semantic-router/pkg/extproc/router.go:17:	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/ratelimit"
+src/semantic-router/pkg/extproc/router.go:54:	RateLimiter *ratelimit.RateLimitResolver
+src/semantic-router/pkg/config/canonical_global.go:45:	RateLimit     RateLimitConfig     `yaml:"ratelimit"`
+src/semantic-router/pkg/config/config.go:84:	RateLimit RateLimitConfig `yaml:"ratelimit,omitempty"`
+src/semantic-router/pkg/extproc/extproc_test.go:4205:									{Key: "x-ratelimit-remaining", Value: "1000"},
+src/semantic-router/pkg/extproc/router_resolvers.go:9:	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/ratelimit"
+src/semantic-router/pkg/extproc/router_resolvers.go:20:	"envoy-ratelimit": true,
+src/semantic-router/pkg/extproc/router_resolvers.go:130:func buildRateLimitResolver(cfg *config.RouterConfig) *ratelimit.RateLimitResolver {
+src/semantic-router/pkg/extproc/router_resolvers.go:134:		logging.ComponentEvent("extproc", "rate_limit_resolver_disabled", map[string]interface{}{
+src/semantic-router/pkg/extproc/router_resolvers.go:156:	resolver := ratelimit.NewRateLimitResolver(providers...)
+src/semantic-router/pkg/extproc/router_resolvers.go:179:				"ratelimit.providers[%d]: unknown type %q (valid types: envoy-ratelimit, local-limiter)",
+src/semantic-router/pkg/extproc/router_resolvers.go:185:	if provider.Type == "envoy-ratelimit" && provider.Address == "" {
+src/semantic-router/pkg/extproc/router_resolvers.go:188:			fmt.Sprintf("ratelimit.providers[%d]: envoy-ratelimit requires 'address'", index),
+src/semantic-router/pkg/extproc/router_resolvers.go:194:			fmt.Sprintf("ratelimit.providers[%d]: local-limiter requires at least one rule", index),
+src/semantic-router/pkg/extproc/router_resolvers.go:200:func createRateLimitProviders(providersCfg []config.RateLimitProviderConfig) []ratelimit.Provider {
+src/semantic-router/pkg/extproc/router_resolvers.go:201:	providers := make([]ratelimit.Provider, 0, len(providersCfg))
+src/semantic-router/pkg/extproc/router_resolvers.go:211:func buildRateLimitProvider(providerCfg config.RateLimitProviderConfig) ratelimit.Provider {
+src/semantic-router/pkg/extproc/router_resolvers.go:213:	case "envoy-ratelimit":
+src/semantic-router/pkg/extproc/router_resolvers.go:222:func buildEnvoyRateLimitProvider(providerCfg config.RateLimitProviderConfig) ratelimit.Provider {
+src/semantic-router/pkg/extproc/router_resolvers.go:228:	envoyProvider, err := ratelimit.NewEnvoyRLSProvider(providerCfg.Address, domain)
+src/semantic-router/pkg/extproc/router_resolvers.go:230:		logging.Errorf("RateLimit: failed to create envoy-ratelimit provider: %v", err)
+src/semantic-router/pkg/extproc/router_resolvers.go:233:	logging.Infof("RateLimit: envoy-ratelimit provider at %s (domain=%s)", providerCfg.Address, domain)
+src/semantic-router/pkg/extproc/router_resolvers.go:237:func buildLocalRateLimitProvider(providerCfg config.RateLimitProviderConfig) ratelimit.Provider {
+src/semantic-router/pkg/extproc/router_resolvers.go:240:	return ratelimit.NewLocalLimiter(rules)
+src/semantic-router/pkg/extproc/router_resolvers.go:243:func buildLocalRateLimitRules(rulesCfg []config.RateLimitRule) []ratelimit.Rule {
+src/semantic-router/pkg/extproc/router_resolvers.go:244:	rules := make([]ratelimit.Rule, 0, len(rulesCfg))
+src/semantic-router/pkg/extproc/router_resolvers.go:246:		rules = append(rules, ratelimit.Rule{
+src/semantic-router/pkg/extproc/router_resolvers.go:248:			Match: ratelimit.RuleMatch{
+src/semantic-router/pkg/extproc/router_resolvers.go:255:			Unit:            ratelimit.ParseUnit(rule.Unit),
+src/semantic-router/pkg/extproc/router_resolvers_test.go:75:	cfg.RateLimit.Providers = []config.RateLimitProviderConfig{{Type: "envoy-ratelimit"}}
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:17:	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/ratelimit"
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:241:// buildRateLimitContext constructs a ratelimit.Context from the request context.
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:242:func (r *OpenAIRouter) buildRateLimitContext(ctx *RequestContext, selectedModel string) ratelimit.Context {
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:255:	return ratelimit.Context{
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:265:func (r *OpenAIRouter) createRateLimitResponse(decision *ratelimit.Decision) *ext_proc.ProcessingResponse {
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:271:	body := []byte(fmt.Sprintf(`{"error":{"message":"Rate limit exceeded. Retry after %s seconds.","type":"rate_limit_error","code":429}}`, retryAfterSec))
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:281:				Key: "x-ratelimit-limit", RawValue: []byte(fmt.Sprintf("%d", decision.Limit)),
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:284:				Key: "x-ratelimit-remaining", RawValue: []byte(fmt.Sprintf("%d", decision.Remaining)),
+src/semantic-router/pkg/extproc/processor_req_body_memory.go:289:				Key: "x-ratelimit-reset", RawValue: []byte(fmt.Sprintf("%d", decision.ResetAt.Unix())),
+src/semantic-router/pkg/extproc/request_context.go:14:	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/ratelimit"
+src/semantic-router/pkg/extproc/request_context.go:240:	// Rate limit context - stored after Check() for post-response Report()
+src/semantic-router/pkg/extproc/request_context.go:241:	RateLimitCtx *ratelimit.Context
+src/semantic-router/pkg/extproc/processor_req_body_prepare.go:150:		decision, err := r.RateLimiter.Check(rlCtx)
+src/semantic-router/pkg/extproc/processor_req_body_prepare.go:152:			logging.ComponentErrorEvent("extproc", "rate_limit_check_failed", map[string]interface{}{
+src/semantic-router/pkg/extproc/processor_req_body_prepare.go:160:			logging.ComponentEvent("extproc", "rate_limit_rejected", map[string]interface{}{
+src/semantic-router/pkg/extproc/processor_res_usage.go:14:	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/ratelimit"
+src/semantic-router/pkg/extproc/processor_res_usage.go:77:		r.RateLimiter.Report(*ctx.RateLimitCtx, ratelimit.TokenUsage{
+src/semantic-router/pkg/extproc/processor_res_usage.go:268:		r.RateLimiter.Report(*ctx.RateLimitCtx, ratelimit.TokenUsage{

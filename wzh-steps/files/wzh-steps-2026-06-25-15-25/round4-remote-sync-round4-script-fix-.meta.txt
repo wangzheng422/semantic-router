@@ -1,0 +1,3 @@
+timestamp=2026-06-25T15:59:43+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -lc wzh-steps/files/wzh-steps-2026-06-25-15-25/remote_scp_to.sh\ wzh-solution/files/wzh-solution-2026-06-25-15-25/remote_round4.sh\ /var/mnt/semantic-router-bench/traffic/remote_round4.sh\;\ wzh-steps/files/wzh-steps-2026-06-25-15-25/remote_exec.sh\ \"chmod\ +x\ /var/mnt/semantic-router-bench/traffic/remote_round4.sh\;\ head\ -1\ /var/mnt/semantic-router-bench/traffic/remote_round4.sh\" 

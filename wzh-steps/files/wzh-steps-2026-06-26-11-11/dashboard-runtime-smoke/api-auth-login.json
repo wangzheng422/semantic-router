@@ -1,0 +1,33 @@
+{
+  "token": "[REDACTED: local dashboard smoke token]",
+  "user": {
+    "createdAt": 0,
+    "email": "round9-admin@example.test",
+    "id": "27460bb6-fed1-47ba-b34a-77ab763b781d",
+    "name": "Round9 Admin",
+    "permissions": [
+      "config.deploy",
+      "config.read",
+      "config.write",
+      "evaluation.read",
+      "evaluation.run",
+      "evaluation.write",
+      "feedback.submit",
+      "logs.read",
+      "mcp.manage",
+      "mcp.read",
+      "mlpipeline.manage",
+      "openclaw.manage",
+      "openclaw.read",
+      "replay.read",
+      "security.manage",
+      "tools.use",
+      "topology.read",
+      "users.manage",
+      "users.view"
+    ],
+    "role": "admin",
+    "status": "active",
+    "updatedAt": 0
+  }
+}

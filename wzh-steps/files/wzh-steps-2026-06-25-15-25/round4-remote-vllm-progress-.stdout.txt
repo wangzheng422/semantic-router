@@ -1,0 +1,16 @@
+## ps
+vsr-qwen35-2b Exited (135) 7 minutes ago
+vsr-qwen35-27b-fp8 Exited (135) 7 minutes ago
+## 2b logs
+Error in sitecustomize; set PYTHONVERBOSE for traceback:
+OSError: [Errno 107] Transport endpoint is not connected: '/usr/lib/python3.12'
+Error in usercustomize; set PYTHONVERBOSE for traceback:
+OSError: [Errno 107] Transport endpoint is not connected: '/usr/lib/python3.12'
+## 27b logs
+Error in sitecustomize; set PYTHONVERBOSE for traceback:
+OSError: [Errno 107] Transport endpoint is not connected: '/usr/lib/python3.12'
+Error in usercustomize; set PYTHONVERBOSE for traceback:
+OSError: [Errno 107] Transport endpoint is not connected: '/usr/lib/python3.12'
+## hf cache size
+0	/var/mnt/semantic-router-bench/hf-cache
+/var/mnt/semantic-router-bench/hf-cache

@@ -1,0 +1,17 @@
+timestamp=2026-06-26T11:28:44+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ python\ -\ \<\<\"PY\"$'
+'from\ pathlib\ import\ Path$'
+'import\ yaml$'
+'p=Path\(\"wzh-solution/files/wzh-solution-2026-06-26-11-11/router-p1-rag-tools-response.yaml\"\)$'
+'yaml.safe_load\(p.read_text\(\)\)$'
+'print\(\"yaml-ok\",\ p\)$'
+'PY$'
+'HOST=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Hostname\\"\)+2\]\)\"\)\;\ PASS=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Password\\"\)+2\]\)\"\)\;\ export\ SSHPASS=\"\$PASS\"\;\ sshpass\ -e\ scp\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ wzh-solution/files/wzh-solution-2026-06-26-11-11/router-p1-rag-tools-response.yaml\ cloud-user@\$HOST:/var/mnt/semantic-router-bench/configs/router-p1-rag-tools-response.yaml 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-copy-p1-fixed-config-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-copy-p1-fixed-config-.stderr.txt
+stdout_lines=1
+stderr_lines=1
+stdout_bytes=91
+stderr_bytes=97

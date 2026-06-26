@@ -1,0 +1,3 @@
+timestamp=2026-06-25T15:26:42+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=rg -n router_dc\|automix\|hybrid\|multi_factor\|latency_aware\|elo\|session_aware\|global\\.router\\.learning\|learning\|adaptation\|protection\|algorithm\\.type\|model-selection\|model\ selection\|selection\ algorithm . --glob !wzh-steps/files/\*\* --glob !target/\*\* --glob !.git/\*\* 

@@ -1,0 +1,57 @@
+| Area | Feature | Evidence keyword count | Auto note |
+|---|---|---:|---|
+| signal | `keywords` | 66 | mentioned in prior artifacts |
+| signal | `embeddings` | 13 | mentioned in prior artifacts |
+| signal | `language` | 32 | mentioned in prior artifacts |
+| signal | `context` | 130 | mentioned in prior artifacts |
+| signal | `structure` | 51 | mentioned in prior artifacts |
+| signal | `role_bindings/authz` | 67 | mentioned in prior artifacts |
+| signal | `jailbreak` | 58 | mentioned in prior artifacts |
+| signal | `pii` | 80 | mentioned in prior artifacts |
+| signal | `user_feedback` | 17 | mentioned in prior artifacts |
+| signal | `reasks` | 5 | mentioned in prior artifacts |
+| signal | `preferences` | 5 | mentioned in prior artifacts |
+| signal | `conversation` | 52 | mentioned in prior artifacts |
+| signal | `events` | 7 | mentioned in prior artifacts |
+| signal | `projections` | 12 | mentioned in prior artifacts |
+| signal | `domains` | 4 | mentioned in prior artifacts |
+| signal | `fact_check` | 15 | mentioned in prior artifacts |
+| signal | `kb` | 4 | mentioned in prior artifacts |
+| signal | `complexity` | 2 | mentioned in prior artifacts |
+| signal | `modality` | 17 | mentioned in prior artifacts |
+| selection | `static` | 10 | mentioned in prior artifacts |
+| selection | `router_dc` | 32 | mentioned in prior artifacts |
+| selection | `automix` | 61 | mentioned in prior artifacts |
+| selection | `hybrid` | 136 | mentioned in prior artifacts |
+| selection | `multi_factor` | 29 | mentioned in prior artifacts |
+| selection | `latency_aware` | 14 | mentioned in prior artifacts |
+| selection | `elo` | 56 | mentioned in prior artifacts |
+| selection | `session_aware` | 17 | mentioned in prior artifacts |
+| selection | `rl_driven` | 0 | no prior artifact mention |
+| selection | `gmtrouter` | 0 | no prior artifact mention |
+| selection | `knn/kmeans/svm/mlp` | 0 | no prior artifact mention |
+| plugin | `semantic-cache` | 0 | no prior artifact mention |
+| plugin | `fast_response` | 0 | no prior artifact mention |
+| plugin | `system_prompt` | 0 | no prior artifact mention |
+| plugin | `header_mutation` | 0 | no prior artifact mention |
+| plugin | `hallucination` | 0 | no prior artifact mention |
+| plugin | `router_replay` | 0 | no prior artifact mention |
+| plugin | `memory` | 3 | mentioned in prior artifacts |
+| plugin | `rag` | 4 | mentioned in prior artifacts |
+| plugin | `tools` | 0 | no prior artifact mention |
+| plugin | `tool_selection` | 0 | no prior artifact mention |
+| plugin | `image_gen` | 0 | no prior artifact mention |
+| plugin | `request_params` | 13 | mentioned in prior artifacts |
+| plugin | `response_jailbreak` | 0 | no prior artifact mention |
+| global | `ratelimit/local-limiter` | 29 | mentioned in prior artifacts |
+| global | `authz/header-injection/static-config` | 59 | mentioned in prior artifacts |
+| global | `response_api` | 0 | no prior artifact mention |
+| global | `looper` | 4 | mentioned in prior artifacts |
+| global | `semantic_cache backends` | 0 | no prior artifact mention |
+| global | `router_replay API/aggregate` | 1 | mentioned in prior artifacts |
+| protocol | `streaming` | 0 | no prior artifact mention |
+| protocol | `Anthropic passthrough` | 0 | no prior artifact mention |
+| protocol | `Responses API` | 0 | no prior artifact mention |
+| routing | `reasoning_family/chat_template_kwargs` | 24 | mentioned in prior artifacts |
+| routing | `model switch gate/session transition` | 2 | mentioned in prior artifacts |
+| routing | `hot reload/watch config` | 0 | no prior artifact mention |

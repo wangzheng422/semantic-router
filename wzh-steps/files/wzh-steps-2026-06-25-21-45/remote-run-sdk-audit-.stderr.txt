@@ -1,0 +1,5 @@
+Warning: Permanently added '[REDACTED: vm bastion hostname]' (ED25519) to the list of known hosts.
+  File "<string>", line 1
+    import json; p="/benchmarks/round6-2026-06-25-21-45/fused-smoke-results.jsonl"; rows=[json.loads(x) for x in open(p, encoding="utf-8")]; print("total", len(rows), "ok", sum(1 for r in rows if r.get("ok")));\nfor r in rows: h=r.get("response",{}).get("captured_headers",{}); print(r.get("kind"), r.get("scenario_id"), r.get("turn_index", "-"), r.get("ok"), h.get("x-vsr-selected-decision"), h.get("x-vsr-selected-model"), h.get("x-vsr-matched-keywords"), h.get("x-vsr-matched-conversation"))
+                                                                                                                                                                                                                   ^
+SyntaxError: unexpected character after line continuation character

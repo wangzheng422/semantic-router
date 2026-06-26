@@ -1,0 +1,3 @@
+timestamp=2026-06-25T22:18:07+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=rg -n MaxCost\|MaxCostPer1M\|max_cost\|budget\|Budget\|pricing\|model_selection\|slo src/semantic-router/pkg src/vllm-sr deploy/recipes docs -g \*.go -g \*.yaml -g \*.md 

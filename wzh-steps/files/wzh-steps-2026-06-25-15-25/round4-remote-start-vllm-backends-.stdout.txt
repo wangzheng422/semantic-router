@@ -1,0 +1,4 @@
+c440e21e7df9473e3e08c94a1367deedc9ffa98ffec3ffcf7b3e8d2194bd8d40
+055e5db211a6a8ed8760f2a646d617d0f6470bab8cf9a2334e41a87f861bbb25
+vsr-qwen35-2b Up 1 second 0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8 Up Less than a second 0.0.0.0:18002->8000/tcp

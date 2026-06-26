@@ -1,0 +1,11 @@
+## cleanup
+## network python
+True 1
+exit=0
+## entrypoint inspect
+Entrypoint=["vllm","serve"] Cmd=null
+## start tiny server 2b
+970bd4cc85db3425a631acfd6539aa483a5dd1a66036bece753b2f6575c9b61d
+vllm-probe Up 20 seconds
+http=000
+

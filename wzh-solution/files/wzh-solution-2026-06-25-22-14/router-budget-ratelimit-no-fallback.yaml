@@ -1,0 +1,101 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+    default_reasoning_effort: low
+    reasoning_families:
+      qwen3:
+        type: chat_template_kwargs
+        parameter: enable_thinking
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 0.20
+        cached_input_per_1m: 0.05
+        completion_per_1m: 0.40
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 8.00
+        cached_input_per_1m: 2.00
+        completion_per_1m: 16.00
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 4096
+      description: Low-cost fallback candidate.
+      capabilities: [chat, low-cost]
+      quality_score: 0.62
+      modality: ar
+      tags: [small, cheap]
+    - name: qwen35-27b-fp8
+      param_size: 27B
+      context_window_size: 4096
+      description: Expensive first candidate with an intentionally exhausted token budget.
+      capabilities: [chat, reasoning]
+      quality_score: 0.91
+      modality: ar
+      tags: [large, expensive]
+
+  decisions:
+    - name: ratelimit-budget-no-fallback
+      priority: 900
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+        - model: qwen35-2b
+          use_reasoning: false
+      algorithm:
+        type: static
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    auto_model_name: budget-ratelimit-auto
+    include_config_models_in_list: true
+    model_selection:
+      method: static
+      enabled: true
+  services:
+    ratelimit:
+      fail_open: false
+      providers:
+        - type: local-limiter
+          rules:
+            - name: large-model-one-token-budget
+              match:
+                user: round7-budget
+                model: qwen35-27b-fp8
+              tokens_per_unit: 1
+              unit: minute

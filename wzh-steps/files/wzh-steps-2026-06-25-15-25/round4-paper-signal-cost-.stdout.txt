@@ -1,0 +1,31 @@
+Second, \emph{information-ordered evaluation}: evaluating high-$I(\tau_i; Y)$ signals first and short-circuiting when the decision outcome is already determined---analogous to early termination in decision trees---can reduce average per-request evaluation cost.
+The minimum description length (MDL) principle~\cite{rissanen1978modeling} provides a complementary perspective: the optimal signal subset is the one that describes the routing policy with minimum total code length, balancing signal extraction cost against routing precision.
+
+
+\subsection{Interpretation as Hybrid Embedding}
+\label{sec:disc_embedding}
+
+The signal extraction layer maps a raw request~$r$ to a structured signal vector $\mathbf{s} = S(r) \in \{0,1\}^N \times [0,1]^N$, where each dimension corresponds to a named signal condition and its associated confidence.
+This operation is functionally analogous to the \emph{embedding layer} of a Transformer~\cite{vaswani2017attention}: both convert unstructured input (token sequences or natural-language queries) into a high-dimensional representation suitable for downstream computation.
+
+However, the analogy is not merely structural---it reveals a key design distinction.
+Transformer embeddings produce dense, opaque vectors optimized end-to-end for a downstream task.
+The signal vector~$\mathbf{s}$, by contrast, is \emph{interpretable by construction}: each dimension has a human-readable name (e.g., \texttt{domain:mathematics}, \texttt{complexity:high}), a defined semantic type, and an independently auditable extraction pipeline.
+This interpretability is not incidental but architecturally enforced: the decision engine references signals by type and name, so the signal vector must be a \emph{structured, symbolic representation} rather than a latent embedding.
+
+We characterize this as a \emph{hybrid embedding}: the extraction methods span a spectrum from sub-millisecond heuristics (keyword matching, regex patterns) to learned neural classifiers (LoRA-based domain and complexity models, embedding similarity), yet all project onto the same interpretable coordinate system.
+\Cref{fig:embedding_comparison} illustrates this comparison.
+
+\begin{figure*}[!ht]
+  \centering
+  \resizebox{\linewidth}{!}{%
+  \begin{tikzpicture}[
+    box/.style={rectangle, draw, thick, rounded corners=3pt,
+                minimum height=0.7cm, align=center, inner sep=4pt, font=\small},
+    lbl/.style={font=\scriptsize, text=gray},
+    arr/.style={->, >=stealth, thick},
+    brace/.style={decorate, decoration={brace, amplitude=5pt, mirror}},
+  ]
+
+  % === Transformer Embedding (top) ===
+  \node[font=\small\bfseries] at (5.5, 4.2) {Transformer Embedding Layer};

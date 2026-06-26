@@ -1,0 +1,9 @@
+ratelimit_large_budget_exhausted False {} None None
+## results
+{"elapsed_ms": 60566.17, "error": "RateLimitError(\"Error code: 429 - {'error': {'message': 'Rate limit exceeded. Retry after 0 seconds.', 'type': 'rate_limit_error', 'code': 429}}\")", "ok": false, "request": {"body": {"max_tokens": 32, "messages": [{"content": "This request should first select the expensive reasoning model, but that model has only a one-token local limiter budget.", "role": "user"}], "model": "auto", "temperature": 0}}, "scenario_id": "ratelimit_large_budget_exhausted"}
+## envoy
+[2026-06-25T14:27:44.699Z] "GET /v1/models HTTP/1.1" 500 - 1 "-" "-" "-" "-"
+[2026-06-25T14:27:46.780Z] "GET /v1/models HTTP/1.1" 200 - 2 "-" "-" "-" "-"
+[2026-06-25T14:27:46.793Z] "GET /v1/models HTTP/1.1" 200 - 0 "-" "-" "-" "-"
+[2026-06-25T14:28:10.091Z] "POST /v1/chat/completions HTTP/1.1" 429 - 2 "-" "-" "-" "-"
+## router ratelimit

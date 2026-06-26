@@ -1,0 +1,1 @@
+find: -printf: unknown primary or operator

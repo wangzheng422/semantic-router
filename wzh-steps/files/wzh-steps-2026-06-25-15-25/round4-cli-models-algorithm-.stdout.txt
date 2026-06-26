@@ -1,0 +1,131 @@
+    name: str
+    event_types: Optional[List[str]] = None
+    severities: Optional[List[str]] = None
+    action_codes: Optional[List[str]] = None
+    temporal: bool = False
+    description: Optional[str] = None
+
+
+class ComplexityCandidates(BaseModel):
+    """Complexity candidates configuration."""
+
+    candidates: List[str]
+    image_candidates: Optional[List[str]] = None
+
+
+class PrototypeScoringConfig(BaseModel):
+    """Prototype-bank construction and scoring controls for embedding-backed signals."""
+
+    enabled: Optional[bool] = None
+    cluster_similarity_threshold: Optional[float] = None
+    max_prototypes: Optional[int] = None
+    best_weight: Optional[float] = None
+    top_m: Optional[int] = None
+    margin_threshold: Optional[float] = None
+
+
+class EmbeddingClassifierConfig(BaseModel):
+    """Embedding classifier tuning, including prototype-aware label scoring controls."""
+
+    model_config = ConfigDict(extra="allow")
+
+    model_type: Optional[str] = None
+    preload_embeddings: Optional[bool] = None
+    target_dimension: Optional[int] = None
+    target_layer: Optional[int] = None
+    enable_soft_matching: Optional[bool] = None
+    top_k: Optional[int] = None
+    min_score_threshold: Optional[float] = None
+    prototype_scoring: Optional[PrototypeScoringConfig] = None
+
+
+class ComplexityRule(BaseModel):
+    """Complexity-based signal configuration using embedding similarity.
+
+    The composer field allows filtering based on other signals (e.g., only apply
+    code_complexity when domain is "computer science"). This is evaluated after
+    all signals are computed in parallel, enabling signal dependencies.
+    """
+
+    name: str
+    threshold: float = 0.1
+    hard: ComplexityCandidates
+    easy: ComplexityCandidates
+    description: Optional[str] = None
+    composer: Optional["Rules"] = None  # Forward reference, defined below
+
+
+class JailbreakRule(BaseModel):
+    """Jailbreak detection signal configuration.
+
+    Supports two methods:
+    - "classifier" (default): BERT/LoRA-based jailbreak classifier
+    - "contrastive": Embedding-based contrastive scoring against jailbreak/benign KBs
+    """
+
+    name: str
+    threshold: float
+    method: Optional[str] = None  # "classifier" (default) or "contrastive"
+    include_history: bool = False
+    jailbreak_patterns: Optional[list[str]] = (
+        None  # Known jailbreak prompts (contrastive KB)
+    )
+    benign_patterns: Optional[list[str]] = None  # Known benign prompts (contrastive KB)
+    description: Optional[str] = None
+
+
+class PIIRule(BaseModel):
+    """PII detection signal configuration."""
+
+    name: str
+    threshold: float
+    pii_types_allowed: Optional[List[str]] = None
+    include_history: bool = False
+    description: Optional[str] = None
+
+
+class ModalityRule(BaseModel):
+    """Modality detection signal configuration.
+
+    Classifies whether a prompt requires text (AR), image (DIFFUSION), or both (BOTH).
+    Detection configuration is read from modality_detector (InlineModels).
+    """
+
+    name: str
+    description: Optional[str] = None
+
+
+class Subject(BaseModel):
+    """RBAC subject (user or group) for role binding."""
+
+    kind: str  # "User" or "Group"
+    name: str
+
+
+class RoleBindingRule(BaseModel):
+    """RBAC role binding signal configuration.
+
+    Maps subjects (users/groups) to a named role following the Kubernetes RBAC pattern.
+    The role name is emitted as a signal of type "authz" in the decision engine.
+    User identity is read from x-authz-user-id and x-authz-user-groups headers.
+    """
+
+    name: str
+    role: str
+    subjects: List[Subject]
+    description: Optional[str] = None
+
+
+class KBSignalTarget(BaseModel):
+    """Binding target for a named knowledge base."""
+
+    kind: Literal["label", "group"]
+    value: str
+
+
+class KBSignal(BaseModel):
+    """Knowledge-base signal bound to a named global KB instance."""
+
+    name: str
+    kb: str
+    target: KBSignalTarget

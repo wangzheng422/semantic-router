@@ -1,0 +1,3 @@
+timestamp=2026-06-26T10:56:49+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=rg -n execute.\*Plugin\|Get.\*Config\|PluginConfig\|request_params\|fast_response\|system_prompt\|header_mutation\|router_replay\|semantic-cache\|semantic_cache\|memory\|rag\|tools\|tool_selection\|image_gen\|response_jailbreak\|hallucination src/semantic-router/pkg/extproc src/semantic-router/pkg/config src/semantic-router/pkg/dsl -g \*.go 

@@ -1,0 +1,22 @@
+timestamp=2026-06-26T11:20:30+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ python\ -\ \<\<\"PY\"$'
+'from\ pathlib\ import\ Path$'
+'import\ json,\ yaml$'
+'base=Path\(\"wzh-solution/files/wzh-solution-2026-06-26-11-11\"\)$'
+'for\ p\ in\ sorted\(base.glob\(\"\*.yaml\"\)\):$'
+'\ \ \ \ yaml.safe_load\(p.read_text\(\)\)$'
+'\ \ \ \ print\(\"yaml-ok\",\ p\)$'
+'for\ p\ in\ sorted\(base.glob\(\"\*.json\"\)\):$'
+'\ \ \ \ json.loads\(p.read_text\(\)\)$'
+'\ \ \ \ print\(\"json-ok\",\ p\)$'
+'PY$'
+'python\ -m\ py_compile\ wzh-solution/files/wzh-solution-2026-06-26-11-11/mock_backend.py\ wzh-solution/files/wzh-solution-2026-06-26-11-11/traffic_round9.py$'
+'find\ wzh-solution/files/wzh-solution-2026-06-26-11-11\ -maxdepth\ 1\ -type\ f\ -print\ \|\ sort 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/local-round9-artifact-validation-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/local-round9-artifact-validation-.stderr.txt
+stdout_lines=12
+stderr_lines=0
+stdout_bytes=938
+stderr_bytes=0

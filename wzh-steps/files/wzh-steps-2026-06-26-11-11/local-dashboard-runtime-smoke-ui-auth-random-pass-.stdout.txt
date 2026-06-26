@@ -1,0 +1,36 @@
+== dashboard runtime smoke ==
+root=/Users/zhengwan/Desktop/dev/semantic-router
+out_dir=/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke
+source_config=/Users/zhengwan/Desktop/dev/semantic-router/wzh-solution/files/wzh-solution-2026-06-26-11-11/router-p1-rag-tools-response.yaml
+local_config=/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/router-dashboard-local.yaml
+backend_port=8700
+frontend_port=3001
+== backend focused unit tests ==
+ok  	github.com/vllm-project/semantic-router/dashboard/backend/auth	(cached)
+ok  	github.com/vllm-project/semantic-router/dashboard/backend/configprojection	(cached)
+ok  	github.com/vllm-project/semantic-router/dashboard/backend/router	(cached)
+ok  	github.com/vllm-project/semantic-router/dashboard/backend/routercontract	(cached)
+ok  	github.com/vllm-project/semantic-router/dashboard/backend/workflowstore	(cached)
+== start backend ==
+backend_pid=58997
+backend_ready_attempt=2
+== backend api probes ==
+dashboard_backend_api_assertions=PASS
+== start vite frontend ==
+frontend_pid=59042
+frontend_ready_attempt=2
+== frontend route probes ==
+/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/page-root.html: title=vLLM Semantic Router root=True script=True bytes=1207
+/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/page-_config.html: title=vLLM Semantic Router root=True script=True bytes=1207
+/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/page-_topology.html: title=vLLM Semantic Router root=True script=True bytes=1207
+/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/page-_playground.html: title=vLLM Semantic Router root=True script=True bytes=1207
+/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/page-_monitoring.html: title=vLLM Semantic Router root=True script=True bytes=1207
+/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/page-_insights.html: title=vLLM Semantic Router root=True script=True bytes=1207
+== optional browser screenshots ==
+Navigating to http://127.0.0.1:3001/config
+Capturing screenshot into /Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/config-page.png
+Navigating to http://127.0.0.1:3001/playground
+Capturing screenshot into /Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/playground-page.png
+== authenticated ui smoke ==
+dashboard_ui_smoke=PASS
+dashboard_runtime_smoke=PASS

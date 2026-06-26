@@ -1,0 +1,27 @@
+total 18 ok 18
+single simple_account_short - True fused-signal-hybrid-selector qwen35-2b explicit_simple None
+single technical_support_complex - True fused-signal-hybrid-selector qwen35-27b-fp8 explicit_complex None
+single many_questions_incident - True fused-signal-hybrid-selector qwen35-2b explicit_complex None
+single numbered_steps_architecture - True fused-signal-hybrid-selector qwen35-27b-fp8 explicit_complex None
+single first_then_chinese - True fused-signal-hybrid-selector qwen35-2b explicit_simple None
+single long_context_root_cause - True fused-signal-hybrid-selector qwen35-2b explicit_complex None
+single jailbreak_guarded - True fused-signal-hybrid-selector qwen35-2b None None
+single pii_guarded_fake - True fused-signal-hybrid-selector qwen35-2b None None
+single critical_payment_event - True fused-signal-hybrid-selector qwen35-2b explicit_complex None
+single authz_admin_policy - True fused-signal-hybrid-selector qwen35-27b-fp8 explicit_complex None
+single no_signal_default - True fused-signal-hybrid-selector qwen35-2b None None
+multi multi_topic_switch_account_to_incident_to_chinese 1 True fused-signal-hybrid-selector qwen35-2b explicit_simple None
+multi multi_topic_switch_account_to_incident_to_chinese 2 True fused-signal-hybrid-selector qwen35-2b explicit_complex multi_turn_user
+multi multi_topic_switch_account_to_incident_to_chinese 3 True fused-signal-hybrid-selector qwen35-2b explicit_simple multi_turn_user
+multi multi_wrong_answer_feedback 1 True fused-signal-hybrid-selector qwen35-2b explicit_simple None
+multi multi_wrong_answer_feedback 2 True fused-signal-hybrid-selector qwen35-27b-fp8 None multi_turn_user
+multi multi_reask_same_question 1 True default-small-no-signal qwen35-2b None None
+multi multi_reask_same_question 2 True fused-signal-hybrid-selector qwen35-2b None multi_turn_user
+## result_file
+18 /var/mnt/semantic-router-bench/benchmarks/round6-2026-06-25-21-45/fused-smoke-results.jsonl
+-rw-r--r--. 1 cloud-user users 59K Jun 25 14:05 /var/mnt/semantic-router-bench/benchmarks/round6-2026-06-25-21-45/fused-smoke-results.jsonl
+## live_containers
+vsr-qwen35-2b Up 15 minutes 0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8 Up 11 minutes 0.0.0.0:18002->8000/tcp
+vsr-router Up 4 minutes 0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+vsr-envoy Up 4 minutes 0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp

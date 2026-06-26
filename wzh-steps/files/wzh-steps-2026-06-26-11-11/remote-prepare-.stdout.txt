@@ -1,0 +1,9 @@
+/var/mnt/semantic-router-bench
+/var/mnt/semantic-router-bench/benchmarks
+/var/mnt/semantic-router-bench/benchmarks/round9-2026-06-26-11-11
+/var/mnt/semantic-router-bench/configs
+/var/mnt/semantic-router-bench/dashboard-data
+/var/mnt/semantic-router-bench/hf-cache
+/var/mnt/semantic-router-bench/logs
+/var/mnt/semantic-router-bench/models
+/var/mnt/semantic-router-bench/traffic

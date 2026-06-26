@@ -1,0 +1,149 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 60s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      pricing:
+        currency: USD
+        prompt_per_1m: 0.20
+        completion_per_1m: 0.40
+      backend_refs:
+        - name: mock-small
+          endpoint: vsr-mock-backend:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      pricing:
+        currency: USD
+        prompt_per_1m: 1.00
+        completion_per_1m: 2.00
+      backend_refs:
+        - name: mock-large
+          endpoint: vsr-mock-backend:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 4096
+      description: Mock small lane.
+      capabilities: [chat, fast]
+      quality_score: 0.60
+      modality: ar
+      tags: [small, cheap]
+    - name: qwen35-27b-fp8
+      param_size: 27B
+      context_window_size: 4096
+      description: Mock large lane.
+      capabilities: [chat, reasoning]
+      quality_score: 0.92
+      modality: ar
+      tags: [large, reasoning]
+
+  signals:
+    keywords:
+      - name: large_task_keywords
+        operator: OR
+        method: bm25
+        keywords: [architecture, debug, proof, complex, reasoning]
+        case_sensitive: false
+        bm25_threshold: 0.01
+
+  decisions:
+    - name: p1-large-rag-tools
+      priority: 900
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: large_task_keywords
+      modelRefs:
+        - model: qwen35-2b
+        - model: qwen35-27b-fp8
+      algorithm:
+        type: hybrid
+      plugins:
+        - type: rag
+          configuration:
+            enabled: true
+            backend: external_api
+            top_k: 1
+            similarity_threshold: 0.1
+            injection_mode: system_prompt
+            on_failure: warn
+            backend_config:
+              endpoint: "http://vsr-mock-backend:8000/rag/search"
+              request_format: custom
+              request_template: '{"query":"{{.Query}}","top_k":{{.TopK}},"threshold":{{.Threshold}}}'
+              timeout_seconds: 5
+        - type: tools
+          configuration:
+            enabled: true
+            mode: filtered
+            allow_tools: [get_weather]
+            block_tools: [calculate]
+            semantic_selection: false
+        - type: tool_selection
+          configuration:
+            enabled: true
+            mode: filter
+            relevance_threshold: 0.1
+            preserve_count: 1
+        - type: router_replay
+          configuration:
+            enabled: true
+            max_records: 100
+            capture_request_body: true
+            capture_response_body: true
+            max_body_bytes: 20000
+    - name: p1-default-small
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    auto_model_name: round9-p1-auto
+    include_config_models_in_list: true
+    model_selection:
+      enabled: true
+      method: hybrid
+      hybrid:
+        router_dc_weight: 0.3
+        automix_weight: 0.7
+        selection_threshold: 0.1
+  services:
+    response_api:
+      enabled: true
+      store_backend: memory
+      ttl_seconds: 3600
+      max_responses: 100
+    router_replay:
+      enabled: true
+      store_backend: memory
+      ttl_seconds: 3600
+  integrations:
+    tools:
+      enabled: true
+      top_k: 1
+      tools_db_path: /app/config/tools_db.json
+      fallback_to_empty: true

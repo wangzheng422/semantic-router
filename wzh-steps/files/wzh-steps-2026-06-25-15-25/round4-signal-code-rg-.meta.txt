@@ -1,0 +1,3 @@
+timestamp=2026-06-25T15:29:10+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=rg -n func\ .\*classif\|Classif\|embedding\|Embedding\|Keyword\|keywords\|PII\|Jailbreak\|Language\|Context\|Conversation\|Structure\|Projection\|Auth\|GetEmbedding\|candle\|openvino\|regex\|regexp\|token\|cost\|latency\|duration src/semantic-router/pkg src/vllm-sr/cli/models.py --glob !\*\*/\*_test.go 

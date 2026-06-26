@@ -1,0 +1,7 @@
+Warning: Permanently added '[REDACTED: bastion hostname]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ podman rm -f vsr-router vsr-envoy vsr-mock-backend
++ :
++ podman run -d --name vsr-mock-backend --network vsr-bench --security-opt=label=disable -p 18003:8000 -e MOCK_LOG_PATH=/logs/mock_requests.jsonl -v /var/mnt/semantic-router-bench/traffic:/traffic:Z -v /var/mnt/semantic-router-bench/logs:/logs:Z docker.io/library/python:3.12-slim python /traffic/mock_backend.py
++ podman run -d --name vsr-router --network vsr-bench --security-opt=label=disable -p 18080:8080 -p 15051:50051 -p 19190:9190 -e AI_BINDING=candle -v /var/mnt/semantic-router-bench/configs/router-p0-fast-response.yaml:/app/config.yaml:Z -v /var/mnt/semantic-router-bench/models:/app/models:Z -v /var/mnt/semantic-router-bench/logs:/logs:Z ghcr.io/vllm-project/semantic-router/vllm-sr:latest /app/config.yaml
+Error: creating container storage: the container name "vsr-router" is already in use by 4108d08a2e8d1ebbfab440963205e8791a7636bf8a80033b32e7e54a50ea7c08. You have to remove that container to be able to reuse that name: that name is already in use, or use --replace to instruct Podman to do so.

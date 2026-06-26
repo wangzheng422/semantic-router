@@ -1,0 +1,46 @@
+## host
+bastion.75s2z.internal
+2026-06-25T07:30:29+00:00
+ 07:30:29 up 14 min,  0 users,  load average: 0.00, 0.00, 0.00
+## gpu
+0, NVIDIA L4, 23034 MiB, 1 MiB
+1, NVIDIA L4, 23034 MiB, 1 MiB
+2, NVIDIA L4, 23034 MiB, 1 MiB
+3, NVIDIA L4, 23034 MiB, 1 MiB
+## disks
+NAME           SIZE TYPE FSTYPE MOUNTPOINTS
+loop0         39.6M loop erofs  
+zram0            8G disk        [SWAP]
+nvme0n1          1T disk        
+|-nvme0n1p1      1M part        
+|-nvme0n1p2    501M part vfat   /boot/efi
+|-nvme0n1p3      1G part xfs    /boot
+`-nvme0n1p4 1022.5G part xfs    /var
+                                /sysroot/ostree/deploy/default/var
+                                /etc
+                                /sysroot
+nvme1n1      875.4G disk        
+nvme2n1      875.4G disk        
+nvme4n1      875.4G disk        
+nvme3n1      875.4G disk        
+## mount
+## workdir
+total 0
+drwxr-xr-x. 2 root root  6 Jun 25 01:33 .
+drwxr-xr-x. 3 root root 35 Jun 25 01:33 ..
+## podman
+podman version 4.9.4-rhel
+vsr-qwen35-2b Exited (135) 3 hours ago docker.io/vllm/vllm-openai:latest
+vsr-qwen35-27b-fp8 Exited (135) 3 hours ago docker.io/vllm/vllm-openai:latest
+vsr-envoy Exited (135) 3 hours ago docker.io/envoyproxy/envoy:v1.34-latest
+vsr-router Exited (0) 3 hours ago ghcr.io/vllm-project/semantic-router/vllm-sr:latest
+## images
+docker.io/library/python:3.12-slim 9cbfea842643 123 MB
+ghcr.io/vllm-project/semantic-router/vllm-sr:latest 855af44c3aa4 457 MB
+docker.io/vllm/vllm-openai:latest f37691f675bb 20.4 GB
+docker.io/envoyproxy/envoy:v1.34-latest a46cc8cd8ef3 179 MB
+## cdi
+total 28
+drwxr-xr-x.   2 root root    25 Jun 25 07:16 .
+drwxr-xr-x. 100 root root  8192 Jun 25 07:16 ..
+-rw-r--r--.   1 root root 15584 Jun 25 07:16 nvidia.yaml

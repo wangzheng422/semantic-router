@@ -1,0 +1,142 @@
+wzh-solution/wzh-solution-2026.06.25.09.21.md:1:# Semantic Router VM Routing and Performance Validation
+wzh-solution/wzh-solution-2026.06.25.09.21.md:11:## Initial Assumptions
+wzh-solution/wzh-solution-2026.06.25.09.21.md:20:## Planned Architecture
+wzh-solution/wzh-solution-2026.06.25.09.21.md:31:## Evidence and Audit Links
+wzh-solution/wzh-solution-2026.06.25.09.21.md:37:## Final Architecture
+wzh-solution/wzh-solution-2026.06.25.09.21.md:50:## Deployment Result
+wzh-solution/wzh-solution-2026.06.25.09.21.md:64:## Routing Configurations Tested
+wzh-solution/wzh-solution-2026.06.25.09.21.md:73:## Scenario Routing Evidence
+wzh-solution/wzh-solution-2026.06.25.09.21.md:82:## Multi-Turn Topic Switching
+wzh-solution/wzh-solution-2026.06.25.09.21.md:94:## guidellm Benchmark
+wzh-solution/wzh-solution-2026.06.25.09.21.md:114:## Risks and Follow-Ups
+wzh-solution/wzh-solution-2026.06.25.09.21.md:122:## Created Artifact: `wzh-steps/files/wzh-steps-2026-06-25-09-21/runlog.sh`
+wzh-solution/wzh-solution-2026.06.25.09.21.md:180:## Created Artifact Links
+wzh-solution/wzh-solution-2026.06.25.09.21.md:189:## Completion State
+wzh-solution/wzh-solution-2026.06.25.10.59.md:1:# Round 2: Extended Semantic Router Routing-Mode Validation
+wzh-solution/wzh-solution-2026.06.25.10.59.md:10:## Planned Coverage
+wzh-solution/wzh-solution-2026.06.25.10.59.md:28:## Test Artifacts
+wzh-solution/wzh-solution-2026.06.25.10.59.md:35:## Results
+wzh-solution/wzh-solution-2026.06.25.10.59.md:37:### Multi-Signal Routing
+wzh-solution/wzh-solution-2026.06.25.10.59.md:68:### Model Selection Algorithms
+wzh-solution/wzh-solution-2026.06.25.10.59.md:94:## Operational Notes
+wzh-solution/wzh-solution-2026.06.25.10.59.md:100:## Artifacts
+solution/solution-2026.06.11.15.43.md:1:# vLLM Semantic Router 架构总结
+solution/solution-2026.06.11.15.43.md:9:## 一、项目定位
+solution/solution-2026.06.11.15.43.md:17:## 二、整体架构概览
+solution/solution-2026.06.11.15.43.md:66:## 三、流量入口 — 请求如何进来
+solution/solution-2026.06.11.15.43.md:68:### 3.1 入口路径
+solution/solution-2026.06.11.15.43.md:82:### 3.2 ExtProc 处理流程
+solution/solution-2026.06.11.15.43.md:93:### 3.3 请求体解析
+solution/solution-2026.06.11.15.43.md:116:## 四、路由决策 — 如何判断流量去哪个后端
+solution/solution-2026.06.11.15.43.md:118:### 4.1 四层架构模型
+solution/solution-2026.06.11.15.43.md:142:### 4.2 Signal（信号层）— 17 种信号家族
+solution/solution-2026.06.11.15.43.md:166:### 4.3 信号的 ML 推理后端
+solution/solution-2026.06.11.15.43.md:180:### 4.4 Decision（决策层）— 路由规则
+solution/solution-2026.06.11.15.43.md:185:# 示例：决策规则配置
+solution/solution-2026.06.11.15.43.md:222:### 4.5 路由执行 — 如何修改 Envoy 请求
+solution/solution-2026.06.11.15.43.md:247:### 4.6 Plugin（插件层）— 路由后增强
+solution/solution-2026.06.11.15.43.md:262:## 五、后端模型注册 — 模型如何接入
+solution/solution-2026.06.11.15.43.md:264:### 5.1 注册方式概览
+solution/solution-2026.06.11.15.43.md:283:### 5.2 方式一：KServe InferenceService（自动发现）
+solution/solution-2026.06.11.15.43.md:288:# SemanticRouter CRD 中的配置
+solution/solution-2026.06.11.15.43.md:306:### 5.3 方式二：Kubernetes Service（直连）
+solution/solution-2026.06.11.15.43.md:329:### 5.4 方式三：LlamaStack（标签发现）
+solution/solution-2026.06.11.15.43.md:350:### 5.5 配置文件中的 Model Map
+solution/solution-2026.06.11.15.43.md:355:# config.yaml 中的模型映射
+solution/solution-2026.06.11.15.43.md:371:### 5.6 LoRA 适配器支持
+solution/solution-2026.06.11.15.43.md:394:## 六、Operator 和部署架构
+solution/solution-2026.06.11.15.43.md:396:### 6.1 Kubernetes Operator
+solution/solution-2026.06.11.15.43.md:429:### 6.2 部署拓扑
+solution/solution-2026.06.11.15.43.md:458:## 七、热更新与配置重载
+solution/solution-2026.06.11.15.43.md:469:## 八、完整请求生命周期
+solution/solution-2026.06.11.15.43.md:512:## 九、Recipe（配方）示例
+solution/solution-2026.06.11.15.43.md:517:# deploy/recipes/balance.yaml 示例结构
+solution/solution-2026.06.11.15.43.md:518:# 均衡路由配方：将流量按能力分配到不同模型
+solution/solution-2026.06.11.15.43.md:546:## 十、关键技术亮点
+solution/solution-2026.06.11.15.43.md:562:## 十一、单 VM 部署（不依赖 Kubernetes）
+solution/solution-2026.06.11.15.43.md:564:### 11.1 结论：完全可以在单个 VM 上运行
+solution/solution-2026.06.11.15.43.md:568:### 11.2 本地部署架构
+solution/solution-2026.06.11.15.43.md:602:### 11.3 具体操作步骤
+solution/solution-2026.06.11.15.43.md:605:# 1. 构建本地开发镜像
+solution/solution-2026.06.11.15.43.md:608:# 2. 启动所有组件（Envoy + Router + Dashboard）
+solution/solution-2026.06.11.15.43.md:611:# 对于 AMD GPU 平台
+solution/solution-2026.06.11.15.43.md:616:### 11.4 本地模式下后端模型的配置
+solution/solution-2026.06.11.15.43.md:621:# 后端可以是本机的 vLLM 实例
+solution/solution-2026.06.11.15.43.md:634:### 11.5 典型单 VM 使用场景
+solution/solution-2026.06.11.15.43.md:646:## 十二、ML 推理绑定层 — 模型权重从哪来
+solution/solution-2026.06.11.15.43.md:648:### 12.1 这些「模型」是什么
+solution/solution-2026.06.11.15.43.md:665:### 12.2 模型权重从 HuggingFace 下载
+solution/solution-2026.06.11.15.43.md:679:### 12.3 模型注册表（Model Registry）
+solution/solution-2026.06.11.15.43.md:691:### 12.4 模型存储位置
+solution/solution-2026.06.11.15.43.md:711:### 12.5 与大模型（LLM）的关系
+solution/solution-2026.06.11.15.43.md:733:## 十三、多轮对话中途切换模型
+solution/solution-2026.06.11.15.43.md:735:### 13.1 结论：能切，而且是默认行为
+solution/solution-2026.06.11.15.43.md:744:### 13.2 但切换有代价
+solution/solution-2026.06.11.15.43.md:752:### 13.3 第一层：Cache Affinity（缓存亲和力）— 软性 tie-breaker
+solution/solution-2026.06.11.15.43.md:776:### 13.4 第二层：Model Switch Gate（模型切换门控）— 硬性控制
+solution/solution-2026.06.11.15.43.md:804:### 13.5 具体场景示例
+solution/solution-2026.06.11.15.43.md:832:### 13.6 总结
+solution/solution-2026.06.11.15.43.md:845:## 十四、项目目录结构速览
+wzh-solution/wzh-solution-2026.06.25.11.30.md:1:# Semantic Router 从入门到进阶：部署、配置、路由判断与测试结果综合报告
+wzh-solution/wzh-solution-2026.06.25.11.30.md:12:## 1. 先给结论
+wzh-solution/wzh-solution-2026.06.25.11.30.md:35:## 2. mental model：semantic-router 到底在干什么
+wzh-solution/wzh-solution-2026.06.25.11.30.md:71:## 3. 运行环境
+wzh-solution/wzh-solution-2026.06.25.11.30.md:73:### 3.1 VM 与磁盘
+wzh-solution/wzh-solution-2026.06.25.11.30.md:89:### 3.2 运行了哪些容器
+wzh-solution/wzh-solution-2026.06.25.11.30.md:106:### 3.3 这些目录和文件分别干什么
+wzh-solution/wzh-solution-2026.06.25.11.30.md:120:## 4. 系统启动时下载或初始化了什么模型
+wzh-solution/wzh-solution-2026.06.25.11.30.md:124:### 4.1 vLLM 后端模型
+wzh-solution/wzh-solution-2026.06.25.11.30.md:144:### 4.2 semantic-router 自己用的 classifier / embedding 模型
+wzh-solution/wzh-solution-2026.06.25.11.30.md:169:## 5. 访问流量路径
+wzh-solution/wzh-solution-2026.06.25.11.30.md:173:### 5.1 正常 OpenAI SDK 流量
+wzh-solution/wzh-solution-2026.06.25.11.30.md:199:### 5.2 为什么 `model=auto`
+wzh-solution/wzh-solution-2026.06.25.11.30.md:219:## 6. 配置文件怎么看
+wzh-solution/wzh-solution-2026.06.25.11.30.md:242:### 6.1 providers.models：真实后端在哪里
+wzh-solution/wzh-solution-2026.06.25.11.30.md:255:### 6.2 routing.signals：怎样识别请求
+wzh-solution/wzh-solution-2026.06.25.11.30.md:274:### 6.3 routing.decisions：命中后走哪里
+wzh-solution/wzh-solution-2026.06.25.11.30.md:301:### 6.4 priority：非常重要
+wzh-solution/wzh-solution-2026.06.25.11.30.md:315:## 7. round 1：基础 keyword / default 配置
+wzh-solution/wzh-solution-2026.06.25.11.30.md:317:### 7.1 `router-basic.yaml`
+wzh-solution/wzh-solution-2026.06.25.11.30.md:342:### 7.2 `router-aggressive-large.yaml`
+wzh-solution/wzh-solution-2026.06.25.11.30.md:366:## 8. round 1：多轮对话是否能动态切模型
+wzh-solution/wzh-solution-2026.06.25.11.30.md:388:## 9. round 1：guidellm 压测结果怎么读
+wzh-solution/wzh-solution-2026.06.25.11.30.md:406:## 10. round 2：多信号配置 `router-multisignal.yaml`
+wzh-solution/wzh-solution-2026.06.25.11.30.md:426:### 10.1 projection 是什么
+wzh-solution/wzh-solution-2026.06.25.11.30.md:449:### 10.2 多信号测试总结果
+wzh-solution/wzh-solution-2026.06.25.11.30.md:461:### 10.3 多信号：配置与结果逐项对应
+wzh-solution/wzh-solution-2026.06.25.11.30.md:485:## 11. round 2：多轮对话中的动态切换
+wzh-solution/wzh-solution-2026.06.25.11.30.md:487:### 11.1 主题切换测试
+wzh-solution/wzh-solution-2026.06.25.11.30.md:503:### 11.2 wrong answer / reask 测试
+wzh-solution/wzh-solution-2026.06.25.11.30.md:517:## 12. round 2：模型选择算法配置
+wzh-solution/wzh-solution-2026.06.25.11.30.md:521:### 12.1 测试配置结构
+wzh-solution/wzh-solution-2026.06.25.11.30.md:540:### 12.2 算法测试总结果
+wzh-solution/wzh-solution-2026.06.25.11.30.md:552:### 12.3 算法逐项结果
+wzh-solution/wzh-solution-2026.06.25.11.30.md:562:### 12.4 Elo 和 session_aware 为什么没作为 per-decision 跑通
+wzh-solution/wzh-solution-2026.06.25.11.30.md:587:## 13. authz 的坑
+wzh-solution/wzh-solution-2026.06.25.11.30.md:618:## 14. 配置和测试结果的直接关联
+wzh-solution/wzh-solution-2026.06.25.11.30.md:636:## 15. 学习路线：从入门到熟练
+wzh-solution/wzh-solution-2026.06.25.11.30.md:638:### 15.1 入门配置：只做 keyword + default
+wzh-solution/wzh-solution-2026.06.25.11.30.md:669:### 15.2 进阶配置：加 embedding / context / language
+wzh-solution/wzh-solution-2026.06.25.11.30.md:685:### 15.3 高级配置：projection + model selection
+wzh-solution/wzh-solution-2026.06.25.11.30.md:701:### 15.4 运维配置：readiness、日志和回滚
+wzh-solution/wzh-solution-2026.06.25.11.30.md:717:## 16. 如何读一次请求的路由结果
+wzh-solution/wzh-solution-2026.06.25.11.30.md:745:## 17. 本次测试中容易误解的现象
+wzh-solution/wzh-solution-2026.06.25.11.30.md:757:## 18. 推荐的实际落地策略
+wzh-solution/wzh-solution-2026.06.25.11.30.md:759:### 18.1 第一阶段：保守上线
+wzh-solution/wzh-solution-2026.06.25.11.30.md:768:### 18.2 第二阶段：扩大语义信号
+wzh-solution/wzh-solution-2026.06.25.11.30.md:778:### 18.3 第三阶段：算法选型
+wzh-solution/wzh-solution-2026.06.25.11.30.md:788:### 18.4 第四阶段：生产化治理
+wzh-solution/wzh-solution-2026.06.25.11.30.md:799:## 19. 本次最终状态
+wzh-solution/wzh-solution-2026.06.25.11.30.md:812:## 20. 证据索引
+wzh-solution/wzh-solution-2026.06.25.11.30.md:829:## 21. 最短学习口诀
+wzh-solution/wzh-solution-2026.06.25.15.25.md:1:# Semantic Router Round 4：融合多信号与算法选模验证报告
+wzh-solution/wzh-solution-2026.06.25.15.25.md:11:## 结论
+wzh-solution/wzh-solution-2026.06.25.15.25.md:19:## 路径
+wzh-solution/wzh-solution-2026.06.25.15.25.md:38:## 本轮配置
+wzh-solution/wzh-solution-2026.06.25.15.25.md:56:## 算法含义
+wzh-solution/wzh-solution-2026.06.25.15.25.md:94:## 信号命中成本
+wzh-solution/wzh-solution-2026.06.25.15.25.md:131:## 测试结果
+wzh-solution/wzh-solution-2026.06.25.15.25.md:158:## 多轮动态切换
+wzh-solution/wzh-solution-2026.06.25.15.25.md:170:## 版本差异风险
+wzh-solution/wzh-solution-2026.06.25.15.25.md:180:## 运维记录
+wzh-solution/wzh-solution-2026.06.25.15.25.md:197:## 后续建议

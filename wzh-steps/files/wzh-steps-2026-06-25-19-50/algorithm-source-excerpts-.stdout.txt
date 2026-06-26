@@ -1,0 +1,460 @@
+	}
+}
+
+// Method returns the selection method type
+func (h *HybridSelector) Method() SelectionMethod {
+	return MethodHybrid
+}
+
+// SetEloSelector sets the Elo component
+func (h *HybridSelector) SetEloSelector(elo *EloSelector) {
+	h.eloSelector = elo
+}
+
+// SetRouterDCSelector sets the RouterDC component
+func (h *HybridSelector) SetRouterDCSelector(routerDC *RouterDCSelector) {
+	h.routerDCSelector = routerDC
+}
+
+// SetAutoMixSelector sets the AutoMix component
+func (h *HybridSelector) SetAutoMixSelector(autoMix *AutoMixSelector) {
+	h.autoMixSelector = autoMix
+}
+
+// SetModelCost sets the cost for a model
+func (h *HybridSelector) SetModelCost(model string, cost float64) {
+	h.modelCosts[model] = cost
+}
+
+// SetLookupTable attaches a lookup table for data-driven constant resolution.
+func (h *HybridSelector) SetLookupTable(lt lookuptable.LookupTable) {
+	h.lookupTable = lt
+}
+
+// resolveQualityGap returns the quality-gap threshold between currentModel and
+// candidateModel for the given task family. It first checks the lookup table;
+// if no entry is found it falls back to config.QualityGapThreshold.
+//
+// TODO: integrate into model upgrade decision logic in Select.
+//
+//nolint:unused // Reserved for upcoming lookup-table consumption.
+func (h *HybridSelector) resolveQualityGap(taskFamily, currentModel, candidateModel string) float64 {
+	if h.lookupTable != nil && taskFamily != "" && currentModel != "" && candidateModel != "" {
+		if gap, ok := h.lookupTable.QualityGap(taskFamily, currentModel, candidateModel); ok {
+			return gap
+		}
+	}
+	return h.config.QualityGapThreshold
+}
+
+// Select chooses the best model by combining multiple selection methods
+func (h *HybridSelector) Select(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+	if err := ValidateSelectionContext(selCtx); err != nil {
+		return nil, err
+	}
+
+	// Collect scores from each component
+	componentScores := make(map[string]map[string]float64)
+	var componentResults []*SelectionResult
+
+	// Get Elo scores
+	if h.eloSelector != nil && h.config.EloWeight > 0 {
+		result, err := h.eloSelector.Select(ctx, selCtx)
+		if err == nil && result != nil {
+			componentScores["elo"] = result.AllScores
+			componentResults = append(componentResults, result)
+		}
+	}
+
+	// Get RouterDC scores
+	if h.routerDCSelector != nil && h.config.RouterDCWeight > 0 {
+		result, err := h.routerDCSelector.Select(ctx, selCtx)
+		if err == nil && result != nil {
+			componentScores["router_dc"] = result.AllScores
+			componentResults = append(componentResults, result)
+		}
+	}
+
+	// Get AutoMix scores
+	if h.autoMixSelector != nil && h.config.AutoMixWeight > 0 {
+		result, err := h.autoMixSelector.Select(ctx, selCtx)
+		if err == nil && result != nil {
+			componentScores["automix"] = result.AllScores
+			componentResults = append(componentResults, result)
+		}
+	}
+
+	// Normalize scores if enabled
+	if h.config.NormalizeScores {
+		for component, scores := range componentScores {
+			componentScores[component] = h.normalizeScores(scores)
+		}
+	}
+
+	// Combine scores with weights
+	combinedScores := h.combineScores(componentScores, selCtx.CandidateModels)
+
+	// Apply cost adjustment
+	if h.config.CostWeight > 0 {
+		h.applyCostAdjustment(combinedScores, selCtx.CostWeight)
+	}
+
+	h.applyCacheAffinity(combinedScores, selCtx)
+
+	logging.Infof("[HybridSelector] Combining scores (weights: elo=%.2f, dc=%.2f, am=%.2f, cost=%.2f):",
+		h.config.EloWeight, h.config.RouterDCWeight, h.config.AutoMixWeight, h.config.CostWeight)
+	for _, model := range selCtx.CandidateModels {
+		var eloScore, dcScore, amScore float64
+		if scores, ok := componentScores["elo"]; ok {
+			eloScore = scores[model.Model]
+		}
+		if scores, ok := componentScores["router_dc"]; ok {
+			dcScore = scores[model.Model]
+		}
+		if scores, ok := componentScores["automix"]; ok {
+			amScore = scores[model.Model]
+		}
+		logging.Infof("[HybridSelector]   %s: elo=%.4f, dc=%.4f, am=%.4f → combined=%.4f",
+			model.Model, eloScore, dcScore, amScore, combinedScores[model.Model])
+	}
+
+	bestModel, bestScore := h.selectBestModel(selCtx.CandidateModels, combinedScores)
+		var err error
+		queryEmbedding, err = r.embeddingFunc(selCtx.Query)
+		if err != nil {
+			return r.defaultSelection(selCtx, fmt.Sprintf("embedding error: %v", err))
+		}
+	}
+
+	allScores := make(map[string]float64)
+	var bestModel *config.ModelRef
+	var bestScore float64
+
+	r.embeddingMu.RLock()
+	defer r.embeddingMu.RUnlock()
+
+	logging.Infof("[RouterDC] Evaluating %d candidates by embedding similarity:",
+		len(selCtx.CandidateModels))
+
+	for i := range selCtx.CandidateModels {
+		model := &selCtx.CandidateModels[i]
+		modelEmb, exists := r.modelEmbeddings[model.Model]
+
+		if !exists {
+			// Model has no embedding, assign minimum score
+			allScores[model.Model] = r.config.MinSimilarity
+			logging.Infof("[RouterDC]   %s: similarity=%.4f (no embedding, using min)", model.Model, r.config.MinSimilarity)
+			continue
+		}
+
+		// Compute contrastive similarity
+		similarity := r.computeContrastiveSimilarity(queryEmbedding, modelEmb)
+		allScores[model.Model] = similarity
+		logging.Infof("[RouterDC]   %s: similarity=%.4f", model.Model, similarity)
+
+		// Record similarity metric for evolution tracking
+		RecordRouterDCSimilarity(model.Model, similarity)
+
+		if similarity > bestScore {
+			bestScore = similarity
+			bestModel = model
+		}
+	}
+
+	if bestModel == nil || bestScore < r.config.MinSimilarity {
+		return r.defaultSelection(selCtx, "no model above similarity threshold")
+	}
+
+	// Apply softmax with temperature to get calibrated probabilities
+	softmaxScores := r.applySoftmax(allScores)
+
+	confidence := bestScore // Use raw similarity as confidence
+	if bestScore > 0.9 {
+		confidence = 0.95
+	}
+
+	reasoning := fmt.Sprintf("Query-model contrastive similarity: %.4f (temperature=%.3f)",
+		bestScore, r.config.Temperature)
+
+	logging.Infof("[RouterDC] Selected model %s (similarity=%.4f, confidence=%.2f)",
+		bestModel.Model, bestScore, confidence)
+
+	return &SelectionResult{
+		SelectedModel: bestModel.Model,
+		LoRAName:      bestModel.LoRAName,
+		Score:         softmaxScores[bestModel.Model],
+		Confidence:    confidence,
+		Method:        MethodRouterDC,
+		Reasoning:     reasoning,
+		AllScores:     softmaxScores,
+	}, nil
+}
+
+// UpdateFeedback updates model-query affinity based on feedback
+func (r *RouterDCSelector) UpdateFeedback(ctx context.Context, feedback *Feedback) error {
+	if err := normalizeWinnerFeedback(feedback); err != nil {
+		return err
+	}
+
+	// Create a simple hash for the query to track affinity
+	queryHash := r.hashQuery(feedback.Query)
+
+	r.affinityMu.Lock()
+	}
+
+	logging.ComponentEvent("selection", "automix_capabilities_initialized", map[string]interface{}{
+		"model_count": len(a.capabilities),
+	})
+}
+
+// Select chooses the best model using POMDP-based cost-quality optimization
+func (a *AutoMixSelector) Select(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+	if err := ValidateSelectionContext(selCtx); err != nil {
+		return nil, err
+	}
+
+	// Sort candidates by cost (cheaper first for cascaded routing)
+	sortedCandidates := a.sortByCost(selCtx.CandidateModels)
+
+	// Calculate expected value for each model using POMDP
+	allScores := make(map[string]float64)
+	a.capMu.RLock()
+	a.valueMu.RLock()
+	defer a.capMu.RUnlock()
+	defer a.valueMu.RUnlock()
+
+	logging.Infof("[AutoMix] Evaluating %d candidates (tradeoff=%.2f):",
+		len(sortedCandidates), a.config.CostQualityTradeoff)
+	for _, model := range sortedCandidates {
+		modelName := model.Model
+		score := a.computeExpectedValue(modelName, selCtx)
+		allScores[modelName] = score
+		if cap, ok := a.capabilities[modelName]; ok {
+			logging.Infof("[AutoMix]   %s: cost=$%.2f, quality=%.2f, value=%.4f",
+				modelName, cap.Cost, cap.AvgQuality, score)
+		} else {
+			logging.Infof("[AutoMix]   %s: value=%.4f (no capability data)", modelName, score)
+		}
+	}
+
+	// Find optimal starting model (not necessarily the best, but best value)
+	var selectedModel *config.ModelRef
+	var selectedScore float64
+	var reasoning string
+
+	if a.config.CostAwareRouting {
+		// Cost-aware: select model with best value considering cost
+		selectedModel, selectedScore, reasoning = a.selectCostAware(sortedCandidates, allScores, selCtx)
+	} else {
+		// Quality-only: select model with highest expected quality
+		selectedModel, selectedScore, reasoning = a.selectQualityOnly(sortedCandidates, allScores)
+	}
+
+	if selectedModel == nil {
+		return nil, fmt.Errorf("could not select a model")
+	}
+
+	// Calculate confidence based on verification probability
+	confidence := a.getVerificationProbability(selectedModel.Model)
+
+	// Record AutoMix-specific metrics for evolution tracking
+	for _, model := range sortedCandidates {
+		if cap, ok := a.capabilities[model.Model]; ok {
+			RecordAutoMixCapability(model.Model, cap.VerificationProb, cap.AvgQuality,
+				cap.QuerySuccessCount, cap.QueryTotalCount)
+		}
+	}
+
+	logging.Infof("[AutoMix] Selected model %s (score=%.4f, confidence=%.2f, cost-aware=%v)",
+		selectedModel.Model, selectedScore, confidence, a.config.CostAwareRouting)
+
+	return &SelectionResult{
+		SelectedModel: selectedModel.Model,
+		LoRAName:      selectedModel.LoRAName,
+		Score:         selectedScore,
+		Confidence:    confidence,
+		Method:        MethodAutoMix,
+		Reasoning:     reasoning,
+		AllScores:     allScores,
+	}, nil
+}
+
+// UpdateFeedback updates POMDP model based on verification outcomes
+func (a *AutoMixSelector) UpdateFeedback(ctx context.Context, feedback *Feedback) error {
+	if err := normalizeWinnerFeedback(feedback); err != nil {
+		return err
+	}
+
+	a.capMu.Lock()
+	defer a.capMu.Unlock()
+
+	// Update winner model capabilities
+	if cap, ok := a.capabilities[feedback.WinnerModel]; ok {
+		cap.QuerySuccessCount++
+func NewMultiFactorSelector(cfg *MultiFactorConfig) *MultiFactorSelector {
+	if cfg == nil {
+		cfg = DefaultMultiFactorConfig()
+	}
+	normalizeWeights(&cfg.Weights)
+	if cfg.LatencyPercentile <= 0 || cfg.LatencyPercentile > 100 {
+		cfg.LatencyPercentile = defaultMFLatencyPercentile
+	}
+	if cfg.OnNoCandidates == "" {
+		cfg.OnNoCandidates = defaultMFOnNoCandidates
+	}
+	return &MultiFactorSelector{
+		config:      cfg,
+		modelParams: make(map[string]config.ModelParams),
+		getInflight: inflight.Get,
+		getTPOT:     latency.GetTPOTPercentile,
+		getTTFT:     latency.GetTTFTPercentile,
+	}
+}
+
+// Method returns MethodMultiFactor.
+func (s *MultiFactorSelector) Method() SelectionMethod {
+	return MethodMultiFactor
+}
+
+// InitializeFromConfig captures per-model quality + pricing for use by Select.
+func (s *MultiFactorSelector) InitializeFromConfig(modelConfig map[string]config.ModelParams) {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+	s.modelParams = make(map[string]config.ModelParams, len(modelConfig))
+	for k, v := range modelConfig {
+		s.modelParams[k] = v
+	}
+}
+
+// UpdateFeedback is a no-op: multi_factor uses live signals only.
+func (s *MultiFactorSelector) UpdateFeedback(_ context.Context, _ *Feedback) error {
+	return nil
+}
+
+// Select runs the SLO filter, then the weighted multi-signal scoring.
+func (s *MultiFactorSelector) Select(_ context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+	if len(selCtx.CandidateModels) == 0 {
+		return nil, fmt.Errorf("no candidate models provided")
+	}
+
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	kept, dropped := s.applySLOFilter(selCtx.CandidateModels)
+	if len(kept) == 0 {
+		return s.applyNoCandidatePolicy(selCtx, dropped)
+	}
+
+	signals := s.gatherSignals(kept)
+	mins, maxs := signalExtrema(signals)
+	allScores := make(map[string]float64, len(kept))
+
+	var bestIdx int
+	bestScore := math.Inf(-1)
+	secondBest := math.Inf(-1)
+	for i, sig := range signals {
+		score := s.scoreCandidate(sig, mins, maxs)
+		allScores[sig.model] = score
+		if score > bestScore {
+			secondBest = bestScore
+			bestScore = score
+			bestIdx = i
+		} else if score > secondBest {
+			secondBest = score
+		}
+	}
+
+	chosen := kept[bestIdx]
+	confidence := 0.5
+	if !math.IsInf(secondBest, -1) && bestScore > 0 {
+		gap := bestScore - secondBest
+		if gap < 0 {
+			gap = 0
+		}
+		confidence = math.Min(1.0, gap/bestScore+0.5)
+	} else if len(kept) == 1 {
+		confidence = 1.0
+	}
+
+	reasoning := fmt.Sprintf(
+		"multi_factor: weights{q=%.2f l=%.2f c=%.2f L=%.2f} latency_p%d, kept=%d, dropped=%d",
+		s.config.Weights.Quality, s.config.Weights.Latency,
+		s.config.Weights.Cost, s.config.Weights.Load,
+		s.config.LatencyPercentile, len(kept), len(dropped),
+	)
+	}
+	return &LatencyAwareSelector{
+		config: cfg,
+	}
+}
+
+// Method returns the selection method type.
+func (s *LatencyAwareSelector) Method() SelectionMethod {
+	return MethodLatencyAware
+}
+
+type latencyCandidateScore struct {
+	modelRef *config.ModelRef
+	tpot     float64
+	ttft     float64
+}
+
+var ErrLatencyAwarePercentileInvalid = errors.New("latency-aware percentile must be between 1 and 100")
+
+// Select chooses the best model based on configured TPOT/TTFT percentiles.
+// If percentile data is missing for all candidates, uses the first candidate as
+// the default candidate.
+func (s *LatencyAwareSelector) Select(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+	_ = ctx
+
+	if err := ValidateSelectionContext(selCtx); err != nil {
+		return nil, err
+	}
+	if err := validateLatencyAwarePercentiles(selCtx); err != nil {
+		return nil, err
+	}
+
+	hasTPOT := selCtx.LatencyAwareTPOTPercentile > 0
+	hasTTFT := selCtx.LatencyAwareTTFTPercentile > 0
+	if !hasTPOT && !hasTTFT {
+		logging.Warnf("[LatencyAwareSelector] Missing TPOT/TTFT percentile configuration, using first candidate as default")
+		return s.defaultToFirst(selCtx, "Latency-aware percentile config missing; using first candidate as default"), nil
+	}
+
+	candidates, minTPOT, minTTFT := collectLatencyCandidates(selCtx, hasTPOT, hasTTFT)
+	if len(candidates) == 0 {
+		logging.Warnf("[LatencyAwareSelector] No latency percentile data for candidates=%v, using first candidate as default", getModelNames(selCtx.CandidateModels))
+		return s.defaultToFirst(selCtx, "No latency stats available; using first candidate as default"), nil
+	}
+
+	scored := scoreLatencyCandidates(candidates, latencyScoreOptions{
+		hasTPOT: hasTPOT,
+		hasTTFT: hasTTFT,
+		minTPOT: minTPOT,
+		minTTFT: minTTFT,
+	})
+	if !scored.ok {
+		logging.Warnf("[LatencyAwareSelector] Failed to score candidates=%v, using first candidate as default", getModelNames(selCtx.CandidateModels))
+		return s.defaultToFirst(selCtx, "Latency-aware scoring failed; using first candidate as default"), nil
+	}
+
+	confidence := latencyConfidence(scored.bestScore, scored.secondBestScore)
+	reasoning := latencyReasoning(hasTPOT, hasTTFT, selCtx.LatencyAwareTPOTPercentile, selCtx.LatencyAwareTTFTPercentile)
+	logging.Infof("[LatencyAwareSelector] Candidates=%v -> selected=%s (score=%.4f, confidence=%.2f)",
+		getModelNames(selCtx.CandidateModels), scored.best.modelRef.Model, scored.bestScore, confidence)
+
+	return &SelectionResult{
+		SelectedModel: scored.best.modelRef.Model,
+		LoRAName:      scored.best.modelRef.LoRAName,
+		Score:         scored.bestScore,
+		Confidence:    confidence,
+		Method:        MethodLatencyAware,
+		Reasoning:     reasoning,
+		AllScores:     scored.allScores,
+	}, nil
+}
+
+func validateLatencyAwarePercentiles(selCtx *SelectionContext) error {
+	for _, percentile := range []struct {
+		name  string
+		value int

@@ -1,0 +1,6 @@
+Warning: Permanently added '[REDACTED: bastion hostname]' (ED25519) to the list of known hosts.
++ cd /var/mnt/semantic-router-bench
++ cp configs/mock_backend.py traffic/mock_backend.py
++ cp configs/traffic_round9.py traffic/traffic_round9.py
++ chmod +x traffic/mock_backend.py traffic/traffic_round9.py
++ ls -l configs traffic

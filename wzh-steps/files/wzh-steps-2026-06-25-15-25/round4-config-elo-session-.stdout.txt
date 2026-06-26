@@ -1,0 +1,361 @@
+            similarity_threshold: 0.72
+            auto_store: true
+            hybrid_search: true
+            hybrid_mode: rerank
+            reflection:
+              enabled: true
+              algorithm: recency_semantic
+              max_inject_tokens: 384
+              recency_decay_days: 14
+              dedup_threshold: 0.9
+              block_patterns:
+                - api key
+                - password
+
+    - name: terse_elo_route
+      description: Personalized terse-answer route using Elo selection.
+      priority: 160
+      rules:
+        operator: AND
+        conditions:
+          - type: preference
+            name: terse_answers
+      modelRefs:
+        - model: qwen3-8b
+          use_reasoning: false
+        - model: qwen3-32b
+          use_reasoning: false
+      algorithm:
+        type: elo
+        elo:
+          initial_rating: 1200
+          k_factor: 32
+          category_weighted: true
+          decay_factor: 0.97
+          min_comparisons: 10
+          cost_scaling_factor: 0.15
+          storage_path: state/elo-selection.json
+          auto_save_interval: 5m
+      plugins:
+        - type: fast_response
+          configuration:
+            message: The primary model is saturated, so a lightweight response was returned immediately.
+        - type: request_params
+          configuration:
+            blocked_params:
+              - logprobs
+              - top_logprobs
+            max_tokens_limit: 8192
+            max_n: 4
+            strip_unknown: false
+
+    - name: support_router_dc_route
+      description: Embedding-driven support route that escalates only when the derived projection band says the request is not a simple support query.
+      priority: 150
+      rules:
+        operator: AND
+        conditions:
+          - type: embedding
+            name: technical_support
+          - type: projection
+            name: support_escalated
+      modelRefs:
+        - model: qwen3-8b
+          use_reasoning: false
+        - model: qwen3-32b
+          use_reasoning: true
+      algorithm:
+        type: router_dc
+        router_dc:
+          temperature: 0.2
+          dimension_size: 384
+          min_similarity: 0.7
+          use_query_contrastive: true
+          use_model_contrastive: true
+          require_descriptions: true
+          use_capabilities: true
+      plugins:
+        - type: header_mutation
+          configuration:
+            add:
+              - name: X-Tenant-Tier
+                value: premium
+            update:
+              - name: X-Route-Source
+                value: semantic-router
+            delete:
+              - X-Debug-Trace
+
+    - name: urgent_automix_route
+      description: Cost-aware urgent handling with AutoMix.
+      priority: 145
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: urgent_keywords
+      modelRefs:
+        - model: qwen3-8b
+          use_reasoning: false
+        - model: qwen3-32b
+          use_reasoning: true
+      algorithm:
+        type: automix
+        automix:
+          verification_threshold: 0.78
+          max_escalations: 2
+          cost_aware_routing: true
+          cost_quality_tradeoff: 0.35
+          discount_factor: 0.9
+          use_logprob_verification: true
+      plugins:
+        - type: response_jailbreak
+          configuration:
+            enabled: true
+            threshold: 0.85
+            action: header
+
+    - name: safe_hybrid_route
+      description: Composite route combining AND, OR, and NOT with Hybrid selection.
+      priority: 140
+      rules:
+        operator: AND
+        conditions:
+          - type: domain
+            name: business
+          - operator: OR
+            conditions:
+              - type: keyword
+                name: urgent_keywords
+              - type: complexity
+                name: needs_reasoning:hard
+          - operator: NOT
+            conditions:
+              - type: jailbreak
+                name: prompt_injection
+      modelRefs:
+        - model: qwen3-8b
+          use_reasoning: true
+        - model: qwen3-32b
+          use_reasoning: true
+      algorithm:
+        type: hybrid
+        hybrid:
+          elo_weight: 0.4
+          router_dc_weight: 0.3
+          automix_weight: 0.2
+          cost_weight: 0.1
+          quality_gap_threshold: 0.08
+          normalize_scores: true
+    - name: spanish_rl_route
+      description: RL-driven route for Spanish-language traffic with Milvus RAG.
+      priority: 135
+      rules:
+        operator: AND
+        conditions:
+          - type: language
+            name: es
+      modelRefs:
+        - model: qwen3-8b
+          use_reasoning: false
+        - model: qwen3-32b
+          use_reasoning: true
+      algorithm:
+        type: rl_driven
+        rl_driven:
+          exploration_rate: 0.15
+          exploration_decay: 0.97
+          min_exploration: 0.03
+          use_thompson_sampling: true
+          enable_personalization: true
+          personalization_blend: 0.4
+          session_context_weight: 0.35
+          implicit_feedback_weight: 0.5
+          cost_awareness: true
+          cost_weight: 0.2
+          storage_path: state/rl-driven.json
+          auto_save_interval: 30s
+          use_router_r1_rewards: true
+          cost_reward_alpha: 0.3
+          format_reward_penalty: -1.0
+          enable_llm_routing: true
+          router_r1_server_url: http://router-r1:8080
+          llm_routing_fallback: thompson
+          enable_multi_round_aggregation: true
+          max_aggregation_rounds: 3
+      plugins:
+        - type: rag
+          configuration:
+            enabled: true
+            backend: milvus
+            similarity_threshold: 0.78
+            top_k: 5
+            max_context_length: 12000
+            injection_mode: tool_role
+            on_failure: warn
+            cache_results: true
+            cache_ttl_seconds: 600
+            min_confidence_threshold: 0.55
+            backend_config:
+              collection: docs
+              reuse_cache_connection: true
+              content_field: content
+              metadata_field: metadata
+              filter_expression: locale == "es"
+
+    - name: admin_gmtrouter_route
+      description: Admin route with personalized GMTRouter selection and external API RAG.
+      priority: 130
+      rules:
+        operator: AND
+        conditions:
+          - type: authz
+            name: admin
+      modelRefs:
+        - model: qwen3-32b
+          use_reasoning: true
+      algorithm:
+        type: gmtrouter
+        gmtrouter:
+          enable_personalization: true
+          history_sample_size: 50
+          embedding_dimension: 768
+          num_gnn_layers: 2
+          attention_heads: 8
+          min_interactions_for_personalization: 5
+          max_interactions_per_user: 200
+          feedback_types:
+            - rating
+            - ranking
+            - response
+          model_path: models/gmtrouter.pt
+          storage_path: state/gmtrouter.db
+      plugins:
+        - type: rag
+          configuration:
+            enabled: true
+            backend: external_api
+            similarity_threshold: 0.7
+            top_k: 6
+            max_context_length: 8000
+            injection_mode: system_prompt
+            on_failure: block
+            cache_results: false
+            min_confidence_threshold: 0.5
+            backend_config:
+              endpoint: https://search.example.com/query
+              api_key: search-api-key
+              auth_header: X-API-Key
+              request_format: custom
+              request_template: "{\"query\":\"{{.Query}}\",\"top_k\":{{.TopK}},\"threshold\":{{.Threshold}}}"
+              timeout_seconds: 15
+              headers:
+                X-Environment: admin
+
+    - name: long_context_latency_route
+      description: Long-context route with latency-aware policy and MCP-backed RAG.
+      priority: 125
+      rules:
+        operator: AND
+        conditions:
+          - type: context
+            name: long_context
+      modelRefs:
+        - model: qwen3-32b
+          use_reasoning: true
+      algorithm:
+        type: latency_aware
+        latency_aware:
+          tpot_percentile: 90
+          ttft_percentile: 95
+          description: Balance throughput and first-token latency for long prompts.
+      plugins:
+        - type: rag
+          configuration:
+            enabled: true
+            backend: mcp
+            similarity_threshold: 0.74
+            top_k: 4
+            max_context_length: 10000
+            injection_mode: tool_role
+            on_failure: skip
+            cache_results: false
+            min_confidence_threshold: 0.5
+            backend_config:
+              server_name: docs-server
+              tool_name: retrieve_docs
+              tool_arguments:
+                query: ${user_content}
+                top_k: ${top_k}
+              timeout_seconds: 20
+
+    # multi_factor example: composes quality/latency/cost/load into one
+    # weighted score with optional SLO ceilings. Issue #37.
+    - name: multi_factor_route
+      description: Compose quality, latency, cost, and load signals into a single weighted score.
+      priority: 124
+      rules:
+        operator: AND
+        conditions:
+          - type: domain
+            name: other
+      modelRefs:
+        - model: qwen3-8b
+        - model: qwen3-32b
+      algorithm:
+        type: multi_factor
+        multi_factor:
+          weights:
+            quality: 0.4
+            latency: 0.2
+            cost: 0.2
+            load: 0.2
+          slo:
+            max_tpot_ms: 200
+            max_ttft_ms: 800
+            max_cost_per_1m: 5.0
+            max_inflight: 50
+          latency_percentile: 95
+          on_no_candidates: cheapest
+
+    - name: agentic_session_route
+      description: Session-aware policy for agentic multi-turn traffic.
+      priority: 123
+      rules:
+        operator: AND
+        conditions:
+          - type: conversation
+            name: active_tool_use
+      modelRefs:
+        - model: qwen3-8b
+        - model: qwen3-32b
+      algorithm:
+        type: session_aware
+        session_aware:
+          base_method: hybrid
+          idle_timeout_seconds: 300
+          min_turns_before_switch: 1
+          switch_margin: 0.05
+          stay_bias: 0.10
+          tool_loop_hard_lock: true
+          context_portability_hard_lock: true
+          decision_drift_reset: true
+          tool_loop_stay_bias: 0.35
+          prefix_cache_weight: 0.20
+          handoff_penalty_weight: 1.0
+          default_handoff_penalty: 0.05
+          quality_gap_multiplier: 1.0
+          max_cache_cost_multiplier: 2.5
+          switch_history_weight: 0.04
+          remaining_turn_prior_weight: 1.0
+          remaining_turn_prior_horizon: 8
+          min_remaining_turn_prior_samples: 3
+
+    - name: fallback_knn_route
+      description: KNN fallback route for general traffic with OpenAI vector-store RAG.
+      priority: 120
+      rules:
+        operator: AND
+        conditions:
+          - type: domain
+            name: other

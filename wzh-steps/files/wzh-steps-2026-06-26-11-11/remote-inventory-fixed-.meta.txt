@@ -1,0 +1,10 @@
+timestamp=2026-06-26T11:13:31+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ HOST=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Hostname\\"\)+2\]\)\"\)\;\ PASS=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Password\\"\)+2\]\)\"\)\;\ export\ SSHPASS=\"\$PASS\"\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ -o\ ConnectTimeout=20\ cloud-user@\$HOST\ \"set\ -x\;\ hostname\;\ date\;\ uname\ -a\;\ id\;\ command\ -v\ podman\ \|\|\ true\;\ command\ -v\ docker\ \|\|\ true\;\ podman\ ps\ --format\ \\"table\ \{\{.Names\}\}\t\{\{.Status\}\}\t\{\{.Ports\}\}\\"\ \|\|\ true\;\ ss\ -ltnp\ \|\|\ true\;\ ls\ -la\ /var/mnt\ /var/mnt/semantic-router\ 2\>/dev/null\ \|\|\ true\" 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-inventory-fixed-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-inventory-fixed-.stderr.txt
+stdout_lines=16
+stderr_lines=12
+stdout_bytes=876
+stderr_bytes=304

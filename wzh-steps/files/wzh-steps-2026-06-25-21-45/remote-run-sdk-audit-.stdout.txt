@@ -1,0 +1,21 @@
+simple_account_short - ok fused-signal-hybrid-selector qwen35-2b explicit_simple account_management None short_context None
+technical_support_complex - ok fused-signal-hybrid-selector qwen35-27b-fp8 explicit_complex technical_support None short_context None
+many_questions_incident - ok fused-signal-hybrid-selector qwen35-2b explicit_complex technical_support many_questions short_context None
+numbered_steps_architecture - ok fused-signal-hybrid-selector qwen35-27b-fp8 explicit_complex None None short_context None
+first_then_chinese - ok fused-signal-hybrid-selector qwen35-2b explicit_simple None first_then_flow short_context None
+long_context_root_cause - ok fused-signal-hybrid-selector qwen35-2b explicit_complex None None long_context None
+jailbreak_guarded - ok fused-signal-hybrid-selector qwen35-2b None None None short_context None
+pii_guarded_fake - ok fused-signal-hybrid-selector qwen35-2b None None None short_context None
+critical_payment_event - ok fused-signal-hybrid-selector qwen35-2b explicit_complex None None short_context None
+authz_admin_policy - ok fused-signal-hybrid-selector qwen35-27b-fp8 explicit_complex None None short_context None
+no_signal_default - ok fused-signal-hybrid-selector qwen35-2b None account_management None short_context None
+multi_topic_switch_account_to_incident_to_chinese 1 ok fused-signal-hybrid-selector qwen35-2b explicit_simple account_management None long_context None
+multi_topic_switch_account_to_incident_to_chinese 2 ok fused-signal-hybrid-selector qwen35-2b explicit_complex technical_support None long_context multi_turn_user
+multi_topic_switch_account_to_incident_to_chinese 3 ok fused-signal-hybrid-selector qwen35-2b explicit_simple None None long_context multi_turn_user
+multi_wrong_answer_feedback 1 ok fused-signal-hybrid-selector qwen35-2b explicit_simple None None short_context None
+multi_wrong_answer_feedback 2 ok fused-signal-hybrid-selector qwen35-27b-fp8 None None None long_context multi_turn_user
+multi_reask_same_question 1 ok default-small-no-signal qwen35-2b None None None short_context None
+multi_reask_same_question 2 ok fused-signal-hybrid-selector qwen35-2b None None None long_context multi_turn_user
+## saved
+18 /var/mnt/semantic-router-bench/benchmarks/round6-2026-06-25-21-45/fused-smoke-results.jsonl
+## compact summary

@@ -1,0 +1,10 @@
+timestamp=2026-06-26T11:14:32+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ HOST=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Hostname\\"\)+2\]\)\"\)\;\ PASS=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Password\\"\)+2\]\)\"\)\;\ export\ SSHPASS=\"\$PASS\"\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ -o\ ConnectTimeout=20\ cloud-user@\$HOST\ \"set\ -x\;\ nvidia-smi\ --query-gpu=index,name,memory.total,memory.used\ --format=csv,noheader\ \|\|\ true\;\ podman\ images\ --format\ \\"table\ \{\{.Repository\}\}\t\{\{.Tag\}\}\t\{\{.ID\}\}\t\{\{.Size\}\}\\"\ \|\|\ true\;\ df\ -h\ /\ /var/mnt\ \|\|\ true\;\ lsblk\ \|\|\ true\" 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-images-gpu-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-images-gpu-.stderr.txt
+stdout_lines=28
+stderr_lines=5
+stdout_bytes=1465
+stderr_bytes=286

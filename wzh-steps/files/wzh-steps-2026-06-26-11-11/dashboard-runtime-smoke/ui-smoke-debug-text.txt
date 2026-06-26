@@ -1,0 +1,396 @@
+Dashboard
+Playground
+Brain
+DSL
+Insight
+Manager
+System
+RA
+Round9 Admin
+vLLM Semantic Router
+RUNTIME
+Global Config
+
+Router-owned runtime defaults are merged with your `config.yaml` `global` override. This surface edits the canonical `global` block while preserving the router's built-in defaults.
+
+CURRENT SURFACE
+Global Config
+CONFIG AREA
+Global
+SCOPE
+Router runtime defaults and overrides
+RUNTIME
+Canonical Global Config
+
+Review the resolved router defaults, edit layered `global` overrides, and keep runtime modules aligned with the canonical v0.3 structure.
+
+Router
+Services
+Stores
+Integrations
+Model Catalog
+Global Config Overview
+
+The router resolved effective defaults successfully. Edits in this section write back to `config.yaml` under `global:`.
+
+Visual
+Raw YAML
+GLOBAL SECTIONS
+23
+Canonical `global` sections tracked by the dashboard.
+RESOLVED BY ROUTER
+21
+Sections currently backed by router-owned defaults or effective merged values.
+MISSING OR INACTIVE
+2
+Sections not currently present in the effective `global` surface.
+Runtime Global Sections
+
+Cards mirror the layered canonical `global` block. Each editor writes back to the matching `global.router`, `global.services`, `global.stores`, `global.integrations`, or `global.model_catalog` path.
+
+Router
+
+Core router-engine controls, startup behavior, and model-selection strategy.
+
+ROUTER
+Router Core
+
+Core router behavior, config source, startup cache handling, and model selection strategy.
+
+router effective defaults
+Configured
+Config source
+file
+Strategy
+Not set
+Auto model name
+MoM
+global.router
+ROUTER
+Route Cache Reset
+
+Controls whether the route cache is cleared on startup or config reload.
+
+router effective defaults
+Enabled
+Startup behavior
+Clear route cache
+global.router.clear_route_cache
+ROUTER
+Model Selection
+
+Selection strategy and ML-backed model-ranking settings used by the router core.
+
+router effective defaults
+Enabled
+Method
+knn
+Models path
+Not set
+ML configured
+Disabled
+global.router.model_selection
+Services
+
+APIs, replay, observability, and other router-owned service surfaces.
+
+SERVICES
+Response API
+
+Conversation chaining and persistence defaults for the OpenAI Responses API surface.
+
+router effective defaults
+Enabled
+Store backend
+redis
+TTL
+86400s
+Max responses
+1000
+global.services.response_api
+SERVICES
+Router Replay
+
+Persistence policy for replay records written by replay-enabled decision plugins.
+
+router effective defaults
+Enabled
+Enabled
+Enabled
+Store backend
+postgres
+Retention
+2592000s
+Async writes
+Disabled
+global.services.router_replay
+SERVICES
+Authorization
+
+Header identity extraction and external authorization provider wiring.
+
+router effective defaults
+Configured
+Fail open
+Disabled
+User header
+x-authz-user-id
+Providers
+0
+global.services.authz
+SERVICES
+Rate Limiting
+
+Per-user, group, and model request throttling rules enforced by the router.
+
+router effective defaults
+Configured
+Fail open
+Disabled
+Providers
+0
+Rules
+0
+global.services.ratelimit
+SERVICES
+Observability
+
+Metrics and tracing defaults emitted by the router runtime.
+
+router effective defaults
+Configured
+Metrics
+Enabled
+Tracing provider
+opentelemetry
+Trace endpoint
+vllm-sr-jaeger:4317
+global.services.observability
+SERVICES
+API Service
+
+Batch-classification API limits and metrics settings when configured.
+
+router effective defaults
+Configured
+Metrics
+Disabled
+Batch size ranges
+0
+Sample rate
+Not set
+global.services.api
+Stores
+
+Shared storage-backed capabilities such as semantic cache and memory.
+
+STORES
+Agentic Memory
+
+Cross-session memory extraction, storage, retrieval thresholds, and reflection policy.
+
+router effective defaults
+Configured
+Milvus address
+Not set
+Embedding model
+Not set
+Similarity threshold
+70%
+global.stores.memory
+STORES
+Semantic Cache
+
+Similarity cache backend, retention policy, and embedding-backed cache behavior.
+
+router effective defaults
+Enabled
+Backend
+memory
+Similarity threshold
+Not set
+Retention
+3600s
+global.stores.semantic_cache
+STORES
+Vector Store
+
+Document ingestion, vector backend selection, and file-backed knowledge-store defaults.
+
+Router default available
+Missing
+Backend
+Not set
+Embedding model
+Not set
+Enabled
+Disabled
+global.stores.vector_store
+Integrations
+
+Auxiliary runtime integrations used by routing and tool selection.
+
+INTEGRATIONS
+Tool Selection
+
+Automatic tool ranking, similarity thresholds, and tool database lookup settings.
+
+router effective defaults
+Disabled
+Top K
+3
+Similarity threshold
+Not set
+Tool DB path
+config/tools_db.json
+2 tools loaded
+global.integrations.tools
+INTEGRATIONS
+Looper
+
+Multi-model execution endpoint, timeout policy, and per-request headers.
+
+router effective defaults
+Configured
+Endpoint
+http://localhost:8899/v1/chat/completions
+Timeout
+1200s
+Headers
+0
+global.integrations.looper
+Model Catalog
+
+Router-owned embedding catalogs, external models, and model-backed modules.
+
+MODEL CATALOG
+Prompt Guard
+
+Prompt-injection detection module settings and system-model binding.
+
+router effective defaults
+Enabled
+Model Ref
+prompt_guard
+Threshold
+70%
+Runtime
+CPU
+global.model_catalog.modules.prompt_guard
+MODEL CATALOG
+Classifier Modules
+
+Domain, PII, MCP, and preference-classification module settings.
+
+router effective defaults
+Configured
+Domain model
+domain_classifier
+PII model
+pii_classifier
+Preference mode
+Contrastive
+global.model_catalog.modules.classifier
+MODEL CATALOG
+Hallucination Mitigation
+
+Fact-check, detector, and explainer modules used for hallucination review.
+
+router effective defaults
+Configured
+Fact-check model
+fact_check_classifier
+Detector model
+hallucination_detector
+Explainer model
+hallucination_explainer
+global.model_catalog.modules.hallucination_mitigation
+MODEL CATALOG
+Feedback Detector
+
+Feedback classification defaults for routing-aware user correction flows.
+
+router effective defaults
+Enabled
+Model Ref
+feedback_detector
+Threshold
+70%
+Runtime
+CPU
+global.model_catalog.modules.feedback_detector
+MODEL CATALOG
+External Models
+
+Optional external LLM integrations used by router-owned auxiliary workflows.
+
+Router default available
+Missing
+Configured models
+0
+Roles
+Not set
+Providers
+Not set
+No external models
+global.model_catalog.external
+MODEL CATALOG
+System Model Bindings
+
+Stable capability-to-model bindings for the router-owned built-in model catalog.
+
+router effective defaults
+Configured
+Prompt Guard
+models/.../mmbert32k-jailbreak-detector-merged
+Domain
+models/.../mmbert32k-intent-classifier-merged
+PII
+models/mmbert32k-pii-detector-merged
+7 bindings
+global.model_catalog.system
+MODEL CATALOG
+Embedding Models
+
+Semantic embedding paths and embedding optimization defaults for router-owned models.
+
+router effective defaults
+Configured
+Semantic path
+models/mmbert-embed-32k-2d-matryoshka
+BERT path
+Not set
+Runtime
+CPU
+global.model_catalog.embeddings
+MODEL CATALOG
+Prompt Compression
+
+Optional signal-evaluation compression profiles plus hard input bounds.
+
+router effective defaults
+Disabled
+Enabled
+Disabled
+Profile
+Not set
+Max tokens
+0
+Skip signals
+Not set
+global.model_catalog.modules.prompt_compression
+MODEL CATALOG
+Modality Detector
+
+Prompt modality detection strategy, classifier settings, and keyword fallback behavior.
+
+router effective defaults
+Disabled
+Enabled
+Disabled
+Method
+Not set
+Prompt prefixes
+0
+global.model_catalog.modules.modality_detector
+Guide

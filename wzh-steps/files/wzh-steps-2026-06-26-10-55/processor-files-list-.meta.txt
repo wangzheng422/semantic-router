@@ -1,0 +1,3 @@
+timestamp=2026-06-26T10:56:49+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=rg --files src/semantic-router/pkg/extproc 

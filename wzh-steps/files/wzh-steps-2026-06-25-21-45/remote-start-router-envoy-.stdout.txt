@@ -1,0 +1,49 @@
+82d1b578444d923966ab6f2d797e194cd1473e1fdea314ba525299279bce2041
+7a217e39f0111d770a40dd276523ffc1a05c61a495312ba41c9dbd8d26a41b95
+router_envoy_ready_attempt=39
+{"status": "healthy", "service": "classification-api"}
+{"object":"list","data":[{"id":"vllm-sr/auto","object":"model","created":1782396214,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"auto","object":"model","created":1782396214,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"fused-round4-auto","object":"model","created":1782396214,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"vllm-sr/fusion","object":"model","created":1782396214,"owned_by":"vllm-semantic-router","description":"Fusion multi-model deliberation"},{"id":"qwen35-2b","object":"model","created":1782396214,"owned_by":"vllm-semantic-router"},{"id":"qwen35-27b-fp8","object":"model","created":1782396214,"owned_by":"vllm-semantic-router"}]}
+vsr-qwen35-2b Up 13 minutes 0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8 Up 9 minutes 0.0.0.0:18002->8000/tcp
+vsr-router Up About a minute 0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+vsr-envoy Up About a minute 0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+## router logs
+## envoy logs
+[2026-06-25T14:02:13.726Z] "GET /v1/models HTTP/1.1" 500 - 1 "-" "-" "-" "-"
+[2026-06-25T14:02:15.863Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:18.002Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:20.137Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:22.268Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:24.407Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:26.546Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:28.686Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:30.820Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:32.964Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:35.099Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:37.233Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:39.361Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:41.481Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:43.604Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:45.745Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:47.880Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:50.016Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:52.154Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:54.281Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:56.406Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:02:58.532Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:00.663Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:02.796Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:04.930Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:07.072Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:09.210Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:11.342Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:13.472Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:15.614Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:17.741Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:19.859Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:21.989Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:24.123Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:26.252Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:28.380Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:30.516Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T14:03:32.653Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"

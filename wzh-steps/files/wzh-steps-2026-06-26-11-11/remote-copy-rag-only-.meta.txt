@@ -1,0 +1,19 @@
+timestamp=2026-06-26T11:30:28+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ python\ -\ \<\<\"PY\"$'
+'from\ pathlib\ import\ Path$'
+'import\ yaml$'
+'for\ name\ in\ \[\"router-p1-rag-only.yaml\"\]:$'
+'\ \ \ \ p=Path\(\"wzh-solution/files/wzh-solution-2026-06-26-11-11\"\)/name$'
+'\ \ \ \ yaml.safe_load\(p.read_text\(\)\)$'
+'\ \ \ \ print\(\"yaml-ok\",\ p\)$'
+'PY$'
+'python\ -m\ py_compile\ wzh-solution/files/wzh-solution-2026-06-26-11-11/traffic_round9.py$'
+'HOST=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Hostname\\"\)+2\]\)\"\)\;\ PASS=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Password\\"\)+2\]\)\"\)\;\ export\ SSHPASS=\"\$PASS\"\;\ sshpass\ -e\ scp\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ wzh-solution/files/wzh-solution-2026-06-26-11-11/router-p1-rag-only.yaml\ wzh-solution/files/wzh-solution-2026-06-26-11-11/traffic_round9.py\ cloud-user@\$HOST:/var/mnt/semantic-router-bench/configs/\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ cloud-user@\$HOST\ \"set\ -eux\;\ cp\ /var/mnt/semantic-router-bench/configs/traffic_round9.py\ /var/mnt/semantic-router-bench/traffic/traffic_round9.py\;\ chmod\ +x\ /var/mnt/semantic-router-bench/traffic/traffic_round9.py\" 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-copy-rag-only-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-copy-rag-only-.stderr.txt
+stdout_lines=1
+stderr_lines=4
+stdout_bytes=81
+stderr_bytes=381

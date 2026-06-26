@@ -1,0 +1,10 @@
+timestamp=2026-06-26T11:15:18+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ HOST=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Hostname\\"\)+2\]\)\"\)\;\ PASS=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Password\\"\)+2\]\)\"\)\;\ export\ SSHPASS=\"\$PASS\"\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ -o\ ConnectTimeout=20\ cloud-user@\$HOST\ \"set\ -euxo\ pipefail\;\ sudo\ mkdir\ -p\ /var/mnt/semantic-router-bench/\{configs,traffic,logs,models,hf-cache,benchmarks/round9-2026-06-26-11-11,dashboard-data\}\;\ sudo\ chown\ -R\ cloud-user:users\ /var/mnt/semantic-router-bench\;\ podman\ network\ inspect\ vsr-bench\ \>/dev/null\ 2\>\&1\ \|\|\ podman\ network\ create\ vsr-bench\;\ podman\ rm\ -f\ vsr-router\ vsr-envoy\ vsr-qwen35-2b\ vsr-qwen35-27b-fp8\ vsr-mock-backend\ vsr-dashboard\ \>/dev/null\ 2\>\&1\ \|\|\ true\;\ find\ /var/mnt/semantic-router-bench\ -maxdepth\ 2\ -type\ d\ -printf\ \\"%p\\n\\"\ \|\ sort\" 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-prepare-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-prepare-.stderr.txt
+stdout_lines=9
+stderr_lines=7
+stdout_bytes=377
+stderr_bytes=696

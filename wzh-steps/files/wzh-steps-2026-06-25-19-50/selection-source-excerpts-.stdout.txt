@@ -1,0 +1,71 @@
+	windows := make(map[string]int, len(modelRefs))
+	for _, ref := range modelRefs {
+		if params, ok := r.Config.ModelConfig[ref.Model]; ok {
+			windows[ref.Model] = params.ContextWindowSize
+		}
+	}
+	return windows
+}
+
+// buildCacheAffinityContext extracts the pre-dispatch continuation signals used
+// by the cache-affinity estimator. Nil request context cleanly disables the
+// estimator without forcing call sites to add extra branching.
+func (r *OpenAIRouter) buildCacheAffinityContext(reqCtx *RequestContext, modelRefs []config.ModelRef) *selection.CacheAffinityContext {
+	if reqCtx == nil {
+		return nil
+	}
+
+	// Missing model window metadata is valid; the estimator treats it as a
+	// neutral fit score rather than as an error.
+	return &selection.CacheAffinityContext{
+		TurnIndex:           reqCtx.TurnIndex,
+		PreviousModel:       reqCtx.PreviousModel,
+		PreviousResponseID:  reqCtx.PreviousResponseID,
+		HistoryTokens:       reqCtx.HistoryTokenCount,
+		ContextTokens:       reqCtx.VSRContextTokenCount,
+		ModelContextWindows: r.modelContextWindows(modelRefs),
+	}
+}
+
+// getSelectionMethod determines which selection algorithm to use.
+// Per-decision algorithm is the primary configuration (aligned with looper pattern).
+// Defaults to static selection if no algorithm is specified.
+func (r *OpenAIRouter) getSelectionMethod(algorithm *config.AlgorithmConfig) selection.SelectionMethod {
+	if algorithm != nil && algorithm.Type != "" {
+		if method, ok := selectionMethodByAlgorithmType[algorithm.Type]; ok {
+			return method
+		}
+	}
+	return selection.MethodStatic
+}
+
+// getSelectionWeights returns cost and quality weights based on algorithm config.
+// Uses per-decision config only (aligned with looper pattern).
+func (r *OpenAIRouter) getSelectionWeights(algorithm *config.AlgorithmConfig) (float64, float64) {
+	// Check per-decision algorithm config
+	if algorithm != nil {
+		if algorithm.AutoMix != nil && algorithm.AutoMix.CostQualityTradeoff > 0 {
+			cost := algorithm.AutoMix.CostQualityTradeoff
+			return cost, 1.0 - cost
+		}
+		if algorithm.Hybrid != nil && algorithm.Hybrid.CostWeight > 0 {
+			cost := algorithm.Hybrid.CostWeight
+			return cost, 1.0 - cost
+		}
+	}
+
+	// Default: equal weighting (0.5 cost, 0.5 quality)
+	return 0.5, 0.5
+}
+
+// getLatencyAwarePercentiles extracts TPOT/TTFT percentile settings for latency_aware selection.
+// Returns (0, 0) when latency_aware is not configured for the decision.
+func (r *OpenAIRouter) getLatencyAwarePercentiles(algorithm *config.AlgorithmConfig) (int, int) {
+	if algorithm == nil || algorithm.LatencyAware == nil {
+		return 0, 0
+	}
+	return algorithm.LatencyAware.TPOTPercentile, algorithm.LatencyAware.TTFTPercentile
+}
+
+// processUserFeedbackForElo automatically updates Elo ratings based on detected user feedback signals.
+// This implements "automatic scoring by signals" - when the FeedbackDetector classifies user

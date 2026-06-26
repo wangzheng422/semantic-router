@@ -1,0 +1,10 @@
+timestamp=2026-06-26T11:20:49+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ -e\;\ HOST=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Hostname\\"\)+2\]\)\"\)\;\ PASS=\$\(python\ -c\ \"from\ pathlib\ import\ Path\;\ lines=Path\(\\".wzh/env.txt\\"\).read_text\(\).splitlines\(\)\;\ print\(lines\[lines.index\(\\"Password\\"\)+2\]\)\"\)\;\ export\ SSHPASS=\"\$PASS\"\;\ tar\ -C\ wzh-solution/files/wzh-solution-2026-06-26-11-11\ -czf\ /tmp/round9-package.tgz\ .\;\ sshpass\ -e\ scp\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ /tmp/round9-package.tgz\ cloud-user@\$HOST:/var/mnt/semantic-router-bench/round9-package.tgz\;\ sshpass\ -e\ ssh\ -o\ StrictHostKeyChecking=no\ -o\ UserKnownHostsFile=/dev/null\ cloud-user@\$HOST\ \"set\ -eux\;\ cd\ /var/mnt/semantic-router-bench\;\ tar\ xzf\ round9-package.tgz\ -C\ configs\;\ cp\ configs/mock_backend.py\ traffic/mock_backend.py\;\ cp\ configs/traffic_round9.py\ traffic/traffic_round9.py\;\ cp\ configs/tools_db.json\ configs/tools_db.json\;\ ls\ -l\ configs\ traffic\" 
+exit_code=1
+stdout_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-copy-round9-package-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-26-11-11/remote-copy-round9-package-.stderr.txt
+stdout_lines=0
+stderr_lines=19
+stdout_bytes=0
+stderr_bytes=1449

@@ -1,0 +1,32 @@
+## time
+2026-06-25T13:47:06+00:00
+ 13:47:06 up 18 min,  0 users,  load average: 0.00, 0.00, 0.00
+## disks
+NAME           SIZE FSTYPE MOUNTPOINTS
+loop0         39.6M erofs  
+zram0            8G        [SWAP]
+nvme0n1          1T        
+|-nvme0n1p1      1M        
+|-nvme0n1p2    501M vfat   /boot/efi
+|-nvme0n1p3      1G xfs    /boot
+`-nvme0n1p4 1022.5G xfs    /var
+                           /sysroot/ostree/deploy/default/var
+                           /etc
+                           /sysroot
+nvme2n1      875.4G        
+nvme3n1      875.4G        
+nvme1n1      875.4G        
+nvme4n1      875.4G        
+## mount
+## podman
+vsr-qwen35-2b Exited (135) 5 hours ago 0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8 Created 0.0.0.0:18002->8000/tcp
+vsr-router Exited (1) 5 hours ago 0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+vsr-envoy Exited (135) 5 hours ago 0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+## gpu
+0, NVIDIA L4, 1, 23034
+1, NVIDIA L4, 1, 23034
+2, NVIDIA L4, 1, 23034
+3, NVIDIA L4, 1, 23034
+## linger
+Linger=yes

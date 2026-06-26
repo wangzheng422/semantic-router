@@ -1,0 +1,16 @@
+[REDACTED: bastion hostname]
+Fri Jun 26 03:13:34 UTC 2026
+Linux [REDACTED: bastion hostname] 5.14.0-427.65.1.el9_4.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Apr 11 15:52:56 EDT 2025 x86_64 x86_64 x86_64 GNU/Linux
+uid=1000(cloud-user) gid=100(users) groups=100(users),10(wheel) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+/usr/bin/podman
+NAMES       STATUS      PORTS
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      128          0.0.0.0:22        0.0.0.0:*          
+LISTEN 0      4096         0.0.0.0:111       0.0.0.0:*          
+LISTEN 0      128             [::]:22           [::]:*          
+LISTEN 0      4096            [::]:111          [::]:*          
+/var/mnt:
+total 4
+drwxr-xr-x.  3 root root   35 Jun 25 01:33 .
+drwxr-xr-x. 24 root root 4096 Jun 25 01:11 ..
+drwxr-xr-x.  2 root root    6 Jun 25 01:33 semantic-router-bench

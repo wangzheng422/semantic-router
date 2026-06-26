@@ -1,0 +1,66 @@
+            timeout_seconds: 90
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    auto_model_name: exhaustive-reference
+    include_config_models_in_list: true
+    clear_route_cache: false
+    streamed_body:
+      enabled: true
+      max_bytes: 1048576
+      timeout_sec: 15
+    skip_processing:
+      enabled: false
+    model_selection:
+      method: hybrid
+      enabled: true
+      elo:
+        initial_rating: 1200
+        k_factor: 32
+        category_weighted: true
+        decay_factor: 0.97
+        min_comparisons: 5
+        cost_scaling_factor: 0.2
+        storage_path: state/elo-global.json
+        auto_save_interval: 5m
+      router_dc:
+        temperature: 0.2
+        dimension_size: 384
+        min_similarity: 0.7
+        use_query_contrastive: true
+        use_model_contrastive: true
+        require_descriptions: true
+        use_capabilities: true
+      automix:
+        verification_threshold: 0.8
+        max_escalations: 2
+        cost_aware_routing: true
+        cost_quality_tradeoff: 0.4
+        discount_factor: 0.9
+        use_logprob_verification: true
+      hybrid:
+        elo_weight: 0.4
+        router_dc_weight: 0.25
+        automix_weight: 0.25
+        cost_weight: 0.1
+        quality_gap_threshold: 0.08
+        normalize_scores: true
+      session_aware:
+        base_method: hybrid
+        idle_timeout_seconds: 300
+        min_turns_before_switch: 1
+        switch_margin: 0.05
+        stay_bias: 0.10
+        tool_loop_hard_lock: true
+        context_portability_hard_lock: true
+        decision_drift_reset: true
+        tool_loop_stay_bias: 0.35
+        prefix_cache_weight: 0.20
+        handoff_penalty_weight: 1.0
+        default_handoff_penalty: 0.05
+        quality_gap_multiplier: 1.0
+        max_cache_cost_multiplier: 2.5
+        switch_history_weight: 0.04
+        remaining_turn_prior_weight: 1.0

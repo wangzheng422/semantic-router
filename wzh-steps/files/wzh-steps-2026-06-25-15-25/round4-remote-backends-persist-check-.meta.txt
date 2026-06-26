@@ -1,0 +1,3 @@
+timestamp=2026-06-25T16:14:14+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=wzh-steps/files/wzh-steps-2026-06-25-15-25/remote_exec.sh set\ +e\;\ echo\ \"\#\#\ ps\"\;\ podman\ ps\ -a\ --format\ \"\{\{.Names\}\}\ \{\{.Status\}\}\"\ \|\ grep\ -E\ \"vsr-qwen\"\;\ echo\ \"\#\#\ 2b\"\;\ curl\ -s\ -o\ /tmp/2b-check.json\ -w\ \"http=%\{http_code\}\\n\"\ http://127.0.0.1:18001/v1/models\;\ cat\ /tmp/2b-check.json\;\ echo\;\ echo\ \"\#\#\ 27b\"\;\ curl\ -s\ -o\ /tmp/27b-check.json\ -w\ \"http=%\{http_code\}\\n\"\ http://127.0.0.1:18002/v1/models\;\ cat\ /tmp/27b-check.json\;\ echo\;\ echo\ \"\#\#\ gpu\"\;\ nvidia-smi\ --query-gpu=index,memory.used,memory.total,utilization.gpu\ --format=csv,noheader 

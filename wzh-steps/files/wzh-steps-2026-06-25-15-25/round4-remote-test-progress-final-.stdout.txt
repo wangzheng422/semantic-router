@@ -1,0 +1,391 @@
+## ps
+vsr-qwen35-2b Up 9 minutes
+vsr-qwen35-27b-fp8 Up 6 minutes
+vsr-router Up 3 minutes
+vsr-envoy Up 3 minutes
+## router tail
+{"level":"info","ts":"2026-06-25T08:17:03.749","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-27b-fp8 (score=0.6250, confidence=0.53, components=3)"}
+{"level":"info","ts":"2026-06-25T08:17:03.749","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-27b-fp8 (method=hybrid, score=0.6250, confidence=0.53): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=0.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-25T08:17:03.750","caller":"req_filter_reason.go:191","msg":"Applied reasoning mode (enabled: true) with effort () to model: qwen35-27b-fp8"}
+{"level":"info","ts":"2026-06-25T08:17:03.750","caller":"logging.go:264","msg":"routing_decision","decision":"fused-signal-hybrid-selector","reasoning_enabled":true,"reasoning_effort":"medium","component":"extproc","original_model":"auto","selected_model":"qwen35-27b-fp8","routing_latency_ms":387,"reason_code":"auto_routing","event":"routing_decision","request_id":"5d87e848-fc4b-491d-9822-4f9615ce3fcc"}
+{"level":"info","ts":"2026-06-25T08:17:11.768","caller":"handler.go:33","msg":"traces export: context deadline exceeded: rpc error: code = Unavailable desc = name resolver error: produced zero addresses"}
+{"level":"info","ts":"2026-06-25T08:17:14.139","caller":"logging.go:160","msg":"session_turn_tokens","pricing_cached_input_per_1m":2,"cost_this_turn":0.001832,"cumulative_cost":0.001832,"cumulative_completion_tokens":96,"model":"qwen35-27b-fp8","cached_prompt_tokens":0,"router_cache_accounting_source":"missing_previous_model","router_estimated_cached_prompt_tokens":0,"pricing_currency":"USD","completion_tokens":96,"request_id":"5d87e848-fc4b-491d-9822-4f9615ce3fcc","router_cache_accounting_confidence":0,"api":"chat_completions","cumulative_cached_prompt_tokens":0,"pricing_completion_per_1m":16,"domain":"unknown","prompt_tokens":37,"session_id":"cc-fc9706860643f286","pricing_prompt_per_1m":8,"timestamp":"2026-06-25T08:17:14.139222128Z","turn_number":1,"cumulative_prompt_tokens":37,"event":"session_turn_tokens"}
+{"level":"info","ts":"2026-06-25T08:17:14.139","caller":"logging.go:160","msg":"llm_usage","cached_prompt_tokens":0,"model":"qwen35-27b-fp8","completion_tokens":96,"total_tokens":133,"completion_latency_ms":10776,"pricing_prompt_per_1m":8,"event":"llm_usage","pricing_completion_per_1m":16,"request_id":"5d87e848-fc4b-491d-9822-4f9615ce3fcc","prompt_tokens":37,"cost":0.001832,"currency":"USD","pricing_cached_input_per_1m":2}
+{"level":"info","ts":"2026-06-25T08:17:14.139","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-25T08:17:14.142","caller":"keyword_classifier_dispatch.go:131","msg":"BM25 keyword classification matched rule \"explicit_simple\" with keywords: [简短] (1/6 matched)"}
+{"level":"info","ts":"2026-06-25T08:17:14.142","caller":"language_classifier.go:117","msg":"Language classification: code=zh, confidence=1.00 (lingua-go: Chinese, threshold=0.30)"}
+{"level":"info","ts":"2026-06-25T08:17:14.256","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 113.697ms"}
+{"level":"info","ts":"2026-06-25T08:17:14.256","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-25T08:17:14.256","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.4376 best=0.4417 support=0.4253 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:14.256","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.3477 best=0.3503 support=0.3397 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:14.256","caller":"embedding_classifier_scoring.go:49","msg":"No match found (best score below min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-25T08:17:14.256","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 113.852884ms: 0 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-25T08:17:14.376","caller":"authz_classifier.go:172","msg":"[Authz Signal] No roles matched for user \"anonymous\" (groups: [])"}
+{"level":"info","ts":"2026-06-25T08:17:14.376","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-25T08:17:14.376","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:14.376","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:14.376","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.9258"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.9101"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.9258, confidence=0.95)"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.86, components=3)"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.86): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-25T08:17:14.495","caller":"logging.go:264","msg":"routing_decision","reasoning_enabled":false,"reason_code":"auto_routing","component":"extproc","routing_latency_ms":353,"request_id":"a10c05c9-2222-4bf4-83c1-407528deab6a","decision":"fused-signal-hybrid-selector","original_model":"auto","reasoning_effort":"","selected_model":"qwen35-2b","event":"routing_decision"}
+{"level":"info","ts":"2026-06-25T08:17:17.066","caller":"logging.go:160","msg":"session_turn_tokens","cumulative_cost":0.00004380000000000001,"cumulative_prompt_tokens":27,"timestamp":"2026-06-25T08:17:17.066861415Z","router_estimated_cached_prompt_tokens":0,"cost_this_turn":0.00004380000000000001,"completion_tokens":96,"cumulative_completion_tokens":96,"api":"chat_completions","model":"qwen35-2b","pricing_prompt_per_1m":0.2,"request_id":"a10c05c9-2222-4bf4-83c1-407528deab6a","pricing_completion_per_1m":0.4,"session_id":"cc-0418d4f14fb7dfdf","domain":"unknown","prompt_tokens":27,"event":"session_turn_tokens","cumulative_cached_prompt_tokens":0,"router_cache_accounting_confidence":0,"turn_number":1,"router_cache_accounting_source":"missing_previous_model","cached_prompt_tokens":0,"pricing_currency":"USD","pricing_cached_input_per_1m":0.05}
+{"level":"info","ts":"2026-06-25T08:17:17.067","caller":"logging.go:160","msg":"llm_usage","prompt_tokens":27,"completion_latency_ms":2924,"pricing_prompt_per_1m":0.2,"pricing_completion_per_1m":0.4,"total_tokens":123,"cost":0.00004380000000000001,"event":"llm_usage","pricing_cached_input_per_1m":0.05,"request_id":"a10c05c9-2222-4bf4-83c1-407528deab6a","model":"qwen35-2b","cached_prompt_tokens":0,"completion_tokens":96,"currency":"USD"}
+{"level":"info","ts":"2026-06-25T08:17:17.067","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-25T08:17:17.071","caller":"keyword_classifier_dispatch.go:131","msg":"BM25 keyword classification matched rule \"explicit_complex\" with keywords: [root cause incident] (2/10 matched)"}
+{"level":"info","ts":"2026-06-25T08:17:17.124","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=1.00 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-25T08:17:26.777","caller":"handler.go:33","msg":"traces export: context deadline exceeded: rpc error: code = Unavailable desc = name resolver error: produced zero addresses"}
+{"level":"info","ts":"2026-06-25T08:17:29.079","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 12009.831ms"}
+{"level":"info","ts":"2026-06-25T08:17:29.079","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-25T08:17:29.079","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.4573 best=0.4658 support=0.4317 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:29.079","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.4381 best=0.4465 support=0.4132 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:29.079","caller":"embedding_classifier_scoring.go:49","msg":"No match found (best score below min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-25T08:17:29.079","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 12.009946685s: 0 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-25T08:17:29.118","caller":"authz_classifier.go:172","msg":"[Authz Signal] No roles matched for user \"anonymous\" (groups: [])"}
+{"level":"info","ts":"2026-06-25T08:17:29.118","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-25T08:17:29.118","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:29.118","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:29.118","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.9287"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.9234"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.9287, confidence=0.95)"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.86, components=3)"}
+{"level":"info","ts":"2026-06-25T08:17:40.694","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.86): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-25T08:17:40.695","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-25T08:17:40.695","caller":"logging.go:264","msg":"routing_decision","component":"extproc","request_id":"7ee2a55a-f89d-48ef-99de-450b1328c1f4","selected_model":"qwen35-2b","decision":"fused-signal-hybrid-selector","reasoning_enabled":false,"event":"routing_decision","reasoning_effort":"","original_model":"auto","routing_latency_ms":23625,"reason_code":"auto_routing"}
+{"level":"info","ts":"2026-06-25T08:17:41.780","caller":"handler.go:33","msg":"traces export: context deadline exceeded: rpc error: code = Unavailable desc = name resolver error: produced zero addresses"}
+{"level":"info","ts":"2026-06-25T08:17:43.866","caller":"logging.go:160","msg":"session_turn_tokens","prompt_tokens":2094,"pricing_completion_per_1m":0.4,"session_id":"cc-6de62dbd8f1fa39c","turn_number":1,"cached_prompt_tokens":0,"cumulative_cost":0.00045720000000000005,"cumulative_completion_tokens":96,"api":"chat_completions","cost_this_turn":0.00045720000000000005,"timestamp":"2026-06-25T08:17:43.866849708Z","request_id":"7ee2a55a-f89d-48ef-99de-450b1328c1f4","domain":"unknown","pricing_prompt_per_1m":0.2,"model":"qwen35-2b","router_cache_accounting_confidence":0,"pricing_currency":"USD","cumulative_prompt_tokens":2094,"router_estimated_cached_prompt_tokens":0,"cumulative_cached_prompt_tokens":0,"router_cache_accounting_source":"missing_previous_model","pricing_cached_input_per_1m":0.05,"completion_tokens":96,"event":"session_turn_tokens"}
+{"level":"info","ts":"2026-06-25T08:17:43.866","caller":"logging.go:160","msg":"llm_usage","cost":0.00045720000000000005,"pricing_prompt_per_1m":0.2,"cached_prompt_tokens":0,"completion_tokens":96,"total_tokens":2190,"completion_latency_ms":26797,"pricing_cached_input_per_1m":0.05,"model":"qwen35-2b","pricing_completion_per_1m":0.4,"currency":"USD","event":"llm_usage","request_id":"7ee2a55a-f89d-48ef-99de-450b1328c1f4","prompt_tokens":2094}
+{"level":"info","ts":"2026-06-25T08:17:43.866","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-25T08:17:43.873","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=0.92 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-25T08:17:43.976","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 106.152ms"}
+{"level":"info","ts":"2026-06-25T08:17:43.976","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-25T08:17:43.976","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.4554 best=0.4641 support=0.4295 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:43.976","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.4856 best=0.4951 support=0.4572 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:43.976","caller":"embedding_classifier_scoring.go:49","msg":"No match found (best score below min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-25T08:17:43.976","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 106.290709ms: 0 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-25T08:17:44.091","caller":"authz_classifier.go:172","msg":"[Authz Signal] No roles matched for user \"anonymous\" (groups: [])"}
+{"level":"info","ts":"2026-06-25T08:17:44.091","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-25T08:17:44.091","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:44.091","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:44.091","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.8894"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.8732"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.8894, confidence=0.89)"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.85, components=3)"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.85): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-25T08:17:44.200","caller":"logging.go:264","msg":"routing_decision","decision":"fused-signal-hybrid-selector","reason_code":"auto_routing","request_id":"4e2b1ece-4c6e-4829-977d-40aedc47da50","original_model":"auto","selected_model":"qwen35-2b","routing_latency_ms":331,"event":"routing_decision","component":"extproc","reasoning_enabled":false,"reasoning_effort":""}
+{"level":"info","ts":"2026-06-25T08:17:46.177","caller":"logging.go:160","msg":"session_turn_tokens","prompt_tokens":29,"cumulative_cost":0.0000346,"domain":"unknown","pricing_prompt_per_1m":0.2,"pricing_cached_input_per_1m":0.05,"api":"chat_completions","pricing_currency":"USD","request_id":"4e2b1ece-4c6e-4829-977d-40aedc47da50","session_id":"cc-47540c3a111de9b4","cumulative_cached_prompt_tokens":0,"turn_number":1,"timestamp":"2026-06-25T08:17:46.17695677Z","router_cache_accounting_confidence":0,"event":"session_turn_tokens","router_estimated_cached_prompt_tokens":0,"pricing_completion_per_1m":0.4,"cached_prompt_tokens":0,"cumulative_completion_tokens":72,"router_cache_accounting_source":"missing_previous_model","cost_this_turn":0.0000346,"model":"qwen35-2b","completion_tokens":72,"cumulative_prompt_tokens":29}
+{"level":"info","ts":"2026-06-25T08:17:46.177","caller":"logging.go:160","msg":"llm_usage","prompt_tokens":29,"request_id":"4e2b1ece-4c6e-4829-977d-40aedc47da50","total_tokens":101,"cost":0.0000346,"currency":"USD","pricing_completion_per_1m":0.4,"event":"llm_usage","completion_tokens":72,"completion_latency_ms":2307,"pricing_cached_input_per_1m":0.05,"model":"qwen35-2b","cached_prompt_tokens":0,"pricing_prompt_per_1m":0.2}
+{"level":"info","ts":"2026-06-25T08:17:46.177","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-25T08:17:46.182","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=0.89 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-25T08:17:46.363","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 183.208ms"}
+{"level":"info","ts":"2026-06-25T08:17:46.363","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-25T08:17:46.363","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.3693 best=0.3738 support=0.3558 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:46.363","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.3920 best=0.3961 support=0.3797 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:46.363","caller":"embedding_classifier_scoring.go:49","msg":"No match found (best score below min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-25T08:17:46.363","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 183.584909ms: 0 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-25T08:17:46.474","caller":"authz_classifier.go:172","msg":"[Authz Signal] No roles matched for user \"anonymous\" (groups: [])"}
+{"level":"info","ts":"2026-06-25T08:17:46.474","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-25T08:17:46.474","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:46.474","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:46.474","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.8771"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.8562"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.8771, confidence=0.88)"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.85, components=3)"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.85): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-25T08:17:46.634","caller":"logging.go:264","msg":"routing_decision","component":"extproc","decision":"fused-signal-hybrid-selector","original_model":"auto","selected_model":"qwen35-2b","reasoning_effort":"","reasoning_enabled":false,"routing_latency_ms":454,"reason_code":"auto_routing","request_id":"f074dd25-2ef0-4363-88ad-41f28ec09b06","event":"routing_decision"}
+{"level":"info","ts":"2026-06-25T08:17:49.214","caller":"logging.go:160","msg":"session_turn_tokens","cumulative_prompt_tokens":61,"cumulative_completion_tokens":96,"session_id":"cc-7d12dfba85c18593","request_id":"f074dd25-2ef0-4363-88ad-41f28ec09b06","pricing_prompt_per_1m":0.2,"pricing_cached_input_per_1m":0.05,"model":"qwen35-2b","domain":"unknown","timestamp":"2026-06-25T08:17:49.214217331Z","prompt_tokens":61,"cached_prompt_tokens":0,"completion_tokens":96,"router_cache_accounting_source":"missing_previous_model","event":"session_turn_tokens","pricing_currency":"USD","pricing_completion_per_1m":0.4,"turn_number":1,"router_estimated_cached_prompt_tokens":0,"router_cache_accounting_confidence":0,"cost_this_turn":0.00005060000000000001,"cumulative_cost":0.00005060000000000001,"api":"chat_completions","cumulative_cached_prompt_tokens":0}
+{"level":"info","ts":"2026-06-25T08:17:49.214","caller":"logging.go:160","msg":"llm_usage","model":"qwen35-2b","total_tokens":157,"completion_latency_ms":3034,"currency":"USD","request_id":"f074dd25-2ef0-4363-88ad-41f28ec09b06","completion_tokens":96,"pricing_cached_input_per_1m":0.05,"cached_prompt_tokens":0,"prompt_tokens":61,"cost":0.00005060000000000001,"pricing_prompt_per_1m":0.2,"event":"llm_usage","pricing_completion_per_1m":0.4}
+{"level":"info","ts":"2026-06-25T08:17:49.214","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-25T08:17:49.217","caller":"keyword_classifier_dispatch.go:131","msg":"BM25 keyword classification matched rule \"explicit_complex\" with keywords: [incident] (1/10 matched)"}
+{"level":"info","ts":"2026-06-25T08:17:49.222","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=0.97 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-25T08:17:49.348","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 131.405ms"}
+{"level":"info","ts":"2026-06-25T08:17:49.348","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-25T08:17:49.348","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.4807 best=0.4846 support=0.4689 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:49.348","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.4534 best=0.4573 support=0.4415 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-25T08:17:49.348","caller":"embedding_classifier_scoring.go:49","msg":"No match found (best score below min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-25T08:17:49.349","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 131.620003ms: 0 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-25T08:17:49.459","caller":"authz_classifier.go:172","msg":"[Authz Signal] No roles matched for user \"anonymous\" (groups: [])"}
+{"level":"info","ts":"2026-06-25T08:17:49.459","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-25T08:17:49.459","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:49.459","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-25T08:17:49.459","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.9320"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.9140"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.9320, confidence=0.95)"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.86, components=3)"}
+{"level":"info","ts":"2026-06-25T08:17:49.579","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.86): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-25T08:17:49.580","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-25T08:17:49.580","caller":"logging.go:264","msg":"routing_decision","request_id":"94617414-bf6c-410e-968c-007958d0101a","component":"extproc","decision":"fused-signal-hybrid-selector","reasoning_enabled":false,"reasoning_effort":"","original_model":"auto","selected_model":"qwen35-2b","routing_latency_ms":363,"reason_code":"auto_routing","event":"routing_decision"}
+## envoy tail
+[2026-06-25 08:14:39.387][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.config.cluster.v3.Cluster Using deprecated option 'envoy.config.cluster.v3.Cluster.http2_protocol_options' from file cluster.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-25 08:14:39.425][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.extensions.access_loggers.file.v3.FileAccessLog Using deprecated option 'envoy.extensions.access_loggers.file.v3.FileAccessLog.format' from file file.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-25 08:14:39.439][1][warning][main] [source/server/server.cc:970] There is no configured limit to the number of allowed active downstream connections. Configure a limit in `envoy.resource_monitors.global_downstream_max_connections` resource monitor.
+[2026-06-25T08:14:39.468Z] "GET /v1/models HTTP/1.1" 500 - 2 "-" "-" "-" "-"
+[2026-06-25T08:14:41.483Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:43.499Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:45.514Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:47.528Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:49.543Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:51.556Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:53.570Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:55.584Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:57.598Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:14:59.611Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:01.625Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:03.639Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:05.654Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:07.668Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:09.683Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:11.697Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:13.710Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:15.724Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:17.738Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:19.753Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:21.767Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:23.783Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:25.798Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:27.814Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:29.828Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:31.842Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:33.855Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:35.870Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:37.885Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:39.899Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:41.913Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:43.927Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:45.941Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:47.956Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:49.971Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:51.986Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:54.000Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:56.014Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:15:58.029Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:00.043Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:02.058Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:04.072Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:06.087Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:08.102Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:10.116Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:12.132Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:14.151Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-25T08:16:16.166Z] "GET /v1/models HTTP/1.1" 200 - 2 "-" "-" "-" "-"
+[2026-06-25T08:16:19.580Z] "POST /v1/chat/completions HTTP/1.1" 200 - 15159 "qwen35-2b" "qwen35-2b" "fused-signal-hybrid-selector" "10.89.0.2:8000"
+[2026-06-25T08:16:34.749Z] "POST /v1/chat/completions HTTP/1.1" 200 - 25665 "qwen35-27b-fp8" "qwen35-27b-fp8" "fused-signal-hybrid-selector" "10.89.0.3:8000"
+[2026-06-25T08:17:00.417Z] "POST /v1/chat/completions HTTP/1.1" 200 - 2942 "qwen35-2b" "qwen35-2b" "fused-signal-hybrid-selector" "10.89.0.2:8000"
+[2026-06-25T08:17:03.362Z] "POST /v1/chat/completions HTTP/1.1" 200 - 10777 "qwen35-27b-fp8" "qwen35-27b-fp8" "fused-signal-hybrid-selector" "10.89.0.3:8000"
+[2026-06-25T08:17:14.141Z] "POST /v1/chat/completions HTTP/1.1" 200 - 2925 "qwen35-2b" "qwen35-2b" "fused-signal-hybrid-selector" "10.89.0.2:8000"
+[2026-06-25T08:17:17.069Z] "POST /v1/chat/completions HTTP/1.1" 200 - 26797 "qwen35-2b" "qwen35-2b" "fused-signal-hybrid-selector" "10.89.0.2:8000"
+[2026-06-25T08:17:43.868Z] "POST /v1/chat/completions HTTP/1.1" 200 - 2308 "qwen35-2b" "qwen35-2b" "fused-signal-hybrid-selector" "10.89.0.2:8000"
+[2026-06-25T08:17:46.179Z] "POST /v1/chat/completions HTTP/1.1" 200 - 3035 "qwen35-2b" "qwen35-2b" "fused-signal-hybrid-selector" "10.89.0.2:8000"
+## traffic files
+total 0
+## vllm recent 2b
+(EngineCore pid=253) Loading safetensors checkpoint shards:   0% Completed | 0/1 [00:00<?, ?it/s]
+(EngineCore pid=253) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.81it/s]
+(EngineCore pid=253) Loading safetensors checkpoint shards: 100% Completed | 1/1 [00:00<00:00,  1.81it/s]
+(EngineCore pid=253) 
+(EngineCore pid=253) INFO 06-25 08:09:04 [default_loader.py:397] Loading weights took 0.68 seconds
+(EngineCore pid=253) INFO 06-25 08:09:05 [gpu_model_runner.py:5187] Model loading took 4.25 GiB memory and 1.148752 seconds
+(EngineCore pid=253) INFO 06-25 08:09:05 [interface.py:670] Setting attention block size to 544 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=253) INFO 06-25 08:09:05 [interface.py:694] Padding mamba page size by 2.64% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=253) INFO 06-25 08:09:05 [gpu_model_runner.py:6200] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+(EngineCore pid=253) INFO 06-25 08:10:19 [gpu_worker.py:480] Available KV cache memory: 1.66 GiB
+(EngineCore pid=253) INFO 06-25 08:10:19 [kv_cache_utils.py:1744] GPU KV cache size: 99,421 tokens
+(EngineCore pid=253) INFO 06-25 08:10:19 [kv_cache_utils.py:1745] Maximum concurrency for 4,096 tokens per request: 24.27x
+(EngineCore pid=253) INFO 06-25 08:10:19 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(EngineCore pid=253) INFO 06-25 08:10:20 [core.py:313] init engine (profile, create kv cache, warmup model) took 74.73 s
+(EngineCore pid=253) INFO 06-25 08:10:20 [vllm.py:999] Asynchronous scheduling is enabled.
+(EngineCore pid=253) WARNING 06-25 08:10:20 [vllm.py:1055] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=253) WARNING 06-25 08:10:20 [vllm.py:1097] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=253) INFO 06-25 08:10:20 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+(EngineCore pid=253) INFO 06-25 08:10:20 [vllm.py:1273] Cudagraph is disabled under eager mode
+(EngineCore pid=253) INFO 06-25 08:10:20 [compilation.py:321] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=1) INFO 06-25 08:10:20 [api_server.py:579] Supported tasks: ['generate']
+(APIServer pid=1) INFO 06-25 08:10:22 [hf.py:548] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=1) INFO 06-25 08:10:36 [base.py:227] Multi-modal warmup completed in 13.856s
+(APIServer pid=1) INFO 06-25 08:10:37 [base.py:227] Readonly multi-modal warmup completed in 0.981s
+(APIServer pid=1) INFO 06-25 08:10:37 [api_server.py:583] Starting vLLM server on http://0.0.0.0:8000
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:37] Available routes are:
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /openapi.json, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /docs, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /redoc, Methods: GET, HEAD
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /load, Methods: GET
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /version, Methods: GET
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /health, Methods: GET
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /metrics, Methods: GET
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=1) INFO 06-25 08:10:37 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=1) INFO:     Started server process [1]
+(APIServer pid=1) INFO:     Waiting for application startup.
+(APIServer pid=1) INFO:     Application startup complete.
+(APIServer pid=1) INFO:     10.89.0.2:37828 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     10.89.0.2:49092 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=1) WARNING 06-25 08:16:28 [utils.py:72] Received a request with trace context but tracing is disabled
+(EngineCore pid=253) WARNING 06-25 08:16:28 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _zero_kv_blocks_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=253) WARNING 06-25 08:16:29 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _compute_slot_mapping_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=253) WARNING 06-25 08:16:29 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=253) WARNING 06-25 08:16:30 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _fused_post_conv_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=253) WARNING 06-25 08:16:30 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _triton_mrope_forward. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=253) WARNING 06-25 08:16:32 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=253) WARNING 06-25 08:16:33 [jit_monitor.py:103] Triton kernel JIT compilation during inference: fused_recurrent_gated_delta_rule_packed_decode_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=253) WARNING 06-25 08:16:33 [jit_monitor.py:103] Triton kernel JIT compilation during inference: layer_norm_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=1) INFO:     10.89.0.5:55124 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 08:16:37 [loggers.py:271] Engine 000: Avg prompt throughput: 2.7 tokens/s, Avg generation throughput: 1.5 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 08:16:47 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     10.89.0.5:58320 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 08:17:07 [loggers.py:271] Engine 000: Avg prompt throughput: 4.0 tokens/s, Avg generation throughput: 9.6 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     10.89.0.5:57576 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 08:17:17 [loggers.py:271] Engine 000: Avg prompt throughput: 2.7 tokens/s, Avg generation throughput: 9.6 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 08:17:27 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     10.89.0.5:41444 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     10.89.0.5:41444 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 08:17:47 [loggers.py:271] Engine 000: Avg prompt throughput: 218.4 tokens/s, Avg generation throughput: 21.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 1.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     10.89.0.5:41444 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+## vllm recent 27b
+(Worker_TP0 pid=484) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=3072,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=484) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=17408,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=485) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=3072,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=485) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=17408,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=485) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=8704,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=484) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=5120,K=8704,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP1 pid=485) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=7168,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=484) WARNING 06-25 08:13:16 [fp8_utils.py:828] Using default W8A8 Block FP8 kernel config. Performance might be sub-optimal! Config file not found at /usr/local/lib/python3.12/dist-packages/vllm/model_executor/layers/quantization/utils/configs/N=7168,K=5120,device_name=NVIDIA_L4,dtype=fp8_w8a8,block_shape=[128,128].json
+(Worker_TP0 pid=484) INFO 06-25 08:13:24 [gpu_worker.py:480] Available KV cache memory: 1.77 GiB
+(EngineCore pid=380) INFO 06-25 08:13:24 [kv_cache_utils.py:1744] GPU KV cache size: 33,678 tokens
+(EngineCore pid=380) INFO 06-25 08:13:24 [kv_cache_utils.py:1745] Maximum concurrency for 4,096 tokens per request: 8.22x
+(Worker_TP1 pid=485) INFO 06-25 08:13:24 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(Worker_TP0 pid=484) INFO 06-25 08:13:24 [jit_monitor.py:54] Kernel JIT monitor activated — Triton JIT compilations during inference will be logged as warnings.
+(EngineCore pid=380) INFO 06-25 08:13:25 [core.py:313] init engine (profile, create kv cache, warmup model) took 77.92 s
+(EngineCore pid=380) Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+(EngineCore pid=380) [transformers] `Qwen2VLImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `Qwen2VLImageProcessor` instead.
+(EngineCore pid=380) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+(EngineCore pid=380) INFO 06-25 08:13:33 [vllm.py:999] Asynchronous scheduling is enabled.
+(EngineCore pid=380) WARNING 06-25 08:13:33 [vllm.py:1055] Enforce eager set, disabling torch.compile and CUDAGraphs. This is equivalent to setting -cc.mode=none -cc.cudagraph_mode=none
+(EngineCore pid=380) WARNING 06-25 08:13:33 [vllm.py:1097] Inductor compilation was disabled by user settings, optimizations settings that are only active during inductor compilation will be ignored.
+(EngineCore pid=380) INFO 06-25 08:13:33 [kernel.py:270] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['vllm_c', 'native'], fused_add_rms_norm=['vllm_c', 'native'])
+(EngineCore pid=380) INFO 06-25 08:13:33 [vllm.py:1273] Cudagraph is disabled under eager mode
+(EngineCore pid=380) INFO 06-25 08:13:33 [compilation.py:321] Enabled custom fusions: norm_quant, act_quant
+(APIServer pid=1) INFO 06-25 08:13:33 [api_server.py:579] Supported tasks: ['generate']
+(APIServer pid=1) WARNING 06-25 08:13:34 [model.py:1502] Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'temperature': 0.6, 'top_k': 20, 'top_p': 0.95}`. If this is not intended, please relaunch vLLM instance with `--generation-config vllm`.
+(APIServer pid=1) INFO 06-25 08:13:36 [hf.py:548] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+(APIServer pid=1) INFO 06-25 08:13:50 [base.py:227] Multi-modal warmup completed in 14.309s
+(APIServer pid=1) INFO 06-25 08:13:51 [base.py:227] Readonly multi-modal warmup completed in 0.544s
+(APIServer pid=1) INFO 06-25 08:13:51 [api_server.py:583] Starting vLLM server on http://0.0.0.0:8000
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:37] Available routes are:
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /openapi.json, Methods: HEAD, GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /docs, Methods: HEAD, GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /docs/oauth2-redirect, Methods: HEAD, GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /redoc, Methods: HEAD, GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /load, Methods: GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /version, Methods: GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /health, Methods: GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /metrics, Methods: GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=1) INFO 06-25 08:13:51 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=1) INFO:     Started server process [1]
+(APIServer pid=1) INFO:     Waiting for application startup.
+(APIServer pid=1) INFO:     Application startup complete.
+(APIServer pid=1) INFO:     10.89.0.3:56178 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     10.89.0.3:46452 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=1) WARNING 06-25 08:16:35 [utils.py:72] Received a request with trace context but tracing is disabled
+(Worker_TP0 pid=484) WARNING 06-25 08:16:35 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _zero_kv_blocks_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:35 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _compute_slot_mapping_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:44 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _w8a8_triton_block_scaled_mm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:45 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:45 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _fused_post_conv_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:46 [jit_monitor.py:103] Triton kernel JIT compilation during inference: layer_norm_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:46 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _triton_mrope_forward. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:48 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=484) WARNING 06-25 08:16:49 [jit_monitor.py:103] Triton kernel JIT compilation during inference: fused_recurrent_gated_delta_rule_packed_decode_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=1) INFO 06-25 08:16:52 [loggers.py:271] Engine 000: Avg prompt throughput: 2.7 tokens/s, Avg generation throughput: 1.7 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     10.89.0.5:49584 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 08:17:02 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 7.9 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 08:17:12 [loggers.py:271] Engine 000: Avg prompt throughput: 3.7 tokens/s, Avg generation throughput: 7.6 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     10.89.0.5:49584 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 08:17:22 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 2.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 08:17:32 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%

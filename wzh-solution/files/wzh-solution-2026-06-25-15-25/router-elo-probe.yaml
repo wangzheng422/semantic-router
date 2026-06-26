@@ -1,0 +1,96 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      pricing:
+        currency: USD
+        prompt_per_1m: 0.20
+        completion_per_1m: 0.40
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      pricing:
+        currency: USD
+        prompt_per_1m: 8.00
+        completion_per_1m: 16.00
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      description: Fast low-cost model.
+      quality_score: 0.62
+    - name: qwen35-27b-fp8
+      description: Larger high-quality model.
+      quality_score: 0.91
+  signals:
+    keywords:
+      - name: elo_probe
+        operator: OR
+        method: bm25
+        keywords: ["ELO_PROBE"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+  decisions:
+    - name: elo-probe
+      priority: 100
+      rules:
+        operator: AND
+        conditions:
+          - type: keyword
+            name: elo_probe
+      modelRefs:
+        - model: qwen35-2b
+        - model: qwen35-27b-fp8
+      algorithm:
+        type: elo
+        elo:
+          initial_rating: 1200
+          k_factor: 32
+          category_weighted: true
+          min_comparisons: 0
+          cost_scaling_factor: 0.15
+          storage_path: /logs/round4-elo-probe.json
+          auto_save_interval: 1m
+    - name: default-small
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    model_selection:
+      method: hybrid
+      enabled: true
+      hybrid:
+        elo_weight: 0.15
+        router_dc_weight: 0.35
+        automix_weight: 0.15
+        cost_weight: 0.35
+        quality_gap_threshold: 0.08
+        normalize_scores: true

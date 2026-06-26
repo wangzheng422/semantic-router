@@ -1,0 +1,7 @@
+-rw-r--r--. 1 cloud-user users 32K Jun 25 08:24 /var/mnt/semantic-router-bench/benchmarks/round4-2026-06-25-15-25/semantic-router-round4-results-2026-06-25-15-25.tgz
+envoy-elo.log 1599 bytes
+envoy-fused.log 7609 bytes
+fused-results.jsonl 63655 bytes
+router-elo.log 1283 bytes
+router-fused.log 140256 bytes
+semantic-router-round4-results-2026-06-25-15-25.tgz 32149 bytes

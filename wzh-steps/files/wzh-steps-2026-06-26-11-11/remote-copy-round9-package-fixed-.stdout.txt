@@ -1,0 +1,15 @@
+configs:
+total 36
+drwxr-xr-x. 2 cloud-user users  158 Jun 26 03:20 __pycache__
+-rw-r--r--. 1 cloud-user users 3664 Jun 26 03:18 envoy-round9.yaml
+-rw-r--r--. 1 cloud-user users 6206 Jun 26 03:18 mock_backend.py
+-rw-r--r--. 1 cloud-user users 1039 Jun 26 03:20 router-p0-fast-response.yaml
+-rw-r--r--. 1 cloud-user users 2040 Jun 26 03:20 router-p0-rewrite-cache-replay.yaml
+-rw-r--r--. 1 cloud-user users 3914 Jun 26 03:20 router-p1-rag-tools-switch-response.yaml
+-rw-r--r--. 1 cloud-user users  971 Jun 26 03:18 tools_db.json
+-rw-r--r--. 1 cloud-user users 6591 Jun 26 03:20 traffic_round9.py
+
+traffic:
+total 16
+-rwxr-xr-x. 1 cloud-user users 6206 Jun 26 03:21 mock_backend.py
+-rwxr-xr-x. 1 cloud-user users 6591 Jun 26 03:21 traffic_round9.py

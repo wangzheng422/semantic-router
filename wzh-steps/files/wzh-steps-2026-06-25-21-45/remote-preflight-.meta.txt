@@ -1,0 +1,3 @@
+timestamp=2026-06-25T21:47:02+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh wzh-steps/files/wzh-steps-2026-06-25-21-45/remote.zsh set\ -euo\ pipefail\;\ echo\ \"\#\#\ time\"\;\ date\ -Is\;\ uptime\;\ echo\ \"\#\#\ disks\"\;\ lsblk\ -o\ NAME,SIZE,FSTYPE,MOUNTPOINTS\;\ echo\ \"\#\#\ mount\"\;\ findmnt\ /var/mnt/semantic-router-bench\ \|\|\ true\;\ echo\ \"\#\#\ podman\"\;\ podman\ ps\ -a\ --format\ \"\{\{.Names\}\}\ \{\{.Status\}\}\ \{\{.Ports\}\}\"\ \|\|\ true\;\ echo\ \"\#\#\ gpu\"\;\ nvidia-smi\ --query-gpu=index,name,memory.used,memory.total\ --format=csv,noheader,nounits\ \|\|\ true\;\ echo\ \"\#\#\ linger\"\;\ loginctl\ show-user\ cloud-user\ -p\ Linger\ \|\|\ true 

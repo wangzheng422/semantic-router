@@ -1,0 +1,246 @@
+src/semantic-router/pkg/config/signal_config.go:58:	AggregationMethodMean AggregationMethod = "mean"
+src/semantic-router/pkg/config/signal_config.go:59:	AggregationMethodMax  AggregationMethod = "max"
+src/semantic-router/pkg/config/signal_config.go:60:	AggregationMethodAny  AggregationMethod = "any"
+src/semantic-router/pkg/config/signal_config.go:85:	AggregationMethodConfiged AggregationMethod `yaml:"aggregation_method"`
+src/semantic-router/pkg/selection/offline_test.go:35:		SelectionMethod: "rl_driven",
+src/semantic-router/pkg/selection/offline_test.go:202:				SelectionMethod: "rl_driven",
+src/semantic-router/pkg/config/validator_projection_test.go:589:func TestValidateProjectionMappingAcceptsSupportedMethods(t *testing.T) {
+src/semantic-router/pkg/config/validator_projection_test.go:591:	for _, method := range []string{"", ProjectionMappingMethodThresholdBands, ProjectionMappingMethodMultiEmit} {
+src/semantic-router/pkg/config/validator_projection_test.go:621:	for _, want := range []string{ProjectionMappingMethodThresholdBands, ProjectionMappingMethodMultiEmit} {
+src/semantic-router/pkg/config/validator_projection_test.go:633:		Method: ProjectionMappingMethodMultiEmit,
+src/semantic-router/pkg/config/validator_projection_test.go:642:	if !strings.Contains(err.Error(), ProjectionMappingMethodMultiEmit) {
+src/semantic-router/pkg/config/validator_projection_test.go:652:		Method: ProjectionMappingMethodThresholdBands,
+src/semantic-router/pkg/selection/hybrid.go:124:func (h *HybridSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/hybrid.go:125:	return MethodHybrid
+src/semantic-router/pkg/selection/hybrid.go:262:		Method:        MethodHybrid,
+src/semantic-router/pkg/selection/selector_test.go:101:			if result.Method != MethodElo {
+src/semantic-router/pkg/selection/selector_test.go:102:				t.Errorf("expected method %s, got %s", MethodElo, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:194:	if result.Method != MethodRouterDC {
+src/semantic-router/pkg/selection/selector_test.go:195:		t.Errorf("expected method %s, got %s", MethodRouterDC, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:243:	if result.Method != MethodAutoMix {
+src/semantic-router/pkg/selection/selector_test.go:244:		t.Errorf("expected method %s, got %s", MethodAutoMix, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:292:	if result.Method != MethodHybrid {
+src/semantic-router/pkg/selection/selector_test.go:293:		t.Errorf("expected method %s, got %s", MethodHybrid, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:322:	if result.Method != MethodStatic {
+src/semantic-router/pkg/selection/selector_test.go:323:		t.Errorf("expected method %s, got %s", MethodStatic, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:339:	registry.Register(MethodElo, NewEloSelector(nil))
+src/semantic-router/pkg/selection/selector_test.go:340:	registry.Register(MethodStatic, NewStaticSelector(nil))
+src/semantic-router/pkg/selection/selector_test.go:343:	eloSelector, ok := registry.Get(MethodElo)
+src/semantic-router/pkg/selection/selector_test.go:348:	staticSelector, ok := registry.Get(MethodStatic)
+src/semantic-router/pkg/selection/selector_test.go:354:	_, ok = registry.Get(MethodRouterDC)
+src/semantic-router/pkg/selection/selector_test.go:364:		expectedMethod SelectionMethod
+src/semantic-router/pkg/selection/selector_test.go:369:			expectedMethod: MethodElo,
+src/semantic-router/pkg/selection/selector_test.go:374:			expectedMethod: MethodRouterDC,
+src/semantic-router/pkg/selection/selector_test.go:379:			expectedMethod: MethodAutoMix,
+src/semantic-router/pkg/selection/selector_test.go:384:			expectedMethod: MethodHybrid,
+src/semantic-router/pkg/selection/selector_test.go:389:			expectedMethod: MethodLatencyAware,
+src/semantic-router/pkg/selection/selector_test.go:394:			expectedMethod: MethodStatic,
+src/semantic-router/pkg/selection/selector_test.go:399:			expectedMethod: MethodStatic,
+src/semantic-router/pkg/selection/selector_test.go:425:	mlMethods := []SelectionMethod{MethodKNN, MethodKMeans, MethodSVM}
+src/semantic-router/pkg/selection/selector_test.go:426:	for _, method := range mlMethods {
+src/semantic-router/pkg/selection/selector_test.go:467:	if result.Method != MethodKNN {
+src/semantic-router/pkg/selection/selector_test.go:468:		t.Errorf("expected method %s, got %s", MethodKNN, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:481:		expectedMethod SelectionMethod
+src/semantic-router/pkg/selection/selector_test.go:486:			expectedMethod: MethodKNN,
+src/semantic-router/pkg/selection/selector_test.go:491:			expectedMethod: MethodKMeans,
+src/semantic-router/pkg/selection/selector_test.go:496:			expectedMethod: MethodSVM,
+src/semantic-router/pkg/selection/elo.go:248:func (e *EloSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/elo.go:249:	return MethodElo
+src/semantic-router/pkg/selection/elo.go:399:		Method:        MethodElo,
+src/semantic-router/pkg/selection/lookuptable/memory_test.go:52:func TestMemoryStorage_ConvenienceMethods(t *testing.T) {
+src/semantic-router/pkg/selection/selection_context_test.go:73:		{name: "ml_adapter", selector: NewMLSelectorAdapter(nil, MethodKNN)},
+src/semantic-router/pkg/selection/selection_context_test.go:104:	_, err := Select(context.Background(), MethodStatic, nil)
+src/semantic-router/pkg/selection/selection_context_test.go:109:	_, err = Select(context.Background(), MethodStatic, &SelectionContext{})
+src/semantic-router/pkg/selection/selection_context_test.go:114:	_, err = Select(context.Background(), MethodStatic, &SelectionContext{
+src/semantic-router/pkg/selection/selection_result_test.go:36:func (s stubSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/selection_result_test.go:37:	return SelectionMethod("stub")
+src/semantic-router/pkg/selection/selection_result_test.go:99:	method := SelectionMethod("stub_invalid_result")
+src/semantic-router/pkg/selection/selection_result_test.go:119:	method := SelectionMethod("stub_nil_result")
+src/semantic-router/pkg/selection/session_aware_test.go:14:		BaseMethod:                 MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:26:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:60:		BaseMethod:                 MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:71:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:119:		BaseMethod:             MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:134:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:168:		BaseMethod:             MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:184:			Method:        MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:225:		BaseMethod:             MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:242:			Method:        MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:285:		BaseMethod:             MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:300:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:330:		BaseMethod:             MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:343:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:480:		BaseMethod:                   MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:497:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:557:		BaseMethod:                   MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:574:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:620:		BaseMethod:                   MethodStatic,
+src/semantic-router/pkg/selection/session_aware_test.go:637:			Method:        MethodHybrid,
+src/semantic-router/pkg/selection/session_aware_test.go:697:func (s stubSessionBase) Method() SelectionMethod { return MethodHybrid }
+src/semantic-router/pkg/selection/latency_aware_test.go:51:	if result.Method != MethodLatencyAware {
+src/semantic-router/pkg/selection/latency_aware_test.go:52:		t.Errorf("expected method %s, got %s", MethodLatencyAware, result.Method)
+src/semantic-router/pkg/selection/session_aware.go:16:	BaseMethod                   SelectionMethod
+src/semantic-router/pkg/selection/session_aware.go:39:		BaseMethod:                   MethodHybrid,
+src/semantic-router/pkg/selection/session_aware.go:100:func defaultSessionAwareBaseMethod(method, defaultMethod SelectionMethod) SelectionMethod {
+src/semantic-router/pkg/selection/session_aware.go:101:	if method == "" || method == MethodSessionAware {
+src/semantic-router/pkg/selection/session_aware.go:142:func (s *SessionAwareSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/session_aware.go:143:	return MethodSessionAware
+src/semantic-router/pkg/selection/session_aware.go:218:		Method:        MethodSessionAware,
+src/semantic-router/pkg/selection/session_aware.go:278:	if s.baseSelector != nil && s.baseSelector.Method() != MethodSessionAware {
+src/semantic-router/pkg/selection/session_aware.go:292:	wrapped.Method = MethodSessionAware
+src/semantic-router/pkg/selection/session_aware.go:339:		Method:        MethodSessionAware,
+src/semantic-router/pkg/config/validator_projection.go:467:	case "", ProjectionMappingMethodThresholdBands, ProjectionMappingMethodMultiEmit:
+src/semantic-router/pkg/config/validator_projection.go:474:			ProjectionMappingMethodThresholdBands,
+src/semantic-router/pkg/config/validator_projection.go:475:			ProjectionMappingMethodMultiEmit,
+src/semantic-router/pkg/config/validator_projection.go:481:	if mapping.Method == ProjectionMappingMethodMultiEmit && len(mapping.Outputs) < 2 {
+src/semantic-router/pkg/config/validator_projection.go:485:			ProjectionMappingMethodMultiEmit,
+src/semantic-router/pkg/config/image_routing_pack_test.go:47:		if got, want := rule.AggregationMethodConfiged, AggregationMethodMax; got != want {
+src/semantic-router/pkg/selection/tier_test.go:87:	methods := []SelectionMethod{MethodKNN, MethodKMeans, MethodSVM, MethodMLP}
+src/semantic-router/pkg/selection/tier_test.go:141:	expectedTiers := map[SelectionMethod]AlgorithmTier{
+src/semantic-router/pkg/selection/tier_test.go:142:		MethodStatic:       TierSupported,
+src/semantic-router/pkg/selection/tier_test.go:143:		MethodElo:          TierSupported,
+src/semantic-router/pkg/selection/tier_test.go:144:		MethodRouterDC:     TierSupported,
+src/semantic-router/pkg/selection/tier_test.go:145:		MethodLatencyAware: TierSupported,
+src/semantic-router/pkg/selection/tier_test.go:146:		MethodHybrid:       TierSupported,
+src/semantic-router/pkg/selection/tier_test.go:147:		MethodAutoMix:      TierExperimental,
+src/semantic-router/pkg/selection/tier_test.go:148:		MethodRLDriven:     TierExperimental,
+src/semantic-router/pkg/selection/tier_test.go:149:		MethodGMTRouter:    TierExperimental,
+src/semantic-router/pkg/selection/tier_test.go:174:	result, err := Select(context.Background(), MethodStatic, selCtx)
+src/semantic-router/pkg/selection/tier_test.go:180:		t.Errorf("Select(MethodStatic) result.Tier = %q, want %q", result.Tier, TierSupported)
+src/semantic-router/pkg/selection/selector.go:35:// SelectionMethod defines the type of model selection algorithm
+src/semantic-router/pkg/selection/selector.go:36:type SelectionMethod string
+src/semantic-router/pkg/selection/selector.go:39:	// MethodElo uses Elo rating system with Bradley-Terry model
+src/semantic-router/pkg/selection/selector.go:41:	MethodElo SelectionMethod = "elo"
+src/semantic-router/pkg/selection/selector.go:43:	// MethodRouterDC uses dual-contrastive learning for query-to-model routing
+src/semantic-router/pkg/selection/selector.go:45:	MethodRouterDC SelectionMethod = "router_dc"
+src/semantic-router/pkg/selection/selector.go:47:	// MethodAutoMix uses POMDP-based cascaded routing with self-verification
+src/semantic-router/pkg/selection/selector.go:49:	MethodAutoMix SelectionMethod = "automix"
+src/semantic-router/pkg/selection/selector.go:51:	// MethodHybrid combines multiple selection techniques with configurable weights
+src/semantic-router/pkg/selection/selector.go:53:	MethodHybrid SelectionMethod = "hybrid"
+src/semantic-router/pkg/selection/selector.go:55:	// MethodStatic uses static scores from configuration (default behavior)
+src/semantic-router/pkg/selection/selector.go:56:	MethodStatic SelectionMethod = "static"
+src/semantic-router/pkg/selection/selector.go:58:	// MethodKNN uses K-Nearest Neighbors for query-based model selection
+src/semantic-router/pkg/selection/selector.go:61:	MethodKNN SelectionMethod = "knn"
+src/semantic-router/pkg/selection/selector.go:63:	// MethodKMeans uses KMeans clustering for model selection
+src/semantic-router/pkg/selection/selector.go:66:	MethodKMeans SelectionMethod = "kmeans"
+src/semantic-router/pkg/selection/selector.go:68:	// MethodSVM uses Support Vector Machine for model classification
+src/semantic-router/pkg/selection/selector.go:71:	MethodSVM SelectionMethod = "svm"
+src/semantic-router/pkg/selection/selector.go:73:	// MethodMLP uses Multi-Layer Perceptron for GPU-accelerated model selection
+src/semantic-router/pkg/selection/selector.go:76:	MethodMLP SelectionMethod = "mlp"
+src/semantic-router/pkg/selection/selector.go:78:	// MethodRLDriven uses reinforcement learning for personalized model selection
+src/semantic-router/pkg/selection/selector.go:81:	MethodRLDriven SelectionMethod = "rl_driven"
+src/semantic-router/pkg/selection/selector.go:83:	// MethodGMTRouter uses heterogeneous graph learning for personalized routing
+src/semantic-router/pkg/selection/selector.go:86:	MethodGMTRouter SelectionMethod = "gmtrouter"
+src/semantic-router/pkg/selection/selector.go:88:	// MethodLatencyAware uses TPOT/TTFT percentile data for latency-aware model selection
+src/semantic-router/pkg/selection/selector.go:90:	MethodLatencyAware SelectionMethod = "latency_aware"
+src/semantic-router/pkg/selection/selector.go:92:	// MethodMultiFactor combines quality/latency/cost/load signals via a
+src/semantic-router/pkg/selection/selector.go:94:	MethodMultiFactor SelectionMethod = "multi_factor"
+src/semantic-router/pkg/selection/selector.go:96:	// MethodSessionAware wraps a base selector with agentic session policy:
+src/semantic-router/pkg/selection/selector.go:99:	MethodSessionAware SelectionMethod = "session_aware"
+src/semantic-router/pkg/selection/selector.go:218:	Method SelectionMethod
+src/semantic-router/pkg/selection/selector.go:240:	Method() SelectionMethod
+src/semantic-router/pkg/selection/selector.go:295:	selectors map[SelectionMethod]Selector
+src/semantic-router/pkg/selection/selector.go:302:		selectors: make(map[SelectionMethod]Selector),
+src/semantic-router/pkg/selection/selector.go:307:func (r *Registry) Register(method SelectionMethod, selector Selector) {
+src/semantic-router/pkg/selection/selector.go:314:func (r *Registry) Get(method SelectionMethod) (Selector, bool) {
+src/semantic-router/pkg/selection/selector.go:325:func Select(ctx context.Context, method SelectionMethod, selCtx *SelectionContext) (*SelectionResult, error) {
+src/semantic-router/pkg/selection/selector.go:333:		selector, _ = GlobalRegistry.Get(MethodStatic)
+src/semantic-router/pkg/selection/selector.go:342:			Method:        MethodStatic,
+src/semantic-router/pkg/config/projection_config.go:43:	// ProjectionMappingMethodThresholdBands emits the first matching output band
+src/semantic-router/pkg/config/projection_config.go:45:	ProjectionMappingMethodThresholdBands = "threshold_bands"
+src/semantic-router/pkg/config/projection_config.go:46:	// ProjectionMappingMethodMultiEmit emits every matching output band, so
+src/semantic-router/pkg/config/projection_config.go:48:	ProjectionMappingMethodMultiEmit = "multi_emit"
+src/semantic-router/pkg/selection/multi_factor_test.go:271:func TestMultiFactor_MethodAndTier(t *testing.T) {
+src/semantic-router/pkg/selection/multi_factor_test.go:273:	if s.Method() != MethodMultiFactor {
+src/semantic-router/pkg/selection/multi_factor_test.go:274:		t.Errorf("Method() = %q, want %q", s.Method(), MethodMultiFactor)
+src/semantic-router/pkg/selection/latency_aware.go:57:func (s *LatencyAwareSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/latency_aware.go:58:	return MethodLatencyAware
+src/semantic-router/pkg/selection/latency_aware.go:116:		Method:        MethodLatencyAware,
+src/semantic-router/pkg/selection/latency_aware.go:284:		Method:        MethodLatencyAware,
+src/semantic-router/pkg/selection/session_aware_helpers.go:32:		Method:        MethodStatic,
+src/semantic-router/pkg/selection/gmtrouter_test.go:30:	if selector.Method() != MethodGMTRouter {
+src/semantic-router/pkg/selection/gmtrouter_test.go:31:		t.Errorf("Expected method %s, got %s", MethodGMTRouter, selector.Method())
+src/semantic-router/pkg/selection/metrics_test.go:445:// TestAllMethodEvolutionMetrics is a comprehensive test that verifies
+src/semantic-router/pkg/selection/metrics_test.go:447:func TestAllMethodEvolutionMetrics(t *testing.T) {
+src/semantic-router/pkg/selection/metrics_test.go:510:	RecordSelectionWithTier(MethodElo, "test-model", "test-decision", TierSupported, 0.8, 0.9, time.Millisecond)
+src/semantic-router/pkg/selection/metrics_test.go:511:	RecordSelectionWithTier(MethodAutoMix, "test-model", "test-decision", TierExperimental, 0.7, 0.8, time.Millisecond)
+src/semantic-router/pkg/selection/metrics.go:627:	RecordSelectionWithTier(MethodHybrid, selectedModel, decision, tier, score, confidence, duration)
+src/semantic-router/pkg/selection/metrics.go:772:func RecordSelectionWithTier(method SelectionMethod, model string, decision string, tier AlgorithmTier, score, confidence float64, duration time.Duration) {
+src/semantic-router/pkg/selection/automix.go:215:func (a *AutoMixSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/automix.go:216:	return MethodAutoMix
+src/semantic-router/pkg/selection/automix.go:323:		Method:        MethodAutoMix,
+src/semantic-router/pkg/selection/automix.go:764:		Method:        MethodAutoMix,
+src/semantic-router/pkg/selection/automix.go:779:			Method:        MethodAutoMix,
+src/semantic-router/pkg/selection/automix.go:792:			Method:        MethodAutoMix,
+src/semantic-router/pkg/selection/automix.go:826:			Method:        MethodAutoMix,
+src/semantic-router/pkg/selection/automix.go:839:		Method:        MethodAutoMix,
+src/semantic-router/pkg/selection/gmtrouter.go:190:func (g *GMTRouterSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/gmtrouter.go:191:	return MethodGMTRouter
+src/semantic-router/pkg/selection/gmtrouter.go:308:		Method:        MethodGMTRouter,
+src/semantic-router/pkg/selection/rl_driven_test.go:115:	if selector.Method() != MethodRLDriven {
+src/semantic-router/pkg/selection/rl_driven_test.go:116:		t.Errorf("Method() = %v, want %v", selector.Method(), MethodRLDriven)
+src/semantic-router/pkg/selection/rl_driven_test.go:164:	if result.Method != MethodRLDriven {
+src/semantic-router/pkg/selection/rl_driven_test.go:165:		t.Errorf("Method = %v, want %v", result.Method, MethodRLDriven)
+src/semantic-router/pkg/selection/factory.go:70:		Method: string(MethodStatic),
+src/semantic-router/pkg/selection/factory.go:120:	method := SelectionMethod(f.cfg.Method)
+src/semantic-router/pkg/selection/factory.go:125:	case MethodElo:
+src/semantic-router/pkg/selection/factory.go:132:	case MethodRouterDC:
+src/semantic-router/pkg/selection/factory.go:145:	case MethodAutoMix:
+src/semantic-router/pkg/selection/factory.go:152:	case MethodHybrid:
+src/semantic-router/pkg/selection/factory.go:165:	case MethodGMTRouter:
+src/semantic-router/pkg/selection/factory.go:175:	case MethodRLDriven:
+src/semantic-router/pkg/selection/factory.go:182:	case MethodLatencyAware:
+src/semantic-router/pkg/selection/factory.go:185:	case MethodMultiFactor:
+src/semantic-router/pkg/selection/factory.go:192:	case MethodSessionAware:
+src/semantic-router/pkg/selection/factory.go:228:	registry.Register(MethodStatic, staticSelector)
+src/semantic-router/pkg/selection/factory.go:239:	registry.Register(MethodElo, eloSelector)
+src/semantic-router/pkg/selection/factory.go:256:	registry.Register(MethodRouterDC, routerDCSelector)
+src/semantic-router/pkg/selection/factory.go:267:	registry.Register(MethodAutoMix, autoMixSelector)
+src/semantic-router/pkg/selection/factory.go:281:	registry.Register(MethodHybrid, hybridSelector)
+src/semantic-router/pkg/selection/factory.go:294:		registry.Register(MethodKNN, knnAdapter)
+src/semantic-router/pkg/selection/factory.go:302:		registry.Register(MethodKMeans, kmeansAdapter)
+src/semantic-router/pkg/selection/factory.go:310:		registry.Register(MethodSVM, svmAdapter)
+src/semantic-router/pkg/selection/factory.go:318:		registry.Register(MethodMLP, mlpAdapter)
+src/semantic-router/pkg/selection/factory.go:330:	registry.Register(MethodRLDriven, rlDrivenSelector)
+src/semantic-router/pkg/selection/factory.go:344:	registry.Register(MethodGMTRouter, gmtRouterSelector)
+src/semantic-router/pkg/selection/factory.go:348:	registry.Register(MethodLatencyAware, latencyAwareSelector)
+src/semantic-router/pkg/selection/factory.go:355:	registry.Register(MethodMultiFactor, multiFactorSelector)
+src/semantic-router/pkg/selection/factory.go:367:	} else if baseSelector, ok := registry.Get(MethodStatic); ok {
+src/semantic-router/pkg/selection/factory.go:370:	registry.Register(MethodSessionAware, sessionAwareSelector)
+src/semantic-router/pkg/selection/factory.go:379:func (f *Factory) createSessionAwareBaseSelector(method SelectionMethod) Selector {
+src/semantic-router/pkg/selection/factory.go:380:	if method == "" || method == MethodSessionAware {
+src/semantic-router/pkg/selection/factory.go:381:		method = MethodHybrid
+src/semantic-router/pkg/selection/factory.go:401:			logging.Infof("[Selection] Registered algorithm: %s (tier=%s, dependencies=none)", method, selector.Tier())
+src/semantic-router/pkg/selection/factory.go:407:			logging.Infof("[Selection] Registered algorithm: %s (tier=%s, dependencies=[%s])",
+src/semantic-router/pkg/selection/factory.go:415:func WarnExperimentalAlgorithms(registry *Registry, configuredMethods []SelectionMethod) {
+src/semantic-router/pkg/selection/factory.go:416:	for _, method := range configuredMethods {
+src/semantic-router/pkg/selection/factory.go:439:func CheckDependencyHealth(registry *Registry, configuredMethods []SelectionMethod) {
+src/semantic-router/pkg/selection/factory.go:440:	for _, method := range configuredMethods {
+src/semantic-router/pkg/selection/factory.go:492:func GetSelector(method SelectionMethod) Selector {
+src/semantic-router/pkg/selection/factory.go:496:		selector, _ = GlobalRegistry.Get(MethodStatic)
+src/semantic-router/pkg/selection/router_dc.go:107:func (r *RouterDCSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/router_dc.go:108:	return MethodRouterDC
+src/semantic-router/pkg/selection/router_dc.go:325:		Method:        MethodRouterDC,
+src/semantic-router/pkg/selection/router_dc.go:471:		Method:        MethodRouterDC,
+src/semantic-router/pkg/selection/ml_adapter.go:32:	method        SelectionMethod
+src/semantic-router/pkg/selection/ml_adapter.go:37:func NewMLSelectorAdapter(mlSelector modelselection.Selector, method SelectionMethod) *MLSelectorAdapter {
+src/semantic-router/pkg/selection/ml_adapter.go:105:func (a *MLSelectorAdapter) Method() SelectionMethod {
+src/semantic-router/pkg/selection/ml_adapter.go:230:	adapter := NewMLSelectorAdapter(mlSelector, MethodKNN)
+src/semantic-router/pkg/selection/ml_adapter.go:272:	adapter := NewMLSelectorAdapter(mlSelector, MethodKMeans)
+src/semantic-router/pkg/selection/ml_adapter.go:313:	adapter := NewMLSelectorAdapter(mlSelector, MethodSVM)
+src/semantic-router/pkg/selection/ml_adapter.go:353:	adapter := NewMLSelectorAdapter(mlSelector, MethodMLP)
+src/semantic-router/pkg/selection/multi_factor.go:84:// MultiFactorSelector implements MethodMultiFactor.
+src/semantic-router/pkg/selection/multi_factor.go:120:// Method returns MethodMultiFactor.
+src/semantic-router/pkg/selection/multi_factor.go:121:func (s *MultiFactorSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/multi_factor.go:122:	return MethodMultiFactor
+src/semantic-router/pkg/selection/multi_factor.go:200:		Method:        MethodMultiFactor,
+src/semantic-router/pkg/selection/multi_factor.go:327:		Method:        MethodMultiFactor,
+src/semantic-router/pkg/selection/static.go:67:func (s *StaticSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/static.go:68:	return MethodStatic
+src/semantic-router/pkg/selection/static.go:153:		Method:        MethodStatic,
+src/semantic-router/pkg/selection/rl_driven.go:428:func (r *RLDrivenSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/rl_driven.go:429:	return MethodRLDriven
+src/semantic-router/pkg/selection/rl_driven.go:618:		Method:        MethodRLDriven,
+src/semantic-router/pkg/selection/rl_driven.go:692:		Method:        MethodRLDriven,
+src/semantic-router/pkg/selection/offline_dataset.go:49:	// SelectionMethod records which algorithm made the routing decision.
+src/semantic-router/pkg/selection/offline_dataset.go:50:	SelectionMethod string `json:"selection_method"`

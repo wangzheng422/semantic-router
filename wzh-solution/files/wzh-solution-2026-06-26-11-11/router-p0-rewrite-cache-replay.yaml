@@ -1,0 +1,87 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 60s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      backend_refs:
+        - name: mock-small
+          endpoint: vsr-mock-backend:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 4096
+      description: Mock small lane.
+      capabilities: [chat]
+      quality_score: 0.6
+      modality: ar
+      tags: [small]
+
+  decisions:
+    - name: p0-rewrite-cache-replay
+      priority: 1000
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+      plugins:
+        - type: system_prompt
+          configuration:
+            enabled: true
+            mode: insert
+            system_prompt: "ROUND9_SYSTEM_PROMPT"
+        - type: header_mutation
+          configuration:
+            add:
+              - name: x-round9-added
+                value: added-by-router
+            update:
+              - name: x-round9-updated
+                value: updated-by-router
+            delete:
+              - x-round9-delete-me
+        - type: semantic-cache
+          configuration:
+            enabled: true
+            similarity_threshold: 0.99
+            ttl_seconds: 120
+        - type: router_replay
+          configuration:
+            enabled: true
+            max_records: 100
+            capture_request_body: true
+            capture_response_body: true
+            max_body_bytes: 20000
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    auto_model_name: round9-rewrite-cache-auto
+    include_config_models_in_list: true
+  stores:
+    semantic_cache:
+      enabled: true
+      backend_type: memory
+      similarity_threshold: 0.99
+      max_entries: 100
+      ttl_seconds: 120
+  services:
+    router_replay:
+      enabled: true
+      store_backend: memory
+      ttl_seconds: 3600

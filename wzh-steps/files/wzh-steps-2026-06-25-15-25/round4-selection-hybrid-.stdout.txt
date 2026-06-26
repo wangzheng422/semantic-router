@@ -1,0 +1,260 @@
+/*
+Copyright 2025 vLLM Semantic Router.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+*/
+
+package selection
+
+import (
+	"context"
+	"errors"
+	"fmt"
+	"math"
+	"strings"
+
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/config"
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/observability/logging"
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/selection/lookuptable"
+)
+
+// HybridConfig configures the Hybrid selector that combines multiple methods
+// Based on arXiv:2404.14618 - Hybrid LLM: Cost-Efficient Quality-Aware Query Routing
+type HybridConfig struct {
+	// EloWeight is the weight for Elo rating contribution (0-1)
+	EloWeight float64 `yaml:"elo_weight"`
+
+	// RouterDCWeight is the weight for embedding similarity contribution (0-1)
+	RouterDCWeight float64 `yaml:"router_dc_weight"`
+
+	// AutoMixWeight is the weight for POMDP value contribution (0-1)
+	AutoMixWeight float64 `yaml:"automix_weight"`
+
+	// CostWeight is the weight for cost consideration (0-1)
+	CostWeight float64 `yaml:"cost_weight"`
+
+	// QualityGapThreshold triggers escalation to larger models
+	QualityGapThreshold float64 `yaml:"quality_gap_threshold"`
+
+	// UseMLP enables MLP-based quality gap prediction (advanced)
+	UseMLP bool `yaml:"use_mlp"`
+
+	// NormalizeScores normalizes component scores before combination
+	NormalizeScores bool `yaml:"normalize_scores"`
+}
+
+// DefaultHybridConfig returns the default Hybrid configuration
+func DefaultHybridConfig() *HybridConfig {
+	return &HybridConfig{
+		EloWeight:           0.3,
+		RouterDCWeight:      0.3,
+		AutoMixWeight:       0.2,
+		CostWeight:          0.2,
+		QualityGapThreshold: 0.1,
+		UseMLP:              false,
+		NormalizeScores:     true,
+	}
+}
+
+// HybridSelector combines multiple selection methods for robust routing
+// It uses weighted combination of Elo ratings, embedding similarity,
+// and POMDP values, with optional cost-aware optimization.
+type HybridSelector struct {
+	config *HybridConfig
+
+	// Component selectors
+	eloSelector      *EloSelector
+	routerDCSelector *RouterDCSelector
+	autoMixSelector  *AutoMixSelector
+
+	// Model costs for cost-aware selection
+	modelCosts map[string]float64
+
+	// lookupTable provides data-driven values (e.g. quality-gap estimates)
+	// that replace hardcoded config constants. May be nil.
+	lookupTable lookuptable.LookupTable
+}
+
+// NewHybridSelector creates a new Hybrid selector
+func NewHybridSelector(cfg *HybridConfig) *HybridSelector {
+	if cfg == nil {
+		cfg = DefaultHybridConfig()
+	}
+
+	return &HybridSelector{
+		config:           cfg,
+		eloSelector:      NewEloSelector(DefaultEloConfig()),
+		routerDCSelector: NewRouterDCSelector(DefaultRouterDCConfig()),
+		autoMixSelector:  NewAutoMixSelector(DefaultAutoMixConfig()),
+		modelCosts:       make(map[string]float64),
+	}
+}
+
+// NewHybridSelectorWithComponents creates a Hybrid selector with custom components
+func NewHybridSelectorWithComponents(
+	cfg *HybridConfig,
+	elo *EloSelector,
+	routerDC *RouterDCSelector,
+	autoMix *AutoMixSelector,
+) *HybridSelector {
+	if cfg == nil {
+		cfg = DefaultHybridConfig()
+	}
+
+	return &HybridSelector{
+		config:           cfg,
+		eloSelector:      elo,
+		routerDCSelector: routerDC,
+		autoMixSelector:  autoMix,
+		modelCosts:       make(map[string]float64),
+	}
+}
+
+// Method returns the selection method type
+func (h *HybridSelector) Method() SelectionMethod {
+	return MethodHybrid
+}
+
+// SetEloSelector sets the Elo component
+func (h *HybridSelector) SetEloSelector(elo *EloSelector) {
+	h.eloSelector = elo
+}
+
+// SetRouterDCSelector sets the RouterDC component
+func (h *HybridSelector) SetRouterDCSelector(routerDC *RouterDCSelector) {
+	h.routerDCSelector = routerDC
+}
+
+// SetAutoMixSelector sets the AutoMix component
+func (h *HybridSelector) SetAutoMixSelector(autoMix *AutoMixSelector) {
+	h.autoMixSelector = autoMix
+}
+
+// SetModelCost sets the cost for a model
+func (h *HybridSelector) SetModelCost(model string, cost float64) {
+	h.modelCosts[model] = cost
+}
+
+// SetLookupTable attaches a lookup table for data-driven constant resolution.
+func (h *HybridSelector) SetLookupTable(lt lookuptable.LookupTable) {
+	h.lookupTable = lt
+}
+
+// resolveQualityGap returns the quality-gap threshold between currentModel and
+// candidateModel for the given task family. It first checks the lookup table;
+// if no entry is found it falls back to config.QualityGapThreshold.
+//
+// TODO: integrate into model upgrade decision logic in Select.
+//
+//nolint:unused // Reserved for upcoming lookup-table consumption.
+func (h *HybridSelector) resolveQualityGap(taskFamily, currentModel, candidateModel string) float64 {
+	if h.lookupTable != nil && taskFamily != "" && currentModel != "" && candidateModel != "" {
+		if gap, ok := h.lookupTable.QualityGap(taskFamily, currentModel, candidateModel); ok {
+			return gap
+		}
+	}
+	return h.config.QualityGapThreshold
+}
+
+// Select chooses the best model by combining multiple selection methods
+func (h *HybridSelector) Select(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+	if err := ValidateSelectionContext(selCtx); err != nil {
+		return nil, err
+	}
+
+	// Collect scores from each component
+	componentScores := make(map[string]map[string]float64)
+	var componentResults []*SelectionResult
+
+	// Get Elo scores
+	if h.eloSelector != nil && h.config.EloWeight > 0 {
+		result, err := h.eloSelector.Select(ctx, selCtx)
+		if err == nil && result != nil {
+			componentScores["elo"] = result.AllScores
+			componentResults = append(componentResults, result)
+		}
+	}
+
+	// Get RouterDC scores
+	if h.routerDCSelector != nil && h.config.RouterDCWeight > 0 {
+		result, err := h.routerDCSelector.Select(ctx, selCtx)
+		if err == nil && result != nil {
+			componentScores["router_dc"] = result.AllScores
+			componentResults = append(componentResults, result)
+		}
+	}
+
+	// Get AutoMix scores
+	if h.autoMixSelector != nil && h.config.AutoMixWeight > 0 {
+		result, err := h.autoMixSelector.Select(ctx, selCtx)
+		if err == nil && result != nil {
+			componentScores["automix"] = result.AllScores
+			componentResults = append(componentResults, result)
+		}
+	}
+
+	// Normalize scores if enabled
+	if h.config.NormalizeScores {
+		for component, scores := range componentScores {
+			componentScores[component] = h.normalizeScores(scores)
+		}
+	}
+
+	// Combine scores with weights
+	combinedScores := h.combineScores(componentScores, selCtx.CandidateModels)
+
+	// Apply cost adjustment
+	if h.config.CostWeight > 0 {
+		h.applyCostAdjustment(combinedScores, selCtx.CostWeight)
+	}
+
+	h.applyCacheAffinity(combinedScores, selCtx)
+
+	logging.Infof("[HybridSelector] Combining scores (weights: elo=%.2f, dc=%.2f, am=%.2f, cost=%.2f):",
+		h.config.EloWeight, h.config.RouterDCWeight, h.config.AutoMixWeight, h.config.CostWeight)
+	for _, model := range selCtx.CandidateModels {
+		var eloScore, dcScore, amScore float64
+		if scores, ok := componentScores["elo"]; ok {
+			eloScore = scores[model.Model]
+		}
+		if scores, ok := componentScores["router_dc"]; ok {
+			dcScore = scores[model.Model]
+		}
+		if scores, ok := componentScores["automix"]; ok {
+			amScore = scores[model.Model]
+		}
+		logging.Infof("[HybridSelector]   %s: elo=%.4f, dc=%.4f, am=%.4f → combined=%.4f",
+			model.Model, eloScore, dcScore, amScore, combinedScores[model.Model])
+	}
+
+	bestModel, bestScore := h.selectBestModel(selCtx.CandidateModels, combinedScores)
+
+	if bestModel == nil {
+		return nil, fmt.Errorf("could not select a model")
+	}
+
+	// Calculate confidence from component agreement
+	confidence := h.calculateConfidence(componentResults, bestModel.Model)
+
+	h.recordComponentAgreement(componentResults, bestModel.Model)
+
+	// Build reasoning
+	reasoning := h.buildReasoning(componentScores, bestModel.Model)
+
+	logging.Infof("[HybridSelector] Selected model %s (score=%.4f, confidence=%.2f, components=%d)",
+		bestModel.Model, bestScore, confidence, len(componentResults))
+
+	return &SelectionResult{
+		SelectedModel: bestModel.Model,
+		LoRAName:      bestModel.LoRAName,
+		Score:         bestScore,

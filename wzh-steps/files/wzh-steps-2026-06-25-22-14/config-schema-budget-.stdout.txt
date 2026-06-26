@@ -1,0 +1,541 @@
+src/vllm-sr/README.md:362:    - name: "budget-route"
+src/vllm-sr/README.md:392:If a replay page would exceed the ext-proc gRPC message budget, the router returns `413 Payload Too Large` instead of failing the stream.
+deploy/recipes/privacy/README.md:46:Pricing is configured in `providers.models[].pricing`, which is the layer the router uses for cost accounting, replay cost snapshots, and savings calculations.
+docs/architecture/lookup-tables.md:65:All lookup table settings live under `model_selection.lookup_tables` in the
+docs/architecture/lookup-tables.md:69:model_selection:
+docs/architecture/lookup-tables.md:292:model_selection:
+docs/architecture/lookup-tables.md:316:model_selection:
+docs/architecture/lookup-tables.md:350:model_selection:
+deploy/recipes/mmlu/mmlu-router.yaml:21:    pricing:
+deploy/recipes/mmlu/mmlu-router.yaml:33:    pricing:
+deploy/recipes/balance.probes.yaml:146:      - id: pricing_strategy_evidence
+deploy/recipes/balance.probes.yaml:147:        query: "Verify this claim with evidence: compare two B2B SaaS pricing strategies and cite sources for the market-share claim."
+deploy/recipes/feedback/README.md:47:Pricing is configured in `providers.models[].pricing`, which is what the router uses for cost accounting and Insights.
+src/semantic-router/pkg/modelruntime/router_runtime.go:340:		"model_selection": mlSelectionNeedsBatched,
+deploy/recipes/privacy/privacy-router.yaml:17:  # Example pricing intentionally exaggerates the local-vs-cloud spread so
+deploy/recipes/privacy/privacy-router.yaml:25:      pricing:
+deploy/recipes/privacy/privacy-router.yaml:39:      pricing:
+deploy/recipes/privacy/privacy-router.yaml:561:          slope: 10.0
+deploy/recipes/privacy/privacy-router.yaml:572:          slope: 10.0
+deploy/recipes/privacy/privacy-router.yaml:583:          slope: 10.0
+deploy/recipes/privacy/privacy-router.yaml:594:          slope: 10.0
+src/semantic-router/pkg/selection/router_r1_client.go:33:// Requires external server: src/training/rl_model_selection/router_r1_server.py
+docs/agent/feature-complete-checklist.md:26:- Benchmark and stress probes may supplement E2E coverage, but they do not replace acceptance tests unless they declare explicit pass/fail budgets
+src/semantic-router/pkg/config/decision_config.go:92:	// lives at src/training/model_selection/rl_model_selection/automix_verifier.py.
+deploy/recipes/feedback/feedback-router.yaml:21:      pricing:
+deploy/recipes/feedback/feedback-router.yaml:33:      pricing:
+deploy/recipes/feedback/feedback-router.yaml:45:      pricing:
+src/semantic-router/pkg/sessiontelemetry/router_memory.go:55:// memory. Costs are in the pricing currency selected by the router config.
+src/semantic-router/pkg/config/model_config_types.go:309:	Pricing            ModelPricing      `yaml:"pricing,omitempty"`
+src/semantic-router/pkg/config/canonical_global.go:29:	ModelSelection            ModelSelectionConfig  `yaml:"model_selection"`
+deploy/recipes/balance.yaml:22:      pricing:
+deploy/recipes/balance.yaml:35:      pricing:
+deploy/recipes/balance.yaml:48:      pricing:
+deploy/recipes/balance.yaml:61:      pricing:
+deploy/recipes/balance.yaml:74:      pricing:
+deploy/recipes/balance.yaml:1057:          slope: 10
+deploy/recipes/balance.yaml:1074:          slope: 12
+deploy/recipes/balance.yaml:1085:          slope: 12
+deploy/recipes/balance.yaml:1096:          slope: 12
+deploy/recipes/balance.yaml:1107:          slope: 12
+deploy/recipes/balance.yaml:1621:      - description: Economics, pricing, incentives, and market dynamics.
+deploy/recipes/balance.yaml:1661:          - Create three slogan options for a climate startup.
+deploy/recipes/balance.yaml:1667:          - Compare two pricing strategies for a B2B SaaS product.
+deploy/recipes/balance.yaml:1924:          - slogan
+docs/agent/context-management.md:55:## Default Budget
+src/semantic-router/pkg/selection/multi_factor_test.go:116:	tpotMap := map[string]float64{"slow": 0.5, "fast": 0.05, "mid": 0.2}
+src/semantic-router/pkg/selection/multi_factor_test.go:122:	res, err := s.Select(context.Background(), &SelectionContext{CandidateModels: candidates("slow", "fast", "mid")})
+src/semantic-router/pkg/selection/multi_factor_test.go:136:		"slow_high_q": {QualityScore: 0.99},
+src/semantic-router/pkg/selection/multi_factor_test.go:140:		"slow_high_q": 0.5,
+src/semantic-router/pkg/selection/multi_factor_test.go:148:	res, err := s.Select(context.Background(), &SelectionContext{CandidateModels: candidates("slow_high_q", "fast_low_q")})
+src/semantic-router/pkg/selection/multi_factor_test.go:153:		t.Errorf("SLO should exclude slow_high_q despite higher quality; got %s reasoning=%q",
+src/semantic-router/pkg/ratelimit/chain.go:17://  2. LocalLimiter      (in-process per-user/model token and request budgets)
+src/semantic-router/pkg/ratelimit/chain.go:124:// Report forwards token usage to all providers for budget tracking.
+src/semantic-router/pkg/dsl/ast_json.go:64:	Slope  float64 `json:"slope,omitempty"`
+src/semantic-router/pkg/ratelimit/local_provider.go:15://   - tokens_per_unit  (TPM): token budget tracking (AI Gateway-style)
+src/semantic-router/pkg/ratelimit/local_provider.go:18:// after response via Report() to decrement token budgets.
+src/semantic-router/pkg/ratelimit/local_provider.go:62:// Check evaluates all matching rules. If any rule's budget is exhausted,
+src/semantic-router/pkg/ratelimit/local_provider.go:149:// This adjusts the token budget based on actual usage rather than the
+src/semantic-router/pkg/config/validator_embedding_test.go:208:		t.Fatal("expected validateEmbeddingContracts to reject classic BERT in mmbert slot, got nil")
+src/semantic-router/pkg/dsl/dsl_test.go:1593:			body:     `weights: { quality: 0.4, latency: 0.3, cost: 0.2, load: 0.1 } slo: { max_tpot_ms: 200, max_ttft_ms: 800, max_cost_per_1m: 5, max_inflight: 20 } latency_percentile: 99 on_no_candidates: "fail"`,
+src/semantic-router/pkg/dsl/dsl_test.go:1602:					t.Fatalf("slo.max_inflight = %#v, want 20", algo.MultiFactor.SLO)
+src/semantic-router/pkg/dsl/dsl_test.go:1694:							MaxCostPer1M: 5,
+src/semantic-router/pkg/dsl/dsl_test.go:5078:  calibration: { method: "sigmoid_distance", slope: 10.0 }
+src/semantic-router/pkg/dsl/dsl_test.go:5131:  calibration: { method: "sigmoid_distance", slope: 10.0 }
+src/semantic-router/pkg/dsl/dsl_test.go:6144:    MODEL "slow-model"
+src/semantic-router/pkg/k8s/testdata/README.md:171:  - `providers.models[*].pricing` when the pool supplies pricing metadata
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:72:// isConfigured reports whether pricing is active: at least one billable rate is set, or
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:154:	currency := pricingCurrency(p.Pricing)
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:206:func pricingCurrency(pricing TurnPricing) string {
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:207:	currency := pricing.Currency
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:250:		fields["pricing_prompt_per_1m"] = p.Pricing.PromptPer1M
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:251:		fields["pricing_completion_per_1m"] = p.Pricing.CompletionPer1M
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:252:		fields["pricing_cached_input_per_1m"] = p.Pricing.CachedInputPer1M
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:253:		fields["pricing_currency"] = currency
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:260:// computeCost returns the turn cost in the pricing currency given token counts
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:262:func computeCost(promptTokens, cachedPromptTokens, completionTokens int, pricing TurnPricing) float64 {
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:263:	if !pricing.isConfigured() {
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:268:	return (float64(uncachedPrompt)*pricing.PromptPer1M +
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:269:		float64(cached)*pricing.CachedInputPer1M +
+src/semantic-router/pkg/sessiontelemetry/telemetry.go:270:		float64(completionTokens)*pricing.CompletionPer1M) / 1_000_000.0
+src/semantic-router/pkg/selection/automix.go:152:	// Requires external server: src/training/rl_model_selection/automix_verifier.py
+src/semantic-router/pkg/selection/automix.go:184:	// Requires external server: src/training/rl_model_selection/automix_verifier.py
+src/semantic-router/pkg/selection/automix.go:628:// Requires external server: src/training/rl_model_selection/automix_verifier.py
+src/semantic-router/pkg/ratelimit/provider.go:12://     requests-per-unit (RPM) and tokens-per-unit (TPM) budgets keyed by
+src/semantic-router/pkg/ratelimit/provider.go:39:	// This enables token-based (TPM) rate limiting where the budget is
+src/semantic-router/pkg/k8s/testdata/output/04-domain-only.yaml:18:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/04-domain-only.yaml:22:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/04-domain-only.yaml:93:    model_selection: {}
+src/semantic-router/pkg/config/canonical_providers.go:24:	Pricing          ModelPricing          `yaml:"pricing,omitempty"`
+src/semantic-router/pkg/k8s/testdata/output/14-domain-embedding-plugin.yaml:18:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/14-domain-embedding-plugin.yaml:22:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/14-domain-embedding-plugin.yaml:79:    model_selection: {}
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:161:// PR 2 — per-turn pricing metadata and cumulative_cost
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:201:	pricing := TurnPricing{
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:213:		Pricing:          pricing,
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:257:	pricing := TurnPricing{
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:270:		Pricing:          pricing,
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:272:			ConversationID: "conv_pricing_1",
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:282:		Pricing:          pricing,
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:284:			ConversationID: "conv_pricing_1",
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:291:	st, ok := store["respapi:conv_pricing_1"]
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:322:	assert.Equal(t, before, after, "no cost observation should be recorded when pricing is not configured")
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:336:		pricing  TurnPricing
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:340:			name:     "zero pricing returns zero cost",
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:343:			pricing:  TurnPricing{},
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:347:			name:    "standard pricing",
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:350:			pricing: TurnPricing{Currency: "USD", PromptPer1M: 5.0, CompletionPer1M: 15.0},
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:355:			name:     "only completion pricing",
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:358:			pricing:  TurnPricing{Currency: "USD", CompletionPer1M: 10.0},
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:365:			pricing:  TurnPricing{Currency: "USD", PromptPer1M: 0, CompletionPer1M: 0},
+src/semantic-router/pkg/sessiontelemetry/telemetry_test.go:372:			got := computeCost(tc.prompt, 0, tc.compl, tc.pricing)
+src/semantic-router/pkg/dsl/parser.go:293:		if slope, ok := getFloat64Field(calibrationObj.Fields, "slope"); ok {
+src/semantic-router/pkg/dsl/parser.go:294:			calibration.Slope = slope
+src/semantic-router/pkg/k8s/testdata/output/07-domain-embedding.yaml:18:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/07-domain-embedding.yaml:22:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/07-domain-embedding.yaml:93:    model_selection: {}
+src/semantic-router/pkg/dsl/compiler_algorithms.go:453:	slo, ok := fields["slo"].(ObjectValue)
+src/semantic-router/pkg/dsl/compiler_algorithms.go:458:	if v, ok := getFloat64Field(slo.Fields, "max_tpot_ms"); ok {
+src/semantic-router/pkg/dsl/compiler_algorithms.go:461:	if v, ok := getFloat64Field(slo.Fields, "max_ttft_ms"); ok {
+src/semantic-router/pkg/dsl/compiler_algorithms.go:464:	if v, ok := getFloat64Field(slo.Fields, "max_cost_per_1m"); ok {
+src/semantic-router/pkg/dsl/compiler_algorithms.go:465:		cfg.MaxCostPer1M = v
+src/semantic-router/pkg/dsl/compiler_algorithms.go:467:	if v, ok := getIntField(slo.Fields, "max_inflight"); ok {
+src/semantic-router/pkg/config/canonical_config.go:207:				return fmt.Errorf("providers.models[%s] must define backend_refs or provider metadata such as reasoning_family, pricing, api_format, external_model_ids, or provider_model_id", model.Name)
+src/semantic-router/pkg/config/canonical_config.go:374:	// still store the provider_model_id so pricing lookups by provider
+src/semantic-router/pkg/k8s/testdata/output/11-domain-plugin.yaml:18:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/11-domain-plugin.yaml:22:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/11-domain-plugin.yaml:69:    model_selection: {}
+src/semantic-router/pkg/config/validator_embedding.go:23:// slot. Classic BERT (e.g. all-MiniLM-L12-v2) uses a different tensor layout
+src/semantic-router/pkg/dsl/emitter_yaml.go:285:		"looper", "model_selection", "vector_store",
+src/semantic-router/pkg/k8s/testdata/output/05-keyword-embedding.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/05-keyword-embedding.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/05-keyword-embedding.yaml:93:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/03-embedding-only.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/03-embedding-only.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/03-embedding-only.yaml:88:    model_selection: {}
+src/semantic-router/pkg/dsl/maintained_asset_roundtrip_test.go:99:func TestMaintainedBalanceWarningBudgetStaysBelowCeiling(t *testing.T) {
+src/semantic-router/pkg/k8s/testdata/output/13-keyword-domain-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/13-keyword-domain-plugin.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/13-keyword-domain-plugin.yaml:82:    model_selection: {}
+src/semantic-router/pkg/config/config.go:207:	ModelSelection  ModelSelectionConfig `yaml:"model_selection,omitempty"`
+src/semantic-router/pkg/selection/metrics.go:161:			Name: "llm_model_selection_total",
+src/semantic-router/pkg/selection/metrics.go:169:			Name:    "llm_model_selection_duration_seconds",
+src/semantic-router/pkg/selection/metrics.go:178:			Name:    "llm_model_selection_score",
+src/semantic-router/pkg/selection/metrics.go:187:			Name:    "llm_model_selection_confidence",
+src/semantic-router/pkg/selection/metrics.go:196:			Name: "llm_model_selection_dependency_health",
+src/semantic-router/pkg/selection/metrics.go:232:			Name: "llm_model_selection_history",
+src/semantic-router/pkg/selection/metrics.go:240:			Name:    "llm_model_selection_component_agreement",
+src/semantic-router/pkg/k8s/testdata/output/08-keyword-embedding-domain.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/08-keyword-embedding-domain.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/08-keyword-embedding-domain.yaml:105:    model_selection: {}
+src/semantic-router/pkg/config/reference_config_global_test.go:6:	modelSelection := mustMapAt(t, router, "model_selection")
+src/semantic-router/pkg/config/reference_config_global_test.go:11:	assertMapCoversStructFields(t, modelSelection, reflect.TypeOf(ModelSelectionConfig{}), "global.router.model_selection")
+src/semantic-router/pkg/config/reference_config_global_test.go:16:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml"), reflect.TypeOf(MLSelectionConfig{}), "global.router.model_selection.ml")
+src/semantic-router/pkg/config/reference_config_global_test.go:17:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "elo"), reflect.TypeOf(EloSelectionConfig{}), "global.router.model_selection.elo")
+src/semantic-router/pkg/config/reference_config_global_test.go:18:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "router_dc"), reflect.TypeOf(RouterDCSelectionConfig{}), "global.router.model_selection.router_dc")
+src/semantic-router/pkg/config/reference_config_global_test.go:19:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "automix"), reflect.TypeOf(AutoMixSelectionConfig{}), "global.router.model_selection.automix")
+src/semantic-router/pkg/config/reference_config_global_test.go:20:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "hybrid"), reflect.TypeOf(HybridSelectionConfig{}), "global.router.model_selection.hybrid")
+src/semantic-router/pkg/config/reference_config_global_test.go:21:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "session_aware"), reflect.TypeOf(SessionAwareSelectionConfig{}), "global.router.model_selection.session_aware")
+src/semantic-router/pkg/config/reference_config_global_test.go:22:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "model_switch_gate"), reflect.TypeOf(ModelSwitchGateConfig{}), "global.router.model_selection.model_switch_gate")
+src/semantic-router/pkg/config/reference_config_global_test.go:23:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "knn"), reflect.TypeOf(MLKNNConfig{}), "global.router.model_selection.ml.knn")
+src/semantic-router/pkg/config/reference_config_global_test.go:24:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "kmeans"), reflect.TypeOf(MLKMeansConfig{}), "global.router.model_selection.ml.kmeans")
+src/semantic-router/pkg/config/reference_config_global_test.go:25:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "svm"), reflect.TypeOf(MLSVMConfig{}), "global.router.model_selection.ml.svm")
+src/semantic-router/pkg/config/reference_config_global_test.go:26:	assertMapCoversStructFields(t, mustMapAt(t, modelSelection, "ml", "mlp"), reflect.TypeOf(MLMLPConfig{}), "global.router.model_selection.ml.mlp")
+src/semantic-router/pkg/config/reference_config_global_test.go:29:	assertMapCoversStructFields(t, lookupTables, reflect.TypeOf(LookupTableConfig{}), "global.router.model_selection.lookup_tables")
+src/semantic-router/pkg/config/reference_config_global_test.go:30:	assertSliceUnionCoversStructFields(t, mustSliceAt(t, lookupTables, "quality_gaps"), reflect.TypeOf(QualityGapOverride{}), "global.router.model_selection.lookup_tables.quality_gaps")
+src/semantic-router/pkg/config/reference_config_global_test.go:31:	assertSliceUnionCoversStructFields(t, mustSliceAt(t, lookupTables, "handoff_penalties"), reflect.TypeOf(HandoffPenaltyOverride{}), "global.router.model_selection.lookup_tables.handoff_penalties")
+src/semantic-router/pkg/config/reference_config_global_test.go:32:	assertSliceUnionCoversStructFields(t, mustSliceAt(t, lookupTables, "remaining_turn_priors"), reflect.TypeOf(RemainingTurnPriorOverride{}), "global.router.model_selection.lookup_tables.remaining_turn_priors")
+src/semantic-router/pkg/k8s/testdata/output/17-embedding-multimodal.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/17-embedding-multimodal.yaml:115:    model_selection: {}
+src/semantic-router/pkg/selection/paper_benchmark_test.go:216:		"slow-model": {QualityScore: 0.9},
+src/semantic-router/pkg/selection/paper_benchmark_test.go:222:	// User consistently prefers "fast-model" (even though slow-model has higher quality)
+src/semantic-router/pkg/selection/paper_benchmark_test.go:226:			LoserModel:  "slow-model",
+src/semantic-router/pkg/selection/paper_benchmark_test.go:237:			{Model: "slow-model"},
+src/semantic-router/pkg/selection/paper_benchmark_test.go:259:	if prefs["fast-model"] <= prefs["slow-model"] {
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:225:		fields["slo"] = multiFactorSLOValue(m.SLO)
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:326:func multiFactorSLOValue(slo *config.MultiFactorSLOConfig) ObjectValue {
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:328:	if slo == nil {
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:331:	setFloatValue(fields, "max_tpot_ms", slo.MaxTPOTMs)
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:332:	setFloatValue(fields, "max_ttft_ms", slo.MaxTTFTMs)
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:333:	setFloatValue(fields, "max_cost_per_1m", slo.MaxCostPer1M)
+src/semantic-router/pkg/dsl/decompiler_algorithms.go:334:	setIntValue(fields, "max_inflight", slo.MaxInflight)
+src/semantic-router/pkg/k8s/testdata/output/16-keyword-embedding-domain-no-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/16-keyword-embedding-domain-no-plugin.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/16-keyword-embedding-domain-no-plugin.yaml:121:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/12-keyword-embedding-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/12-keyword-embedding-plugin.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/12-keyword-embedding-plugin.yaml:81:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/15-keyword-embedding-domain-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/15-keyword-embedding-domain-plugin.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/15-keyword-embedding-domain-plugin.yaml:147:    model_selection: {}
+src/semantic-router/pkg/config/selection_config.go:221:	SLO     *MultiFactorSLOConfig     `yaml:"slo,omitempty"`
+src/semantic-router/pkg/config/selection_config.go:247:	MaxCostPer1M float64 `yaml:"max_cost_per_1m,omitempty"`
+src/semantic-router/pkg/dsl/decompiler_convert_values.go:271:		fields = append(fields, fmt.Sprintf("slope: %g", calibration.Slope))
+src/semantic-router/pkg/config/docs_contract_test.go:96:			"global:\n  router:\n    model_selection:",
+src/semantic-router/pkg/config/docs_contract_test.go:130:			"pricing:",
+src/semantic-router/pkg/config/docs_contract_test.go:254:			"global:\n  router:\n    model_selection:",
+src/semantic-router/pkg/config/docs_contract_test.go:280:			"config:\n  model_selection:",
+src/semantic-router/pkg/config/docs_contract_test.go:281:			"\nmodel_selection:\n",
+src/semantic-router/pkg/modelselection/trainer.go:30:// IMPORTANT: This order MUST match Python training: src/training/model_selection/ml_model_selection/data_loader.py
+src/semantic-router/pkg/k8s/testdata/output/02-keyword-only.yaml:18:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/02-keyword-only.yaml:22:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/02-keyword-only.yaml:87:    model_selection: {}
+src/semantic-router/pkg/selection/rl_driven.go:334:	// Requires external Router-R1 server (see src/training/rl_model_selection/router_r1_server.py)
+src/semantic-router/pkg/selection/rl_driven.go:397:	// Requires external server: src/training/rl_model_selection/router_r1_server.py
+src/semantic-router/pkg/selection/rl_driven.go:628:// Requires external server: src/training/rl_model_selection/router_r1_server.py
+src/semantic-router/pkg/k8s/testdata/output/10-embedding-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/10-embedding-plugin.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/10-embedding-plugin.yaml:69:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/06-keyword-domain.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/06-keyword-domain.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/06-keyword-domain.yaml:99:    model_selection: {}
+src/semantic-router/pkg/k8s/testdata/output/01-basic.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/01-basic.yaml:24:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/01-basic.yaml:104:    model_selection: {}
+src/semantic-router/pkg/observability/metrics/session_cost.go:10:// SessionTurnCost tracks per-turn cost for sessions with pricing configured, labeled by
+src/semantic-router/pkg/observability/metrics/session_cost.go:15:		Help:    "Distribution of per-turn cost attributed to a logical session (model + domain category + currency). Only recorded when pricing is configured.",
+src/semantic-router/pkg/observability/metrics/session_cost.go:21:// RecordSessionTurnCost records the per-turn cost histogram for sessions with pricing
+src/semantic-router/pkg/observability/metrics/session_cost.go:22:// configured. Callers must only invoke this when pricing is active (cost == 0 for a
+src/semantic-router/pkg/observability/metrics/session_cost.go:23:// free model is valid; cost == 0 because pricing is absent should not be recorded).
+src/semantic-router/pkg/selection/multi_factor.go:59:	MaxCostPer1M float64
+src/semantic-router/pkg/selection/multi_factor.go:125:// InitializeFromConfig captures per-model quality + pricing for use by Select.
+src/semantic-router/pkg/selection/multi_factor.go:192:	logging.Infof("[MultiFactor] candidates=%d -> %s (score=%.4f confidence=%.2f, dropped_by_slo=%d)",
+src/semantic-router/pkg/selection/multi_factor.go:267:	slo := s.config.SLO
+src/semantic-router/pkg/selection/multi_factor.go:269:	if slo.MaxTPOTMs > 0 {
+src/semantic-router/pkg/selection/multi_factor.go:270:		if v, ok := s.getTPOT(model, s.config.LatencyPercentile); ok && v*1000 > slo.MaxTPOTMs {
+src/semantic-router/pkg/selection/multi_factor.go:271:			return fmt.Sprintf("tpot_p%d=%.1fms>%.1fms", s.config.LatencyPercentile, v*1000, slo.MaxTPOTMs), true
+src/semantic-router/pkg/selection/multi_factor.go:274:	if slo.MaxTTFTMs > 0 {
+src/semantic-router/pkg/selection/multi_factor.go:275:		if v, ok := s.getTTFT(model, s.config.LatencyPercentile); ok && v*1000 > slo.MaxTTFTMs {
+src/semantic-router/pkg/selection/multi_factor.go:276:			return fmt.Sprintf("ttft_p%d=%.1fms>%.1fms", s.config.LatencyPercentile, v*1000, slo.MaxTTFTMs), true
+src/semantic-router/pkg/selection/multi_factor.go:279:	if slo.MaxCostPer1M > 0 {
+src/semantic-router/pkg/selection/multi_factor.go:280:		if params, ok := s.modelParams[model]; ok && params.Pricing.PromptPer1M > slo.MaxCostPer1M {
+src/semantic-router/pkg/selection/multi_factor.go:281:			return fmt.Sprintf("cost=$%.2f>$%.2f per 1M", params.Pricing.PromptPer1M, slo.MaxCostPer1M), true
+src/semantic-router/pkg/selection/multi_factor.go:284:	if slo.MaxInflight > 0 {
+src/semantic-router/pkg/selection/multi_factor.go:285:		if got := s.getInflight(model); got > slo.MaxInflight {
+src/semantic-router/pkg/selection/multi_factor.go:286:			return fmt.Sprintf("inflight=%d>%d", got, slo.MaxInflight), true
+src/semantic-router/pkg/selection/multi_factor.go:298:		return s.noCandidateResult(c, "all_candidates_excluded_by_slo:first"), nil
+src/semantic-router/pkg/selection/multi_factor.go:301:		return s.noCandidateResult(c, "all_candidates_excluded_by_slo:cheapest"), nil
+src/semantic-router/pkg/k8s/testdata/output/09-keyword-plugin.yaml:18:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/09-keyword-plugin.yaml:22:      pricing:
+src/semantic-router/pkg/k8s/testdata/output/09-keyword-plugin.yaml:68:    model_selection: {}
+src/semantic-router/pkg/modelselection/selector_test.go:2137:	// Generate training data for model-quality (slow but high quality)
+src/semantic-router/pkg/k8s/testdata/input/04-domain-only.yaml:11:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/04-domain-only.yaml:19:      pricing:
+src/semantic-router/pkg/config/pricing_helper.go:7:// has no pricing entry at all. Accepts both short names and provider model IDs.
+src/semantic-router/pkg/config/validator.go:84:			name:     "model_selection",
+src/semantic-router/pkg/apiserver/route_memory_test.go:208:		Content:    "User's budget for Hawaii is $10,000",
+src/semantic-router/pkg/k8s/testdata/input/14-domain-embedding-plugin.yaml:11:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/14-domain-embedding-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/config/projection_config.go:64:	Slope  float64 `yaml:"slope,omitempty"`
+src/semantic-router/pkg/modelselection/README.md:14:> cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/README.md:49:│  Training is done in Python: src/training/model_selection/ml_model_selection/       │
+src/semantic-router/pkg/modelselection/README.md:146:model_selection:
+src/semantic-router/pkg/modelselection/README.md:180:src/training/model_selection/ml_model_selection/         # Training and validation scripts
+src/semantic-router/pkg/modelselection/README.md:293:- Low-quality, slow responses have less influence
+src/semantic-router/pkg/modelselection/README.md:689:cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/README.md:940:    model_selection:
+src/semantic-router/pkg/modelselection/README.md:1026:> See `src/training/model_selection/ml_model_selection/` for the full training pipeline.
+src/semantic-router/pkg/modelselection/README.md:1032:cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/README.md:1046:cd src/training/model_selection/ml_model_selection
+src/semantic-router/pkg/modelselection/README.md:1252:| KNN | Fast | O(n) - slower with more data | High (stores all embeddings) |
+src/semantic-router/pkg/modelselection/README.md:1275:- Ensure models are loaded (first request is slow)
+src/semantic-router/pkg/k8s/testdata/input/07-domain-embedding.yaml:11:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/07-domain-embedding.yaml:19:      pricing:
+src/semantic-router/pkg/promptcompression/compressor.go:2:// long prompts to a token budget while preserving classification and embedding
+src/semantic-router/pkg/promptcompression/compressor.go:24:// top-ranked sentences are selected to fit the token budget and reassembled in
+src/semantic-router/pkg/promptcompression/compressor.go:46:	// MaxTokens is the target token budget. If the input is already within
+src/semantic-router/pkg/promptcompression/compressor.go:47:	// budget, it is returned unchanged.
+src/semantic-router/pkg/promptcompression/compressor.go:143:// Compress reduces the input text to fit within the configured token budget.
+src/semantic-router/pkg/promptcompression/compressor.go:272:// selectSentences picks sentences to keep within the token budget.
+src/semantic-router/pkg/promptcompression/compressor.go:281:	budget := cfg.MaxTokens
+src/semantic-router/pkg/promptcompression/compressor.go:287:		if !kept[i] && usedTokens+tokenCounts[i] <= budget {
+src/semantic-router/pkg/promptcompression/compressor.go:296:		if i >= 0 && !kept[i] && usedTokens+tokenCounts[i] <= budget {
+src/semantic-router/pkg/promptcompression/compressor.go:320:		if usedTokens+tokenCounts[c.index] <= budget {
+src/semantic-router/pkg/promptcompression/compressor.go:347:	// Fill middle slots with uniformly spaced sentences
+src/semantic-router/pkg/config/canonical_loader_test.go:460:      pricing:
+src/semantic-router/pkg/config/canonical_loader_test.go:487:	pricing := cfg.ModelConfig["qwen3"].Pricing
+src/semantic-router/pkg/config/canonical_loader_test.go:488:	if pricing.PromptPer1M != 0.24 || pricing.CompletionPer1M != 0.96 || pricing.Currency != "USD" {
+src/semantic-router/pkg/config/canonical_loader_test.go:489:		t.Fatalf("expected provider pricing to be preserved in model config, got %#v", pricing)
+src/semantic-router/pkg/config/canonical_loader_test.go:494:		t.Fatal("expected GetModelPricing to resolve provider pricing")
+src/semantic-router/pkg/config/canonical_loader_test.go:498:			"expected GetModelPricing to return provider pricing, got prompt=%v completion=%v currency=%q",
+src/semantic-router/pkg/config/canonical_loader_test.go:519:      pricing:
+src/semantic-router/pkg/config/canonical_loader_test.go:553:		t.Fatal("expected pricing lookup by provider model ID to succeed")
+src/semantic-router/pkg/config/canonical_loader_test.go:577:		t.Fatal("expected explicit zero pricing to be treated as configured")
+src/semantic-router/pkg/config/canonical_loader_test.go:581:			"expected zero pricing with USD currency, got prompt=%v completion=%v currency=%q",
+src/semantic-router/pkg/config/canonical_loader_test.go:610:		t.Fatal("expected pricing lookup by short name to succeed")
+src/semantic-router/pkg/config/canonical_loader_test.go:619:		t.Fatal("expected pricing lookup by provider model ID to succeed")
+src/semantic-router/pkg/config/canonical_loader_test.go:628:		t.Fatal("expected pricing lookup for unknown model to return false")
+src/semantic-router/pkg/k8s/testdata/input/11-domain-plugin.yaml:11:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/11-domain-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/modelselection/selector.go:31:// Training is done in Python (src/training/model_selection/ml_model_selection/).
+src/semantic-router/pkg/modelselection/selector.go:597:// See: src/training/model_selection/ml_model_selection/train.py
+src/semantic-router/pkg/modelselection/selector.go:605:	// Training is now done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:607:	logging.Warnf("KNN training in Go is deprecated. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/pkg/modelselection/selector.go:721:// See: src/training/model_selection/ml_model_selection/train.py
+src/semantic-router/pkg/modelselection/selector.go:729:	// Training is now done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:731:	logging.Warnf("KMeans training in Go is deprecated. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/pkg/modelselection/selector.go:842:// See: src/training/model_selection/ml_model_selection/train.py
+src/semantic-router/pkg/modelselection/selector.go:850:	// Training is now done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:852:	logging.Warnf("SVM training in Go is deprecated. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/pkg/modelselection/selector.go:969:	// Training is done in Python (src/training/model_selection/ml_model_selection/)
+src/semantic-router/pkg/modelselection/selector.go:970:	logging.Warnf("MLP training in Go is not supported. Use Python training: python src/training/model_selection/ml_model_selection/train.py")
+src/semantic-router/pkg/k8s/testdata/input/05-keyword-embedding.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/05-keyword-embedding.yaml:21:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/15-keyword-embedding-domain-plugin.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/15-keyword-embedding-domain-plugin.yaml:21:      pricing:
+src/semantic-router/pkg/promptcompression/profile.go:6:// workload while preserving the caller's token budget.
+src/semantic-router/pkg/k8s/testdata/input/03-embedding-only.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/03-embedding-only.yaml:21:      pricing:
+src/semantic-router/pkg/config/helper.go:138:// GetModelPricing returns pricing per 1M tokens and its currency for the given model.
+src/semantic-router/pkg/config/helper.go:145:		// Treat an explicit zero-price entry as configured pricing when a currency is
+src/semantic-router/pkg/config/helper.go:159:// prompt+completion rate among models that define pricing.
+src/semantic-router/pkg/k8s/testdata/input/02-keyword-only.yaml:11:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/02-keyword-only.yaml:19:      pricing:
+src/semantic-router/pkg/modelselection/persistence.go:213:				// Normalize: 1.0 for fastest, 0.0 for slowest
+src/semantic-router/pkg/modelselection/persistence.go:732:	return "models/model_selection"
+src/semantic-router/pkg/modelselection/persistence.go:737:	return "data/model_selection"
+src/semantic-router/pkg/k8s/testdata/input/13-keyword-domain-plugin.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/13-keyword-domain-plugin.yaml:21:      pricing:
+src/semantic-router/pkg/promptcompression/compressor_nlp_test.go:174:			budget := int(float64(originalTokens) * compressionRatio)
+src/semantic-router/pkg/promptcompression/compressor_nlp_test.go:175:			cfg := DefaultConfig(budget)
+src/semantic-router/pkg/promptcompression/compressor_nlp_test.go:411:	// 25% budget — very aggressive
+src/semantic-router/pkg/k8s/testdata/input/01-basic.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/01-basic.yaml:21:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/10-embedding-plugin.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/10-embedding-plugin.yaml:21:      pricing:
+src/semantic-router/pkg/latency/cache.go:53:	const maxTPOT = 1000.0 // 1000s - very slow but possible upper bound
+src/semantic-router/pkg/latency/cache.go:240:	const maxTTFT = 1000.0 // 1000s - very slow but possible upper bound
+src/semantic-router/pkg/promptcompression/profile_test.go:8:		t.Fatalf("expected token budget to be preserved, got %d", cfg.MaxTokens)
+src/semantic-router/pkg/k8s/testdata/input/09-keyword-plugin.yaml:11:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/09-keyword-plugin.yaml:19:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/06-keyword-domain.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/06-keyword-domain.yaml:21:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/08-keyword-embedding-domain.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/08-keyword-embedding-domain.yaml:21:      pricing:
+src/semantic-router/pkg/promptcompression/compressor_test.go:261:	budget := originalTokens / 2
+src/semantic-router/pkg/promptcompression/compressor_test.go:263:	result := Compress(text, DefaultConfig(budget))
+src/semantic-router/pkg/promptcompression/compressor_test.go:265:	if result.CompressedTokens > budget {
+src/semantic-router/pkg/promptcompression/compressor_test.go:266:		t.Errorf("compressed tokens (%d) exceeds budget (%d)", result.CompressedTokens, budget)
+src/semantic-router/pkg/promptcompression/compressor_test.go:346:	budget := CountTokensApprox(text) / 4
+src/semantic-router/pkg/promptcompression/compressor_test.go:348:	cfg := DefaultConfig(budget)
+src/semantic-router/pkg/promptcompression/compressor_test.go:673:		t.Errorf("compressed tokens (%d) exceeds budget (200)", result.CompressedTokens)
+src/semantic-router/pkg/promptcompression/compressor_test.go:892:		t.Errorf("compressed tokens (%d) exceeds budget (%d)", result.CompressedTokens, cfg.MaxTokens)
+src/semantic-router/pkg/promptcompression/compressor_test.go:977:	// The compressed output must differ (we set a tight budget)
+src/semantic-router/pkg/promptcompression/compressor_test.go:1164:			t.Errorf("iteration %d: compressed tokens (%d) exceeds budget", i, result.CompressedTokens)
+src/semantic-router/pkg/promptcompression/compressor_test.go:1454:		"Fiscal policy adjustments aim to reduce the budget deficit.",
+src/semantic-router/pkg/promptcompression/compressor_test.go:1564:			// At middle with short diverse documents, retention depends on budget.
+src/semantic-router/pkg/promptcompression/compressor_test.go:1625:		sentences = append(sentences, "Fiscal responsibility demands transparent budgetary oversight processes.")
+src/semantic-router/pkg/promptcompression/compressor_test.go:1798:		{"budget_128", 128},
+src/semantic-router/pkg/promptcompression/compressor_test.go:1799:		{"budget_256", 256},
+src/semantic-router/pkg/promptcompression/compressor_test.go:1800:		{"budget_512", 512},
+src/semantic-router/pkg/promptcompression/compressor_test.go:1814:				t.Errorf("compressed to %d tokens, exceeds budget %d", result.CompressedTokens, tt.maxTokens)
+src/semantic-router/pkg/promptcompression/compressor_test.go:1843:		t.Errorf("ratio = %.2f, want 1.0 for within-budget prompt", result.Ratio)
+src/semantic-router/pkg/promptcompression/compressor_test.go:1883:					t.Errorf("compressed to %d tokens, exceeds budget %d", result.CompressedTokens, maxTokens)
+src/semantic-router/pkg/promptcompression/compressor_test.go:2011:		t.Errorf("compressed to %d tokens, budget was %d", result.CompressedTokens, maxTokens)
+src/semantic-router/pkg/k8s/testdata/input/17-embedding-multimodal.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/16-keyword-embedding-domain-no-plugin.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/16-keyword-embedding-domain-no-plugin.yaml:21:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/12-keyword-embedding-plugin.yaml:12:      pricing:
+src/semantic-router/pkg/k8s/testdata/input/12-keyword-embedding-plugin.yaml:21:      pricing:
+src/semantic-router/pkg/ir/extensions.go:32:	// (type/budget/display). nil means the inbound request did not request
+src/semantic-router/pkg/ir/extensions.go:221:	BudgetTokens int64
+src/semantic-router/pkg/looper/ratings.go:108:				"slot":      idx + 1,
+src/semantic-router/pkg/looper/ratings.go:123:					"slot":      idx + 1,
+src/semantic-router/pkg/apiserver/route_memory_get_delete_test.go:46:	if resp.Content != "User's budget for Hawaii is $10,000" {
+src/semantic-router/pkg/looper/confidence.go:183:// sortModelRefsByCost sorts ModelRefs by their pricing (cheapest first)
+src/semantic-router/pkg/looper/confidence.go:305:// src/training/model_selection/rl_model_selection/automix_verifier.py).
+src/semantic-router/pkg/looper/confidence.go:518:		// AutoMix-style: order by pricing (cheapest first)
+src/semantic-router/pkg/cache/cache_test.go:4338:		// Skip linear search for very large sizes (too slow)
+src/semantic-router/pkg/anthropic/outbound_test.go:422:		{"rate_limit_error", "slow down"},
+src/semantic-router/pkg/apiserver/route_vectorstore_search.go:47:	// Backend search can be slow (e.g., Llama Stack embeds queries on CPU),
+src/semantic-router/pkg/anthropic/client.go:272:// OpenAI's CompletionUsage envelope has no slot for cache or
+src/semantic-router/pkg/anthropic/inbound_test.go:327:		"thinking": {"type": "enabled", "budget_tokens": 8000, "display": "summarized"},
+src/semantic-router/pkg/anthropic/inbound_test.go:337:	if ext.Thinking.Type != "enabled" || ext.Thinking.BudgetTokens != 8000 || ext.Thinking.Display != "summarized" {
+src/semantic-router/pkg/extproc/router_replay_aggregate.go:16:	ModelSelection       []routerReplayAggregateValue      `json:"model_selection"`
+src/semantic-router/pkg/anthropic/inbound.go:684:	if b := thinking.Get("budget_tokens"); b.Exists() && b.Type == gjson.Number {
+src/semantic-router/pkg/anthropic/inbound.go:685:		spec.BudgetTokens = b.Int()
+src/semantic-router/pkg/anthropic/client_stream_test.go:226:	raw := "data: {\"type\":\"error\",\"error\":{\"type\":\"rate_limit_error\",\"message\":\"slow down\"}}\n\n"
+src/semantic-router/pkg/anthropic/client_stream_test.go:231:	assert.Contains(t, body, "slow down")
+src/semantic-router/pkg/extproc/router_replay_aggregate_test.go:61:	modelSelection := body["model_selection"].([]interface{})
+src/semantic-router/pkg/extproc/router_replay_aggregate_test.go:63:		t.Fatalf("expected alphabetical tie-breaker for model_selection, got %#v", got)
+src/semantic-router/pkg/extproc/router_replay_aggregate_test.go:141:				Keyword: []string{"pricing"},
+src/semantic-router/pkg/extproc/req_filter_memory_rewrite.go:51:- Replace vague references (e.g., "it", "that", "my budget") with specific context from history
+src/semantic-router/pkg/extproc/req_filter_memory_rewrite.go:58:History: [user]: My project budget is $50,000 and deadline is March 15th
+src/semantic-router/pkg/extproc/req_filter_memory_rewrite.go:79:Query: What is my budget?
+src/semantic-router/pkg/extproc/req_filter_memory_rewrite.go:80:Rewritten: What is my project budget?`
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:40:		{"my questions", "What is my budget?"},
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:45:		{"I've contraction", "I've told you my budget"},
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:186:		result := ShouldSearchMemory(ctx, "Hi, what's my budget?")
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:206:		{"my", "What is my budget?"},
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:258:	assert.True(t, ContainsPersonalPronoun("MY budget"))
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:259:	assert.True(t, ContainsPersonalPronoun("My budget"))
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:260:	assert.True(t, ContainsPersonalPronoun("my budget"))
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:294:		assert.True(t, ContainsPersonalPronoun("What's my budget?"))
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:300:		assert.True(t, ContainsPersonalPronoun(`"my budget"`))
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:305:		assert.True(t, ContainsPersonalPronoun("What is\nmy budget?"))
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:408:		{"greeting with follow-up 1", "Hi, what's my budget?"},
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:652:		{Memory: &memory.Memory{Content: "Budget is $10,000"}, Score: 0.85},
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:658:	assert.Contains(t, result, "- Budget is $10,000")
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:663:		{Memory: &memory.Memory{Content: "Budget is $10,000"}, Score: 0.85},
+src/semantic-router/pkg/extproc/req_filter_memory_test.go:669:	assert.Contains(t, result, "- Budget is $10,000")
+src/semantic-router/pkg/extproc/router_selection.go:45:	logging.ComponentEvent("extproc", "model_selection_registry_initialized", map[string]interface{}{
+src/semantic-router/pkg/extproc/router_selection.go:338:	logging.ComponentEvent("extproc", "ml_model_selection_enabled", map[string]interface{}{
+src/semantic-router/pkg/extproc/router_selection.go:388:			MaxCostPer1M: decisionCfg.SLO.MaxCostPer1M,
+src/semantic-router/pkg/memory/milvus_store_test.go:378:				entity.NewColumnVarChar("content", []string{"The budget is $50k"}),
+src/semantic-router/pkg/memory/milvus_store_test.go:391:	results, err := store.Retrieve(ctx, RetrieveOptions{Query: "budget", UserID: "u1", Limit: 5})
+src/semantic-router/pkg/memory/milvus_store_test.go:398:	assert.Equal(t, "The budget is $50k", results[0].Memory.Content)
+src/semantic-router/pkg/memory/milvus_store_test.go:744:		Content: "User's budget is $10,000",
+src/semantic-router/pkg/memory/milvus_store_test.go:945:		Content: "Updated content with new budget $15,000",
+src/semantic-router/pkg/memory/milvus_store_test.go:1040:					"Portland charity race is scheduled for March 15th with a $5000 budget",
+src/semantic-router/pkg/extproc/memory_helpers_test.go:338:					Content: json.RawMessage(`"What's my budget?"`),
+src/semantic-router/pkg/extproc/memory_helpers_test.go:341:			OutputText: "Your budget is $10,000",
+src/semantic-router/pkg/extproc/memory_helpers_test.go:386:					Content: json.RawMessage(`"What's my budget?"`),
+src/semantic-router/pkg/extproc/memory_helpers_test.go:389:			OutputText: "Your budget is $10,000",
+src/semantic-router/pkg/extproc/memory_helpers_test.go:419:	assert.Equal(t, "What's my budget?", memory.SDKMessageContent(history[2]))
+src/semantic-router/pkg/extproc/memory_helpers_test.go:421:	assert.Equal(t, "Your budget is $10,000", memory.SDKMessageContent(history[3]))
+src/semantic-router/pkg/extproc/memory_helpers_test.go:866:			OutputText: "Great choice! Hawaii is beautiful. What's your budget?",
+src/semantic-router/pkg/extproc/memory_helpers_test.go:874:					Content: json.RawMessage(`"My budget is $10,000"`),
+src/semantic-router/pkg/extproc/memory_helpers_test.go:885:					Content: json.RawMessage(`"What did I say my budget was?"`),
+src/semantic-router/pkg/extproc/memory_helpers_test.go:888:			OutputText: "You said your budget is $10,000 for the Hawaii trip.",
+src/semantic-router/pkg/extproc/memory_helpers_test.go:916:	assert.Equal(t, "Great choice! Hawaii is beautiful. What's your budget?", memory.SDKMessageContent(history[1]))
+src/semantic-router/pkg/extproc/memory_helpers_test.go:917:	assert.Equal(t, "My budget is $10,000", memory.SDKMessageContent(history[2]))
+src/semantic-router/pkg/extproc/memory_helpers_test.go:919:	assert.Equal(t, "What did I say my budget was?", memory.SDKMessageContent(history[4]))
+src/semantic-router/pkg/extproc/memory_helpers_test.go:920:	assert.Equal(t, "You said your budget is $10,000 for the Hawaii trip.", memory.SDKMessageContent(history[5]))
+src/semantic-router/pkg/memory/inmemory_store_test.go:50:		{"mem1", "User's budget for Hawaii vacation is $10,000"},
+src/semantic-router/pkg/memory/inmemory_store_test.go:69:		Query:     "What is my budget for Hawaii?",
+src/semantic-router/pkg/memory/inmemory_store_test.go:90:		Content:   "User's budget for Hawaii vacation is $10,000",
+src/semantic-router/pkg/memory/inmemory_store_test.go:109:		Query:     "What is my budget for Hawaii?",
+src/semantic-router/pkg/memory/inmemory_store_test.go:132:		Content:   "User's budget for Hawaii vacation is $10,000",
+src/semantic-router/pkg/memory/inmemory_store_test.go:141:		Query:     "What is my budget for Hawaii?",
+src/semantic-router/pkg/memory/inmemory_store_test.go:155:		Query:     "What is my budget for Hawaii?",
+src/semantic-router/pkg/memory/inmemory_store_test.go:181:			Content:   "User's budget for Hawaii vacation is $10,000",
+src/semantic-router/pkg/memory/inmemory_store_test.go:206:	query := "What is my budget for Hawaii?"
+src/semantic-router/pkg/memory/inmemory_store_test.go:258:		Content:   "User's budget for Hawaii vacation is $10,000",
+src/semantic-router/pkg/memory/inmemory_store_test.go:267:		Query:     "What is my budget?",
+src/semantic-router/pkg/memory/inmemory_store_test.go:285:		Content:   "User's budget for Hawaii vacation is $10,000",
+src/semantic-router/pkg/memory/inmemory_store_test.go:294:		Query:     "What is my budget for Hawaii?",
+src/semantic-router/pkg/memory/inmemory_store_test.go:315:		Content:   "User's budget for Hawaii vacation is $10,000",
+src/semantic-router/pkg/memory/inmemory_store_test.go:322:		Content:   "User's budget for Hawaii vacation is $10,000",
+src/semantic-router/pkg/memory/inmemory_store_test.go:334:		Query:     "What is my budget for Hawaii?",
+src/semantic-router/pkg/routerreplay/store/redis.go:375:// UpdateUsageCost updates token usage and pricing-derived cost fields for a record.
+src/semantic-router/pkg/extproc/safego_test.go:60:	// function inline in the caller's goroutine, otherwise a slow
+src/semantic-router/pkg/extproc/req_filter_memory_search.go:11:// These override the fact-check signal for personal questions like "What is my budget?"
+src/semantic-router/pkg/memory/extractor_test.go:534:		{"substantive question", "What is my budget for the Hawaii trip?", "Your budget is $10,000", false},
+src/semantic-router/pkg/extproc/router_replay_cost_test.go:84:		t.Fatalf("expected cost fields to stay empty when selected model pricing is missing, got %#v", snapshot)
+src/semantic-router/pkg/routerreplay/store/postgres.go:17:// PostgresStore.Add. The single %s slot receives the validated table name.
+src/semantic-router/pkg/routerreplay/store/postgres.go:418:// UpdateUsageCost updates token usage and pricing-derived cost fields for a record.
+src/semantic-router/pkg/extproc/req_filter_query_rewrite_test.go:100:				{Message: mockChatMessage{Content: "What is the budget for the Hawaii vacation?"}},
+src/semantic-router/pkg/extproc/req_filter_query_rewrite_test.go:113:		{Role: "assistant", Content: "Hawaii sounds great! What's your budget?"},
+src/semantic-router/pkg/extproc/req_filter_query_rewrite_test.go:118:	assert.Equal(t, "What is the budget for the Hawaii vacation?", result)
+src/semantic-router/pkg/extproc/req_filter_query_rewrite_test.go:156:				{Message: mockChatMessage{Content: `"What is my budget for Hawaii?"`}},
+src/semantic-router/pkg/extproc/req_filter_query_rewrite_test.go:167:	assert.Equal(t, "What is my budget for Hawaii?", result, "should strip quotes")
+src/semantic-router/pkg/extproc/req_filter_query_rewrite_test.go:174:				{Message: mockChatMessage{Content: "  What is the budget?  \n"}},
+src/semantic-router/pkg/extproc/req_filter_query_rewrite_test.go:186:	assert.Equal(t, "What is the budget?", result, "should trim whitespace")
+src/semantic-router/pkg/extproc/router_selection_config_test.go:114:								MaxCostPer1M: 2.4,
+src/semantic-router/pkg/extproc/router_selection_config_test.go:133:	assertFloat(t, got.MultiFactor.SLO.MaxTPOTMs, 85, "multi_factor.slo.max_tpot_ms")
+src/semantic-router/pkg/extproc/router_selection_config_test.go:134:	assertFloat(t, got.MultiFactor.SLO.MaxTTFTMs, 550, "multi_factor.slo.max_ttft_ms")
+src/semantic-router/pkg/extproc/router_selection_config_test.go:135:	assertFloat(t, got.MultiFactor.SLO.MaxCostPer1M, 2.4, "multi_factor.slo.max_cost_per_1m")
+src/semantic-router/pkg/extproc/router_selection_config_test.go:136:	assertInt(t, got.MultiFactor.SLO.MaxInflight, 32, "multi_factor.slo.max_inflight")
+src/semantic-router/pkg/extproc/processor_res_usage.go:176:		pricing, ok := r.Config.GetFullModelPricing(ctx.RequestModel)
+src/semantic-router/pkg/extproc/processor_res_usage.go:178:			costAmount := costForResponseUsage(usage, pricing)
+src/semantic-router/pkg/extproc/processor_res_usage.go:179:			currency := pricing.Currency
+src/semantic-router/pkg/extproc/processor_res_usage.go:183:			eventFields["pricing_prompt_per_1m"] = pricing.PromptPer1M
+src/semantic-router/pkg/extproc/processor_res_usage.go:184:			eventFields["pricing_cached_input_per_1m"] = pricing.CachedInputPer1M
+src/semantic-router/pkg/extproc/processor_res_usage.go:185:			eventFields["pricing_completion_per_1m"] = pricing.CompletionPer1M
+src/semantic-router/pkg/extproc/processor_res_usage.go:193:	eventFields["pricing"] = "not_configured"
+src/semantic-router/pkg/extproc/processor_res_usage.go:250:	pricing sessiontelemetry.TurnPricing,
+src/semantic-router/pkg/extproc/processor_res_usage.go:260:	}, pricing)
+src/semantic-router/pkg/extproc/processor_res_usage.go:317:func costForResponseUsage(usage responseUsageMetrics, pricing config.ModelPricing) float64 {
+src/semantic-router/pkg/extproc/processor_res_usage.go:320:	return (float64(uncachedPrompt)*pricing.PromptPer1M +
+src/semantic-router/pkg/extproc/processor_res_usage.go:321:		float64(cached)*pricing.CachedInputPer1M +
+src/semantic-router/pkg/extproc/processor_res_usage.go:322:		float64(usage.completionTokens)*pricing.CompletionPer1M) / 1_000_000.0
+src/semantic-router/pkg/memory/reflection.go:19:// rules: recency decay, redundancy dedup, and token budget enforcement.
+src/semantic-router/pkg/memory/reflection.go:78:// the token budget.
+src/semantic-router/pkg/memory/reflection.go:101:	// Step 5: Enforce token budget
+src/semantic-router/pkg/memory/reflection.go:102:	memories = g.enforceTokenBudget(memories)
+src/semantic-router/pkg/memory/reflection.go:105:		logging.Debugf("ReflectionGate: %d→%d memories (blocked=%d, dedup+budget trimmed)",
+src/semantic-router/pkg/memory/reflection.go:178:// enforceTokenBudget keeps memories in score-descending order until the
+src/semantic-router/pkg/memory/reflection.go:179:// cumulative estimated token count exceeds the budget.
+src/semantic-router/pkg/memory/reflection.go:180:func (g *ReflectionGate) enforceTokenBudget(memories []*RetrieveResult) []*RetrieveResult {
+src/semantic-router/pkg/memory/reflection.go:185:			logging.Debugf("ReflectionGate: token budget %d reached at %d/%d memories", g.maxTokens, i, len(memories))
+src/semantic-router/pkg/memory/reflection.go:225:// English approximation). Good enough for budget enforcement.
+src/semantic-router/pkg/memory/filter_registry_test.go:19:		{Memory: &Memory{ID: "m3", Content: "User budget is 50k", CreatedAt: now}, Score: 0.7},
+src/semantic-router/pkg/extproc/session_telemetry.go:22:// sessionTurnPricing looks up the active pricing for model from the router config
+src/semantic-router/pkg/extproc/session_telemetry.go:40:func recordSessionTurn(ctx *RequestContext, usage responseUsageMetrics, pricing sessiontelemetry.TurnPricing) {
+src/semantic-router/pkg/extproc/session_telemetry.go:45:	accounting := estimateRouterCacheAccounting(ctx, usage, pricing)
+src/semantic-router/pkg/extproc/session_telemetry.go:62:		Pricing:                     pricing,
+src/semantic-router/pkg/extproc/session_telemetry.go:75:			recordRouterSessionUsageFromContext(ctx, usage, pricing, accounting)
+src/semantic-router/pkg/extproc/session_telemetry.go:93:	pricing sessiontelemetry.TurnPricing,
+src/semantic-router/pkg/extproc/session_telemetry.go:106:		Cost:                        sessionTurnCost(usage, pricing),
+src/semantic-router/pkg/extproc/session_telemetry.go:116:	pricing sessiontelemetry.TurnPricing,
+src/semantic-router/pkg/extproc/session_telemetry.go:155:		estimatedSavings:      estimatedCacheSavings(estimatedCached, pricing),
+src/semantic-router/pkg/extproc/session_telemetry.go:160:func estimatedCacheSavings(tokens int, pricing sessiontelemetry.TurnPricing) float64 {
+src/semantic-router/pkg/extproc/session_telemetry.go:161:	if tokens <= 0 || pricing.PromptPer1M <= 0 {
+src/semantic-router/pkg/extproc/session_telemetry.go:164:	cachedRate := pricing.CachedInputPer1M
+src/semantic-router/pkg/extproc/session_telemetry.go:168:	delta := pricing.PromptPer1M - cachedRate
+src/semantic-router/pkg/extproc/session_telemetry.go:186:func sessionTurnCost(usage responseUsageMetrics, pricing sessiontelemetry.TurnPricing) float64 {
+src/semantic-router/pkg/extproc/session_telemetry.go:187:	if pricing.PromptPer1M == 0 &&
+src/semantic-router/pkg/extproc/session_telemetry.go:188:		pricing.CompletionPer1M == 0 &&
+src/semantic-router/pkg/extproc/session_telemetry.go:189:		pricing.CachedInputPer1M == 0 &&
+src/semantic-router/pkg/extproc/session_telemetry.go:190:		pricing.Currency == "" {
+src/semantic-router/pkg/extproc/session_telemetry.go:195:	return (float64(uncachedPrompt)*pricing.PromptPer1M +
+src/semantic-router/pkg/extproc/session_telemetry.go:196:		float64(cached)*pricing.CachedInputPer1M +
+src/semantic-router/pkg/extproc/session_telemetry.go:197:		float64(usage.completionTokens)*pricing.CompletionPer1M) / 1_000_000.0
+src/semantic-router/pkg/routerreplay/store/store.go:35:// UsageCost captures token usage and pricing-derived cost details for a record.
+src/semantic-router/pkg/routerreplay/store/store.go:210:	// UpdateUsageCost updates token usage and pricing-derived cost fields for an existing record.
+src/semantic-router/pkg/routerreplay/store/memory.go:163:// UpdateUsageCost updates token usage and pricing-derived cost fields for a record.
+src/semantic-router/pkg/routerreplay/store/milvus.go:440:// UpdateUsageCost updates token usage and pricing-derived cost fields for a record.
+src/semantic-router/pkg/classification/classifier_projection_outputs.go:75:	slope := 12.0
+src/semantic-router/pkg/classification/classifier_projection_outputs.go:77:		slope = mapping.Calibration.Slope
+src/semantic-router/pkg/classification/classifier_projection_outputs.go:81:	return 1.0 / (1.0 + math.Exp(-slope*distance))
+src/semantic-router/pkg/memory/metrics_test.go:100:			userID:      "user_slow",
+src/semantic-router/pkg/classification/classifier_signal_load_gate.go:15:	slots     chan struct{}
+src/semantic-router/pkg/classification/classifier_signal_load_gate.go:37:		"Signal evaluation load gate enabled: threshold=%d max_concurrency=%d gated_slots=%d",
+src/semantic-router/pkg/classification/classifier_signal_load_gate.go:45:		slots:     make(chan struct{}, gatedSlots),
+src/semantic-router/pkg/classification/classifier_signal_load_gate.go:56:		g.slots <- struct{}{}
+src/semantic-router/pkg/classification/classifier_signal_load_gate.go:58:			<-g.slots
+src/semantic-router/pkg/memory/types.go:14:	// Example: "User's budget for Hawaii is $10,000"
+src/semantic-router/pkg/memory/types.go:22:	// Example: "On Dec 29 2024, user planned Hawaii vacation with $10K budget"
+src/semantic-router/pkg/memory/types.go:35:	// Should be self-contained with context (e.g., "budget for Hawaii is $10K" not just "$10K")
+src/semantic-router/pkg/memory/consolidation_test.go:13:		{ID: "m1", Content: "User budget for Hawaii trip is $10,000", CreatedAt: now},
+src/semantic-router/pkg/memory/consolidation_test.go:14:		{ID: "m2", Content: "User budget for Hawaii trip is ten thousand dollars", CreatedAt: now},
+src/semantic-router/pkg/memory/consolidation_test.go:27:	foundBudgetGroup := false
+src/semantic-router/pkg/memory/consolidation_test.go:35:			foundBudgetGroup = true
+src/semantic-router/pkg/memory/consolidation_test.go:41:	assert.True(t, foundBudgetGroup, "budget memories should be grouped together")
+src/semantic-router/pkg/memory/consolidation_test.go:47:		{Content: "Q: What is my budget?\nA: Your budget is $10,000"},
+src/semantic-router/pkg/memory/consolidation_test.go:48:		{Content: "Q: What is my budget?\nA: Your Hawaii budget is $10,000"},
+src/semantic-router/pkg/memory/consolidation_test.go:52:	assert.Contains(t, merged, "Q: What is my budget?")
+src/semantic-router/pkg/memory/consolidation_test.go:53:	assert.Contains(t, merged, "A: Your budget is $10,000")
+src/semantic-router/pkg/memory/consolidation_test.go:54:	assert.Contains(t, merged, "A: Your Hawaii budget is $10,000")
+src/semantic-router/pkg/memory/consolidation_test.go:56:	// Dedup: "Q: What is my budget?" should appear only once
+src/semantic-router/pkg/memory/consolidation_test.go:59:		if line == "Q: What is my budget?" {
+src/semantic-router/pkg/memory/valkey_store_test.go:720:// This is the invariant that prevents the recordRetrieval race where a slower goroutine
+src/semantic-router/pkg/memory/sanitize_test.go:12:	content := "User budget for Hawaii trip is $10,000"
+src/semantic-router/pkg/memory/reflection_test.go:31:		{Memory: &Memory{ID: "m2", Content: "User budget is 50k", CreatedAt: now}, Score: 0.8},
+src/semantic-router/pkg/memory/reflection_test.go:83:		{Memory: &Memory{ID: "m1", Content: "User budget for Hawaii trip is $10,000", CreatedAt: now}, Score: 0.9},
+src/semantic-router/pkg/memory/reflection_test.go:84:		{Memory: &Memory{ID: "m2", Content: "User budget for Hawaii trip is $10,000 dollars", CreatedAt: now}, Score: 0.85},
+src/semantic-router/pkg/memory/reflection_test.go:98:func TestReflectionGate_TokenBudget(t *testing.T) {
+src/semantic-router/pkg/memory/reflection_test.go:106:		{Memory: &Memory{ID: "m3", Content: "this is a much longer memory that contains many words and should push us over the token budget limit", CreatedAt: now}, Score: 0.8},
+src/semantic-router/pkg/memory/reflection_test.go:110:	assert.Less(t, len(result), len(memories), "token budget should trim some memories")
+src/semantic-router/pkg/apis/vllm.ai/v1alpha1/types.go:70:	Pricing *ModelPricing `json:"pricing,omitempty" yaml:"pricing,omitempty"`
+src/semantic-router/pkg/apis/vllm.ai/v1alpha1/types.go:78:// ModelPricing defines the pricing structure for a model

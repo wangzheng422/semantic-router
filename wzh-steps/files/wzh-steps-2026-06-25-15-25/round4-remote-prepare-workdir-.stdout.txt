@@ -1,0 +1,35 @@
+## before
+NAME      SIZE TYPE FSTYPE MOUNTPOINTS
+nvme1n1 875.4G disk        
+nvme2n1 875.4G disk        
+nvme4n1 875.4G disk        
+nvme3n1 875.4G disk        
+meta-data=/dev/nvme1n1           isize=512    agcount=4, agsize=57373047 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=1, sparse=1, rmapbt=0
+         =                       reflink=1    bigtime=1 inobtcount=1 nrext64=0
+data     =                       bsize=4096   blocks=229492187, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0, ftype=1
+log      =internal log           bsize=4096   blocks=112056, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+Discarding blocks...Done.
+## after
+TARGET                         SOURCE       FSTYPE OPTIONS
+/var/mnt/semantic-router-bench /dev/nvme1n1 xfs    rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+Filesystem     Type  Size  Used Avail Use% Mounted on
+/dev/nvme1n1   xfs   876G  6.2G  869G   1% /var/mnt/semantic-router-bench
+total 0
+drwxr-xr-x. 11 cloud-user cloud-user 139 Jun 25 07:31 .
+drwxr-xr-x.  3 root       root        35 Jun 25 01:33 ..
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 benchmarks
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 configs
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 containers
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 hf-cache
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 logs
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 models
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 repo
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 state
+drwxr-xr-x.  2 cloud-user users        6 Jun 25 07:31 traffic
+vsr-bench bridge

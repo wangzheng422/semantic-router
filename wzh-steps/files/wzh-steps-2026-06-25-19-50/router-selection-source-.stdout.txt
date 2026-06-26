@@ -1,0 +1,260 @@
+package extproc
+
+import (
+	"context"
+	"os"
+	"strings"
+	"time"
+
+	candle_binding "github.com/vllm-project/semantic-router/candle-binding"
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/config"
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/observability/logging"
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/routerreplay/store"
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/selection"
+	"github.com/vllm-project/semantic-router/src/semantic-router/pkg/selection/lookuptable"
+)
+
+func createModelSelectorRegistry(cfg *config.RouterConfig, replayReader store.Reader) (*selection.Registry, lookuptable.LookupTableStorage, func()) {
+	modelSelectionCfg := buildModelSelectionConfig(cfg)
+	backendModels := cfg.BackendModels
+	selectionFactory := selection.NewFactory(modelSelectionCfg)
+
+	if backendModels.ModelConfig != nil {
+		selectionFactory = selectionFactory.WithModelConfig(backendModels.ModelConfig)
+	}
+	if len(cfg.Categories) > 0 {
+		selectionFactory = selectionFactory.WithCategories(cfg.Categories)
+	}
+	selectionFactory = selectionFactory.WithEmbeddingFunc(resolveSelectionEmbeddingFunc(cfg))
+
+	lt, cancel := buildLookupTable(cfg, replayReader)
+	if lt != nil {
+		selectionFactory = selectionFactory.WithLookupTable(lt)
+	}
+
+	registry := selectionFactory.CreateAll()
+	selection.GlobalRegistry = registry
+
+	// Collect algorithm methods actually configured in decisions
+	configuredMethods := collectConfiguredAlgorithmMethods(cfg)
+
+	// Warn about experimental algorithms and check dependency health
+	selection.WarnExperimentalAlgorithms(registry, configuredMethods)
+	selection.CheckDependencyHealth(registry, configuredMethods)
+
+	logging.ComponentEvent("extproc", "model_selection_registry_initialized", map[string]interface{}{
+		"mode": "per_decision_algorithm_config",
+	})
+	return registry, lt, cancel
+}
+
+func resolveSelectionEmbeddingFunc(cfg *config.RouterConfig) func(string) ([]float32, error) {
+	backend := strings.TrimSpace(strings.ToLower(os.Getenv("EMBEDDING_BACKEND_OVERRIDE")))
+	if backend == "" {
+		backend = strings.TrimSpace(strings.ToLower(cfg.EmbeddingConfig.Backend))
+	}
+	if backend == "" {
+		backend = "candle"
+	}
+
+	modelType := strings.TrimSpace(strings.ToLower(cfg.EmbeddingConfig.ModelType))
+	if modelType == "" {
+		modelType = "qwen3"
+	}
+
+	switch backend {
+	case "openvino":
+		return openvinoEmbeddingFunc(modelType)
+	default:
+		return func(text string) ([]float32, error) {
+			output, err := candle_binding.GetEmbeddingBatched(text, modelType, 1024)
+			if err != nil {
+				return nil, err
+			}
+			return output.Embedding, nil
+		}
+	}
+}
+
+func collectConfiguredAlgorithmMethods(cfg *config.RouterConfig) []selection.SelectionMethod {
+	seen := make(map[string]bool)
+	var methods []selection.SelectionMethod
+
+	for _, decision := range cfg.Decisions {
+		if decision.Algorithm == nil || decision.Algorithm.Type == "" {
+			continue
+		}
+		if !seen[decision.Algorithm.Type] {
+			seen[decision.Algorithm.Type] = true
+			methods = append(methods, selection.SelectionMethod(decision.Algorithm.Type))
+		}
+	}
+
+	return methods
+}
+
+func buildModelSelectionConfig(cfg *config.RouterConfig) *selection.ModelSelectionConfig {
+	modelSelectionCfg := &selection.ModelSelectionConfig{
+		Method: "static",
+	}
+
+	decisionCfgs := findDecisionScopedSelectionConfigs(cfg)
+	modelSelectionCfg.Elo = buildEloSelectionConfig(cfg, decisionCfgs.elo)
+	modelSelectionCfg.RouterDC = buildRouterDCSelectionConfig(cfg, decisionCfgs.routerDC)
+	modelSelectionCfg.AutoMix = buildAutoMixSelectionConfig(cfg)
+	modelSelectionCfg.Hybrid = buildHybridSelectionConfig(cfg)
+	modelSelectionCfg.SessionAware = buildSessionAwareSelectionConfig(cfg, decisionCfgs.sessionAware)
+	modelSelectionCfg.ML = buildMLSelectionConfig(cfg)
+	modelSelectionCfg.MultiFactor = buildMultiFactorSelectionConfig(decisionCfgs.multiFactor)
+	modelSelectionCfg.RLDriven = buildRLDrivenSelectionConfig(decisionCfgs.rlDriven)
+	modelSelectionCfg.GMTRouter = buildGMTRouterSelectionConfig(decisionCfgs.gmtRouter)
+	return modelSelectionCfg
+}
+
+type decisionScopedSelectionConfigs struct {
+	elo          *config.EloSelectionConfig
+	routerDC     *config.RouterDCSelectionConfig
+	rlDriven     *config.RLDrivenSelectionConfig
+	gmtRouter    *config.GMTRouterSelectionConfig
+	multiFactor  *config.MultiFactorSelectionConfig
+	sessionAware *config.SessionAwareSelectionConfig
+}
+
+func findDecisionScopedSelectionConfigs(cfg *config.RouterConfig) decisionScopedSelectionConfigs {
+	intelligentRouting := cfg.IntelligentRouting
+	var result decisionScopedSelectionConfigs
+
+	for _, decision := range intelligentRouting.Decisions {
+		if decision.Algorithm == nil {
+			continue
+		}
+		if decision.Algorithm.Type == "elo" &&
+			decision.Algorithm.Elo != nil &&
+			result.elo == nil {
+			result.elo = decision.Algorithm.Elo
+		}
+		if decision.Algorithm.Type == "router_dc" &&
+			decision.Algorithm.RouterDC != nil &&
+			result.routerDC == nil {
+			result.routerDC = decision.Algorithm.RouterDC
+		}
+		if decision.Algorithm.Type == "rl_driven" &&
+			decision.Algorithm.RLDriven != nil &&
+			result.rlDriven == nil {
+			result.rlDriven = decision.Algorithm.RLDriven
+		}
+		if decision.Algorithm.Type == "gmtrouter" &&
+			decision.Algorithm.GMTRouter != nil &&
+			result.gmtRouter == nil {
+			result.gmtRouter = decision.Algorithm.GMTRouter
+		}
+		if decision.Algorithm.Type == "multi_factor" &&
+			decision.Algorithm.MultiFactor != nil &&
+			result.multiFactor == nil {
+			result.multiFactor = decision.Algorithm.MultiFactor
+		}
+		if decision.Algorithm.Type == "session_aware" &&
+			decision.Algorithm.SessionAware != nil &&
+			result.sessionAware == nil {
+			result.sessionAware = decision.Algorithm.SessionAware
+		}
+	}
+
+	return result
+}
+
+func buildEloSelectionConfig(
+	cfg *config.RouterConfig,
+	decisionCfg *config.EloSelectionConfig,
+) *selection.EloConfig {
+	intelligentRouting := cfg.IntelligentRouting
+	eloCfg := intelligentRouting.ModelSelection.Elo
+	result := &selection.EloConfig{
+		InitialRating:     eloCfg.InitialRating,
+		KFactor:           eloCfg.KFactor,
+		CategoryWeighted:  eloCfg.CategoryWeighted,
+		DecayFactor:       eloCfg.DecayFactor,
+		MinComparisons:    eloCfg.MinComparisons,
+		CostScalingFactor: eloCfg.CostScalingFactor,
+		StoragePath:       eloCfg.StoragePath,
+		AutoSaveInterval:  eloCfg.AutoSaveInterval,
+	}
+
+	if decisionCfg == nil {
+		return result
+	}
+
+	if decisionCfg.StoragePath != "" {
+		result.StoragePath = decisionCfg.StoragePath
+	}
+	if decisionCfg.AutoSaveInterval != "" {
+		result.AutoSaveInterval = decisionCfg.AutoSaveInterval
+	}
+	if decisionCfg.KFactor != 0 {
+		result.KFactor = decisionCfg.KFactor
+	}
+	if decisionCfg.InitialRating != 0 {
+		result.InitialRating = decisionCfg.InitialRating
+	}
+	result.CategoryWeighted = decisionCfg.CategoryWeighted
+	return result
+}
+
+func buildRouterDCSelectionConfig(
+	cfg *config.RouterConfig,
+	decisionCfg *config.RouterDCSelectionConfig,
+) *selection.RouterDCConfig {
+	intelligentRouting := cfg.IntelligentRouting
+	routerDCCfg := intelligentRouting.ModelSelection.RouterDC
+	result := &selection.RouterDCConfig{
+		Temperature:         routerDCCfg.Temperature,
+		DimensionSize:       routerDCCfg.DimensionSize,
+		MinSimilarity:       routerDCCfg.MinSimilarity,
+		UseQueryContrastive: routerDCCfg.UseQueryContrastive,
+		UseModelContrastive: routerDCCfg.UseModelContrastive,
+		RequireDescriptions: routerDCCfg.RequireDescriptions,
+		UseCapabilities:     routerDCCfg.UseCapabilities,
+	}
+
+	if decisionCfg == nil {
+		return result
+	}
+
+	if decisionCfg.Temperature != 0 {
+		result.Temperature = decisionCfg.Temperature
+	}
+	result.RequireDescriptions = decisionCfg.RequireDescriptions
+	result.UseCapabilities = decisionCfg.UseCapabilities
+	return result
+}
+
+func buildAutoMixSelectionConfig(cfg *config.RouterConfig) *selection.AutoMixConfig {
+	intelligentRouting := cfg.IntelligentRouting
+	autoMixCfg := intelligentRouting.ModelSelection.AutoMix
+	return &selection.AutoMixConfig{
+		VerificationThreshold:  autoMixCfg.VerificationThreshold,
+		MaxEscalations:         autoMixCfg.MaxEscalations,
+		CostAwareRouting:       autoMixCfg.CostAwareRouting,
+		CostQualityTradeoff:    autoMixCfg.CostQualityTradeoff,
+		DiscountFactor:         autoMixCfg.DiscountFactor,
+		UseLogprobVerification: autoMixCfg.UseLogprobVerification,
+	}
+}
+
+func buildHybridSelectionConfig(cfg *config.RouterConfig) *selection.HybridConfig {
+	intelligentRouting := cfg.IntelligentRouting
+	hybridCfg := intelligentRouting.ModelSelection.Hybrid
+	return &selection.HybridConfig{
+		EloWeight:           hybridCfg.EloWeight,
+		RouterDCWeight:      hybridCfg.RouterDCWeight,
+		AutoMixWeight:       hybridCfg.AutoMixWeight,
+		CostWeight:          hybridCfg.CostWeight,
+		QualityGapThreshold: hybridCfg.QualityGapThreshold,
+		NormalizeScores:     hybridCfg.NormalizeScores,
+	}
+}
+
+func buildSessionAwareSelectionConfig(
+	cfg *config.RouterConfig,
+	decisionCfg *config.SessionAwareSelectionConfig,
+) *selection.SessionAwareConfig {

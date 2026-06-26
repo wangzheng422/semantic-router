@@ -1,0 +1,7 @@
+Warning: Permanently added '[REDACTED: bastion hostname]' (ED25519) to the list of known hosts.
++ sudo mkdir -p /var/mnt/semantic-router-bench/configs /var/mnt/semantic-router-bench/traffic /var/mnt/semantic-router-bench/logs /var/mnt/semantic-router-bench/models /var/mnt/semantic-router-bench/hf-cache /var/mnt/semantic-router-bench/benchmarks/round9-2026-06-26-11-11 /var/mnt/semantic-router-bench/dashboard-data
++ sudo chown -R cloud-user:users /var/mnt/semantic-router-bench
++ podman network inspect vsr-bench
++ podman rm -f vsr-router vsr-envoy vsr-qwen35-2b vsr-qwen35-27b-fp8 vsr-mock-backend vsr-dashboard
++ find /var/mnt/semantic-router-bench -maxdepth 2 -type d -printf '%p\n'
++ sort

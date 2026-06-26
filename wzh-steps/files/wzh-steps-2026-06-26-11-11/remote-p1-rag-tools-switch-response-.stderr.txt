@@ -1,0 +1,249 @@
+Warning: Permanently added '[REDACTED: bastion hostname]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ podman rm -f vsr-router vsr-envoy
++ :
++ podman run --replace -d --name vsr-router --network vsr-bench --security-opt=label=disable -p 18080:8080 -p 15051:50051 -p 19190:9190 -e AI_BINDING=candle -v /var/mnt/semantic-router-bench/configs/router-p1-rag-tools-switch-response.yaml:/app/config.yaml:Z -v /var/mnt/semantic-router-bench/configs/tools_db.json:/app/config/tools_db.json:Z -v /var/mnt/semantic-router-bench/models:/app/models:Z -v /var/mnt/semantic-router-bench/logs:/logs:Z ghcr.io/vllm-project/semantic-router/vllm-sr:latest /app/config.yaml
++ podman run --replace -d --name vsr-envoy --network vsr-bench --security-opt=label=disable -p 18888:8888 -p 19901:9901 -v /var/mnt/semantic-router-bench/configs/envoy-round9.yaml:/etc/envoy/envoy.yaml:Z docker.io/envoyproxy/envoy:v1.34-latest -c /etc/envoy/envoy.yaml --log-level warn
++ ready=0
+++ seq 1 80
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ for i in $(seq 1 80)
++ curl -fsS http://127.0.0.1:18080/health
++ sleep 2
++ test 0 = 1

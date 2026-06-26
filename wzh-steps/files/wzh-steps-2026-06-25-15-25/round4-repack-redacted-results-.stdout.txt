@@ -1,0 +1,17 @@
+configs/
+configs/router-session-aware-probe.yaml
+configs/router-fused-signals-hybrid.yaml
+configs/router-elo-probe.yaml
+configs/envoy-vsr.yaml
+traffic/
+traffic/start_backends_after_linger.sh
+traffic/traffic_fused_audit.py
+traffic/remote_round4.sh
+benchmarks/
+benchmarks/round4-2026-06-25-15-25/
+benchmarks/round4-2026-06-25-15-25/router-fused.log
+benchmarks/round4-2026-06-25-15-25/fused-results.jsonl
+benchmarks/round4-2026-06-25-15-25/envoy-fused.log
+benchmarks/round4-2026-06-25-15-25/router-elo.log
+benchmarks/round4-2026-06-25-15-25/envoy-elo.log
+archive_bytes=34696

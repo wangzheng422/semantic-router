@@ -1,0 +1,36 @@
+2026/06/26 11:49:40 Config file path: /Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-26-11-11/dashboard-runtime-smoke/router-dashboard-local.yaml
+2026/06/26 11:49:40 Workflow database initialized at: ./data/workflow.sqlite
+2026/06/26 11:49:40 Config projection database initialized at: ./data/config-projection.sqlite
+2026/06/26 11:49:40 Workflow health API registered: /api/workflows/health
+2026/06/26 11:49:40 Config API endpoints registered: /api/router/config/all, /api/router/config/yaml, /api/router/config/update, /api/router/config/nl/verify, /api/router/config/nl/generate/stream, /api/router/config/nl/generate, /api/router/config/deploy, /api/router/config/deploy/preview, /api/router/config/rollback, /api/router/config/versions, /api/router/config/deployments, /api/router/config/active-projection
+2026/06/26 11:49:40 Global config API endpoints registered: /api/router/config/global, /api/router/config/global/update, /api/router/config/global/raw, /api/router/config/global/raw/update (legacy aliases: /api/router/config/defaults, /api/router/config/defaults/update)
+2026/06/26 11:49:40 Tools DB API endpoint registered: /api/tools-db
+2026/06/26 11:49:40 Web Search API endpoint registered: /api/tools/web-search
+2026/06/26 11:49:40 Open Web API endpoint registered: /api/tools/open-web
+2026/06/26 11:49:40 Weather API endpoint registered: /api/tools/weather
+2026/06/26 11:49:40 Fetch Raw API endpoint registered: /api/tools/fetch-raw
+2026/06/26 11:49:40 Status API endpoint registered: /api/status
+2026/06/26 11:49:40 Logs API endpoint registered: /api/logs
+2026/06/26 11:49:40 Topology Test Query API endpoint registered: /api/topology/test-query (Router API: http://127.0.0.1:18080)
+2026/06/26 11:49:40 Security Policy API endpoints registered: /api/security/policy, /api/security/policy/preview
+2026/06/26 11:49:40 Evaluation datasets endpoint registered: /api/evaluation/datasets
+2026/06/26 11:49:40 Evaluation project root: /Users/zhengwan/Desktop/dev/semantic-router
+2026/06/26 11:49:40 Evaluation database initialized at: ./data/evaluations.db
+2026/06/26 11:49:40 Evaluation results directory: /Users/zhengwan/Desktop/dev/semantic-router/data/results
+2026/06/26 11:49:40 Evaluation API endpoints registered: /api/evaluation/*
+2026/06/26 11:49:40 MCP API endpoints registered: /api/mcp/*
+2026/06/26 11:49:40 ML Pipeline feature disabled
+2026/06/26 11:49:40 OpenClaw feature disabled
+2026/06/26 11:49:40 Envoy proxy configured: http://127.0.0.1:18888 → /api/router/v1/chat/completions
+2026/06/26 11:49:40 Router API proxy configured: http://127.0.0.1:18080 (excluding /api/router/config/*)
+2026/06/26 11:49:40 Warning: Grafana URL not configured
+2026/06/26 11:49:40 Info: Jaeger URL not configured (optional)
+2026/06/26 11:49:40 Info: Fleet simulator URL not configured (optional)
+2026/06/26 11:49:40 Warning: Prometheus URL not configured
+2026/06/26 11:49:40 WizMap static app registered at /embedded/wizmap/
+2026/06/26 11:49:40 Semantic Router Dashboard listening on :8700
+2026/06/26 11:49:40 Static dir: /Users/zhengwan/Desktop/dev/semantic-router/dashboard/frontend
+2026/06/26 11:49:40 Envoy: http://127.0.0.1:18888 → /api/router/v1/chat/completions
+2026/06/26 11:49:40 Router API: http://127.0.0.1:18080 → /api/router/*
+2026/06/26 11:49:40 Router Metrics: http://127.0.0.1:19190/metrics → /metrics/router
+2026/06/26 11:49:40 Read-only mode: ENABLED (config editing disabled)

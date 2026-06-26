@@ -1,0 +1,354 @@
+version: v0.3
+
+listeners:
+  - name: http-8888
+    address: 0.0.0.0
+    port: 8888
+    timeout: 600s
+
+providers:
+  defaults:
+    default_model: qwen35-2b
+    default_reasoning_effort: low
+    reasoning_families:
+      qwen3:
+        type: chat_template_kwargs
+        parameter: enable_thinking
+  models:
+    - name: qwen35-2b
+      provider_model_id: qwen35-2b
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 0.20
+        cached_input_per_1m: 0.05
+        completion_per_1m: 0.40
+      backend_refs:
+        - name: qwen35-2b-vllm
+          endpoint: vsr-qwen35-2b:8000
+          protocol: http
+          weight: 100
+    - name: qwen35-27b-fp8
+      provider_model_id: qwen35-27b-fp8
+      api_format: openai
+      reasoning_family: qwen3
+      pricing:
+        currency: USD
+        prompt_per_1m: 8.00
+        cached_input_per_1m: 2.00
+        completion_per_1m: 16.00
+      backend_refs:
+        - name: qwen35-27b-fp8-vllm
+          endpoint: vsr-qwen35-27b-fp8:8000
+          protocol: http
+          weight: 100
+
+routing:
+  modelCards:
+    - name: qwen35-2b
+      param_size: 2B
+      context_window_size: 4096
+      description: Fast low-cost model for short account questions, simple summaries, and lightweight support triage.
+      capabilities: [chat, fast-response, account-support, concise-summary]
+      quality_score: 0.62
+      modality: ar
+      tags: [small, fast, cheap]
+    - name: qwen35-27b-fp8
+      param_size: 27B
+      context_window_size: 4096
+      description: Larger FP8 reasoning model for technical support, incidents, security review, code analysis, multi-step workflows, and long-context synthesis.
+      capabilities: [chat, reasoning, code, technical-support, security, incident-analysis, long-context]
+      quality_score: 0.91
+      modality: ar
+      tags: [large, reasoning, expensive]
+
+  signals:
+    keywords:
+      - name: explicit_simple
+        operator: OR
+        method: bm25
+        keywords: ["simple", "short", "concise", "one sentence", "一句话", "简短"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+      - name: explicit_complex
+        operator: OR
+        method: bm25
+        keywords: ["root cause", "architecture", "incident", "security", "debug", "troubleshoot", "proof", "排查", "架构", "事故"]
+        case_sensitive: false
+        bm25_threshold: 0.05
+
+    embeddings:
+      - name: technical_support
+        threshold: 0.60
+        aggregation_method: max
+        candidates:
+          - installation failure and troubleshooting
+          - service error message analysis
+          - root cause investigation
+          - system configuration guide
+          - production incident mitigation
+      - name: account_management
+        threshold: 0.60
+        aggregation_method: max
+        candidates:
+          - password reset
+          - account settings
+          - profile update
+          - subscription management
+          - billing information
+
+    language:
+      - name: zh
+        description: Chinese-language requests.
+
+    context:
+      - name: short_context
+        min_tokens: "0"
+        max_tokens: "120"
+        description: Short requests.
+      - name: long_context
+        min_tokens: "121"
+        max_tokens: "8K"
+        description: Long requests.
+
+    structure:
+      - name: many_questions
+        description: Prompts with many explicit questions.
+        feature:
+          type: count
+          source:
+            type: regex
+            pattern: '[?？]'
+        predicate:
+          gte: 4
+      - name: numbered_steps
+        description: Prompts that contain numbered list items.
+        feature:
+          type: exists
+          source:
+            type: regex
+            pattern: '(?m)^\\s*\\d+\\.\\s+'
+      - name: first_then_flow
+        description: Prompts that express an ordered workflow.
+        feature:
+          type: sequence
+          source:
+            type: sequence
+            case_sensitive: false
+            sequences:
+              - ["first", "then"]
+              - ["first", "next", "finally"]
+              - ["首先", "然后"]
+              - ["先", "再"]
+
+    role_bindings:
+      - name: admins
+        subjects:
+          - kind: Group
+            name: admins
+        role: admin
+      - name: premium_support
+        subjects:
+          - kind: Group
+            name: premium-support
+        role: premium_user
+
+    jailbreak:
+      - name: prompt_injection
+        method: hybrid
+        threshold: 0.55
+        include_history: true
+        description: Detect prompt-injection or jailbreak attempts.
+        jailbreak_patterns:
+          - ignore previous instructions
+          - reveal the hidden prompt
+          - jailbreak mode
+        benign_patterns:
+          - explain the policy
+          - summarize the safety rules
+
+    pii:
+      - name: restricted_pii
+        threshold: 0.55
+        include_history: true
+        pii_types_allowed:
+          - EMAIL_ADDRESS
+        description: Sensitive prompts where only low-risk identifiers may pass through.
+
+    user_feedbacks:
+      - name: wrong_answer
+        description: User indicates the current answer is incorrect.
+      - name: need_clarification
+        description: User asks for a clearer or more detailed follow-up.
+
+    reasks:
+      - name: likely_dissatisfied
+        description: Current user turn closely repeats the immediately previous user turn.
+        threshold: 0.70
+        lookback_turns: 1
+
+    preferences:
+      - name: terse_answers
+        description: Users who prefer short, direct responses.
+        examples:
+          - keep it concise
+          - bullet points only
+          - answer in one paragraph
+        threshold: 0.60
+
+    conversation:
+      - name: multi_turn_user
+        description: At least two user messages - the conversation has history.
+        feature:
+          type: count
+          source:
+            type: message
+            role: user
+        predicate:
+          gte: 2
+
+    events:
+      - name: critical_payment_event
+        description: Critical payment or transaction events that need incident-grade routing.
+        event_types:
+          - payment_failed
+          - transaction_declined
+        severities:
+          - critical
+          - high
+        action_codes:
+          - TXN_DECLINE
+        temporal: true
+
+  projections:
+    scores:
+      - name: escalation_score
+        method: weighted_sum
+        inputs:
+          - type: keyword
+            name: explicit_complex
+            weight: 0.15
+          - type: embedding
+            name: technical_support
+            weight: 0.25
+            value_source: confidence
+          - type: context
+            name: long_context
+            weight: 0.20
+          - type: structure
+            name: many_questions
+            weight: 0.20
+          - type: structure
+            name: first_then_flow
+            weight: 0.20
+    mappings:
+      - name: escalation_band
+        source: escalation_score
+        method: threshold_bands
+        outputs:
+          - name: low_escalation
+            lt: 0.35
+          - name: high_escalation
+            gte: 0.35
+
+  decisions:
+    - name: fused-signal-hybrid-selector
+      priority: 900
+      rules:
+        operator: OR
+        conditions:
+          - type: keyword
+            name: explicit_simple
+          - type: keyword
+            name: explicit_complex
+          - type: embedding
+            name: technical_support
+          - type: embedding
+            name: account_management
+          - type: language
+            name: zh
+          - type: context
+            name: long_context
+          - type: structure
+            name: many_questions
+          - type: structure
+            name: numbered_steps
+          - type: structure
+            name: first_then_flow
+          - type: projection
+            name: high_escalation
+          - type: event
+            name: critical_payment_event
+          - type: pii
+            name: restricted_pii
+          - type: jailbreak
+            name: prompt_injection
+          - type: user_feedback
+            name: wrong_answer
+          - type: user_feedback
+            name: need_clarification
+          - type: reask
+            name: likely_dissatisfied
+          - type: preference
+            name: terse_answers
+          - type: conversation
+            name: multi_turn_user
+          - type: authz
+            name: admin
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+        - model: qwen35-27b-fp8
+          use_reasoning: true
+          reasoning_effort: medium
+      algorithm:
+        type: hybrid
+        hybrid:
+          elo_weight: 0.15
+          router_dc_weight: 0.35
+          automix_weight: 0.15
+          cost_weight: 0.35
+          quality_gap_threshold: 0.08
+          normalize_scores: true
+
+    - name: default-small-no-signal
+      priority: 0
+      rules:
+        operator: AND
+        conditions: []
+      modelRefs:
+        - model: qwen35-2b
+          use_reasoning: false
+
+global:
+  router:
+    config_source: file
+    strategy: priority
+    auto_model_name: fused-round4-auto
+    include_config_models_in_list: true
+    model_selection:
+      method: hybrid
+      enabled: true
+      router_dc:
+        temperature: 0.2
+        dimension_size: 384
+        min_similarity: 0.0
+        use_query_contrastive: true
+        use_model_contrastive: true
+        require_descriptions: false
+        use_capabilities: true
+      automix:
+        verification_threshold: 0.75
+        max_escalations: 1
+        cost_aware_routing: true
+        cost_quality_tradeoff: 0.45
+        discount_factor: 0.9
+        use_logprob_verification: true
+      hybrid:
+        elo_weight: 0.15
+        router_dc_weight: 0.35
+        automix_weight: 0.15
+        cost_weight: 0.35
+        quality_gap_threshold: 0.08
+        normalize_scores: true

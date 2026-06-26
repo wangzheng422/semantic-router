@@ -1,0 +1,47 @@
+src/semantic-router/pkg/selection/selector_test.go:159:func TestRouterDCSelector_Select(t *testing.T) {
+src/semantic-router/pkg/selection/selector_test.go:162:	selector := NewRouterDCSelector(DefaultRouterDCConfig())
+src/semantic-router/pkg/selection/selector_test.go:194:	if result.Method != MethodRouterDC {
+src/semantic-router/pkg/selection/selector_test.go:195:		t.Errorf("expected method %s, got %s", MethodRouterDC, result.Method)
+src/semantic-router/pkg/selection/selector_test.go:354:	_, ok = registry.Get(MethodRouterDC)
+src/semantic-router/pkg/selection/selector_test.go:374:			expectedMethod: MethodRouterDC,
+src/semantic-router/pkg/selection/router_dc.go:32:type RouterDCConfig struct {
+src/semantic-router/pkg/selection/router_dc.go:76:// RouterDCSelector implements dual-contrastive learning for query-to-model routing
+src/semantic-router/pkg/selection/router_dc.go:79:type RouterDCSelector struct {
+src/semantic-router/pkg/selection/router_dc.go:94:// NewRouterDCSelector creates a new RouterDC-based selector
+src/semantic-router/pkg/selection/router_dc.go:95:func NewRouterDCSelector(cfg *RouterDCConfig) *RouterDCSelector {
+src/semantic-router/pkg/selection/router_dc.go:99:	return &RouterDCSelector{
+src/semantic-router/pkg/selection/router_dc.go:107:func (r *RouterDCSelector) Method() SelectionMethod {
+src/semantic-router/pkg/selection/router_dc.go:108:	return MethodRouterDC
+src/semantic-router/pkg/selection/router_dc.go:112:func (r *RouterDCSelector) SetEmbeddingFunc(f func(text string) ([]float32, error)) {
+src/semantic-router/pkg/selection/router_dc.go:118:func (r *RouterDCSelector) InitializeModelEmbeddings(modelDescriptions map[string]string) error {
+src/semantic-router/pkg/selection/router_dc.go:142:func (r *RouterDCSelector) SetModelEmbedding(model string, embedding []float32) {
+src/semantic-router/pkg/selection/router_dc.go:150:func (r *RouterDCSelector) InitializeFromConfig(modelConfig map[string]config.ModelParams) error {
+src/semantic-router/pkg/selection/router_dc.go:202:func (r *RouterDCSelector) buildDescriptionText(model string, params config.ModelParams) string {
+src/semantic-router/pkg/selection/router_dc.go:227:func (r *RouterDCSelector) ValidateConfig(modelConfig map[string]config.ModelParams) error {
+src/semantic-router/pkg/selection/router_dc.go:248:func (r *RouterDCSelector) Select(ctx context.Context, selCtx *SelectionContext) (*SelectionResult, error) {
+src/semantic-router/pkg/selection/router_dc.go:325:		Method:        MethodRouterDC,
+src/semantic-router/pkg/selection/router_dc.go:332:func (r *RouterDCSelector) UpdateFeedback(ctx context.Context, feedback *Feedback) error {
+src/semantic-router/pkg/selection/router_dc.go:372:func (r *RouterDCSelector) computeContrastiveSimilarity(queryEmb, modelEmb []float32) float64 {
+src/semantic-router/pkg/selection/router_dc.go:395:func (r *RouterDCSelector) cosineSimilarity(a, b []float32) float64 {
+src/semantic-router/pkg/selection/router_dc.go:415:func (r *RouterDCSelector) applySoftmax(scores map[string]float64) map[string]float64 {
+src/semantic-router/pkg/selection/router_dc.go:443:func (r *RouterDCSelector) hashQuery(query string) string {
+src/semantic-router/pkg/selection/router_dc.go:453:func (r *RouterDCSelector) defaultSelection(selCtx *SelectionContext, reason string) (*SelectionResult, error) {
+src/semantic-router/pkg/selection/router_dc.go:471:		Method:        MethodRouterDC,
+src/semantic-router/pkg/selection/router_dc.go:478:func (r *RouterDCSelector) GetModelEmbeddings() map[string][]float32 {
+src/semantic-router/pkg/selection/tier_declarations.go:32:func (r *RouterDCSelector) Tier() AlgorithmTier {
+src/semantic-router/pkg/selection/tier_declarations.go:37:func (r *RouterDCSelector) ExternalDependencies() []Dependency {
+src/semantic-router/pkg/selection/factory.go:132:	case MethodRouterDC:
+src/semantic-router/pkg/selection/factory.go:133:		routerDCSelector := NewRouterDCSelector(f.cfg.RouterDC)
+src/semantic-router/pkg/selection/factory.go:246:	routerDCSelector := NewRouterDCSelector(routerDCCfg)
+src/semantic-router/pkg/selection/factory.go:256:	registry.Register(MethodRouterDC, routerDCSelector)
+src/semantic-router/pkg/selection/tier_test.go:37:		{"router_dc", NewRouterDCSelector(DefaultRouterDCConfig())},
+src/semantic-router/pkg/selection/tier_test.go:144:		MethodRouterDC:     TierSupported,
+src/semantic-router/pkg/selection/selector.go:43:	// MethodRouterDC uses dual-contrastive learning for query-to-model routing
+src/semantic-router/pkg/selection/selector.go:45:	MethodRouterDC SelectionMethod = "router_dc"
+src/semantic-router/pkg/selection/metrics_test.go:489:		routerDCSelector := NewRouterDCSelector(DefaultRouterDCConfig())
+src/semantic-router/pkg/selection/selection_context_test.go:67:		{name: "router_dc", selector: NewRouterDCSelector(nil)},
+src/semantic-router/pkg/selection/hybrid.go:77:	routerDCSelector *RouterDCSelector
+src/semantic-router/pkg/selection/hybrid.go:97:		routerDCSelector: NewRouterDCSelector(DefaultRouterDCConfig()),
+src/semantic-router/pkg/selection/hybrid.go:107:	routerDC *RouterDCSelector,
+src/semantic-router/pkg/selection/hybrid.go:133:// SetRouterDCSelector sets the RouterDC component
+src/semantic-router/pkg/selection/hybrid.go:134:func (h *HybridSelector) SetRouterDCSelector(routerDC *RouterDCSelector) {

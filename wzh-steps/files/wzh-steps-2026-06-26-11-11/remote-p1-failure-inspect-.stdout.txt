@@ -1,0 +1,21 @@
+NAMES               STATUS                     PORTS
+vsr-qwen35-2b       Exited (135) 13 hours ago  0.0.0.0:18001->8000/tcp
+vsr-qwen35-27b-fp8  Exited (135) 13 hours ago  0.0.0.0:18002->8000/tcp
+vsr-mock-backend    Up 4 minutes               0.0.0.0:18003->8000/tcp
+vsr-router          Exited (1) 3 minutes ago   0.0.0.0:15051->50051/tcp, 0.0.0.0:18080->8080/tcp, 0.0.0.0:19190->9190/tcp
+vsr-envoy           Up 3 minutes               0.0.0.0:18888->8888/tcp, 0.0.0.0:19901->9901/tcp
+---router logs---
+Starting router from canonical config...
+  Config file: /app/config.yaml
+Starting router...
+
+[97m       █     █     █▄   ▄█[0m
+[97m ▄▄ ▄█ █     █     █ ▀▄▀ █[0m
+[97m  █▄█▀ █     █     █     █[0m
+[97m   ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀[0m
+[97m  Semantic Router[0m
+[38;2;145;158;171m  Intelligent Routing for Mixture-of-Models[0m
+
+---envoy logs---
+---router inspect state---
+exit=1 status=exited error= started=2026-06-26 03:24:47.292615963 +0000 UTC finished=2026-06-26 03:24:47.436906548 +0000 UTC
