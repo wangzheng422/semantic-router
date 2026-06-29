@@ -1,0 +1,10 @@
+timestamp=2026-06-29T10:43:52+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=./wzh-solution/files/wzh-solution-2026-06-29-10-40/remote_exec.zsh /Users/zhengwan/Desktop/dev/semantic-router set\ -euxo\ pipefail\;\ podman\ start\ vsr-qwen35-2b\ vsr-qwen35-27b-fp8\ \|\|\ true\;\ podman\ ps\ -a\ --format\ \"table\ \{\{.Names\}\}\t\{\{.Status\}\}\t\{\{.Ports\}\}\"\;\ echo\ ---logs-2b---\;\ podman\ logs\ --tail\ 80\ vsr-qwen35-2b\ \|\|\ true\;\ echo\ ---logs-27b---\;\ podman\ logs\ --tail\ 80\ vsr-qwen35-27b-fp8\ \|\|\ true\;\ for\ i\ in\ \$\(seq\ 1\ 120\)\;\ do\ ok=0\;\ curl\ -fsS\ http://127.0.0.1:18001/v1/models\ \>/tmp/m1.json\ 2\>/tmp/m1.err\ \&\&\ curl\ -fsS\ http://127.0.0.1:18002/v1/models\ \>/tmp/m2.json\ 2\>/tmp/m2.err\ \&\&\ ok=1\;\ if\ \[\ \"\$ok\"\ =\ 1\ \]\;\ then\ echo\ ready-attempt=\$i\;\ cat\ /tmp/m1.json\;\ echo\;\ cat\ /tmp/m2.json\;\ exit\ 0\;\ fi\;\ sleep\ 5\;\ done\;\ echo\ not-ready\;\ cat\ /tmp/m1.err\ \|\|\ true\;\ cat\ /tmp/m2.err\ \|\|\ true\;\ podman\ ps\ -a\ --format\ \"table\ \{\{.Names\}\}\t\{\{.Status\}\}\t\{\{.Ports\}\}\"\;\ exit\ 1 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-start-old-vllm-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-start-old-vllm-.stderr.txt
+stdout_lines=130
+stderr_lines=274
+stdout_bytes=18412
+stderr_bytes=9073

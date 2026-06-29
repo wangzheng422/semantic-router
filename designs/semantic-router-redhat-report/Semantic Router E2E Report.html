@@ -1,0 +1,853 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>vLLM Semantic Router E2E 实验汇报</title>
+  <style>
+    deck-stage:not(:defined) { visibility: hidden; }
+
+    :root {
+      --rh-red: #EE0000;
+      --rh-dark-red: #A60000;
+      --rh-maroon: #5F0000;
+      --rh-pale-red: #FFF0F0;
+      --rh-soft-red-gray: #F8EAEA;
+      --ink: #151515;
+      --charcoal: #2B2B2B;
+      --gray: #6A6E73;
+      --mid-gray: #8A8D90;
+      --rule-gray: #D2D2D2;
+      --light-gray: #F4F4F4;
+      --white: #FFFFFF;
+      --font: Arial, "Red Hat Text", "Red Hat Display", "PingFang SC", "Noto Sans SC", sans-serif;
+      --title: 58px;
+      --subtitle: 34px;
+      --section-title: 72px;
+      --body: 30px;
+      --body-sm: 25px;
+      --caption: 24px;
+      --footer: 22px;
+      --pad-x: 100px;
+      --pad-y: 82px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #000;
+      font-family: var(--font);
+      color: var(--ink);
+    }
+
+    section[data-label] > *:not(img):not(picture):not(video):not(svg):not(canvas) {
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide {
+      position: relative;
+      height: 100%;
+      background: var(--white);
+      padding: var(--pad-y) var(--pad-x);
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 10px;
+      background: var(--rh-red);
+    }
+
+    .footer {
+      position: absolute;
+      left: var(--pad-x);
+      right: var(--pad-x);
+      bottom: 34px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--gray);
+      font-size: var(--footer);
+      border-top: 2px solid var(--rule-gray);
+      padding-top: 16px;
+    }
+
+    .kicker {
+      color: var(--rh-red);
+      font-size: 24px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 22px;
+    }
+
+    h1, h2, h3, p { margin: 0; }
+
+    .title {
+      font-size: var(--title);
+      line-height: 1.08;
+      font-weight: 700;
+      color: var(--ink);
+      max-width: 1480px;
+      text-wrap: pretty;
+    }
+
+    .subtitle {
+      font-size: var(--subtitle);
+      line-height: 1.32;
+      color: var(--gray);
+      max-width: 1320px;
+      margin-top: 26px;
+      text-wrap: pretty;
+    }
+
+    .section-title {
+      font-size: var(--section-title);
+      line-height: 1.06;
+      font-weight: 700;
+      color: var(--ink);
+      max-width: 1280px;
+      text-wrap: pretty;
+    }
+
+    .rule-short {
+      width: 138px;
+      height: 8px;
+      background: var(--rh-red);
+      margin-top: 34px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      margin-top: 58px;
+    }
+
+    .three-col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 34px;
+      margin-top: 54px;
+    }
+
+    .four-col {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+      margin-top: 48px;
+    }
+
+    .panel {
+      border: 2px solid var(--rule-gray);
+      background: var(--white);
+      padding: 30px 30px 32px;
+      min-height: 170px;
+      position: relative;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      top: -2px;
+      height: 8px;
+      background: var(--rh-red);
+    }
+
+    .panel.gray {
+      background: var(--light-gray);
+    }
+
+    .panel.red-soft {
+      background: var(--rh-pale-red);
+      border-color: var(--rh-dark-red);
+    }
+
+    .panel-title {
+      font-size: 31px;
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 18px;
+    }
+
+    .panel-body {
+      font-size: var(--body-sm);
+      line-height: 1.48;
+      color: var(--charcoal);
+      text-wrap: pretty;
+    }
+
+    .large-number {
+      font-size: 82px;
+      line-height: 0.95;
+      font-weight: 700;
+      color: var(--rh-red);
+      margin-bottom: 18px;
+    }
+
+    .body-list {
+      display: grid;
+      gap: 22px;
+      margin-top: 42px;
+      max-width: 1420px;
+    }
+
+    .body-list li {
+      font-size: var(--body);
+      line-height: 1.35;
+      color: var(--charcoal);
+      margin-left: 1em;
+    }
+
+    .table {
+      margin-top: 46px;
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 25px;
+      line-height: 1.35;
+      color: var(--charcoal);
+    }
+
+    .table th {
+      text-align: left;
+      font-weight: 700;
+      color: var(--ink);
+      border-bottom: 4px solid var(--rh-red);
+      padding: 17px 20px;
+      background: var(--light-gray);
+    }
+
+    .table td {
+      border-bottom: 2px solid var(--rule-gray);
+      padding: 17px 20px;
+      vertical-align: top;
+    }
+
+    .tag {
+      display: inline-block;
+      border: 2px solid var(--rh-red);
+      color: var(--rh-dark-red);
+      background: var(--rh-pale-red);
+      padding: 6px 14px;
+      font-size: 22px;
+      font-weight: 700;
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      margin-top: 60px;
+      align-items: stretch;
+    }
+
+    .flow-step {
+      border: 2px solid var(--rule-gray);
+      background: var(--white);
+      padding: 26px 24px;
+      min-height: 220px;
+      position: relative;
+    }
+
+    .flow-step::after {
+      content: ">";
+      position: absolute;
+      right: -22px;
+      top: 88px;
+      color: var(--rh-red);
+      font-size: 44px;
+      font-weight: 700;
+      z-index: 1;
+    }
+
+    .flow-step:last-child::after {
+      content: "";
+    }
+
+    .flow-label {
+      font-size: 24px;
+      color: var(--rh-red);
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .flow-title {
+      font-size: 29px;
+      line-height: 1.2;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .flow-body {
+      font-size: 23px;
+      line-height: 1.35;
+      color: var(--charcoal);
+    }
+
+    .architecture {
+      display: grid;
+      grid-template-columns: 1fr 1.05fr 1fr;
+      gap: 36px;
+      margin-top: 52px;
+      align-items: stretch;
+    }
+
+    .boundary {
+      border: 3px solid var(--rule-gray);
+      padding: 28px;
+      min-height: 560px;
+      background: var(--light-gray);
+      position: relative;
+    }
+
+    .boundary.red {
+      border-color: var(--rh-red);
+      background: var(--rh-pale-red);
+    }
+
+    .boundary-title {
+      color: var(--rh-red);
+      font-weight: 700;
+      font-size: 25px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .node {
+      background: var(--white);
+      border: 2px solid var(--rule-gray);
+      padding: 22px 22px;
+      margin-bottom: 18px;
+      min-height: 95px;
+    }
+
+    .node strong {
+      display: block;
+      font-size: 29px;
+      line-height: 1.1;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .node span {
+      display: block;
+      font-size: 23px;
+      line-height: 1.35;
+      color: var(--gray);
+    }
+
+    .code-block {
+      margin-top: 42px;
+      background: var(--light-gray);
+      border-left: 8px solid var(--rh-red);
+      padding: 28px 32px;
+      font-family: "Courier New", monospace;
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1.35;
+      white-space: pre-wrap;
+    }
+
+    .metric-rail {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 54px;
+    }
+
+    .metric {
+      border-top: 8px solid var(--rh-red);
+      background: var(--light-gray);
+      padding: 28px;
+      min-height: 190px;
+    }
+
+    .metric-value {
+      font-size: 62px;
+      line-height: 1;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .metric-label {
+      font-size: 24px;
+      line-height: 1.35;
+      color: var(--gray);
+    }
+
+    .check-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px 34px;
+      margin-top: 46px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 18px;
+      align-items: start;
+      font-size: 27px;
+      line-height: 1.32;
+      color: var(--charcoal);
+    }
+
+    .check .mark {
+      color: var(--rh-red);
+      font-weight: 700;
+      font-size: 31px;
+      line-height: 1;
+    }
+
+    .cover-layout {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 62px;
+      height: 100%;
+      align-items: center;
+      padding-bottom: 34px;
+    }
+
+    .cover-title {
+      font-size: 82px;
+      line-height: 1.02;
+      font-weight: 700;
+      color: var(--ink);
+      max-width: 1050px;
+      text-wrap: pretty;
+    }
+
+    .cover-subtitle {
+      font-size: 35px;
+      line-height: 1.32;
+      color: var(--gray);
+      max-width: 940px;
+      margin-top: 34px;
+    }
+
+    .side-panel {
+      border-left: 12px solid var(--rh-red);
+      background: var(--light-gray);
+      padding: 42px;
+      min-height: 520px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .side-panel .label {
+      color: var(--rh-red);
+      font-size: 25px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .side-panel .big {
+      color: var(--ink);
+      font-size: 58px;
+      line-height: 1.05;
+      font-weight: 700;
+      margin-top: 24px;
+    }
+
+    .side-panel .small {
+      color: var(--charcoal);
+      font-size: 27px;
+      line-height: 1.4;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 68px;
+      border-top: 6px solid var(--rh-red);
+      padding-top: 38px;
+    }
+
+    .timeline-item {
+      padding-right: 30px;
+      border-right: 2px solid var(--rule-gray);
+      min-height: 280px;
+    }
+
+    .timeline-item:last-child {
+      border-right: 0;
+    }
+
+    .week {
+      color: var(--rh-red);
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .timeline-title {
+      font-size: 30px;
+      line-height: 1.18;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .timeline-copy {
+      font-size: 24px;
+      line-height: 1.38;
+      color: var(--charcoal);
+    }
+
+    .muted {
+      color: var(--gray);
+    }
+
+    .red {
+      color: var(--rh-red);
+    }
+  </style>
+</head>
+<body>
+<deck-stage width="1920" height="1080" no-rail>
+  <section data-label="Title">
+    <div class="slide">
+      <div class="cover-layout">
+        <div>
+          <div class="kicker">Technical customer briefing</div>
+          <h1 class="cover-title">vLLM Semantic Router E2E 实验汇报</h1>
+          <p class="cover-subtitle">从环境恢复、双模型部署、语义分流到 dashboard 验收的客户实验路径。</p>
+          <div class="rule-short"></div>
+        </div>
+        <div class="side-panel">
+          <div>
+            <div class="label">Validated setup</div>
+            <div class="big">2B + 27B FP8</div>
+          </div>
+          <p class="small">面向资深 IT 运维客户：用可复制的 runbook 完成语义路由实验，并用响应头解释每一次模型选择。</p>
+        </div>
+      </div>
+      <div class="footer"><span>vLLM Semantic Router E2E</span><span>01</span></div>
+    </div>
+  </section>
+
+  <section data-label="Questions">
+    <div class="slide">
+      <div class="kicker">Executive frame</div>
+      <h2 class="title">本次实验回答六个运维问题</h2>
+      <p class="subtitle">汇报重点不是算法论文，而是客户能否部署、验证、解释、清理并复现实验。</p>
+      <div class="three-col">
+        <div class="panel"><div class="large-number">01</div><div class="panel-title">环境能否恢复</div><p class="panel-body">GPU VM 重启后，工作目录、Podman 网络、模型容器和路由栈能否恢复。</p></div>
+        <div class="panel"><div class="large-number">02</div><div class="panel-title">双模型能否共存</div><p class="panel-body">Qwen 3.5 2B 和 27B FP8 同时提供 OpenAI-compatible API。</p></div>
+        <div class="panel"><div class="large-number">03</div><div class="panel-title">请求如何分流</div><p class="panel-body">从固定小模型、关键词，到 hybrid 成本质量权衡逐步验证。</p></div>
+        <div class="panel gray"><div class="large-number">04</div><div class="panel-title">多轮是否动态切换</div><p class="panel-body">主题从账号请求切到分布式事故后，路由能否切到 27B FP8。</p></div>
+        <div class="panel gray"><div class="large-number">05</div><div class="panel-title">缓存是否降低成本</div><p class="panel-body">重复请求命中 semantic-cache 后，不再访问后端模型。</p></div>
+        <div class="panel gray"><div class="large-number">06</div><div class="panel-title">客户如何验收</div><p class="panel-body">用响应头、模型列表、端口和 dashboard 健康检查形成签收标准。</p></div>
+      </div>
+      <div class="footer"><span>Problem statement</span><span>02</span></div>
+    </div>
+  </section>
+
+  <section data-label="Architecture">
+    <div class="slide">
+      <div class="kicker">Runtime architecture</div>
+      <h2 class="title">端到端链路由五层组成</h2>
+      <p class="subtitle">Envoy 接收 OpenAI 请求，semantic-router 做语义判断，vLLM 后端负责最终生成。</p>
+      <div class="architecture">
+        <div class="boundary">
+          <div class="boundary-title">Client side</div>
+          <div class="node"><strong>客户应用</strong><span>OpenAI SDK / Chat API</span></div>
+          <div class="node"><strong>请求数据</strong><span>model, messages, headers, max_tokens</span></div>
+          <div class="node"><strong>验收信号</strong><span>x-vsr-selected-model, cache-hit, matched signals</span></div>
+        </div>
+        <div class="boundary red">
+          <div class="boundary-title">Routing plane</div>
+          <div class="node"><strong>Envoy</strong><span>8888 OpenAI API + ext_proc</span></div>
+          <div class="node"><strong>semantic-router</strong><span>signals, decisions, model selection, plugins</span></div>
+          <div class="node"><strong>Dashboard</strong><span>config, models, status, metrics</span></div>
+        </div>
+        <div class="boundary">
+          <div class="boundary-title">Model plane</div>
+          <div class="node"><strong>qwen35-2b</strong><span>低成本、简单请求、短摘要</span></div>
+          <div class="node"><strong>qwen35-27b-fp8</strong><span>复杂推理、多轮、事故分析</span></div>
+          <div class="node"><strong>持久缓存</strong><span>模型缓存和 router 本地模型位于 /var/mnt</span></div>
+        </div>
+      </div>
+      <div class="footer"><span>Architecture</span><span>03</span></div>
+    </div>
+  </section>
+
+  <section data-label="Environment">
+    <div class="slide">
+      <div class="kicker">Environment baseline</div>
+      <h2 class="title">环境基线先解决重启恢复问题</h2>
+      <p class="subtitle">客户实验第一步不是写复杂路由，而是确认 GPU、容器、磁盘和缓存位置稳定。</p>
+      <table class="table">
+        <thead><tr><th>检查项</th><th>期望状态</th><th>客户验收动作</th></tr></thead>
+        <tbody>
+          <tr><td>GPU</td><td>能看到 NVIDIA GPU 和空闲显存</td><td><code>nvidia-smi</code></td></tr>
+          <tr><td>容器运行时</td><td>Podman 可用，Docker 非必需</td><td><code>command -v podman</code></td></tr>
+          <tr><td>持久目录</td><td>模型和配置放在 /var/mnt</td><td><code>df -h /var/mnt</code></td></tr>
+          <tr><td>容器网络</td><td>同一网络内可通过容器名互通</td><td><code>podman network inspect vsr-bench</code></td></tr>
+          <tr><td>重启恢复</td><td>旧 vLLM 容器可直接 start</td><td><code>podman ps -a</code></td></tr>
+        </tbody>
+      </table>
+      <div class="footer"><span>Environment readiness</span><span>04</span></div>
+    </div>
+  </section>
+
+  <section data-label="Model Backends">
+    <div class="slide">
+      <div class="kicker">Model serving</div>
+      <h2 class="title">两个 Qwen 后端形成成本与能力梯度</h2>
+      <p class="subtitle">2B 提供低成本基线，27B FP8 用于复杂推理；semantic-router 在两者之间做可解释选择。</p>
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-title">qwen35-2b</div>
+          <p class="panel-body">后端模型：Qwen/Qwen3.5-2B<br>定位：简单问题、短摘要、轻量客服<br>价格模型：prompt 0.20 / completion 0.40 per 1M tokens</p>
+          <div class="code-block">--served-model-name qwen35-2b<br>--max-model-len 4096</div>
+        </div>
+        <div class="panel red-soft">
+          <div class="panel-title">qwen35-27b-fp8</div>
+          <p class="panel-body">后端模型：Qwen/Qwen3.5-27B-FP8<br>定位：事故分析、架构、代码、安全、多轮推理<br>价格模型：prompt 8.00 / completion 16.00 per 1M tokens</p>
+          <div class="code-block">--served-model-name qwen35-27b-fp8<br>--max-model-len 4096</div>
+        </div>
+      </div>
+      <div class="footer"><span>Model backends</span><span>05</span></div>
+    </div>
+  </section>
+
+  <section data-label="Scenario Simple">
+    <div class="slide">
+      <div class="kicker">Scenario 1</div>
+      <h2 class="title">场景一用固定小模型验证链路</h2>
+      <p class="subtitle">固定 2B 是最小 smoke test，用来证明 Envoy、ext_proc、router 和 vLLM 链路打通。</p>
+      <div class="two-col">
+        <div>
+          <h3 class="panel-title">配置意图</h3>
+          <ul class="body-list">
+            <li>只配置一个后端模型：<code>qwen35-2b</code></li>
+            <li>默认 decision 使用空条件兜底</li>
+            <li>不启用 reasoning，不启用复杂算法</li>
+          </ul>
+        </div>
+        <div class="code-block">routing:<br>  decisions:<br>    - name: default-small<br>      priority: 0<br>      conditions: []<br>      modelRefs:<br>        - model: qwen35-2b</div>
+      </div>
+      <div class="metric-rail">
+        <div class="metric"><div class="metric-value">200</div><div class="metric-label">OpenAI chat completions 返回成功</div></div>
+        <div class="metric"><div class="metric-value">2B</div><div class="metric-label">响应模型固定为 qwen35-2b</div></div>
+        <div class="metric"><div class="metric-value">0</div><div class="metric-label">无需复杂信号和策略参与</div></div>
+        <div class="metric"><div class="metric-value">1</div><div class="metric-label">作为后续实验的基准链路</div></div>
+      </div>
+      <div class="footer"><span>Fixed small-model route</span><span>06</span></div>
+    </div>
+  </section>
+
+  <section data-label="Keyword Route">
+    <div class="slide">
+      <div class="kicker">Scenario 2</div>
+      <h2 class="title">场景二用关键词建立第一层分流</h2>
+      <p class="subtitle">关键词是最容易解释的入口规则，适合作为客户第一组业务分流实验。</p>
+      <div class="three-col">
+        <div class="panel"><div class="panel-title">简单请求</div><p class="panel-body"><span class="tag">short</span><span class="tag">one sentence</span><br>命中 <code>explicit_simple</code>，通常走 2B。</p></div>
+        <div class="panel"><div class="panel-title">复杂请求</div><p class="panel-body"><span class="tag">incident</span><span class="tag">root cause</span><br>命中 <code>explicit_complex</code>，进入复杂 decision。</p></div>
+        <div class="panel"><div class="panel-title">阈值解释</div><p class="panel-body"><code>bm25_threshold: 0.05</code> 适合 PoC；生产应基于真实日志回放调参。</p></div>
+      </div>
+      <table class="table">
+        <thead><tr><th>请求</th><th>预期响应头</th><th>通过标准</th></tr></thead>
+        <tbody>
+          <tr><td>短摘要</td><td><code>x-vsr-matched-keywords: explicit_simple</code></td><td>选中 qwen35-2b</td></tr>
+          <tr><td>生产事故</td><td><code>x-vsr-matched-keywords: explicit_complex</code></td><td>进入复杂 decision</td></tr>
+        </tbody>
+      </table>
+      <div class="footer"><span>Keyword routing</span><span>07</span></div>
+    </div>
+  </section>
+
+  <section data-label="Model Cards">
+    <div class="slide">
+      <div class="kicker">Model cards</div>
+      <h2 class="title">场景三用模型卡片解释选择依据</h2>
+      <p class="subtitle">模型卡片把“模型能力、成本、质量”写进配置，让路由选择能够被运维解释。</p>
+      <table class="table">
+        <thead><tr><th>模型</th><th>能力标签</th><th>质量分</th><th>成本定位</th></tr></thead>
+        <tbody>
+          <tr><td><strong>qwen35-2b</strong></td><td>chat, fast-response, account-support, concise-summary</td><td>0.62</td><td>低成本基线</td></tr>
+          <tr><td><strong>qwen35-27b-fp8</strong></td><td>reasoning, code, technical-support, security, incident-analysis</td><td>0.91</td><td>高成本高质量</td></tr>
+        </tbody>
+      </table>
+      <div class="two-col">
+        <div class="panel gray"><div class="panel-title">运维可调</div><p class="panel-body">价格、quality_score、capabilities 都是治理入口。客户可以按内部成本和质量评测结果修正。</p></div>
+        <div class="panel gray"><div class="panel-title">路由可解释</div><p class="panel-body">响应头告诉你选了哪个模型；模型卡片告诉你这个选择背后的能力和成本假设。</p></div>
+      </div>
+      <div class="footer"><span>Model card governance</span><span>08</span></div>
+    </div>
+  </section>
+
+  <section data-label="Hybrid Selection">
+    <div class="slide">
+      <div class="kicker">Scenario 4</div>
+      <h2 class="title">场景四用 hybrid 平衡质量与成本</h2>
+      <p class="subtitle">复杂 signal 命中不等于必然走大模型；最终选择由算法权重综合决定。</p>
+      <div class="flow">
+        <div class="flow-step"><div class="flow-label">Input</div><div class="flow-title">用户请求</div><div class="flow-body">messages + headers + max_tokens</div></div>
+        <div class="flow-step"><div class="flow-label">Signals</div><div class="flow-title">语义命中</div><div class="flow-body">keyword, embedding, context, structure</div></div>
+        <div class="flow-step"><div class="flow-label">Decision</div><div class="flow-title">候选集合</div><div class="flow-body">qwen35-2b 与 qwen35-27b-fp8</div></div>
+        <div class="flow-step"><div class="flow-label">Hybrid</div><div class="flow-title">权重融合</div><div class="flow-body">router_dc 0.35 + cost 0.35 + automix 0.15</div></div>
+        <div class="flow-step"><div class="flow-label">Route</div><div class="flow-title">模型选择</div><div class="flow-body">写入 x-selected-model，Envoy 转发</div></div>
+      </div>
+      <div class="code-block">quality_gap_threshold: 0.08<br>cost_weight: 0.35<br>router_dc_weight: 0.35<br>normalize_scores: true</div>
+      <div class="footer"><span>Hybrid selection</span><span>09</span></div>
+    </div>
+  </section>
+
+  <section data-label="Multiturn">
+    <div class="slide">
+      <div class="kicker">Scenario 5</div>
+      <h2 class="title">场景五验证多轮主题切换</h2>
+      <p class="subtitle">OpenAI SDK 的多轮对话就是多个 role/content；router 可以看到历史并根据当前主题重新选择模型。</p>
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-title">请求结构</div>
+          <p class="panel-body">第一轮：账号偏好重置，简单短请求。<br>第二轮：切换为分布式队列事故 RCA，复杂技术请求。</p>
+          <div class="code-block">messages: [<br>  user: account preference,<br>  assistant: concise reply,<br>  user: debug queue incident<br>]</div>
+        </div>
+        <div class="panel red-soft">
+          <div class="panel-title">验证结果</div>
+          <p class="panel-body"><code>x-vsr-selected-model: qwen35-27b-fp8</code><br><code>x-vsr-selected-reasoning: on</code><br><code>x-vsr-matched-conversation: multi_turn_user</code></p>
+        </div>
+      </div>
+      <div class="footer"><span>Multi-turn dynamic routing</span><span>10</span></div>
+    </div>
+  </section>
+
+  <section data-label="Cache">
+    <div class="slide">
+      <div class="kicker">Scenario 6</div>
+      <h2 class="title">场景六用 semantic-cache 降低重复请求成本</h2>
+      <p class="subtitle">重复请求命中缓存后，响应路径变为 cache，可以省掉后端 Qwen 推理。</p>
+      <div class="two-col">
+        <div>
+          <h3 class="panel-title">配置</h3>
+          <div class="code-block">plugins:<br>  - type: semantic-cache<br>    configuration:<br>      enabled: true<br>      similarity_threshold: 0.995<br>      ttl_seconds: 300</div>
+        </div>
+        <div>
+          <h3 class="panel-title">验收响应头</h3>
+          <div class="code-block">x-vsr-cache-hit: true<br>x-vsr-cache-similarity: 1.0000<br>x-vsr-response-path: cache</div>
+        </div>
+      </div>
+      <div class="metric-rail">
+        <div class="metric"><div class="metric-value">0.995</div><div class="metric-label">高相似度阈值，减少缓存错配风险</div></div>
+        <div class="metric"><div class="metric-value">300s</div><div class="metric-label">PoC 场景下缓存保留 5 分钟</div></div>
+        <div class="metric"><div class="metric-value">1.0000</div><div class="metric-label">完全重复请求的实测相似度</div></div>
+        <div class="metric"><div class="metric-value">cache</div><div class="metric-label">第二次请求不走后端模型生成</div></div>
+      </div>
+      <div class="footer"><span>Semantic cache</span><span>11</span></div>
+    </div>
+  </section>
+
+  <section data-label="Dashboard">
+    <div class="slide">
+      <div class="kicker">Operations view</div>
+      <h2 class="title">Dashboard 把路由配置和状态交给运维</h2>
+      <p class="subtitle">dashboard 不是静态页面；它通过 tunnel 连接真实 router、Envoy 和 metrics。</p>
+      <div class="three-col">
+        <div class="panel"><div class="panel-title">本地前端</div><p class="panel-body"><code>127.0.0.1:3001</code><br>客户浏览器访问入口。</p></div>
+        <div class="panel"><div class="panel-title">后端代理</div><p class="panel-body"><code>127.0.0.1:8700</code><br>读取 config、auth、workflow 和 router API。</p></div>
+        <div class="panel"><div class="panel-title">远端 tunnel</div><p class="panel-body"><code>28080 -> 18080</code><br><code>28888 -> 18888</code><br><code>29190 -> 19190</code></p></div>
+      </div>
+      <table class="table">
+        <thead><tr><th>健康项</th><th>预期状态</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>backend_healthz</td><td>200</td><td>dashboard backend 可用</td></tr>
+          <tr><td>auth_login / auth_me</td><td>200</td><td>登录和会话正常</td></tr>
+          <tr><td>router_models_proxy</td><td>200</td><td>能看到 auto、2B、27B FP8</td></tr>
+        </tbody>
+      </table>
+      <div class="footer"><span>Dashboard and observability</span><span>12</span></div>
+    </div>
+  </section>
+
+  <section data-label="Runbook">
+    <div class="slide">
+      <div class="kicker">Customer runbook</div>
+      <h2 class="title">客户可以按 runbook 完成全量实验</h2>
+      <p class="subtitle">每个场景都有目标、配置、命令、请求样例、响应头和通过标准。</p>
+      <div class="flow">
+        <div class="flow-step"><div class="flow-label">0</div><div class="flow-title">基线检查</div><div class="flow-body">GPU、Podman、磁盘、网络</div></div>
+        <div class="flow-step"><div class="flow-label">1</div><div class="flow-title">模型部署</div><div class="flow-body">2B 与 27B FP8 后端就绪</div></div>
+        <div class="flow-step"><div class="flow-label">2</div><div class="flow-title">固定路由</div><div class="flow-body">小模型 smoke test</div></div>
+        <div class="flow-step"><div class="flow-label">3</div><div class="flow-title">智能分流</div><div class="flow-body">关键词、hybrid、多轮切换</div></div>
+        <div class="flow-step"><div class="flow-label">4</div><div class="flow-title">验收清理</div><div class="flow-body">dashboard、响应头、端口释放</div></div>
+      </div>
+      <div class="footer"><span>Experiment runbook</span><span>13</span></div>
+    </div>
+  </section>
+
+  <section data-label="Acceptance">
+    <div class="slide">
+      <div class="kicker">Acceptance checklist</div>
+      <h2 class="title">交付验收看响应头、模型和端口</h2>
+      <p class="subtitle">验收标准必须能被客户自己复查，不依赖讲解人记忆。</p>
+      <div class="check-grid">
+        <div class="check"><div class="mark">■</div><div>GPU VM 基线通过，Podman 与 /var/mnt 可用</div></div>
+        <div class="check"><div class="mark">■</div><div>2B 与 27B FP8 的 `/v1/models` 均可访问</div></div>
+        <div class="check"><div class="mark">■</div><div>Envoy `/v1/chat/completions` 返回 200</div></div>
+        <div class="check"><div class="mark">■</div><div>简单请求命中 `explicit_simple` 并走 2B</div></div>
+        <div class="check"><div class="mark">■</div><div>复杂请求命中 `explicit_complex` 和 technical support</div></div>
+        <div class="check"><div class="mark">■</div><div>多轮主题切换走 `qwen35-27b-fp8`</div></div>
+        <div class="check"><div class="mark">■</div><div>重复请求出现 `x-vsr-cache-hit: true`</div></div>
+        <div class="check"><div class="mark">■</div><div>体验结束后本地端口和临时凭据清理完成</div></div>
+      </div>
+      <div class="footer"><span>Customer acceptance</span><span>14</span></div>
+    </div>
+  </section>
+
+  <section data-label="Risks">
+    <div class="slide">
+      <div class="kicker">Production caveats</div>
+      <h2 class="title">生产化需要补齐治理和边界验证</h2>
+      <p class="subtitle">PoC 已证明主链路和关键场景；生产前还要处理数据、版本和成本边界。</p>
+      <table class="table">
+        <thead><tr><th>风险</th><th>当前观察</th><th>生产建议</th></tr></thead>
+        <tbody>
+          <tr><td>replay API</td><td>本轮 runtime 中 router_replay API 返回 404</td><td>目标版本上线前重新验证 replay/dashboard API</td></tr>
+          <tr><td>缓存错配</td><td>semantic-cache 阈值设为 0.995</td><td>基于真实问答回放评估阈值</td></tr>
+          <tr><td>成本策略</td><td>hybrid 会因 cost_weight 压制 27B</td><td>用真实成本和质量评测调整权重</td></tr>
+          <tr><td>审计数据</td><td>请求体可能包含敏感内容</td><td>开启脱敏、保留周期和访问控制</td></tr>
+        </tbody>
+      </table>
+      <div class="footer"><span>Risks and controls</span><span>15</span></div>
+    </div>
+  </section>
+
+  <section data-label="Rollout">
+    <div class="slide">
+      <div class="kicker">Recommended rollout</div>
+      <h2 class="title">建议按五周路径推进落地</h2>
+      <p class="subtitle">先把链路跑稳，再逐步引入智能路由、缓存、安全和审计能力。</p>
+      <div class="timeline">
+        <div class="timeline-item"><div class="week">Week 1</div><div class="timeline-title">固定路由</div><div class="timeline-copy">2B 后端、Envoy、router、dashboard 基线。</div></div>
+        <div class="timeline-item"><div class="week">Week 2</div><div class="timeline-title">关键词分流</div><div class="timeline-copy">用真实日志回放调 bm25 和业务词表。</div></div>
+        <div class="timeline-item"><div class="week">Week 3</div><div class="timeline-title">hybrid 策略</div><div class="timeline-copy">引入 27B、成本权重、质量分和模型卡片。</div></div>
+        <div class="timeline-item"><div class="week">Week 4</div><div class="timeline-title">多轮与缓存</div><div class="timeline-copy">验证主题切换、semantic-cache 和安全 signal。</div></div>
+        <div class="timeline-item"><div class="week">Week 5</div><div class="timeline-title">生产治理</div><div class="timeline-copy">压测、告警、审计、配置变更和回滚流程。</div></div>
+      </div>
+      <div class="footer"><span>Rollout plan</span><span>16</span></div>
+    </div>
+  </section>
+</deck-stage>
+<script src="deck-stage.js"></script>
+</body>
+</html>

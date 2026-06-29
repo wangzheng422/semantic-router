@@ -1,0 +1,10 @@
+timestamp=2026-06-29T12:01:57+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=rm -f /private/tmp/vsr-round10-dashboard-access.txt 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-remove-dashboard-access-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-remove-dashboard-access-.stderr.txt
+stdout_lines=0
+stderr_lines=0
+stdout_bytes=0
+stderr_bytes=0

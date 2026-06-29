@@ -1,0 +1,10 @@
+timestamp=2026-06-29T12:01:23+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c set\ +e\;\ screen\ -S\ 33979.vsr_round10_dashboard\ -X\ quit\;\ screen\ -S\ 66238.vsr_round10_dashboard\ -X\ quit\;\ sleep\ 2\;\ screen\ -ls 
+exit_code=1
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-stop-dashboard-screens-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-stop-dashboard-screens-.stderr.txt
+stdout_lines=2
+stderr_lines=0
+stdout_bytes=79
+stderr_bytes=0

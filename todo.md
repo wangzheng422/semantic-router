@@ -79,3 +79,29 @@
 - DONE: Tested dashboard startup and core pages/API behavior: focused backend packages, protected config API, tools DB API, Vite SPA routes, and authenticated Config/Playground UI passed; production build failed on a TypeScript timer type issue, and full backend `go test ./...` failed in handlers/OpenClaw tests.
 - DONE: Classified every P0/P1/dashboard item as PASS, PARTIAL, BLOCKED, or FAIL with concrete evidence and next action in the round 9 solution report.
 - DONE: Recorded commands, raw outputs, generated configs/scripts, dashboard evidence, environment cleanup, and secret scan results in round 9 artifacts.
+
+## round 10
+
+- DONE: Re-validated the rebooted remote GPU VM, including GPU, Podman, image cache, model cache, writable NVMe, and open ports.
+- DONE: Recreated the VM working directory, Podman network, model/cache mounts, and runtime configs needed for a complex semantic-router use case.
+- DONE: Restarted the two OpenAI-compatible Qwen backends: `Qwen/Qwen3.5-2B` and `Qwen/Qwen3.5-27B-FP8`.
+- DONE: Deployed semantic-router and Envoy with a complex demo configuration that is interesting to inspect from the dashboard.
+- DONE: Started dashboard and exposed an access path for the user to experience it.
+- DONE: Ran smoke checks through Envoy and dashboard APIs/UI, then left the dashboard running in detached `screen` session `vsr_round10_dashboard`.
+- DONE: Recorded commands, raw outputs, access URL/tunnel notes, generated configs/scripts, risks, and secret scan results in round 10 artifacts.
+
+## round 11
+
+- DONE: Produce a self-contained Chinese "from beginner to advanced" operations guide for senior IT operations customers.
+- DONE: Include environment setup: GPU VM prerequisites, filesystem layout, Podman network, model cache, vLLM backends, semantic-router, Envoy, dashboard, local tunnel, and cleanup.
+- DONE: Explain simple routing scenarios first, then model-selection algorithms, then fused multi-signal and cache/dashboard scenarios.
+- DONE: Embed complete example configuration, request data, expected headers, and parameter explanations in the document.
+- DONE: Validate the document exists, is linked from the round artifacts, and does not include live passwords or host secrets.
+
+## round 12
+
+- DONE: Use the `baoyu-design` deck workflow to turn the round 11 E2E operations guide into a Red Hat publication-style briefing deck.
+- DONE: Build a 16-slide static HTML deck with Red Hat red/gray/black/white styling and minimum font size above 16 pt.
+- DONE: Export the deck as an editable PPTX and verify slide XML contains editable text.
+- DONE: Start a local preview server and capture a browser screenshot for visual validation.
+- DONE: Scan the generated design artifacts for obvious password, token, API key, host, and private-key patterns.

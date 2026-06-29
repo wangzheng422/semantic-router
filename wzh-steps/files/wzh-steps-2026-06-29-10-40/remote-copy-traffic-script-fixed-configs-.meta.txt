@@ -1,0 +1,10 @@
+timestamp=2026-06-29T10:59:03+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=wzh-solution/files/wzh-solution-2026-06-29-10-40/remote_scp_to.zsh /Users/zhengwan/Desktop/dev/semantic-router wzh-solution/files/wzh-solution-2026-06-29-10-40/traffic_round10_demo.py /var/mnt/semantic-router-bench/configs/traffic_round10_demo.py 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-copy-traffic-script-fixed-configs-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-copy-traffic-script-fixed-configs-.stderr.txt
+stdout_lines=0
+stderr_lines=1
+stdout_bytes=0
+stderr_bytes=84

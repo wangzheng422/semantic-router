@@ -1,0 +1,16 @@
+Warning: Permanently added '[REDACTED: host]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ find /var/mnt/semantic-router-bench -maxdepth 3 -type d -print
++ sort
++ echo ---hf-cache---
++ find /var/mnt/semantic-router-bench/hf-cache -maxdepth 4 -type d -print
++ sort
++ head -200
++ echo ---models---
++ find /var/mnt/semantic-router-bench/models -maxdepth 4 -type d -print
++ sort
++ head -200
++ echo ---files---
++ find /var/mnt/semantic-router-bench -maxdepth 3 -type f -printf '%p %s\n'
++ sort
++ head -200

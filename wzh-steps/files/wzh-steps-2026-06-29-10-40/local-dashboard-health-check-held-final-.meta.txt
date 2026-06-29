@@ -1,0 +1,10 @@
+timestamp=2026-06-29T11:12:34+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=wzh-solution/files/wzh-solution-2026-06-29-10-40/check_local_dashboard_round10.zsh /Users/zhengwan/Desktop/dev/semantic-router 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-dashboard-health-check-held-final-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-dashboard-health-check-held-final-.stderr.txt
+stdout_lines=1
+stderr_lines=0
+stdout_bytes=320
+stderr_bytes=0

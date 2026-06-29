@@ -1,0 +1,10 @@
+timestamp=2026-06-29T12:03:31+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=kill 34579 34621 34626 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-kill-dashboard-children-escalated-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-kill-dashboard-children-escalated-.stderr.txt
+stdout_lines=0
+stderr_lines=0
+stdout_bytes=0
+stderr_bytes=0

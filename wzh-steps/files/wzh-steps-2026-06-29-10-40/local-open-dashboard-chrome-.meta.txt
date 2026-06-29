@@ -1,0 +1,10 @@
+timestamp=2026-06-29T11:12:43+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=open -a Google\ Chrome http://127.0.0.1:3001 
+exit_code=1
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-open-dashboard-chrome-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-open-dashboard-chrome-.stderr.txt
+stdout_lines=0
+stderr_lines=1
+stdout_bytes=0
+stderr_bytes=49

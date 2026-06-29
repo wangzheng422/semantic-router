@@ -1,0 +1,10 @@
+timestamp=2026-06-29T10:43:19+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=./wzh-solution/files/wzh-solution-2026-06-29-10-40/remote_exec.zsh /Users/zhengwan/Desktop/dev/semantic-router set\ -euxo\ pipefail\;\ MP=/var/mnt/semantic-router-bench\;\ find\ \"\$MP\"\ -maxdepth\ 3\ -type\ d\ -print\ \|\ sort\;\ echo\ ---hf-cache---\;\ find\ \"\$MP/hf-cache\"\ -maxdepth\ 4\ -type\ d\ -print\ 2\>/dev/null\ \|\ sort\ \|\ head\ -200\;\ echo\ ---models---\;\ find\ \"\$MP/models\"\ -maxdepth\ 4\ -type\ d\ -print\ 2\>/dev/null\ \|\ sort\ \|\ head\ -200\;\ echo\ ---files---\;\ find\ \"\$MP\"\ -maxdepth\ 3\ -type\ f\ -printf\ \"%p\ %s\n\"\ 2\>/dev/null\ \|\ sort\ \|\ head\ -200 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-cache-inspect-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-cache-inspect-.stderr.txt
+stdout_lines=65
+stderr_lines=16
+stdout_bytes=4395
+stderr_bytes=553

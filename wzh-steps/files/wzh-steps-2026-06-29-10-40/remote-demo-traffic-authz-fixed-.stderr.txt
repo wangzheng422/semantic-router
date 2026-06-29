@@ -1,0 +1,262 @@
+Warning: Permanently added '[REDACTED: host]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ python /var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py --base-url http://[REDACTED: ip]:18888/v1 --router-url http://[REDACTED: ip]:18080
+Traceback (most recent call last):
+  File "/var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py", line 101, in <module>
+    main()
+  File "/var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py", line 96, in main
+    status, headers, body = get(args.router_url + path)
+  File "/var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py", line 25, in get
+    with urllib.request.urlopen(url, timeout=timeout) as resp:
+  File "/usr/lib64/python3.9/urllib/request.py", line 214, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib64/python3.9/urllib/request.py", line 523, in open
+    response = meth(req, response)
+  File "/usr/lib64/python3.9/urllib/request.py", line 632, in http_response
+    response = self.parent.error(
+  File "/usr/lib64/python3.9/urllib/request.py", line 561, in error
+    return self._call_chain(*args)
+  File "/usr/lib64/python3.9/urllib/request.py", line 494, in _call_chain
+    result = func(*args)
+  File "/usr/lib64/python3.9/urllib/request.py", line 641, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
++ true
++ echo ---router-tail---
++ podman logs --tail 260 vsr-router
+{"level":"warn","ts":"2026-06-29T02:53:09.088","caller":"validate.go:16","msg":"[config] Unknown field \"elo_weight\" in global.router.model_selection.hybrid"}
+{"level":"warn","ts":"2026-06-29T02:53:09.089","caller":"validate.go:16","msg":"[config] Unknown field \"elo_weight\" in routing.decisions.algorithm.hybrid"}
+{"level":"warn","ts":"2026-06-29T02:53:09.090","caller":"logging.go:264","msg":"startup_status_file_backend","backend":"file","message":"Startup status using local file backend. Status is not shared across replicas or visible to the dashboard in containerized deployments. Set startup_status.store_backend: redis for production use.","event":"startup_status_file_backend","component":"router"}
+{"level":"info","ts":"2026-06-29T02:53:09.091","caller":"logging.go:264","msg":"required_models_check_started","component":"router","event":"required_models_check_started"}
+{"level":"info","ts":"2026-06-29T02:53:09.091","caller":"logging.go:264","msg":"api_server_starting","component":"router","api_port":8080,"event":"api_server_starting"}
+{"level":"info","ts":"2026-06-29T02:53:09.091","caller":"logging.go:264","msg":"classification_service_waiting_for_runtime","using_placeholder":true,"event":"classification_service_waiting_for_runtime","component":"apiserver"}
+{"level":"info","ts":"2026-06-29T02:53:09.091","caller":"logging.go:264","msg":"memory_api_disabled","reason":"config_disabled","event":"memory_api_disabled","component":"apiserver"}
+{"level":"info","ts":"2026-06-29T02:53:09.091","caller":"logging.go:264","msg":"required_models_already_present","total_models":4,"event":"required_models_already_present","component":"router"}
+{"level":"info","ts":"2026-06-29T02:53:09.091","caller":"logging.go:264","msg":"server_listening","port":8080,"event":"server_listening","component":"apiserver"}
+{"level":"info","ts":"2026-06-29T02:53:09.092","caller":"logging.go:264","msg":"metrics_server_starting","event":"metrics_server_starting","component":"router","address":":9190"}
+{"level":"info","ts":"2026-06-29T02:53:09.093","caller":"logging.go:264","msg":"embedding_models_init_started","qwen3_configured":false,"gemma_configured":false,"bert_configured":false,"use_cpu":true,"event":"embedding_models_init_started","component":"router","mmbert_configured":true,"multimodal_configured":false}
+{"level":"info","ts":"2026-06-29T02:53:10.337","caller":"router_runtime.go:346","msg":"INFO: Embedding models initialized successfully"}
+{"level":"info","ts":"2026-06-29T02:53:10.337","caller":"logging.go:264","msg":"embedding_models_initialized","use_batched":false,"event":"embedding_models_initialized","component":"router"}
+{"level":"info","ts":"2026-06-29T02:53:10.337","caller":"logging.go:264","msg":"embedding_models_init_completed","embedding_ready":false,"tools_ready":false,"tools_model":"mmbert","event":"embedding_models_init_completed","component":"router"}
+{"level":"info","ts":"2026-06-29T02:53:10.337","caller":"logging.go:264","msg":"router_config_using_runtime_registry","event":"router_config_using_runtime_registry","component":"extproc","config_source":"file"}
+{"level":"info","ts":"2026-06-29T02:53:10.337","caller":"logging.go:264","msg":"pii_mapping_loaded","count":35,"event":"pii_mapping_loaded","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:53:10.337","caller":"logging.go:264","msg":"jailbreak_mapping_loaded","count":2,"event":"jailbreak_mapping_loaded","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:53:10.338","caller":"logging.go:264","msg":"inmemory_cache_init_started","enabled":true,"eviction_policy":"fifo","use_hnsw":false,"max_entries":1000,"component":"cache","embedding_model":"mmbert","event":"inmemory_cache_init_started","ttl_seconds":3600,"similarity_threshold":0.5}
+{"level":"info","ts":"2026-06-29T02:53:10.338","caller":"logging.go:264","msg":"inmemory_cache_initialized","embedding_model":"mmbert","max_entries":1000,"ttl_seconds":3600,"component":"cache","similarity_threshold":0.5,"event":"inmemory_cache_initialized","use_hnsw":false,"enabled":true,"hnsw_ef_search":50,"eviction_policy":"fifo"}
+{"level":"info","ts":"2026-06-29T02:53:10.338","caller":"logging.go:264","msg":"semantic_cache_initialized","event":"semantic_cache_initialized","component":"extproc","backend":"memory","similarity_threshold":0.5,"ttl_seconds":3600,"max_entries":1000}
+{"level":"info","ts":"2026-06-29T02:53:10.338","caller":"logging.go:264","msg":"tools_database_disabled","component":"extproc","event":"tools_database_disabled"}
+{"level":"info","ts":"2026-06-29T02:53:10.339","caller":"logging.go:264","msg":"jailbreak_detector_backend_selected","backend":"mmbert_32k","event":"jailbreak_detector_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.339","caller":"logging.go:264","msg":"pii_detector_backend_selected","backend":"mmbert_32k","event":"pii_detector_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.339","caller":"logging.go:264","msg":"embedding_classifier_initialized","multimodal_prepared":false,"preload_embeddings":true,"target_dimension":768,"model_type":"mmbert","backend":"candle","prototype_scoring":true,"rules":2,"event":"embedding_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.340","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","event":"knowledge_base_preload_deferred","component":"classifier","knowledge_base":"privacy_kb","labels":18,"backend":""}
+{"level":"info","ts":"2026-06-29T02:53:10.340","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","knowledge_base":"privacy_kb","labels":18,"event":"knowledge_base_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","component":"classifier","labels":14,"backend":"","knowledge_base":"mmlu_kb","event":"knowledge_base_preload_deferred"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","labels":14,"knowledge_base":"mmlu_kb","event":"knowledge_base_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"category_classifier_backend_selected","component":"classifier","backend":"mmbert_32k","event":"category_classifier_backend_selected"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"context_classifier_initialized","rules":2,"event":"context_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"structure_classifier_initialized","rules":3,"event":"structure_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"runtime_initialization_started","tasks":6,"event":"runtime_initialization_started","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"jailbreak_detector_init_started","model_ref":"models/mmbert32k-jailbreak-detector-merged","classes":2,"use_cpu":true,"event":"jailbreak_detector_init_started","component":"classifier","mode":"candle"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"once.go:78","msg":"Initializing mmBERT-32K jailbreak detector: models/mmbert32k-jailbreak-detector-merged"}
+Initializing mmBERT-32K jailbreak detector from: models/mmbert32k-jailbreak-detector-merged
+WARNING: ModelFactory already initialized
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"pii_detector_init_started","use_cpu":true,"event":"pii_detector_init_started","component":"classifier","model_ref":"models/mmbert32k-pii-detector-merged","classes":35}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"embedding_classifier_backend.go:91","msg":"INFO: Embedding models initialized successfully"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"keyword_embedding_backend_initialized","mmbert_2d_enabled":true,"qwen3_model_ref":"","gemma_model_ref":"","mmbert_model_ref":"models/mmbert-embed-32k-2d-matryoshka","event":"keyword_embedding_backend_initialized","component":"classifier","use_cpu":true,"backend":"candle"}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"logging.go:264","msg":"feedback_mapping_loaded","model_ref":"models/mmbert32k-feedback-detector-merged","event":"feedback_mapping_loaded","component":"classifier","labels":4}
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"once.go:78","msg":"📊 Initializing mmBERT-32K feedback detector: models/mmbert32k-feedback-detector-merged"}
+📊 Initializing mmBERT-32K feedback detector from: models/mmbert32k-feedback-detector-merged
+{"level":"info","ts":"2026-06-29T02:53:10.341","caller":"once.go:78","msg":"Initializing mmBERT-32K PII detector: models/mmbert32k-pii-detector-merged"}
+Initializing mmBERT-32K PII detector from: models/mmbert32k-pii-detector-merged
+{"level":"info","ts":"2026-06-29T02:53:10.452","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 110.762ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.462","caller":"contrastive_preference_embeddings.go:35","msg":"[Preference Contrastive] preloaded 4/4 example embeddings using model=mmbert in 121.314365ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.463","caller":"logging.go:264","msg":"preference_classifier_initialized","model_ref":"","routes":1,"event":"preference_classifier_initialized","component":"classifier","mode":"contrastive"}
+{"level":"info","ts":"2026-06-29T02:53:10.518","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 65.767ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.587","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 69.081ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.665","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 78.186ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.734","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 68.510ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.806","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 72.015ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.881","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 74.981ms"}
+{"level":"info","ts":"2026-06-29T02:53:10.950","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 68.526ms"}
+{"level":"info","ts":"2026-06-29T02:53:11.012","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 62.043ms"}
+{"level":"info","ts":"2026-06-29T02:53:11.078","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 65.966ms"}
+{"level":"info","ts":"2026-06-29T02:53:11.078","caller":"logging.go:264","msg":"embedding_candidates_preloaded","target_dimension":768,"workers":1,"elapsed_ms":736,"candidates":10,"component":"classifier","total_candidates":10,"event":"embedding_candidates_preloaded","model_type":"mmbert"}
+   mmBERT-32K feedback detector loaded
+{"level":"info","ts":"2026-06-29T02:53:11.965","caller":"once.go:78","msg":"mmBERT-32K feedback detector initialized"}
+{"level":"info","ts":"2026-06-29T02:53:11.965","caller":"logging.go:264","msg":"feedback_detector_initialized","backend":"mmbert_32k","model_ref":"models/mmbert32k-feedback-detector-merged","event":"feedback_detector_initialized","component":"classifier"}
+   mmBERT-32K PII detector loaded
+{"level":"info","ts":"2026-06-29T02:53:12.017","caller":"once.go:78","msg":"mmBERT-32K PII detector initialized"}
+{"level":"info","ts":"2026-06-29T02:53:12.017","caller":"logging.go:264","msg":"pii_detector_initialized","backend":"mmbert_32k","model_ref":"models/mmbert32k-pii-detector-merged","event":"pii_detector_initialized","component":"classifier"}
+   mmBERT-32K jailbreak detector loaded
+{"level":"info","ts":"2026-06-29T02:53:12.091","caller":"once.go:78","msg":"mmBERT-32K jailbreak detector initialized"}
+{"level":"info","ts":"2026-06-29T02:53:12.091","caller":"logging.go:264","msg":"jailbreak_detector_initialized","backend":"mmbert_32k","model_ref":"models/mmbert32k-jailbreak-detector-merged","event":"jailbreak_detector_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:12.091","caller":"logging.go:264","msg":"runtime_initialization_completed","tasks":6,"event":"runtime_initialization_completed","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:53:12.091","caller":"logging.go:264","msg":"redis_store_init_started","external_config":false,"ttl_seconds":86400,"event":"redis_store_init_started","component":"responsestore","cluster_mode":false}
+{"level":"warn","ts":"2026-06-29T02:53:12.091","caller":"logging.go:264","msg":"response_api_store_init_failed","backend":"redis","error":"invalid Redis config: address is required for standalone Redis","response_api_enabled":false,"event":"response_api_store_init_failed","component":"extproc"}
+{"level":"error","ts":"2026-06-29T02:53:12.091","caller":"router_replay_setup.go:84","msg":"Failed to initialize shared replay store for backend postgres: postgres config required when store_backend is 'postgres'","stacktrace":"github.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.initializeSharedReplayRecorders\n\t/build/pkg/extproc/router_replay_setup.go:84\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.createReplayRuntime\n\t/build/pkg/extproc/router_replay_setup.go:16\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.buildRouterComponents\n\t/build/pkg/extproc/router_build.go:174\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.buildOpenAIRouterFromConfig\n\t/build/pkg/extproc/router_build.go:127\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.newOpenAIRouterForServer\n\t/build/pkg/extproc/router_build.go:74\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.NewServer\n\t/build/pkg/extproc/server.go:74\nmain.newExtProcServerOrFatal\n\t/build/cmd/runtime_bootstrap.go:374\nmain.main\n\t/build/cmd/main.go:45\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:283"}
+{"level":"info","ts":"2026-06-29T02:53:12.410","caller":"logging.go:264","msg":"automix_capabilities_initialized","model_count":2,"event":"automix_capabilities_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-29T02:53:12.410","caller":"logging.go:264","msg":"automix_capabilities_initialized","model_count":2,"event":"automix_capabilities_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-29T02:53:12.410","caller":"logging.go:264","msg":"hybrid_selector_initialized","model_count":2,"event":"hybrid_selector_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"logging.go:264","msg":"rl_driven_selector_initialized","category_count":0,"event":"rl_driven_selector_initialized","component":"selection","model_count":2}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"logging.go:264","msg":"gmt_router_initialized","personalization":true,"storage_enabled":false,"llm_node_count":0,"event":"gmt_router_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: static (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: router_dc (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: automix (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:364","msg":"[Selection] Registered algorithm: svm (tier=experimental, dependencies=[Pre-trained svm model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:364","msg":"[Selection] Registered algorithm: mlp (tier=experimental, dependencies=[Pre-trained mlp model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: latency_aware (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: multi_factor (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: elo (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: hybrid (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:364","msg":"[Selection] Registered algorithm: knn (tier=experimental, dependencies=[Pre-trained knn model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:364","msg":"[Selection] Registered algorithm: kmeans (tier=experimental, dependencies=[Pre-trained kmeans model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: rl_driven (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"factory.go:358","msg":"[Selection] Registered algorithm: gmtrouter (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"logging.go:264","msg":"selection_factory_initialized","event":"selection_factory_initialized","component":"selection","selector_count":13}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"logging.go:264","msg":"model_selection_registry_initialized","mode":"per_decision_algorithm_config","event":"model_selection_registry_initialized","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"logging.go:264","msg":"rate_limit_resolver_disabled","event":"rate_limit_resolver_disabled","component":"extproc","reason":"no_providers_configured"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"logging.go:264","msg":"credential_resolver_initialized","providers":["header-injection","static-config"],"event":"credential_resolver_initialized","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:53:12.411","caller":"logging.go:264","msg":"tools_database_load_skipped","reason":"embedding_runtime_not_ready_for_tools","event":"tools_database_load_skipped","component":"router"}
+{"level":"info","ts":"2026-06-29T02:53:12.412","caller":"logging.go:264","msg":"startup_complete","extproc_port":50051,"sem_cache_enabled":true,"ratelimit_providers":0,"model_selection":true,"event":"startup_complete","secure":false,"embedding_ready":false,"decisions":"fused-signal-hybrid-selector,default-small-no-signal","component":"router","api_port":8080,"metrics_port":9190,"authz_providers":0,"config_source":"file"}
+{"level":"info","ts":"2026-06-29T02:53:12.412","caller":"logging.go:264","msg":"server_starting","secure":false,"max_msg_mb":4,"event":"server_starting","component":"extproc","port":50051}
+{"level":"info","ts":"2026-06-29T02:53:24.093","caller":"handler.go:33","msg":"traces export: context deadline exceeded: rpc error: code = Unavailable desc = name resolver error: produced zero addresses"}
+{"level":"info","ts":"2026-06-29T02:53:29.247","caller":"keyword_classifier_dispatch.go:131","msg":"BM25 keyword classification matched rule \"explicit_simple\" with keywords: [one sentence short] (2/6 matched)"}
+{"level":"info","ts":"2026-06-29T02:53:29.358","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 111.211ms"}
+{"level":"info","ts":"2026-06-29T02:53:29.359","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-29T02:53:29.359","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.4969 best=0.5036 support=0.4768 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:53:29.359","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.4593 best=0.4681 support=0.4331 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:53:29.359","caller":"embedding_classifier_scoring.go:49","msg":"No match found (best score below min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-29T02:53:29.359","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 111.612128ms: 0 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-29T02:53:29.367","caller":"preference_classifier_contrastive.go:46","msg":"Preference contrastive classification: preference=terse_answers, latency=0.120s"}
+{"level":"info","ts":"2026-06-29T02:53:32.108","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=0.69 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-29T02:53:32.109","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-29T02:53:32.109","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:53:32.109","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:53:32.109","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.9413"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.8971"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.9413, confidence=0.95)"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.86, components=3)"}
+{"level":"info","ts":"2026-06-29T02:53:32.205","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.86): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-29T02:53:32.206","caller":"req_filter_cache.go:123","msg":"handleCaching: Performing cache lookup - model=round10-dashboard-demo-auto, query='Give me a short one sentence summary of semantic routing.', threshold=1.00"}
+{"level":"info","ts":"2026-06-29T02:53:32.230","caller":"req_filter_cache.go:132","msg":"FindSimilarWithThreshold returned: found=false, error=<nil>, lookupTime=24ms"}
+{"level":"info","ts":"2026-06-29T02:53:32.258","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-29T02:53:32.258","caller":"req_filter_sys_prompt.go:94","msg":"Added category-specific system prompt (insert mode, no existing system message) (mode: insert)"}
+{"level":"info","ts":"2026-06-29T02:53:32.258","caller":"logging.go:264","msg":"routing_decision","selected_model":"qwen35-2b","component":"extproc","request_id":"c4cbe4d9-d2a4-4332-8c23-203260421734","original_model":"round10-dashboard-demo-auto","decision":"fused-signal-hybrid-selector","reasoning_enabled":false,"reason_code":"auto_routing","event":"routing_decision","reasoning_effort":"","routing_latency_ms":3011}
+{"level":"info","ts":"2026-06-29T02:53:33.280","caller":"logging.go:160","msg":"llm_usage","prompt_tokens":59,"event":"llm_usage","cached_prompt_tokens":0,"currency":"USD","completion_tokens":26,"total_tokens":85,"completion_latency_ms":4033,"cost":0.000022200000000000004,"pricing_prompt_per_1m":0.2,"pricing_cached_input_per_1m":0.05,"pricing_completion_per_1m":0.4,"request_id":"c4cbe4d9-d2a4-4332-8c23-203260421734","model":"qwen35-2b"}
+{"level":"info","ts":"2026-06-29T02:53:33.280","caller":"processor_res_cache.go:74","msg":"Cache updated for request ID: c4cbe4d9-d2a4-4332-8c23-203260421734"}
+{"level":"info","ts":"2026-06-29T02:53:33.280","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-29T02:53:34.285","caller":"keyword_classifier_dispatch.go:131","msg":"BM25 keyword classification matched rule \"explicit_complex\" with keywords: [root cause debug architecture incident] (4/10 matched)"}
+{"level":"info","ts":"2026-06-29T02:53:34.290","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=1.00 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-29T02:53:34.437","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 152.242ms"}
+{"level":"info","ts":"2026-06-29T02:53:34.437","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-29T02:53:34.437","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.5559 best=0.5559 support=0.5559 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:53:34.437","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.4500 best=0.4552 support=0.4344 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:53:34.437","caller":"embedding_classifier_scoring.go:38","msg":"Soft match found: rule=\"technical_support\", score=0.5559 (min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-29T02:53:34.437","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 152.46728ms: 1 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-29T02:53:34.550","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-29T02:53:34.550","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:53:34.550","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:53:34.550","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.9478"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.9465"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.9478, confidence=0.95)"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.86, components=3)"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.86): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-29T02:53:34.691","caller":"req_filter_cache.go:123","msg":"handleCaching: Performing cache lookup - model=round10-dashboard-demo-auto, query='We have a production payment incident. First explain the likely root cause, then propose a debug architecture and mitigation checklist. Include 1. diagnosis 2. recovery 3. prevention.', threshold=1.00"}
+{"level":"info","ts":"2026-06-29T02:53:34.730","caller":"logging.go:160","msg":"cache_miss","threshold":0.995,"model":"round10-dashboard-demo-auto","entries_checked":1,"backend":"memory","best_similarity":0.47495264,"event":"cache_miss"}
+{"level":"info","ts":"2026-06-29T02:53:34.730","caller":"req_filter_cache.go:132","msg":"FindSimilarWithThreshold returned: found=false, error=<nil>, lookupTime=38ms"}
+{"level":"info","ts":"2026-06-29T02:53:34.769","caller":"req_filter_reason.go:194","msg":"Reasoning mode disabled for model: qwen35-2b"}
+{"level":"info","ts":"2026-06-29T02:53:34.769","caller":"req_filter_sys_prompt.go:94","msg":"Added category-specific system prompt (insert mode, no existing system message) (mode: insert)"}
+{"level":"info","ts":"2026-06-29T02:53:34.769","caller":"logging.go:264","msg":"routing_decision","selected_model":"qwen35-2b","reasoning_enabled":false,"reasoning_effort":"","component":"extproc","request_id":"bddad88f-0081-41ab-8cc3-6d2eec2309d5","reason_code":"auto_routing","decision":"fused-signal-hybrid-selector","routing_latency_ms":484,"event":"routing_decision","original_model":"round10-dashboard-demo-auto"}
+{"level":"info","ts":"2026-06-29T02:53:38.108","caller":"logging.go:160","msg":"llm_usage","pricing_completion_per_1m":0.4,"total_tokens":213,"pricing_cached_input_per_1m":0.05,"model":"qwen35-2b","prompt_tokens":85,"event":"llm_usage","request_id":"bddad88f-0081-41ab-8cc3-6d2eec2309d5","completion_latency_ms":3823,"cost":0.0000682,"currency":"USD","pricing_prompt_per_1m":0.2,"cached_prompt_tokens":0,"completion_tokens":128}
+{"level":"info","ts":"2026-06-29T02:53:38.108","caller":"processor_res_cache.go:74","msg":"Cache updated for request ID: bddad88f-0081-41ab-8cc3-6d2eec2309d5"}
+{"level":"info","ts":"2026-06-29T02:53:38.108","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-29T02:53:39.113","caller":"keyword_classifier_dispatch.go:131","msg":"BM25 keyword classification matched rule \"explicit_complex\" with keywords: [root cause incident debug architecture] (4/10 matched)"}
+{"level":"info","ts":"2026-06-29T02:53:39.117","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=0.98 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-29T02:53:39.216","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 103.272ms"}
+{"level":"info","ts":"2026-06-29T02:53:39.216","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-29T02:53:39.216","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.5346 best=0.5367 support=0.5283 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:53:39.216","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.4231 best=0.4256 support=0.4154 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:53:39.216","caller":"embedding_classifier_scoring.go:38","msg":"Soft match found: rule=\"technical_support\", score=0.5346 (min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-29T02:53:39.216","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 103.433544ms: 1 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-29T02:53:39.353","caller":"classifier_feedback_lifecycle.go:45","msg":"Feedback classification: feedback_type=wrong_answer, confidence=0.998"}
+{"level":"info","ts":"2026-06-29T02:53:39.619","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-29T02:53:39.619","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:53:39.619","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:53:39.619","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-29T02:53:39.723","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-29T02:53:39.723","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.9388"}
+{"level":"info","ts":"2026-06-29T02:53:39.723","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.9526"}
+{"level":"info","ts":"2026-06-29T02:53:39.723","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-27b-fp8 (similarity=0.9526, confidence=0.95)"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=0.0000, am=1.0000 → combined=0.4209"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=1.0000, am=0.0000 → combined=0.6250"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-27b-fp8 (score=0.6250, confidence=0.53, components=3)"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-27b-fp8 (method=hybrid, score=0.6250, confidence=0.53): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=0.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-29T02:53:39.724","caller":"req_filter_cache.go:123","msg":"handleCaching: Performing cache lookup - model=round10-dashboard-demo-auto, query='Now switch topics: debug a distributed queue incident with root cause analysis and architecture risks.', threshold=1.00"}
+{"level":"info","ts":"2026-06-29T02:53:39.751","caller":"logging.go:160","msg":"cache_miss","model":"round10-dashboard-demo-auto","entries_checked":2,"event":"cache_miss","backend":"memory","best_similarity":0.6693287,"threshold":0.995}
+{"level":"info","ts":"2026-06-29T02:53:39.751","caller":"req_filter_cache.go:132","msg":"FindSimilarWithThreshold returned: found=false, error=<nil>, lookupTime=27ms"}
+{"level":"info","ts":"2026-06-29T02:53:39.779","caller":"req_filter_reason.go:191","msg":"Applied reasoning mode (enabled: true) with effort () to model: qwen35-27b-fp8"}
+{"level":"info","ts":"2026-06-29T02:53:39.780","caller":"req_filter_sys_prompt.go:94","msg":"Added category-specific system prompt (insert mode, no existing system message) (mode: insert)"}
+{"level":"info","ts":"2026-06-29T02:53:39.780","caller":"logging.go:264","msg":"routing_decision","reason_code":"auto_routing","request_id":"6988c63b-ed5d-47a9-822c-dddf26a01084","selected_model":"qwen35-27b-fp8","decision":"fused-signal-hybrid-selector","reasoning_enabled":true,"reasoning_effort":"medium","original_model":"round10-dashboard-demo-auto","routing_latency_ms":667,"event":"routing_decision","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:53:44.098","caller":"handler.go:33","msg":"traces export: context deadline exceeded: rpc error: code = Unavailable desc = name resolver error: produced zero addresses"}
+{"level":"info","ts":"2026-06-29T02:53:59.101","caller":"handler.go:33","msg":"traces export: context deadline exceeded: rpc error: code = Unavailable desc = name resolver error: produced zero addresses"}
+{"level":"info","ts":"2026-06-29T02:53:59.383","caller":"logging.go:160","msg":"llm_usage","model":"qwen35-27b-fp8","prompt_tokens":91,"completion_latency_ms":20271,"cost":0.002776,"currency":"USD","pricing_completion_per_1m":16,"cached_prompt_tokens":0,"total_tokens":219,"pricing_prompt_per_1m":8,"request_id":"6988c63b-ed5d-47a9-822c-dddf26a01084","completion_tokens":128,"pricing_cached_input_per_1m":2,"event":"llm_usage"}
+{"level":"info","ts":"2026-06-29T02:53:59.383","caller":"processor_res_cache.go:74","msg":"Cache updated for request ID: 6988c63b-ed5d-47a9-822c-dddf26a01084"}
+{"level":"info","ts":"2026-06-29T02:53:59.383","caller":"processor_res_memory.go:17","msg":"Memory store check: MemoryExtractor=false, autoStore=false, responseJailbreakPassed=true"}
+{"level":"info","ts":"2026-06-29T02:54:00.388","caller":"keyword_classifier_dispatch.go:131","msg":"BM25 keyword classification matched rule \"explicit_simple\" with keywords: [one sentence short] (2/6 matched)"}
+{"level":"info","ts":"2026-06-29T02:54:00.391","caller":"language_classifier.go:117","msg":"Language classification: code=en, confidence=0.69 (lingua-go: English, threshold=0.30)"}
+{"level":"info","ts":"2026-06-29T02:54:00.478","caller":"preference_classifier_contrastive.go:46","msg":"Preference contrastive classification: preference=terse_answers, latency=0.090s"}
+{"level":"info","ts":"2026-06-29T02:54:00.478","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=request, backend=candle, model=mmbert, dim=768): 89.724ms"}
+{"level":"info","ts":"2026-06-29T02:54:00.478","caller":"embedding_classifier_text.go:69","msg":"Computed query embedding (model: mmbert, dimension: 768)"}
+{"level":"info","ts":"2026-06-29T02:54:00.478","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"technical_support\": score=0.4969 best=0.5036 support=0.4768 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:54:00.478","caller":"embedding_classifier_scoring.go:72","msg":"Rule \"account_management\": score=0.4593 best=0.4681 support=0.4331 threshold=0.600 matched=false (prototypes=5)"}
+{"level":"info","ts":"2026-06-29T02:54:00.478","caller":"embedding_classifier_scoring.go:49","msg":"No match found (best score below min_threshold=0.500)"}
+{"level":"info","ts":"2026-06-29T02:54:00.478","caller":"embedding_classifier_text.go:82","msg":"ClassifyDetailed completed in 89.9027ms: 0 rules matched out of 2 (modality=text)"}
+{"level":"info","ts":"2026-06-29T02:54:00.598","caller":"elo.go:314","msg":"[EloSelector] Evaluating 2 candidates for category 'fused-signal-hybrid-selector':"}
+{"level":"info","ts":"2026-06-29T02:54:00.598","caller":"elo.go:317","msg":"[EloSelector]   qwen35-2b: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:54:00.598","caller":"elo.go:317","msg":"[EloSelector]   qwen35-27b-fp8: rating=0.0 (W:0 L:0 T:0)"}
+{"level":"info","ts":"2026-06-29T02:54:00.598","caller":"elo.go:382","msg":"[EloSelector] Selected model qwen35-2b (rating=0.0, score=0.5000, confidence=0.50)"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"router_dc.go:274","msg":"[RouterDC] Evaluating 2 candidates by embedding similarity:"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-2b: similarity=0.9413"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"router_dc.go:291","msg":"[RouterDC]   qwen35-27b-fp8: similarity=0.8971"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"router_dc.go:317","msg":"[RouterDC] Selected model qwen35-2b (similarity=0.9413, confidence=0.95)"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"automix.go:273","msg":"[AutoMix] Evaluating 2 candidates (tradeoff=0.45):"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"automix.go:280","msg":"[AutoMix]   qwen35-2b: cost=$0.20, quality=0.62, value=0.6110"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"automix.go:280","msg":"[AutoMix]   qwen35-27b-fp8: cost=$8.00, quality=0.91, value=0.5500"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"automix.go:315","msg":"[AutoMix] Selected model qwen35-2b (score=0.5710, confidence=0.70, cost-aware=true)"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"hybrid.go:223","msg":"[HybridSelector] Combining scores (weights: experience=0.30, dc=0.35, am=0.15, cost=0.35):"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-2b: experience=0.5000, dc=1.0000, am=1.0000 → combined=0.9120"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"hybrid.go:236","msg":"[HybridSelector]   qwen35-27b-fp8: experience=0.5000, dc=0.0000, am=0.0000 → combined=0.1875"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"hybrid.go:254","msg":"[HybridSelector] Selected model qwen35-2b (score=0.9120, confidence=0.86, components=3)"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"req_filter_classification.go:229","msg":"[ModelSelection] Selected qwen35-2b (method=hybrid, score=0.9120, confidence=0.86): Hybrid combination: [Experience=0.500 RouterDC=1.000 AutoMix=1.000], weights=[elo:0.30, dc:0.35, am:0.15, cost:0.35]"}
+{"level":"info","ts":"2026-06-29T02:54:00.689","caller":"req_filter_cache.go:123","msg":"handleCaching: Performing cache lookup - model=round10-dashboard-demo-auto, query='Give me a short one sentence summary of semantic routing.', threshold=1.00"}
+{"level":"info","ts":"2026-06-29T02:54:00.712","caller":"logging.go:160","msg":"cache_hit","backend":"memory","similarity":0.9999999,"threshold":0.995,"model":"round10-dashboard-demo-auto","event":"cache_hit"}
+{"level":"info","ts":"2026-06-29T02:54:00.712","caller":"req_filter_cache.go:132","msg":"FindSimilarWithThreshold returned: found=true, error=<nil>, lookupTime=23ms"}
+{"level":"info","ts":"2026-06-29T02:54:00.712","caller":"logging.go:160","msg":"cache_hit","category":"fused-signal-hybrid-selector","threshold":0.995,"event":"cache_hit","request_id":"49c7cf72-fb28-42e9-926c-112b9d99b97a","model":"round10-dashboard-demo-auto","query":"Give me a short one sentence summary of semantic routing."}
++ echo ---envoy-tail---
++ podman logs --tail 100 vsr-envoy
+[2026-06-29 02:53:09.284][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.config.cluster.v3.Cluster Using deprecated option 'envoy.config.cluster.v3.Cluster.http2_protocol_options' from file cluster.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-29 02:53:09.320][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.extensions.access_loggers.file.v3.FileAccessLog Using deprecated option 'envoy.extensions.access_loggers.file.v3.FileAccessLog.format' from file file.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-29 02:53:09.338][1][warning][main] [source/server/server.cc:970] There is no configured limit to the number of allowed active downstream connections. Configure a limit in `envoy.resource_monitors.global_downstream_max_connections` resource monitor.

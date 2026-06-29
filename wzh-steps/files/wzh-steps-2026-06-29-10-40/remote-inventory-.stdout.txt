@@ -1,0 +1,29 @@
+[REDACTED: host]
+Mon Jun 29 02:42:53 UTC 2026
+ 02:42:53 up 5 min,  0 users,  load average: 0.00, 0.04, 0.02
+Linux [REDACTED: host] 5.14.0-427.65.1.el9_4.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Apr 11 15:52:56 EDT 2025 x86_64 x86_64 x86_64 GNU/Linux
+uid=1000(cloud-user) gid=100(users) groups=100(users),10(wheel) context=unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023
+/usr/bin/podman
+0, NVIDIA L4, 23034 MiB, 1 MiB
+1, NVIDIA L4, 23034 MiB, 1 MiB
+2, NVIDIA L4, 23034 MiB, 1 MiB
+3, NVIDIA L4, 23034 MiB, 1 MiB
+NAMES               STATUS                   PORTS
+vsr-qwen35-2b       Exited (135) 3 days ago  [REDACTED: ip]:18001->8000/tcp
+vsr-qwen35-27b-fp8  Exited (135) 3 days ago  [REDACTED: ip]:18002->8000/tcp
+REPOSITORY                                           TAG           IMAGE ID      SIZE
+docker.io/library/python                             3.12-slim     9cbfea842643  123 MB
+ghcr.io/vllm-project/semantic-router/vllm-sr         latest        855af44c3aa4  457 MB
+docker.io/vllm/vllm-openai                           latest        f37691f675bb  20.4 GB
+docker.io/envoyproxy/envoy                           v1.34-latest  a46cc8cd8ef3  179 MB
+registry.redhat.io/rhelai1/instructlab-nvidia-rhel9  1.5.0         376387141385  28.4 GB
+Filesystem      Size  Used Avail Use% Mounted on
+overlay          40M   40M     0 100% /
+/dev/nvme0n1p4 1023G  267G  757G  27% /var
+/dev/nvme0n1p4 1023G  267G  757G  27% /var
+/var/mnt/semantic-router-bench
+State  Recv-Q Send-Q Local Address:Port Peer Address:PortProcess
+LISTEN 0      4096         [REDACTED: ip]:111       [REDACTED: ip]:*          
+LISTEN 0      128          [REDACTED: ip]:22        [REDACTED: ip]:*          
+LISTEN 0      4096            [::]:111          [::]:*          
+LISTEN 0      128             [::]:22           [::]:*          

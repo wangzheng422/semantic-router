@@ -1,0 +1,5 @@
+remote-router-through-tunnel ready: http://[REDACTED: ip]:28080/v1/models
+dashboard-backend ready: http://[REDACTED: ip]:8700/healthz
+dashboard-frontend ready: http://[REDACTED: ip]:3001
+dashboard_url=http://[REDACTED: ip]:3001
+access_file=/Users/zhengwan/Desktop/dev/semantic-router/wzh-steps/files/wzh-steps-2026-06-29-10-40/dashboard-local/dashboard-access.txt

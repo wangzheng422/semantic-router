@@ -1,0 +1,10 @@
+timestamp=2026-06-29T12:02:18+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=zsh -c for\ p\ in\ 3001\ 8700\ 28080\ 28888\ 29190\;\ do\ if\ lsof\ -nP\ -iTCP:\$p\ -sTCP:LISTEN\ \>/dev/null\ 2\>\&1\;\ then\ echo\ port=\$p\ still-listening\;\ lsof\ -nP\ -iTCP:\$p\ -sTCP:LISTEN\;\ else\ echo\ port=\$p\ free\;\ fi\;\ done 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-port-check-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-cleanup-port-check-.stderr.txt
+stdout_lines=18
+stderr_lines=0
+stdout_bytes=1240
+stderr_bytes=0

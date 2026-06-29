@@ -1,0 +1,65 @@
+/var/mnt/semantic-router-bench
+/var/mnt/semantic-router-bench/benchmarks
+/var/mnt/semantic-router-bench/benchmarks/round9-2026-06-26-11-11
+/var/mnt/semantic-router-bench/configs
+/var/mnt/semantic-router-bench/configs/__pycache__
+/var/mnt/semantic-router-bench/dashboard-data
+/var/mnt/semantic-router-bench/hf-cache
+/var/mnt/semantic-router-bench/logs
+/var/mnt/semantic-router-bench/models
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/.cache
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/1_Pooling
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/onnx
+/var/mnt/semantic-router-bench/traffic
+---hf-cache---
+/var/mnt/semantic-router-bench/hf-cache
+---models---
+/var/mnt/semantic-router-bench/models
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/.cache
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/.cache/huggingface
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/.cache/huggingface/download
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/1_Pooling
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/onnx
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/onnx/layer-11
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/onnx/layer-16
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/onnx/layer-22
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/onnx/layer-6
+---files---
+/var/mnt/semantic-router-bench/configs/._. 163
+/var/mnt/semantic-router-bench/configs/.___pycache__ 163
+/var/mnt/semantic-router-bench/configs/._envoy-round9.yaml 163
+/var/mnt/semantic-router-bench/configs/._mock_backend.py 163
+/var/mnt/semantic-router-bench/configs/._router-p0-fast-response.yaml 163
+/var/mnt/semantic-router-bench/configs/._router-p0-rewrite-cache-replay.yaml 163
+/var/mnt/semantic-router-bench/configs/._router-p1-rag-tools-switch-response.yaml 163
+/var/mnt/semantic-router-bench/configs/._tools_db.json 163
+/var/mnt/semantic-router-bench/configs/._traffic_round9.py 163
+/var/mnt/semantic-router-bench/configs/__pycache__/._mock_backend.cpython-312.pyc 163
+/var/mnt/semantic-router-bench/configs/__pycache__/._traffic_round9.cpython-312.pyc 163
+/var/mnt/semantic-router-bench/configs/__pycache__/mock_backend.cpython-312.pyc 8856
+/var/mnt/semantic-router-bench/configs/__pycache__/traffic_round9.cpython-312.pyc 8422
+/var/mnt/semantic-router-bench/configs/envoy-round9.yaml 3664
+/var/mnt/semantic-router-bench/configs/mock_backend.py 6206
+/var/mnt/semantic-router-bench/configs/router-p0-fast-response.yaml 1039
+/var/mnt/semantic-router-bench/configs/router-p0-rewrite-cache-replay.yaml 2040
+/var/mnt/semantic-router-bench/configs/router-p1-rag-only.yaml 1758
+/var/mnt/semantic-router-bench/configs/router-p1-rag-tools-response.yaml 3741
+/var/mnt/semantic-router-bench/configs/router-p1-rag-tools-switch-response.yaml 3914
+/var/mnt/semantic-router-bench/configs/tools_db.json 971
+/var/mnt/semantic-router-bench/configs/traffic_round9.py 7162
+/var/mnt/semantic-router-bench/logs/mock_requests.jsonl 1195
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/.gitattributes 1833
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/README.md 11822
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/config.json 1210
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/config_sentence_transformers.json 293
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/model.safetensors 613892480
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/modules.json 229
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/sentence_bert_config.json 59
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/special_tokens_map.json 1051
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/tokenizer.json 34363443
+/var/mnt/semantic-router-bench/models/mmbert-embed-32k-2d-matryoshka/tokenizer_config.json 46470
+/var/mnt/semantic-router-bench/round9-package.tgz 15629
+/var/mnt/semantic-router-bench/traffic/mock_backend.py 6206
+/var/mnt/semantic-router-bench/traffic/traffic_round9.py 7162

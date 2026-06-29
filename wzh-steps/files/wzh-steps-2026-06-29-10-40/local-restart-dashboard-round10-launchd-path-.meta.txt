@@ -1,0 +1,10 @@
+timestamp=2026-06-29T11:07:03+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=wzh-solution/files/wzh-solution-2026-06-29-10-40/start_local_dashboard_round10.zsh /Users/zhengwan/Desktop/dev/semantic-router 
+exit_code=1
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-restart-dashboard-round10-launchd-path-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/local-restart-dashboard-round10-launchd-path-.stderr.txt
+stdout_lines=0
+stderr_lines=1
+stdout_bytes=0
+stderr_bytes=89

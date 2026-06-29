@@ -1,0 +1,6 @@
+/var/mnt/semantic-router-bench/configs/._router-round10-dashboard-demo.yaml
+/var/mnt/semantic-router-bench/configs/router-round10-dashboard-demo.yaml
+/var/mnt/semantic-router-bench/configs/._envoy-round10-dashboard-demo.yaml
+/var/mnt/semantic-router-bench/configs/envoy-round10-dashboard-demo.yaml
+/var/mnt/semantic-router-bench/dashboard-data
+/var/mnt/semantic-router-bench/round10-dashboard-demo.tgz

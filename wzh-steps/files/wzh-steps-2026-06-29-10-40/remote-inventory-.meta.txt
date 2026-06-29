@@ -1,0 +1,10 @@
+timestamp=2026-06-29T10:42:48+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=./wzh-solution/files/wzh-solution-2026-06-29-10-40/remote_exec.zsh /Users/zhengwan/Desktop/dev/semantic-router set\ -euxo\ pipefail\;\ hostname\;\ date\;\ uptime\;\ uname\ -a\;\ id\;\ command\ -v\ podman\ \|\|\ true\;\ command\ -v\ docker\ \|\|\ true\;\ nvidia-smi\ --query-gpu=index,name,memory.total,memory.used\ --format=csv,noheader\ \|\|\ true\;\ podman\ ps\ -a\ --format\ \"table\ \{\{.Names\}\}\t\{\{.Status\}\}\t\{\{.Ports\}\}\"\ \|\|\ true\;\ podman\ images\ --format\ \"table\ \{\{.Repository\}\}\t\{\{.Tag\}\}\t\{\{.ID\}\}\t\{\{.Size\}\}\"\ \|\|\ true\;\ df\ -h\ /\ /var\ /var/mnt\ \|\|\ true\;\ find\ /var/mnt\ -maxdepth\ 3\ -type\ d\ -name\ \"semantic-router\*\"\ -print\ 2\>/dev/null\ \|\ sort\;\ ss\ -ltnp\ \|\|\ true 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-inventory-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-inventory-.stderr.txt
+stdout_lines=29
+stderr_lines=16
+stdout_bytes=1811
+stderr_bytes=535

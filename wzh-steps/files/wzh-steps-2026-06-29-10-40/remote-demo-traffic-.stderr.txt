@@ -1,0 +1,23 @@
+Warning: Permanently added '[REDACTED: host]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ python /var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py --base-url http://[REDACTED: ip]:18888/v1 --router-url http://[REDACTED: ip]:18080
+Traceback (most recent call last):
+  File "/var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py", line 101, in <module>
+    main()
+  File "/var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py", line 96, in main
+    status, headers, body = get(args.router_url + path)
+  File "/var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py", line 25, in get
+    with urllib.request.urlopen(url, timeout=timeout) as resp:
+  File "/usr/lib64/python3.9/urllib/request.py", line 214, in urlopen
+    return opener.open(url, data, timeout)
+  File "/usr/lib64/python3.9/urllib/request.py", line 523, in open
+    response = meth(req, response)
+  File "/usr/lib64/python3.9/urllib/request.py", line 632, in http_response
+    response = self.parent.error(
+  File "/usr/lib64/python3.9/urllib/request.py", line 561, in error
+    return self._call_chain(*args)
+  File "/usr/lib64/python3.9/urllib/request.py", line 494, in _call_chain
+    result = func(*args)
+  File "/usr/lib64/python3.9/urllib/request.py", line 641, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found

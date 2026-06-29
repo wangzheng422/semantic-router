@@ -1,0 +1,45 @@
+aca7c0f1a7ba5ff35418a3a3d1053d2e1b2fd2810e3cb146389c4adcc75589a1
+b3e97a2ae7741d243ad7ad97a2bea6f89af682e6b8d0f779b3f001ebd826ac30
+ready-attempt=29
+{"status": "healthy", "service": "classification-api"}
+{"object":"list","data":[{"id":"vllm-sr/auto","object":"model","created":1782701479,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"auto","object":"model","created":1782701479,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"round10-dashboard-demo-auto","object":"model","created":1782701479,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"vllm-sr/fusion","object":"model","created":1782701479,"owned_by":"vllm-semantic-router","description":"Fusion multi-model deliberation"},{"id":"qwen35-2b","object":"model","created":1782701479,"owned_by":"vllm-semantic-router"},{"id":"qwen35-27b-fp8","object":"model","created":1782701479,"owned_by":"vllm-semantic-router"}]}
+NAMES               STATUS         PORTS
+vsr-qwen35-2b       Up 7 minutes   [REDACTED: ip]:18001->8000/tcp
+vsr-qwen35-27b-fp8  Up 7 minutes   [REDACTED: ip]:18002->8000/tcp
+vsr-router          Up 57 seconds  [REDACTED: ip]:15051->50051/tcp, [REDACTED: ip]:18080->8080/tcp, [REDACTED: ip]:19190->9190/tcp
+vsr-envoy           Up 57 seconds  [REDACTED: ip]:18888->8888/tcp, [REDACTED: ip]:19901->9901/tcp
+[97m   ▀▀  ▀▀▀▀▀ ▀▀▀▀▀ ▀     ▀[0m
+[97m  Semantic Router[0m
+[38;2;145;158;171m  Intelligent Routing for Mixture-of-Models[0m
+
+[32m✓ Downloaded[0m
+  path: /app/models/mmbert32k-pii-detector-merged
+[32m✓ Downloaded[0m
+  path: /app/models/mmbert32k-jailbreak-detector-merged
+[32m✓ Downloaded[0m
+  path: /app/models/mmbert32k-feedback-detector-merged
+INFO: mmBERT embedding model registered with 2D Matryoshka support
+[2026-06-29T02:50:25.573Z] "GET /v1/models HTTP/1.1" 500 - 1 "-" "-" "-" "-"
+[2026-06-29T02:50:27.588Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:29.603Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:31.617Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:33.630Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:35.644Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:37.660Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:39.675Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:41.690Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:43.704Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:45.717Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:47.731Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:49.745Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:51.759Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:53.774Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:55.787Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:57.800Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:50:59.815Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:51:01.829Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:51:03.844Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:51:05.858Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:51:07.872Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:51:09.887Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"
+[2026-06-29T02:51:11.902Z] "GET /v1/models HTTP/1.1" 500 - 0 "-" "-" "-" "-"

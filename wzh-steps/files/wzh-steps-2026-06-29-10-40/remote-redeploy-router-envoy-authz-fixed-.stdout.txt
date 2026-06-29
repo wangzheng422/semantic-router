@@ -1,0 +1,9 @@
+2f32383a3432896b9fd16e67ae38b9e8b7c1efdfce8e79ae2032a228b5b7c722
+2b7533f74ebbbb1b7f95702367ed0c1fe84a34f70f8bec3b8b6ac1efae212ff1
+ready-attempt=3
+{"object":"list","data":[{"id":"vllm-sr/auto","object":"model","created":1782701593,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"auto","object":"model","created":1782701593,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"round10-dashboard-demo-auto","object":"model","created":1782701593,"owned_by":"vllm-semantic-router","description":"Intelligent Router for Mixture-of-Models"},{"id":"vllm-sr/fusion","object":"model","created":1782701593,"owned_by":"vllm-semantic-router","description":"Fusion multi-model deliberation"},{"id":"qwen35-2b","object":"model","created":1782701593,"owned_by":"vllm-semantic-router"},{"id":"qwen35-27b-fp8","object":"model","created":1782701593,"owned_by":"vllm-semantic-router"}]}
+NAMES               STATUS        PORTS
+vsr-qwen35-2b       Up 9 minutes  [REDACTED: ip]:18001->8000/tcp
+vsr-qwen35-27b-fp8  Up 9 minutes  [REDACTED: ip]:18002->8000/tcp
+vsr-router          Up 5 seconds  [REDACTED: ip]:15051->50051/tcp, [REDACTED: ip]:18080->8080/tcp, [REDACTED: ip]:19190->9190/tcp
+vsr-envoy           Up 4 seconds  [REDACTED: ip]:18888->8888/tcp, [REDACTED: ip]:19901->9901/tcp

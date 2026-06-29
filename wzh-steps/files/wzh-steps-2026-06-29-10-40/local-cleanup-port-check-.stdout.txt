@@ -1,0 +1,18 @@
+port=3001 still-listening
+COMMAND   PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+node    34621 zhengwan   13u  IPv4 0xfbcf76873bedaa5b      0t0  TCP [REDACTED: ip]:3001 (LISTEN)
+port=8700 still-listening
+COMMAND   PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+main    34626 zhengwan   14u  IPv6 0xdde889c51ec84ff7      0t0  TCP *:8700 (LISTEN)
+port=28080 still-listening
+COMMAND   PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+ssh     34579 zhengwan    6u  IPv6 0x8ab65c62de635a1f      0t0  TCP [::1]:28080 (LISTEN)
+ssh     34579 zhengwan    7u  IPv4 0x84adf7e3a6d2344e      0t0  TCP [REDACTED: ip]:28080 (LISTEN)
+port=28888 still-listening
+COMMAND   PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+ssh     34579 zhengwan    8u  IPv6 0x21ff6502f19a3baf      0t0  TCP [::1]:28888 (LISTEN)
+ssh     34579 zhengwan    9u  IPv4 0xf0ce8c4bd5aee605      0t0  TCP [REDACTED: ip]:28888 (LISTEN)
+port=29190 still-listening
+COMMAND   PID     USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+ssh     34579 zhengwan   10u  IPv6 0x6e6baf337e184e48      0t0  TCP [::1]:29190 (LISTEN)
+ssh     34579 zhengwan   11u  IPv4 0xe59b3c1684848ed9      0t0  TCP [REDACTED: ip]:29190 (LISTEN)

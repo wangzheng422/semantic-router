@@ -1,0 +1,1 @@
+{"checks": [{"name": "backend_healthz", "status": 200}, {"name": "auth_login", "status": 401}, {"name": "auth_me", "status": 401}, {"name": "router_models_proxy", "status": 401}, {"name": "frontend_root", "status": 200}], "models": []}

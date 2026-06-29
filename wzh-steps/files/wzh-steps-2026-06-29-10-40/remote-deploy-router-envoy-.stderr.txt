@@ -1,0 +1,266 @@
+Warning: Permanently added '[REDACTED: host]' (ED25519) to the list of known hosts.
++ MP=/var/mnt/semantic-router-bench
++ mkdir -p /var/mnt/semantic-router-bench/configs /var/mnt/semantic-router-bench/traffic /var/mnt/semantic-router-bench/logs /var/mnt/semantic-router-bench/dashboard-data /var/mnt/semantic-router-bench/models
++ tar xzf /var/mnt/semantic-router-bench/round10-dashboard-demo.tgz -C /var/mnt/semantic-router-bench/configs
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
+tar: Ignoring unknown extended header keyword 'LIBARCHIVE.xattr.com.apple.provenance'
++ cp /var/mnt/semantic-router-bench/configs/traffic_round10_demo.py /var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py
++ chmod +x /var/mnt/semantic-router-bench/traffic/traffic_round10_demo.py
++ podman network inspect vsr-bench
++ podman rm -f vsr-router vsr-envoy
++ podman run --replace -d --name vsr-router --network vsr-bench --security-opt=label=disable -p 18080:8080 -p 15051:50051 -p 19190:9190 -e AI_BINDING=candle -v /var/mnt/semantic-router-bench/configs/router-round10-dashboard-demo.yaml:/app/config.yaml:Z -v /var/mnt/semantic-router-bench/models:/app/models:Z -v /var/mnt/semantic-router-bench/logs:/logs:Z ghcr.io/vllm-project/semantic-router/vllm-sr:latest /app/config.yaml
++ podman run --replace -d --name vsr-envoy --network vsr-bench --security-opt=label=disable -p 18888:8888 -p 19901:9901 -v /var/mnt/semantic-router-bench/configs/envoy-round10-dashboard-demo.yaml:/etc/envoy/envoy.yaml:Z docker.io/envoyproxy/envoy:v1.34-latest -c /etc/envoy/envoy.yaml --log-level warn
++ ready=0
+++ seq 1 90
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ sleep 2
++ for i in $(seq 1 90)
++ curl -fsS http://[REDACTED: ip]:18080/health
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ echo ready-attempt=29
++ ready=1
++ break
++ test 1 = 1
++ curl -fsS http://[REDACTED: ip]:18080/health
++ echo
++ curl -fsS http://[REDACTED: ip]:18888/v1/models
++ echo
++ podman ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'
++ podman logs --tail 120 vsr-router
+{"level":"warn","ts":"2026-06-29T02:50:23.572","caller":"validate.go:16","msg":"[config] Unknown field \"elo_weight\" in global.router.model_selection.hybrid"}
+{"level":"warn","ts":"2026-06-29T02:50:23.572","caller":"validate.go:16","msg":"[config] Unknown field \"elo_weight\" in routing.decisions.algorithm.hybrid"}
+{"level":"warn","ts":"2026-06-29T02:50:23.574","caller":"logging.go:264","msg":"startup_status_file_backend","message":"Startup status using local file backend. Status is not shared across replicas or visible to the dashboard in containerized deployments. Set startup_status.store_backend: redis for production use.","event":"startup_status_file_backend","component":"router","backend":"file"}
+{"level":"info","ts":"2026-06-29T02:50:23.575","caller":"logging.go:264","msg":"required_models_check_started","event":"required_models_check_started","component":"router"}
+{"level":"info","ts":"2026-06-29T02:50:23.575","caller":"logging.go:264","msg":"api_server_starting","component":"router","api_port":8080,"event":"api_server_starting"}
+{"level":"info","ts":"2026-06-29T02:50:23.576","caller":"logging.go:264","msg":"classification_service_waiting_for_runtime","using_placeholder":true,"event":"classification_service_waiting_for_runtime","component":"apiserver"}
+{"level":"info","ts":"2026-06-29T02:50:23.577","caller":"logging.go:264","msg":"memory_api_disabled","event":"memory_api_disabled","component":"apiserver","reason":"config_disabled"}
+{"level":"info","ts":"2026-06-29T02:50:23.578","caller":"logging.go:264","msg":"server_listening","port":8080,"event":"server_listening","component":"apiserver"}
+{"level":"info","ts":"2026-06-29T02:50:24.384","caller":"downloader.go:76","msg":"Downloading model: models/mmbert32k-pii-detector-merged"}
+
+Fetching 19 files:   0%|          | 0/19 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 19 files:   5%|▌         | 1/19 [00:00<00:02,  7.73it/s]
+Fetching 19 files:  32%|███▏      | 6/19 [00:12<00:28,  2.23s/it]
+Fetching 19 files:  53%|█████▎    | 10/19 [00:15<00:13,  1.51s/it]
+Fetching 19 files: 100%|██████████| 19/19 [00:15<00:00,  1.19it/s]
+{"level":"info","ts":"2026-06-29T02:50:40.816","caller":"downloader.go:125","msg":"Successfully downloaded model: models/mmbert32k-pii-detector-merged"}
+{"level":"info","ts":"2026-06-29T02:50:40.817","caller":"downloader.go:76","msg":"Downloading model: models/mmbert32k-jailbreak-detector-merged"}
+
+Fetching 20 files:   0%|          | 0/20 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 20 files:   5%|▌         | 1/20 [00:00<00:03,  6.05it/s]
+Fetching 20 files:  35%|███▌      | 7/20 [00:11<00:21,  1.68s/it]
+Fetching 20 files: 100%|██████████| 20/20 [00:11<00:00,  1.76it/s]
+{"level":"info","ts":"2026-06-29T02:50:52.606","caller":"downloader.go:125","msg":"Successfully downloaded model: models/mmbert32k-jailbreak-detector-merged"}
+{"level":"info","ts":"2026-06-29T02:50:52.607","caller":"downloader.go:76","msg":"Downloading model: models/mmbert32k-feedback-detector-merged"}
+
+Fetching 15 files:   0%|          | 0/15 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+
+Fetching 15 files:  20%|██        | 3/15 [00:00<00:00, 29.99it/s]
+Fetching 15 files:  20%|██        | 3/15 [00:19<00:00, 29.99it/s]
+Fetching 15 files:  33%|███▎      | 5/15 [00:20<00:49,  4.91s/it]
+Fetching 15 files: 100%|██████████| 15/15 [00:20<00:00,  1.34s/it]
+{"level":"info","ts":"2026-06-29T02:51:13.233","caller":"downloader.go:125","msg":"Successfully downloaded model: models/mmbert32k-feedback-detector-merged"}
+{"level":"info","ts":"2026-06-29T02:51:13.234","caller":"downloader.go:199","msg":"Successfully downloaded all 3 models"}
+{"level":"info","ts":"2026-06-29T02:51:13.234","caller":"logging.go:264","msg":"required_models_ready","event":"required_models_ready","component":"router"}
+{"level":"info","ts":"2026-06-29T02:51:13.297","caller":"logging.go:264","msg":"metrics_server_starting","event":"metrics_server_starting","component":"router","address":":9190"}
+{"level":"info","ts":"2026-06-29T02:51:13.298","caller":"logging.go:264","msg":"embedding_models_init_started","component":"router","qwen3_configured":false,"gemma_configured":false,"bert_configured":false,"event":"embedding_models_init_started","mmbert_configured":true,"multimodal_configured":false,"use_cpu":true}
+{"level":"info","ts":"2026-06-29T02:51:17.322","caller":"router_runtime.go:346","msg":"INFO: Embedding models initialized successfully"}
+{"level":"info","ts":"2026-06-29T02:51:17.322","caller":"logging.go:264","msg":"embedding_models_initialized","component":"router","use_batched":false,"event":"embedding_models_initialized"}
+{"level":"info","ts":"2026-06-29T02:51:17.322","caller":"logging.go:264","msg":"embedding_models_init_completed","tools_ready":false,"tools_model":"mmbert","event":"embedding_models_init_completed","component":"router","embedding_ready":false}
+{"level":"info","ts":"2026-06-29T02:51:17.322","caller":"logging.go:264","msg":"router_config_using_runtime_registry","config_source":"file","event":"router_config_using_runtime_registry","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:51:17.322","caller":"logging.go:264","msg":"pii_mapping_loaded","count":35,"event":"pii_mapping_loaded","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:51:17.322","caller":"logging.go:264","msg":"jailbreak_mapping_loaded","component":"extproc","count":2,"event":"jailbreak_mapping_loaded"}
+{"level":"info","ts":"2026-06-29T02:51:17.323","caller":"logging.go:264","msg":"inmemory_cache_init_started","enabled":true,"max_entries":1000,"ttl_seconds":3600,"similarity_threshold":0.5,"use_hnsw":false,"eviction_policy":"fifo","event":"inmemory_cache_init_started","embedding_model":"mmbert","component":"cache"}
+{"level":"info","ts":"2026-06-29T02:51:17.334","caller":"logging.go:264","msg":"inmemory_cache_initialized","hnsw_ef_search":50,"event":"inmemory_cache_initialized","enabled":true,"max_entries":1000,"ttl_seconds":3600,"eviction_policy":"fifo","use_hnsw":false,"embedding_model":"mmbert","similarity_threshold":0.5,"component":"cache"}
+{"level":"info","ts":"2026-06-29T02:51:17.345","caller":"logging.go:264","msg":"semantic_cache_initialized","component":"extproc","similarity_threshold":0.5,"ttl_seconds":3600,"max_entries":1000,"backend":"memory","event":"semantic_cache_initialized"}
+{"level":"info","ts":"2026-06-29T02:51:17.345","caller":"logging.go:264","msg":"tools_database_disabled","event":"tools_database_disabled","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:51:17.345","caller":"logging.go:264","msg":"jailbreak_detector_backend_selected","backend":"mmbert_32k","event":"jailbreak_detector_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:17.346","caller":"logging.go:264","msg":"pii_detector_backend_selected","backend":"mmbert_32k","event":"pii_detector_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:17.358","caller":"logging.go:264","msg":"embedding_classifier_initialized","backend":"candle","preload_embeddings":true,"prototype_scoring":true,"multimodal_prepared":false,"model_type":"mmbert","event":"embedding_classifier_initialized","rules":2,"component":"classifier","target_dimension":768}
+{"level":"info","ts":"2026-06-29T02:51:17.358","caller":"logging.go:264","msg":"authz_classifier_initialized","role_bindings":2,"event":"authz_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:17.371","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","knowledge_base":"privacy_kb","labels":18,"backend":"","event":"knowledge_base_preload_deferred","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:17.371","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","knowledge_base":"privacy_kb","labels":18,"event":"knowledge_base_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:17.382","caller":"logging.go:264","msg":"knowledge_base_preload_deferred","labels":14,"backend":"","event":"knowledge_base_preload_deferred","component":"classifier","knowledge_base":"mmlu_kb"}
+{"level":"info","ts":"2026-06-29T02:51:17.382","caller":"logging.go:264","msg":"knowledge_base_classifier_initialized","labels":14,"event":"knowledge_base_classifier_initialized","component":"classifier","knowledge_base":"mmlu_kb"}
+{"level":"info","ts":"2026-06-29T02:51:17.382","caller":"logging.go:264","msg":"category_classifier_backend_selected","backend":"mmbert_32k","event":"category_classifier_backend_selected","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:17.382","caller":"logging.go:264","msg":"context_classifier_initialized","component":"classifier","rules":2,"event":"context_classifier_initialized"}
+{"level":"info","ts":"2026-06-29T02:51:17.382","caller":"logging.go:264","msg":"structure_classifier_initialized","rules":3,"event":"structure_classifier_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:17.382","caller":"logging.go:264","msg":"runtime_initialization_started","event":"runtime_initialization_started","component":"classifier","tasks":6}
+{"level":"info","ts":"2026-06-29T02:51:17.382","caller":"logging.go:264","msg":"jailbreak_detector_init_started","component":"classifier","mode":"candle","model_ref":"models/mmbert32k-jailbreak-detector-merged","classes":2,"use_cpu":true,"event":"jailbreak_detector_init_started"}
+WARNING: ModelFactory already initialized
+{"level":"info","ts":"2026-06-29T02:51:17.383","caller":"once.go:78","msg":"Initializing mmBERT-32K jailbreak detector: models/mmbert32k-jailbreak-detector-merged"}
+Initializing mmBERT-32K jailbreak detector from: models/mmbert32k-jailbreak-detector-merged
+{"level":"info","ts":"2026-06-29T02:51:17.383","caller":"logging.go:264","msg":"pii_detector_init_started","event":"pii_detector_init_started","component":"classifier","model_ref":"models/mmbert32k-pii-detector-merged","classes":35,"use_cpu":true}
+{"level":"info","ts":"2026-06-29T02:51:17.383","caller":"logging.go:264","msg":"feedback_mapping_loaded","component":"classifier","labels":4,"model_ref":"models/mmbert32k-feedback-detector-merged","event":"feedback_mapping_loaded"}
+{"level":"info","ts":"2026-06-29T02:51:17.383","caller":"embedding_classifier_backend.go:91","msg":"INFO: Embedding models initialized successfully"}
+{"level":"info","ts":"2026-06-29T02:51:17.385","caller":"logging.go:264","msg":"keyword_embedding_backend_initialized","qwen3_model_ref":"","gemma_model_ref":"","mmbert_model_ref":"models/mmbert-embed-32k-2d-matryoshka","event":"keyword_embedding_backend_initialized","component":"classifier","use_cpu":true,"mmbert_2d_enabled":true,"backend":"candle"}
+{"level":"info","ts":"2026-06-29T02:51:17.385","caller":"once.go:78","msg":"Initializing mmBERT-32K PII detector: models/mmbert32k-pii-detector-merged"}
+Initializing mmBERT-32K PII detector from: models/mmbert32k-pii-detector-merged
+{"level":"info","ts":"2026-06-29T02:51:17.385","caller":"once.go:78","msg":"📊 Initializing mmBERT-32K feedback detector: models/mmbert32k-feedback-detector-merged"}
+📊 Initializing mmBERT-32K feedback detector from: models/mmbert32k-feedback-detector-merged
+{"level":"info","ts":"2026-06-29T02:51:17.496","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 110.230ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.512","caller":"contrastive_preference_embeddings.go:35","msg":"[Preference Contrastive] preloaded 4/4 example embeddings using model=mmbert in 129.243879ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.512","caller":"logging.go:264","msg":"preference_classifier_initialized","routes":1,"event":"preference_classifier_initialized","component":"classifier","mode":"contrastive","model_ref":""}
+{"level":"info","ts":"2026-06-29T02:51:17.561","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 64.227ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.627","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 66.534ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.689","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 61.614ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.754","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 64.837ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.813","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 59.408ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.887","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 73.237ms"}
+{"level":"info","ts":"2026-06-29T02:51:17.965","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 78.178ms"}
+{"level":"info","ts":"2026-06-29T02:51:18.032","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 66.829ms"}
+{"level":"info","ts":"2026-06-29T02:51:18.095","caller":"embedding_classifier_backend.go:194","msg":"[Perf] embedding inference (phase=preload, backend=candle, model=mmbert, dim=768): 63.069ms"}
+{"level":"info","ts":"2026-06-29T02:51:18.095","caller":"logging.go:264","msg":"embedding_candidates_preloaded","total_candidates":10,"model_type":"mmbert","event":"embedding_candidates_preloaded","workers":1,"elapsed_ms":709,"target_dimension":768,"component":"classifier","candidates":10}
+   mmBERT-32K PII detector loaded
+{"level":"info","ts":"2026-06-29T02:51:18.988","caller":"once.go:78","msg":"mmBERT-32K PII detector initialized"}
+{"level":"info","ts":"2026-06-29T02:51:18.988","caller":"logging.go:264","msg":"pii_detector_initialized","backend":"mmbert_32k","model_ref":"models/mmbert32k-pii-detector-merged","event":"pii_detector_initialized","component":"classifier"}
+   mmBERT-32K jailbreak detector loaded
+{"level":"info","ts":"2026-06-29T02:51:19.032","caller":"once.go:78","msg":"mmBERT-32K jailbreak detector initialized"}
+{"level":"info","ts":"2026-06-29T02:51:19.032","caller":"logging.go:264","msg":"jailbreak_detector_initialized","backend":"mmbert_32k","model_ref":"models/mmbert32k-jailbreak-detector-merged","event":"jailbreak_detector_initialized","component":"classifier"}
+   mmBERT-32K feedback detector loaded
+{"level":"info","ts":"2026-06-29T02:51:19.075","caller":"once.go:78","msg":"mmBERT-32K feedback detector initialized"}
+{"level":"info","ts":"2026-06-29T02:51:19.075","caller":"logging.go:264","msg":"feedback_detector_initialized","backend":"mmbert_32k","model_ref":"models/mmbert32k-feedback-detector-merged","event":"feedback_detector_initialized","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:19.075","caller":"logging.go:264","msg":"runtime_initialization_completed","tasks":6,"event":"runtime_initialization_completed","component":"classifier"}
+{"level":"info","ts":"2026-06-29T02:51:19.075","caller":"logging.go:264","msg":"redis_store_init_started","external_config":false,"ttl_seconds":86400,"event":"redis_store_init_started","component":"responsestore","cluster_mode":false}
+{"level":"warn","ts":"2026-06-29T02:51:19.075","caller":"logging.go:264","msg":"response_api_store_init_failed","backend":"redis","error":"invalid Redis config: address is required for standalone Redis","response_api_enabled":false,"event":"response_api_store_init_failed","component":"extproc"}
+{"level":"error","ts":"2026-06-29T02:51:19.075","caller":"router_replay_setup.go:84","msg":"Failed to initialize shared replay store for backend postgres: postgres config required when store_backend is 'postgres'","stacktrace":"github.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.initializeSharedReplayRecorders\n\t/build/pkg/extproc/router_replay_setup.go:84\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.createReplayRuntime\n\t/build/pkg/extproc/router_replay_setup.go:16\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.buildRouterComponents\n\t/build/pkg/extproc/router_build.go:174\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.buildOpenAIRouterFromConfig\n\t/build/pkg/extproc/router_build.go:127\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.newOpenAIRouterForServer\n\t/build/pkg/extproc/router_build.go:74\ngithub.com/vllm-project/semantic-router/src/semantic-router/pkg/extproc.NewServer\n\t/build/pkg/extproc/server.go:74\nmain.newExtProcServerOrFatal\n\t/build/cmd/runtime_bootstrap.go:374\nmain.main\n\t/build/cmd/main.go:45\nruntime.main\n\t/usr/local/go/src/runtime/proc.go:283"}
+{"level":"info","ts":"2026-06-29T02:51:19.397","caller":"logging.go:264","msg":"automix_capabilities_initialized","component":"selection","model_count":2,"event":"automix_capabilities_initialized"}
+{"level":"info","ts":"2026-06-29T02:51:19.406","caller":"logging.go:264","msg":"automix_capabilities_initialized","model_count":2,"event":"automix_capabilities_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-29T02:51:19.406","caller":"logging.go:264","msg":"hybrid_selector_initialized","component":"selection","model_count":2,"event":"hybrid_selector_initialized"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"logging.go:264","msg":"rl_driven_selector_initialized","event":"rl_driven_selector_initialized","component":"selection","model_count":2,"category_count":0}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"logging.go:264","msg":"gmt_router_initialized","personalization":true,"storage_enabled":false,"llm_node_count":0,"event":"gmt_router_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: router_dc (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: automix (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: hybrid (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:364","msg":"[Selection] Registered algorithm: knn (tier=experimental, dependencies=[Pre-trained knn model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:364","msg":"[Selection] Registered algorithm: kmeans (tier=experimental, dependencies=[Pre-trained kmeans model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:364","msg":"[Selection] Registered algorithm: mlp (tier=experimental, dependencies=[Pre-trained mlp model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: rl_driven (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: elo (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:364","msg":"[Selection] Registered algorithm: svm (tier=experimental, dependencies=[Pre-trained svm model (pretrained_model)])"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: gmtrouter (tier=experimental, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: latency_aware (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: multi_factor (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"factory.go:358","msg":"[Selection] Registered algorithm: static (tier=supported, dependencies=none)"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"logging.go:264","msg":"selection_factory_initialized","selector_count":13,"event":"selection_factory_initialized","component":"selection"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"logging.go:264","msg":"model_selection_registry_initialized","mode":"per_decision_algorithm_config","event":"model_selection_registry_initialized","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"logging.go:264","msg":"rate_limit_resolver_disabled","reason":"no_providers_configured","event":"rate_limit_resolver_disabled","component":"extproc"}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"logging.go:264","msg":"credential_resolver_initialized","event":"credential_resolver_initialized","component":"extproc","providers":["header-injection","static-config"]}
+{"level":"info","ts":"2026-06-29T02:51:19.408","caller":"logging.go:264","msg":"tools_database_load_skipped","reason":"embedding_runtime_not_ready_for_tools","event":"tools_database_load_skipped","component":"router"}
+{"level":"info","ts":"2026-06-29T02:51:19.409","caller":"logging.go:264","msg":"startup_complete","config_source":"file","authz_providers":0,"event":"startup_complete","secure":false,"decisions":"fused-signal-hybrid-selector,default-small-no-signal","component":"router","extproc_port":50051,"metrics_port":9190,"model_selection":true,"ratelimit_providers":0,"embedding_ready":false,"sem_cache_enabled":true,"api_port":8080}
+{"level":"info","ts":"2026-06-29T02:51:19.409","caller":"logging.go:264","msg":"server_starting","secure":false,"max_msg_mb":4,"event":"server_starting","component":"extproc","port":50051}
++ podman logs --tail 60 vsr-envoy
+[2026-06-29 02:50:23.553][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.config.cluster.v3.Cluster Using deprecated option 'envoy.config.cluster.v3.Cluster.http2_protocol_options' from file cluster.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-29 02:50:23.608][1][warning][misc] [source/common/protobuf/message_validator_impl.cc:23] Deprecated field: type envoy.extensions.access_loggers.file.v3.FileAccessLog Using deprecated option 'envoy.extensions.access_loggers.file.v3.FileAccessLog.format' from file file.proto. This configuration will be removed from Envoy soon. Please see https://www.envoyproxy.io/docs/envoy/latest/version_history/version_history for details. If continued use of this field is absolutely necessary, see https://www.envoyproxy.io/docs/envoy/latest/configuration/operations/runtime#using-runtime-overrides-for-deprecated-features for how to apply a temporary and highly discouraged override.
+[2026-06-29 02:50:23.623][1][warning][main] [source/server/server.cc:970] There is no configured limit to the number of allowed active downstream connections. Configure a limit in `envoy.resource_monitors.global_downstream_max_connections` resource monitor.

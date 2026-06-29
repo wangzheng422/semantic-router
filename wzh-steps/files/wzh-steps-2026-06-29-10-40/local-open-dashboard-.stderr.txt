@@ -1,0 +1,1 @@
+No application knows how to open URL http://[REDACTED: ip]:3001 (Error Domain=NSOSStatusErrorDomain Code=-10661 "kLSExecutableIncorrectFormat: No compatible executable was found" UserInfo={_LSLine=1793, _LSFunction=runEvaluator}).

@@ -1,0 +1,18 @@
+{
+  "type": "design",
+  "designSystems": [],
+  "primaryDesignSystem": null,
+  "assets": {
+    "Semantic Router E2E Report": {
+      "versions": [
+        {
+          "path": "Semantic Router E2E Report.html",
+          "createdAt": "2026-06-29T04:34:58.461Z",
+          "status": "needs-review"
+        }
+      ]
+    }
+  },
+  "createdAt": "2026-06-29T04:34:58.462Z",
+  "updatedAt": "2026-06-29T04:34:58.462Z"
+}

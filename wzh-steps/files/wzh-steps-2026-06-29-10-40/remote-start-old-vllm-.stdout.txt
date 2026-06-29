@@ -1,0 +1,131 @@
+vsr-qwen35-2b
+vsr-qwen35-27b-fp8
+NAMES               STATUS                 PORTS
+vsr-qwen35-2b       Up 1 second            [REDACTED: ip]:18001->8000/tcp
+vsr-qwen35-27b-fp8  Up Less than a second  [REDACTED: ip]:18002->8000/tcp
+---logs-2b---
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=1) INFO 06-25 13:54:20 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=1) INFO:     [REDACTED: ip]:40224 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=1) WARNING 06-25 14:04:15 [utils.py:72] Received a request with trace context but tracing is disabled
+(EngineCore pid=296) WARNING 06-25 14:04:15 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _zero_kv_blocks_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=296) WARNING 06-25 14:04:15 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _compute_slot_mapping_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=296) WARNING 06-25 14:04:16 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=296) WARNING 06-25 14:04:17 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _fused_post_conv_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=296) WARNING 06-25 14:04:17 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _triton_mrope_forward. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=296) WARNING 06-25 14:04:18 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=296) WARNING 06-25 14:04:19 [jit_monitor.py:103] Triton kernel JIT compilation during inference: fused_recurrent_gated_delta_rule_packed_decode_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=296) WARNING 06-25 14:04:19 [jit_monitor.py:103] Triton kernel JIT compilation during inference: layer_norm_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=1) INFO:     [REDACTED: ip]:49252 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:04:20 [loggers.py:271] Engine 000: Avg prompt throughput: 2.7 tokens/s, Avg generation throughput: 1.5 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:04:30 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:54492 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:04:40 [loggers.py:271] Engine 000: Avg prompt throughput: 4.0 tokens/s, Avg generation throughput: 6.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:57352 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:04:50 [loggers.py:271] Engine 000: Avg prompt throughput: 2.7 tokens/s, Avg generation throughput: 6.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:05:00 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:34546 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:34546 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:34546 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:34546 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:05:20 [loggers.py:271] Engine 000: Avg prompt throughput: 221.8 tokens/s, Avg generation throughput: 25.6 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:48922 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:48922 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:05:30 [loggers.py:271] Engine 000: Avg prompt throughput: 11.4 tokens/s, Avg generation throughput: 5.5 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 1.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:48922 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:48922 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:48922 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:05:40 [loggers.py:271] Engine 000: Avg prompt throughput: 15.7 tokens/s, Avg generation throughput: 6.3 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:36496 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:36496 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:05:50 [loggers.py:271] Engine 000: Avg prompt throughput: 13.1 tokens/s, Avg generation throughput: 12.8 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:06:00 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:47832 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:47832 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:24:00 [loggers.py:271] Engine 000: Avg prompt throughput: 5.3 tokens/s, Avg generation throughput: 7.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:24:10 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:44580 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO:     [REDACTED: ip]:44580 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:26:00 [loggers.py:271] Engine 000: Avg prompt throughput: 4.4 tokens/s, Avg generation throughput: 2.6 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:26:10 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:100] [shutdown] API server: shutdown triggered
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:116] [shutdown] API server: stopping engine client mode=abort timeout=0s
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:652] [shutdown] MPClient: start timeout=0s
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:654] [shutdown] MPClient: stopping engine manager
+(APIServer pid=1) WARNING 06-25 14:37:23 [utils.py:607] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:656] [shutdown] MPClient: engine manager stopped
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:657] [shutdown] MPClient: cleaning up background resources
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:659] [shutdown] MPClient: complete
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:125] [shutdown] API server: engine client stopped
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:128] [shutdown] API server: signalling HTTP server shutdown
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:149] [shutdown] API server: shutting down FastAPI HTTP server
+---logs-27b---
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /tokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /detokenize, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/models, Methods: GET
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /ping, Methods: GET
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /ping, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /invocations, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/chat/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/chat/completions/batch, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/responses, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/responses/{response_id}, Methods: GET
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/responses/{response_id}/cancel, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/completions, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/messages, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/messages/count_tokens, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /generative_scoring, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /inference/v1/generate, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /scale_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /is_scaling_elastic_ep, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/chat/completions/render, Methods: POST
+(APIServer pid=1) INFO 06-25 13:59:08 [launcher.py:46] Route: /v1/completions/render, Methods: POST
+(APIServer pid=1) INFO:     [REDACTED: ip]:55206 - "GET /v1/models HTTP/1.1" 200 OK
+(APIServer pid=1) WARNING 06-25 14:04:20 [utils.py:72] Received a request with trace context but tracing is disabled
+(Worker_TP0 pid=527) WARNING 06-25 14:04:20 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _zero_kv_blocks_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:21 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _compute_slot_mapping_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:24 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _w8a8_triton_block_scaled_mm. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:24 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:25 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _fused_post_conv_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:25 [jit_monitor.py:103] Triton kernel JIT compilation during inference: layer_norm_fwd_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:26 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _triton_mrope_forward. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:28 [jit_monitor.py:103] Triton kernel JIT compilation during inference: _causal_conv1d_update_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(Worker_TP0 pid=527) WARNING 06-25 14:04:29 [jit_monitor.py:103] Triton kernel JIT compilation during inference: fused_recurrent_gated_delta_rule_packed_decode_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(APIServer pid=1) INFO 06-25 14:04:29 [loggers.py:271] Engine 000: Avg prompt throughput: 2.7 tokens/s, Avg generation throughput: 0.1 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:51236 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:04:39 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 6.3 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:51236 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:04:49 [loggers.py:271] Engine 000: Avg prompt throughput: 3.7 tokens/s, Avg generation throughput: 6.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:04:59 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:47114 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:05:29 [loggers.py:271] Engine 000: Avg prompt throughput: 2.6 tokens/s, Avg generation throughput: 6.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:05:39 [loggers.py:271] Engine 000: Avg prompt throughput: 6.7 tokens/s, Avg generation throughput: 4.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 5.5%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO:     [REDACTED: ip]:54224 - "POST /v1/chat/completions HTTP/1.1" 200 OK
+(APIServer pid=1) INFO 06-25 14:05:49 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 2.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(APIServer pid=1) INFO 06-25 14:05:59 [loggers.py:271] Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 0.0 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 0.0%
+(EngineCore pid=423) INFO 06-25 14:37:23 [core.py:1178] [shutdown] EngineCore: trigger received signal=SIGTERM
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:100] [shutdown] API server: shutdown triggered
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:116] [shutdown] API server: stopping engine client mode=abort timeout=0s
+(EngineCore pid=423) INFO 06-25 14:37:23 [core.py:1297] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=423) INFO 06-25 14:37:23 [core.py:1328] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=423) INFO 06-25 14:37:23 [core.py:1191] [shutdown] EngineCore: exiting busy loop
+(EngineCore pid=423) INFO 06-25 14:37:23 [multiproc_executor.py:428] [shutdown] Executor: waiting for worker exit count=2
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:652] [shutdown] MPClient: start timeout=0s
+(Worker_TP0 pid=527) INFO 06-25 14:37:23 [multiproc_executor.py:790] Parent process exited, terminating worker queues
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:654] [shutdown] MPClient: stopping engine manager
+(APIServer pid=1) WARNING 06-25 14:37:23 [utils.py:607] [shutdown] Process manager: force killing remaining processes count=1
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:656] [shutdown] MPClient: engine manager stopped
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:657] [shutdown] MPClient: cleaning up background resources
+(APIServer pid=1) INFO 06-25 14:37:23 [core_client.py:659] [shutdown] MPClient: complete
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:125] [shutdown] API server: engine client stopped
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:128] [shutdown] API server: signalling HTTP server shutdown
+(APIServer pid=1) INFO 06-25 14:37:23 [launcher.py:149] [shutdown] API server: shutting down FastAPI HTTP server
+ready-attempt=42
+{"object":"list","data":[{"id":"qwen35-2b","object":"model","created":1782701251,"owned_by":"vllm","root":"Qwen/Qwen3.5-2B","parent":null,"max_model_len":4096,"permission":[{"id":"modelperm-9abb7b7e4374d83b","object":"model_permission","created":1782701251,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}
+{"object":"list","data":[{"id":"qwen35-27b-fp8","object":"model","created":1782701251,"owned_by":"vllm","root":"Qwen/Qwen3.5-27B-FP8","parent":null,"max_model_len":4096,"permission":[{"id":"modelperm-8ad7bd6fb92fc7c3","object":"model_permission","created":1782701251,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":true,"allow_search_indices":false,"allow_view":true,"allow_fine_tuning":false,"organization":"*","group":null,"is_blocking":false}]}]}

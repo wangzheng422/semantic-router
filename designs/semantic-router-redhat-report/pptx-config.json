@@ -1,0 +1,88 @@
+{
+  "width": 1920,
+  "height": 1080,
+  "resetTransformSelector": "deck-stage",
+  "filename": "semantic-router-e2e-redhat-report",
+  "slides": [
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(0)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(1)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(2)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(3)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(4)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(5)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(6)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(7)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(8)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(9)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(10)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(11)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(12)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(13)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(14)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    },
+    {
+      "showJs": "document.querySelector('deck-stage').goTo(15)",
+      "selector": "deck-stage > [data-deck-active]",
+      "delay": 600
+    }
+  ]
+}

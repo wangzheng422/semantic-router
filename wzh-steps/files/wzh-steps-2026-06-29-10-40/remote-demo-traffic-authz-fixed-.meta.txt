@@ -1,0 +1,10 @@
+timestamp=2026-06-29T10:53:26+0800
+cwd=/Users/zhengwan/Desktop/dev/semantic-router
+command=./wzh-solution/files/wzh-solution-2026-06-29-10-40/remote_exec.zsh /Users/zhengwan/Desktop/dev/semantic-router set\ -euxo\ pipefail\;\ MP=/var/mnt/semantic-router-bench\;\ python\ \"\$MP/traffic/traffic_round10_demo.py\"\ --base-url\ http://127.0.0.1:18888/v1\ --router-url\ http://127.0.0.1:18080\ \|\|\ true\;\ echo\ ---router-tail---\;\ podman\ logs\ --tail\ 260\ vsr-router\;\ echo\ ---envoy-tail---\;\ podman\ logs\ --tail\ 100\ vsr-envoy 
+exit_code=0
+stdout_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-demo-traffic-authz-fixed-.stdout.txt
+stderr_file=wzh-steps/files/wzh-steps-2026-06-29-10-40/remote-demo-traffic-authz-fixed-.stderr.txt
+stdout_lines=25
+stderr_lines=262
+stdout_bytes=7334
+stderr_bytes=48720
